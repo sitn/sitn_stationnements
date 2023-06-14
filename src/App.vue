@@ -6,8 +6,8 @@
         <div class="q-pa-md">
           <div class="text-h5">Localisation</div>
           <Search @addOption="addRecord"></Search>
-          <Map :geojson="geojson"></Map>
-          <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem=""></Table>
+          <Map :geojson="geojson" :focus="focus"></Map>
+          <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
         </div>
 
       </q-step>
@@ -61,9 +61,9 @@
 </template>
 
 <script>
-import Search from "./components/Search.vue";
-import Map from "./components/Map.vue";
-import Table from "./components/Table.vue";
+import Search from "./components/Search.vue"
+import Map from "./components/Map.vue"
+import Table from "./components/Table.vue"
 import { Quasar } from "quasar";
 import { ref, isProxy, toRaw } from 'vue'
 
@@ -80,31 +80,40 @@ export default {
   },
   data() {
     return {
+      focus: null,
       options: null,
       geojson: {
         'type': 'FeatureCollection',
         'features': []
       }
-    };
+    }
   },
   methods: {
 
     addRecord(s) {
-      console.log('Add record')
+      console.log(`App.vue | Add new record with id=${s.id}`)
       console.log(toRaw(s))
       console.log(this.geojson.features)
       this.geojson.features.push(s)
 
     },
+
     deleteRecord(id) {
-      console.log(`App | Delete record with id=${id}`)
-
+      console.log(`App.vue | Delete item with id=${id}`)
       this.geojson.features = this.geojson.features.filter(function (obj) {
-        return obj.id !== id;
-      });
+        return obj.id !== id
+      })
+    },
 
-      // this.geojson.features.push(s)
-    }
+    focusRecord(id) {
+      console.log(`App.vue | Focus on item with id=${id}`)
+      this.focus = id
+    },
+
+    action(id, name) {
+      // console.log(`App.vue | Focus record with id=${id}`)
+
+    },
 
   }
 

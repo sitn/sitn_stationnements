@@ -13,6 +13,10 @@
                 <q-td key="comnom" :props="props">
                     <b>{{ props.row.properties.comnom }}</b>
                 </q-td>
+                <!-- commune column -->
+                <q-td key="type" :props="props">
+                    <b> I, II</b>
+                </q-td>
                 <!-- actions column -->
                 <q-td key="actions" :props="props">
                     <q-btn dense round flat color="grey" name="print" @click="focusItem(props.row)" icon="map"></q-btn>
@@ -61,6 +65,13 @@ export default {
                     sortable: true,
                 },
                 {
+                    name: "type",
+                    align: "left",
+                    label: "Type(s)",
+                    field: "comnom",
+                    sortable: true,
+                },
+                {
                     name: "actions",
                     align: "center",
                     label: "",
@@ -83,7 +94,7 @@ export default {
 
         },
         focusItem(item) {
-            console.log(`Focus on item with id=${item.id}`)
+            console.log(`Table.vue | Focus on item with id=${item.id}`)
             this.$emit('focusItem', item.id);
             this.$emit('action', { type: "focus", id: item.id });
 

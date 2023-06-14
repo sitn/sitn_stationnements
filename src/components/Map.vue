@@ -62,7 +62,7 @@ for (var i = 0; i < resolutions.length; i++) {
 export default {
     name: 'Map',
     components: {},
-    props: ['geom', 'geojson'],
+    props: ['geojson', 'focus'],
     data() {
         return {
             features: [],
@@ -90,7 +90,6 @@ export default {
 
         featuresCount() {
             console.log(`Feature count: ${this.olFeatures.length}`)
-
             return this.olFeatures.length
         }
 
