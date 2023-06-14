@@ -11,9 +11,6 @@ import GeoJSON from 'ol/format/GeoJSON.js';
 import TileLayer from 'ol/layer/Tile.js';
 import VectorSource from 'ol/source/Vector.js';
 import { Vector as VectorLayer } from 'ol/layer.js';
-import Feature from 'ol/Feature.js';
-import Point from 'ol/geom/Point.js';
-import { fromLonLat } from 'ol/proj.js';
 import Projection from 'ol/proj/Projection';
 import proj4 from 'proj4';
 import { register } from 'ol/proj/proj4';
@@ -99,6 +96,24 @@ export default {
 
     },
     methods: {
+        zoomTo(id) {
+
+            console.log(`Map.vue | Focus on item with id=${id}`)
+            const view = this.olMap.getView()
+            const source = this.layer.getSource()
+            const features = source.getFeatures()
+
+            let target = features.find((f) => {
+                return f.get('id') === id
+            })
+
+            view.fit(target.getGeometry(), {
+                //padding: [170, 50, 30, 150],
+                maxZoom: 12,
+                size: [200, 200]
+            })
+
+        },
         updateSource() {
             // this.olVectorLayer.changed()
             // this.olVectorSource.refresh({ force: true })
@@ -112,18 +127,14 @@ export default {
             console.log(source.getFeatures());
 
             // console.log(`Number of features: ${source.getFeatures().length}`)
+
+            source.clear();
+
             if (this.featuresCount > 0) {
-                source.clear();
                 source.addFeatures(this.olFeatures);
                 view.fit(source.getExtent())
             }
 
-            // this.olVectorSource.clear();
-            // this.olVectorSource.addFeatures(this.olFeatures);
-
-            // this.VectorSource.clear();
-            // this.olVectorSource.addFeatures(this.olFeatures);
-            // view.fit(this.olVectorSource.getExtent())
         }
     },
     mounted() {

@@ -7,7 +7,7 @@
           <div class="text-h5">Localisation</div>
           <Search @addOption="addRecord"></Search>
           <Map :geojson="geojson"></Map>
-          <Table :rows="geojson.features"></Table>
+          <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem=""></Table>
         </div>
 
       </q-step>
@@ -97,7 +97,12 @@ export default {
 
     },
     deleteRecord(id) {
-      console.log(`Delete record ${id}`)
+      console.log(`App | Delete record with id=${id}`)
+
+      this.geojson.features = this.geojson.features.filter(function (obj) {
+        return obj.id !== id;
+      });
+
       // this.geojson.features.push(s)
     }
 

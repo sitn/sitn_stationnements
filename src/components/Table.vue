@@ -15,10 +15,8 @@
                 </q-td>
                 <!-- actions column -->
                 <q-td key="actions" :props="props">
-                    <q-btn dense round flat color="grey" name="print" @click="" icon="map">
-                    </q-btn>
-                    <q-btn dense round flat color="grey" name="delete" @click="showDialog('delete', props.row)"
-                        icon="delete"></q-btn>
+                    <q-btn dense round flat color="grey" name="print" @click="focusItem(props.row)" icon="map"></q-btn>
+                    <q-btn dense round flat color="grey" name="delete" @click="deleteItem(props.row)" icon="delete"></q-btn>
                 </q-td>
             </q-tr>
         </template>
@@ -30,6 +28,7 @@
 import { ref } from 'vue'
 export default {
     props: { 'rows': Array, 'model': Object },
+    emits: ['deleteItem'],
     setup() {
         return {
             // model: ref(null),
@@ -74,8 +73,21 @@ export default {
     computed() {
 
     },
-    methods() {
+    methods: {
+        deleteItem(item) {
+            console.log(item)
+            console.log(`Delete item with id=${item.id}`)
+            this.$emit('deleteItem', item.id);
 
+            this.$emit('action', { type: "delete", id: item.id });
+
+        },
+        focusItem(item) {
+            console.log(`Focus on item with id=${item.id}`)
+            this.$emit('focusItem', item.id);
+            this.$emit('action', { type: "focus", id: item.id });
+
+        }
     }
 }
 </script>
