@@ -1,0 +1,208 @@
+<template>
+    <div class="q-py-md" style="width:100%;height:400px;">
+        <div id="map"></div>
+    </div>
+</template>
+
+<script>
+import Map from 'ol/Map.js';
+import View from 'ol/View.js';
+import GeoJSON from 'ol/format/GeoJSON.js';
+import TileLayer from 'ol/layer/Tile.js';
+import VectorSource from 'ol/source/Vector.js';
+import { Vector as VectorLayer } from 'ol/layer.js';
+import Feature from 'ol/Feature.js';
+import Point from 'ol/geom/Point.js';
+import { fromLonLat } from 'ol/proj.js';
+import Projection from 'ol/proj/Projection';
+import proj4 from 'proj4';
+import { register } from 'ol/proj/proj4';
+import { getTopLeft, getWidth } from 'ol/extent.js';
+import WMTS from 'ol/source/WMTS';
+import WMTSTileGrid from 'ol/tilegrid/WMTS.js';
+
+// CRS definitions
+proj4.defs(
+    "EPSG:2056",
+    "+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 +x_0=2600000 +y_0=1200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs"
+);
+
+register(proj4);
+
+const extent = [2420000, 976000.0000000001, 2932000, 1360000];
+const projection = new Projection({
+    code: 'EPSG:2056',
+    extent: extent,
+});
+//const projection = getProjection('EPSG:2056');
+const projectionExtent = projection.getExtent();
+
+const resolutions = [
+    249.99999999999994,
+    99.99999999999999,
+    49.99999999999999,
+    19.999999999999996,
+    9.999999999999998,
+    4.999999999999999,
+    2.4999999999999996,
+    1.9999999999999996,
+    1.4999999999999998,
+    0.9999999999999998,
+    0.4999999999999999,
+    0.24999999999999994,
+    0.12499999999999997,
+    0.062499999999999986,
+    0.031249999999999993,
+    0.015624999999999997,
+    0.007812499999999998
+]
+
+var matrixIds = [];
+for (var i = 0; i < resolutions.length; i++) {
+    matrixIds.push(i);
+}
+
+export default {
+    name: 'Map',
+    components: {},
+    props: ['geom', 'geojson'],
+    data() {
+        return {
+            features: [],
+            vectorLayer: null,
+            vectorSource: null,
+        }
+    },
+    computed: {
+        olFeatures() {
+
+            return new GeoJSON().readFeatures(this.geojson);
+
+        },
+        olVectorSource() {
+            return new VectorSource({
+                features: this.olFeatures,
+            });
+        },
+        olVectorLayer() {
+            // this.olVectorSource.refresh({ force: true })
+            return new VectorLayer({
+                source: this.olVectorSource,
+            });
+        },
+
+        featuresCount() {
+            console.log(`Feature count: ${this.olFeatures.length}`)
+
+            return this.olFeatures.length
+        }
+
+    },
+    methods: {
+        updateSource() {
+            // this.olVectorLayer.changed()
+            // this.olVectorSource.refresh({ force: true })
+
+            const view = this.olMap.getView()
+            const source = this.vectorLayer.getSource()
+
+            // source.changed()
+            console.log('updateSource')
+            console.log(source)
+            console.log(source.getFeatures());
+
+            // console.log(`Number of features: ${source.getFeatures().length}`)
+            if (this.featuresCount > 0) {
+                source.clear();
+                source.addFeatures(this.olFeatures);
+                view.fit(source.getExtent())
+            }
+
+            // this.olVectorSource.clear();
+            // this.olVectorSource.addFeatures(this.olFeatures);
+
+            // this.VectorSource.clear();
+            // this.olVectorSource.addFeatures(this.olFeatures);
+            // view.fit(this.olVectorSource.getExtent())
+        }
+    },
+    mounted() {
+
+        console.log(`Count: ${this.featuresCount}`)
+        console.log(this.olfeatures)
+
+        const vectorSource = new VectorSource({
+            features: this.olfeatures,
+        });
+
+        const vectorLayer = new VectorLayer({
+            source: vectorSource,
+        });
+
+        this.vectorLayer = new VectorLayer({
+            source: new VectorSource({
+                features: [],
+            }),
+        })
+
+        // Map
+        this.olMap = new Map({
+            target: 'map',
+            layers: [
+                new TileLayer({
+                    opacity: 1.0,
+                    source: new WMTS({
+                        attributions:
+                            'Tiles © <a href="https://sitn.ne.ch/"' +
+                            ' target="_blank">SITN</a>',
+                        url: 'https://sitn.ne.ch/mapproxy95/service?',
+                        layer: 'plan_ville',
+                        matrixSet: 'EPSG2056',
+                        format: 'image/png',
+                        projection: projection,
+                        tileGrid: new WMTSTileGrid({
+                            origin: getTopLeft(projectionExtent),
+                            resolutions: resolutions,
+                            matrixIds: matrixIds,
+                        }),
+                        style: 'default',
+                        wrapX: false,
+                    }),
+                }),
+                this.vectorLayer,
+            ],
+            view: new View({
+                center: [2550720, 1196243],
+                zoom: 4,
+                projection: projection,
+            }),
+        })
+
+        this.updateSource()
+
+    },
+    watch: {
+
+        featuresCount(v) {
+            this.updateSource()
+            // this.olfeatures.changed()
+            console.log("featuresCount changed")
+
+        },
+    }
+}
+
+</script>
+
+<style>
+/* @import './../../node_modules/ol/ol.css'; */
+@import '../assets/ol.css';
+
+#map {
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+</style>
