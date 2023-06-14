@@ -13,4 +13,9 @@ class Mob20 {
   }
 
 let locations = []
-locations.push()
+locations.push(new Mob20('I', 1000*Math.random()))
+locations.push(new Mob20('II', 1000*Math.random()))
+locations.push(new Mob20('III', 1000*Math.random()))
+locations.push(new Mob20('IV', 1000*Math.random()))
+locations.push(new Mob20('V', 1000*Math.random()))
+locations.push(new Mob20('VI', 1000*Math.random()))
