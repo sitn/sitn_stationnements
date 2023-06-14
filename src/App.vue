@@ -69,6 +69,14 @@ import { ref, isProxy, toRaw, effect } from 'vue'
 import GeoJSON from 'ol/format/GeoJSON.js';
 import { Vector as VectorLayer } from 'ol/layer.js';
 
+// Classes
+class Mob20 {
+  constructor(type, area) {
+    this.type = type;
+    this.area = area;
+  }
+}
+
 export default {
   name: 'App',
   components: {
@@ -99,13 +107,29 @@ export default {
   },
   methods: {
 
-    addRecord(s) {
+    addRecord(feature) {
 
+      console.log(`App.vue | Add new record with id=${feature.id}`)
 
-      console.log(`App.vue | Add new record with id=${s.id}`)
-      console.log(toRaw(s))
       console.log(this.geojson.features)
-      this.geojson.features.push(s)
+
+      // add MOB20 attribute
+      let locations = []
+      locations.push(new Mob20('I', 1000 * Math.random()))
+      locations.push(new Mob20('II', 1000 * Math.random()))
+      locations.push(new Mob20('III', 1000 * Math.random()))
+      locations.push(new Mob20('IV', 1000 * Math.random()))
+      locations.push(new Mob20('V', 1000 * Math.random()))
+      locations.push(new Mob20('VI', 1000 * Math.random()))
+
+      console.log(feature.properties)
+      feature.properties.locations = locations
+
+      console.log(toRaw(feature))
+
+      // add feature to geojson
+      this.geojson.features.push(feature)
+
 
     },
 
