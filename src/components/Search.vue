@@ -45,6 +45,8 @@
 <script>
 import { ref } from 'vue'
 export default {
+    name: 'Search',
+    components: {},
     props: { 'title': String, 'options': Object, 'model': Object, 'selected': Object },
     emits: ['addOption'],
     setup() {
@@ -62,15 +64,10 @@ export default {
         selectOption() {
             if (this.model !== null) {
                 // add item
-                console.log(`option selected: ${this.model.properties.label}`);
-
+                console.log(`Search.vue | Option selected: ${this.model.properties.label}`);
 
                 this.$emit('addOption', this.model);
-                // this.$emit('addOption', this.model.properties);
 
-                //this.$emit('update:option', this.childCounter)
-
-                // let record = {};
                 // this.rows.push(this.model.properties);
                 // console.log(toRaw(this.rows));
 
@@ -79,7 +76,8 @@ export default {
             }
         },
         fetchSources(val, update, abort) {
-            // call abort() if data can't be retrieved
+
+            // call abort() when no data is returned
             if (val.length < 2) {
                 abort();
                 return;

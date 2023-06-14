@@ -4,9 +4,9 @@
       <!-- LOCATION FORM -->
       <q-step :name="1" title="Localisation" icon="assignment" :done="step > 1">
         <div class="q-pa-md">
-          <div class="text-h5">Localisation</div>
+          <div class="text-h5">Localisation du projet</div>
           <Search @addOption="addRecord"></Search>
-          <Map :geojson="geojson" :focus="focus"></Map>
+          <Map ref="map" :geojson="geojson"></Map>
           <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
         </div>
 
@@ -65,18 +65,22 @@ import Search from "./components/Search.vue"
 import Map from "./components/Map.vue"
 import Table from "./components/Table.vue"
 import { Quasar } from "quasar";
-import { ref, isProxy, toRaw } from 'vue'
+import { ref, isProxy, toRaw, effect } from 'vue'
+import GeoJSON from 'ol/format/GeoJSON.js';
+import { Vector as VectorLayer } from 'ol/layer.js';
 
 export default {
-  setup() {
-    return {
-      step: ref(1),
-    };
-  },
+  name: 'App',
   components: {
     Map,
     Table,
     Search
+  },
+  setup() {
+    return {
+      map: ref(),
+      step: ref(1),
+    };
   },
   data() {
     return {
@@ -88,9 +92,16 @@ export default {
       }
     }
   },
+  computed: {
+    olFeatures() {
+      return new GeoJSON().readFeatures(this.geojson);
+    },
+  },
   methods: {
 
     addRecord(s) {
+
+
       console.log(`App.vue | Add new record with id=${s.id}`)
       console.log(toRaw(s))
       console.log(this.geojson.features)
@@ -107,7 +118,9 @@ export default {
 
     focusRecord(id) {
       console.log(`App.vue | Focus on item with id=${id}`)
-      this.focus = id
+      this.map.hello(id)
+      this.map.zoomTo(id)
+      // this.focus = id
     },
 
     action(id, name) {

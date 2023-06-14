@@ -31,8 +31,10 @@
 <script>
 import { ref } from 'vue'
 export default {
+    name: 'Table',
+    components: {},
     props: { 'rows': Array, 'model': Object },
-    emits: ['deleteItem'],
+    emits: ['deleteItem', 'focusItem', 'action'],
     setup() {
         return {
             // model: ref(null),
@@ -67,7 +69,7 @@ export default {
                 {
                     name: "type",
                     align: "left",
-                    label: "Type(s)",
+                    label: "Type(s) de localisation",
                     field: "comnom",
                     sortable: true,
                 },

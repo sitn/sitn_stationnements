@@ -10,13 +10,16 @@ import View from 'ol/View.js';
 import GeoJSON from 'ol/format/GeoJSON.js';
 import TileLayer from 'ol/layer/Tile.js';
 import VectorSource from 'ol/source/Vector.js';
-import { Vector as VectorLayer } from 'ol/layer.js';
+import { Image as ImageLayer, Vector as VectorLayer } from 'ol/layer.js';
+// import {Image as ImageLayer, Tile as TileLayer} from 'ol/layer.js';
 import Projection from 'ol/proj/Projection';
 import proj4 from 'proj4';
 import { register } from 'ol/proj/proj4';
 import { getTopLeft, getWidth } from 'ol/extent.js';
 import WMTS from 'ol/source/WMTS';
 import WMTSTileGrid from 'ol/tilegrid/WMTS.js';
+import ImageWMS from 'ol/source/ImageWMS.js';
+import { ref, isProxy, toRaw } from 'vue'
 
 // CRS definitions
 proj4.defs(
@@ -63,6 +66,8 @@ export default {
     name: 'Map',
     components: {},
     props: ['geojson', 'focus'],
+    emits: [],
+    expose: ['hello', 'zoomTo'],
     data() {
         return {
             features: [],
@@ -95,15 +100,18 @@ export default {
 
     },
     methods: {
+        hello(id) {
+            console.log(`hello ${id}`)
+        },
         zoomTo(id) {
 
             console.log(`Map.vue | Focus on item with id=${id}`)
             const view = this.olMap.getView()
-            const source = this.layer.getSource()
-            const features = source.getFeatures()
+            const source = this.vectorLayer.getSource()
+            const features = toRaw(source.getFeatures())
 
             let target = features.find((f) => {
-                return f.get('id') === id
+                return f.getId() === id
             })
 
             view.fit(target.getGeometry(), {
@@ -179,6 +187,25 @@ export default {
                         wrapX: false,
                     }),
                 }),
+                new ImageLayer({
+                    source: new ImageWMS({
+                        attributions:
+                            'Tiles © <a href="https://sitn.ne.ch/"' +
+                            ' target="_blank">SITN</a>',
+                        crossOrigin: 'anonymous',
+                        params: {
+                            'ogcserver': 'private-png',
+                            'SERVICE': 'WMS',
+                            'VERSION': '1.3.0',
+                            'REQUEST': 'GetMap',
+                            'FORMAT': 'image/png',
+                            'TRANSPARENT': true,
+                            'LAYERS': 'mob20_type_localisation2023'
+                        },
+                        serverType: 'mapserver',
+                        url: 'https://sitn.ne.ch/mapserv_proxy',
+                    }),
+                }),
                 this.vectorLayer,
             ],
             view: new View({
@@ -196,9 +223,14 @@ export default {
         featuresCount(v) {
             this.updateSource()
             // this.olfeatures.changed()
-            console.log("featuresCount changed")
+            console.log("Map.vue | featuresCount changed")
 
         },
+        focus() {
+            // console.log(`Map.vue | Focus changed to id=${this.focus}`)
+            // this.zoomTo(this.focus)
+
+        }
     }
 }
 
