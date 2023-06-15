@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div class="bg-grey-3 q-pa-md">
     <q-stepper v-model="step" ref="stepper" color="primary" animated>
       <!-- LOCATION FORM -->
       <q-step :name="1" title="Localisation" icon="assignment" :done="step > 1">
@@ -9,7 +9,29 @@
           <Map ref="map" :geojson="geojson"></Map>
           <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
         </div>
+        <div class="q-pa-md">
+          <div class="text-h5">Détails du projet</div>
+          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in factors">
+            <label class="text-h7 ">{{ item.affectation }}</label>
+            <div class="row q-col-gutter-sm">
 
+              <q-input class="col-3" bg-color="white" outlined label="" type="number" name="item.affectation"
+                v-model.number="item.area" min="0.0" max="Inf">
+                <template v-slot:label>
+                  Surface brute de plancher (SBP) en m<sup>2</sup>
+                </template>
+                <!--
+                <template v-slot:append>
+                  m<sup>2</sup>
+                </template>
+                -->
+              </q-input>
+              <q-input class="col-3" bg-color="white" outlined label="Nombre" type="number" name="item.housing"
+                v-model.number="item.housing" min="0.0" max="Inf">
+              </q-input>
+            </div>
+          </div>
+        </div>
       </q-step>
       <!-- DETAILS FORM -->
       <q-step :name="2" title="Détails" caption="" icon="assignment" :done="step > 2">
@@ -77,6 +99,29 @@ class Mob20 {
   }
 }
 
+class Factor {
+  constructor(type, affectation, areaFactor, housingFactor, activityFactor, area, housing) {
+    this.type = type;
+    this.affectation = affectation;
+    this.areaFactor = areaFactor;
+    this.housingFactor = housingFactor;
+    this.activityFactor = activityFactor;
+    this.area = area;
+    this.housing = housing;
+  }
+}
+
+const factors = [];
+factors.push(new Factor("Logement", "Logements standards", 0.01, 1, 0.1, 0, 0));
+factors.push(new Factor("Logement", "Logements avec encadrement ou étudiants", 0.01, 1, 0.1, 0, 0));
+factors.push(new Factor("Activité", "Services à nombreuse clientèle", 0.01, 2, 1, 0, 0));
+factors.push(new Factor("Activité", "Magasins à nombreuse clientèle", 0.01, 2, 8, 0, 0));
+factors.push(new Factor("Activité", "Autres magasins", 0.01, 1.5, 3.5, 0, 0));
+factors.push(new Factor("Activité", "Industrie et artisanat", 0.01, 1, 0.2, 0, 0));
+factors.push(new Factor("Activité", "Entrepôts et dépôts", 0.01, 0.1, 0.01, 0, 0));
+factors.push(new Factor("Activité", "Autres services", 0.01, 2, 0.5, 0, 0));
+
+
 export default {
   name: 'App',
   components: {
@@ -92,7 +137,7 @@ export default {
   },
   data() {
     return {
-      focus: null,
+      factors: factors,
       options: null,
       geojson: {
         'type': 'FeatureCollection',
@@ -142,7 +187,6 @@ export default {
 
     focusRecord(id) {
       console.log(`App.vue | Focus on item with id=${id}`)
-      this.map.hello(id)
       this.map.zoomTo(id)
       // this.focus = id
     },

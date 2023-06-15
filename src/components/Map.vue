@@ -65,9 +65,9 @@ for (var i = 0; i < resolutions.length; i++) {
 export default {
     name: 'Map',
     components: {},
-    props: ['geojson', 'focus'],
+    props: ['geojson'],
     emits: [],
-    expose: ['hello', 'zoomTo'],
+    expose: ['zoomTo'],
     data() {
         return {
             features: [],
@@ -100,9 +100,6 @@ export default {
 
     },
     methods: {
-        hello(id) {
-            console.log(`hello ${id}`)
-        },
         zoomTo(id) {
 
             console.log(`Map.vue | Focus on item with id=${id}`)
@@ -226,11 +223,6 @@ export default {
             console.log("Map.vue | featuresCount changed")
 
         },
-        focus() {
-            // console.log(`Map.vue | Focus changed to id=${this.focus}`)
-            // this.zoomTo(this.focus)
-
-        }
     }
 }
 
