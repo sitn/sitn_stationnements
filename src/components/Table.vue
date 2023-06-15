@@ -15,7 +15,9 @@
                 </q-td>
                 <!-- commune column -->
                 <q-td key="type" :props="props">
-                    <b> I, II</b>
+                    <template v-for="item in props.row.properties.locations">
+                        <li>{{ item.type }} {{ item.area }} m2</li>
+                    </template>
                 </q-td>
                 <!-- actions column -->
                 <q-td key="actions" :props="props">
@@ -23,6 +25,9 @@
                     <q-btn dense round flat color="grey" name="delete" @click="deleteItem(props.row)" icon="delete"></q-btn>
                 </q-td>
             </q-tr>
+        </template>
+        <template v-slot:no-data>
+            Aucune parcelle sélectionnée
         </template>
     </q-table>
     <!--</div> -->
@@ -104,7 +109,6 @@ export default {
     }
 }
 </script>
-
 
 <style>
 @import "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons";

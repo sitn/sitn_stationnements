@@ -29,14 +29,16 @@
               <q-input v-if="item.isHousing" class="col-3" bg-color="white" outlined label="Nombre" type="number"
                 name="item.housing" v-model.number="item.housing" min="0.0" max="Inf">
               </q-input>
-              <q-input class="col-3" bg-color="light-blue-1" outlined label="Besoin brut habitant" type="number"
+              <q-input class="col-3" bg-color="light-blue-1" outlined label="Besoin brut habitant/employé" type="number"
                 name="item.rawResidentNeed" v-model.number="item.rawResidentNeed" readonly>
               </q-input>
-              <q-input class="col-3" bg-color="light-blue-1" outlined label="Besoin brut visiteur" type="number"
+              <q-input class="col-3" bg-color="light-blue-1" outlined label="Besoin brut visiteur/client" type="number"
+                name="item.rawVisitorNeed" v-model.number="item.rawVisitorNeed" readonly>
+              </q-input>
+              <q-input class="col-3" bg-color="light-blue-1" outlined label="Besoin brut total" type="number"
                 name="item.rawVisitorNeed" v-model.number="item.rawVisitorNeed" readonly>
               </q-input>
 
-              
 
             </div>
           </div>
@@ -122,7 +124,7 @@ class Factor {
     return this.type === "Logement";
   }
   get rawResidentNeed() {
-    return this.area * this.areaFactor * this.housingFactor
+    return Math.max(this.area * this.areaFactor * this.housingFactor, this.housing)
   }
   get rawVisitorNeed() {
     return this.area * this.areaFactor * this.activityFactor
