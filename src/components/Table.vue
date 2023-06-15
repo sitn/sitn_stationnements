@@ -16,7 +16,12 @@
                 <!-- commune column -->
                 <q-td key="type" :props="props">
                     <template v-for="item in props.row.properties.locations">
-                        <li>{{ item.type }} {{ item.area.toFixed(1) }} m2</li>
+                        <div>
+                            <q-chip square color="grey-3">
+                                <q-avatar :color="item.color" text-color="white">{{ item.type }}</q-avatar>
+                                {{ item.area.toFixed(1) }} m<sup>2</sup>
+                            </q-chip>
+                        </div>
                     </template>
                 </q-td>
                 <!-- actions column -->
