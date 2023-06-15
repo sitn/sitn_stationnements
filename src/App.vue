@@ -1,48 +1,72 @@
 <template>
   <div class="bg-grey-3 q-pa-md">
     <q-stepper v-model="step" ref="stepper" color="primary" animated>
-      <!-- LOCATION FORM -->
+
       <q-step :name="1" title="Localisation" icon="assignment" :done="step > 1">
+
+        <!-- 1. LOCATION -->
         <div class="q-pa-md">
           <div class="text-h5">Étape 1: Localisation du projet</div>
           <Search @addOption="addRecord"></Search>
           <Map ref="map" :geojson="geojson"></Map>
           <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
         </div>
+
+        <!-- 2. RAW PARKING NEEDS -->
         <div class="q-pa-md">
           <div class="text-h5">Étape 2: Calcul du besoin brut</div>
           <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in factors">
             <label class="text-h7 ">{{ item.affectation }}</label>
             <div class="row q-col-gutter-sm">
 
-              <q-input class="col-3" bg-color="white" outlined label="" type="number" name="item.affectation"
-                v-model.number="item.area" min="0.0" max="Inf">
-                <template v-slot:label>
-                  Surface brute de plancher (SBP) en m<sup>2</sup>
-                </template>
-                <!--
-                <template v-slot:append>
-                  m<sup>2</sup>
-                </template>
-                -->
-              </q-input>
-              <q-input v-if="item.isHousing" class="col-3" bg-color="white" outlined label="Nombre" type="number"
-                name="item.housing" v-model.number="item.housing" min="0.0" max="Inf">
-              </q-input>
-              <q-input class="col-3" bg-color="light-blue-1" outlined label="Besoin brut habitant/employé" type="number"
-                name="item.rawResidentNeed" v-model.number="item.rawResidentNeed" readonly>
-              </q-input>
-              <q-input class="col-3" bg-color="light-blue-1" outlined label="Besoin brut visiteur/client" type="number"
-                name="item.rawVisitorNeed" v-model.number="item.rawVisitorNeed" readonly>
-              </q-input>
-              <q-input class="col-3" bg-color="light-blue-1" outlined label="Besoin brut total" type="number"
-                name="item.rawVisitorNeed" v-model.number="item.rawVisitorNeed" readonly>
-              </q-input>
+              <div class="col">
+                <q-input class="col" bg-color="white" outlined label="" type="number" name="item.affectation"
+                  v-model.number="item.area" min="0.0" max="Inf">
+                  <template v-slot:label>
+                    Surface brute de plancher (SBP) <!-- en m<sup>2</sup> -->
+                  </template>
 
+                  <template v-slot:append>
+                    <div class="text-body2">m<sup>2</sup></div>
+                  </template>
+
+                </q-input>
+              </div>
+
+              <div class="col">
+                <q-input v-if="item.isHousing" class="col" bg-color="white" outlined label="Nombre de logements"
+                  type="number" name="item.housing" v-model.number="item.housing" min="0.0" max="Inf">
+                </q-input>
+              </div>
+
+              <div class="col">
+                <q-input bg-color="light-blue-1" outlined label="Besoin brut habitant/employé" type="number"
+                  name="item.rawResidentNeed" v-model.number="item.rawResidentNeed" readonly>
+                </q-input>
+              </div>
+
+              <div class="col">
+                <q-input class="col" bg-color="light-blue-1" outlined label="Besoin brut visiteur/client" type="number"
+                  name="item.rawVisitorNeed" v-model.number="item.rawVisitorNeed" readonly>
+                </q-input>
+              </div>
+
+              <div class="col">
+                <q-input class="col" bg-color="light-blue-1" outlined label="Besoin brut total" type="number"
+                  name="item.rawVisitorNeed" v-model.number="item.rawTotalNeed" readonly>
+                </q-input>
+              </div>
 
             </div>
           </div>
+          <div>{{ loctype }}</div>
+
         </div>
+
+        <!-- 3. NET PARKING NEEDS -->
+
+
+
       </q-step>
       <!-- DETAILS FORM -->
       <q-step :name="2" title="Détails" caption="" icon="assignment" :done="step > 2">
@@ -103,31 +127,41 @@ import GeoJSON from 'ol/format/GeoJSON.js';
 import { Vector as VectorLayer } from 'ol/layer.js';
 
 // Classes
+const colors = { 'I': 'legend-1', 'II': 'legend-2', 'III': 'legend-3', 'IV': 'legend-4', 'V': 'legend-5', 'VI': 'legend-6' };
+
+// Mob 20
 class Mob20 {
   constructor(type, area) {
     this.type = type;
-    this.area = area;
+    this.area = parseFloat(area);
+  }
+  get color() {
+    return colors[this.type]
   }
 }
 
+// Factor
 class Factor {
   constructor(type, affectation, areaFactor, housingFactor, activityFactor, area, housing) {
     this.type = type;
     this.affectation = affectation;
-    this.areaFactor = areaFactor;
-    this.housingFactor = housingFactor;
-    this.activityFactor = activityFactor;
-    this.area = area;
-    this.housing = housing;
+    this.areaFactor = parseFloat(areaFactor);
+    this.housingFactor = parseFloat(housingFactor);
+    this.activityFactor = parseFloat(activityFactor);
+    this.area = parseFloat(area);
+    this.housing = parseFloat(housing);
   }
   get isHousing() {
     return this.type === "Logement";
   }
   get rawResidentNeed() {
-    return Math.max(this.area * this.areaFactor * this.housingFactor, this.housing)
+    return parseFloat(Math.max(this.area * this.areaFactor * this.housingFactor, this.housing).toFixed(2))
   }
   get rawVisitorNeed() {
-    return this.area * this.areaFactor * this.activityFactor
+    return parseFloat((this.area * this.areaFactor * this.activityFactor).toFixed(2))
+  }
+  get rawTotalNeed() {
+    return (this.rawResidentNeed + this.rawVisitorNeed).toFixed(2)
   }
 }
 
@@ -140,6 +174,20 @@ factors.push(new Factor("Activité", "Autres magasins", 0.01, 1.5, 3.5, 0, 0));
 factors.push(new Factor("Activité", "Industrie et artisanat", 0.01, 1, 0.2, 0, 0));
 factors.push(new Factor("Activité", "Entrepôts et dépôts", 0.01, 0.1, 0.01, 0, 0));
 factors.push(new Factor("Activité", "Autres services", 0.01, 2, 0.5, 0, 0));
+
+// Project
+class Project {
+  constructor(parcels, factors) {
+    this.parcels = parcels
+    this.factors = factors
+  }
+  get locationType() {
+    return 'IV'
+  }
+}
+
+// 
+
 
 
 export default {
@@ -167,7 +215,37 @@ export default {
   },
   computed: {
     olFeatures() {
-      return new GeoJSON().readFeatures(this.geojson);
+      return new GeoJSON().readFeatures(this.geojson)
+    },
+    loctype() {
+
+      if (this.geojson.features.length > 0) {
+
+        let locations = this.geojson.features
+
+        let sums = { 'I': 0.0, 'II': 0.0, 'III': 0.0, 'IV': 0.0, 'V': 0.0, 'VI': 0.0 }
+
+        this.geojson.features.forEach(feature => {
+
+          feature.properties.locations.forEach(location => {
+
+            sums[location.type] += location.area
+
+          })
+
+        })
+
+        console.log('sums all')
+        console.log(sums)
+
+        let result = this.geojson.features.map(obj => obj.properties.locations);
+        console.log('result')
+        console.log(result)
+
+        // temp1[0].properties.locations.filter(el => el.type === 'V')
+
+        return 42
+      }
     },
   },
   methods: {
@@ -190,7 +268,7 @@ export default {
       console.log(feature.properties)
       feature.properties.locations = locations
 
-      console.log(toRaw(feature))
+      //console.log(toRaw(feature))
 
       // add feature to geojson
       this.geojson.features.push(feature)
