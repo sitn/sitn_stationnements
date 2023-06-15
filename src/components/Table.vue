@@ -16,7 +16,7 @@
                 <!-- commune column -->
                 <q-td key="type" :props="props">
                     <template v-for="item in props.row.properties.locations">
-                        <li>{{ item.type }} {{ item.area }} m2</li>
+                        <li>{{ item.type }} {{ item.area.toFixed(1) }} m2</li>
                     </template>
                 </q-td>
                 <!-- actions column -->
