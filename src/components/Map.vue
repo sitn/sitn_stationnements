@@ -144,7 +144,6 @@ export default {
     mounted() {
 
         console.log(`Count: ${this.featuresCount}`)
-        console.log(this.olfeatures)
 
         const vectorSource = new VectorSource({
             features: this.olfeatures,
@@ -197,10 +196,10 @@ export default {
                             'REQUEST': 'GetMap',
                             'FORMAT': 'image/png',
                             'TRANSPARENT': true,
-                            'LAYERS': 'mob20_type_localisation2023'
+                            'LAYERS': 'mob20_type_localisation'
                         },
                         serverType: 'mapserver',
-                        url: 'https://sitn.ne.ch/mapserv_proxy',
+                        url: 'https://sitn.ne.ch/services/wms',
                     }),
                 }),
                 this.vectorLayer,
