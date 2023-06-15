@@ -10,6 +10,19 @@
           <Search @addOption="addRecord"></Search>
           <Map ref="map" :geojson="geojson"></Map>
           <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
+          <div class="q-my-md">
+            <q-card class="my-card text-white" style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)">
+              <q-card-section>
+                <div class="text-h6">Résumé de la localisation</div>
+                <div class="text-subtitle2">{{ loctype }}</div>
+              </q-card-section>
+
+              <q-card-section class="q-pt-none">
+                {{ lorem }}
+              </q-card-section>
+            </q-card>
+
+          </div>
         </div>
 
         <!-- 2. RAW PARKING NEEDS -->
@@ -59,12 +72,16 @@
 
             </div>
           </div>
-          <div>{{ loctype }}</div>
+
 
         </div>
 
         <!-- 3. NET PARKING NEEDS -->
+        <div class="q-pa-md">
+          <div class="text-h5">Étape 3: Calcul du besoin net</div>
 
+
+        </div>
 
 
       </q-step>
@@ -123,11 +140,11 @@ import Map from "./components/Map.vue"
 import Table from "./components/Table.vue"
 import { Quasar } from "quasar";
 import { ref, isProxy, toRaw, effect } from 'vue'
-import GeoJSON from 'ol/format/GeoJSON.js';
-import { Vector as VectorLayer } from 'ol/layer.js';
+import GeoJSON from 'ol/format/GeoJSON.js'
+import { Vector as VectorLayer } from 'ol/layer.js'
 
 // Classes
-const colors = { 'I': 'legend-1', 'II': 'legend-2', 'III': 'legend-3', 'IV': 'legend-4', 'V': 'legend-5', 'VI': 'legend-6' };
+const colors = { 'I': 'legend-1', 'II': 'legend-2', 'III': 'legend-3', 'IV': 'legend-4', 'V': 'legend-5', 'VI': 'legend-6' }
 
 // Mob 20
 class Mob20 {
@@ -143,16 +160,16 @@ class Mob20 {
 // Factor
 class Factor {
   constructor(type, affectation, areaFactor, housingFactor, activityFactor, area, housing) {
-    this.type = type;
-    this.affectation = affectation;
-    this.areaFactor = parseFloat(areaFactor);
-    this.housingFactor = parseFloat(housingFactor);
-    this.activityFactor = parseFloat(activityFactor);
-    this.area = parseFloat(area);
-    this.housing = parseFloat(housing);
+    this.type = type
+    this.affectation = affectation
+    this.areaFactor = parseFloat(areaFactor)
+    this.housingFactor = parseFloat(housingFactor)
+    this.activityFactor = parseFloat(activityFactor)
+    this.area = parseFloat(area)
+    this.housing = parseFloat(housing)
   }
   get isHousing() {
-    return this.type === "Logement";
+    return this.type === "Logement"
   }
   get rawResidentNeed() {
     return parseFloat(Math.max(this.area * this.areaFactor * this.housingFactor, this.housing).toFixed(2))
@@ -165,15 +182,15 @@ class Factor {
   }
 }
 
-const factors = [];
-factors.push(new Factor("Logement", "Logements standards", 0.01, 1, 0.1, 0, 0));
-factors.push(new Factor("Logement", "Logements avec encadrement ou étudiants", 0.01, 1, 0.1, 0, 0));
-factors.push(new Factor("Activité", "Services à nombreuse clientèle", 0.01, 2, 1, 0, 0));
-factors.push(new Factor("Activité", "Magasins à nombreuse clientèle", 0.01, 2, 8, 0, 0));
-factors.push(new Factor("Activité", "Autres magasins", 0.01, 1.5, 3.5, 0, 0));
-factors.push(new Factor("Activité", "Industrie et artisanat", 0.01, 1, 0.2, 0, 0));
-factors.push(new Factor("Activité", "Entrepôts et dépôts", 0.01, 0.1, 0.01, 0, 0));
-factors.push(new Factor("Activité", "Autres services", 0.01, 2, 0.5, 0, 0));
+const factors = []
+factors.push(new Factor("Logement", "Logements standards", 0.01, 1, 0.1, 0, 0))
+factors.push(new Factor("Logement", "Logements avec encadrement ou étudiants", 0.01, 1, 0.1, 0, 0))
+factors.push(new Factor("Activité", "Services à nombreuse clientèle", 0.01, 2, 1, 0, 0))
+factors.push(new Factor("Activité", "Magasins à nombreuse clientèle", 0.01, 2, 8, 0, 0))
+factors.push(new Factor("Activité", "Autres magasins", 0.01, 1.5, 3.5, 0, 0))
+factors.push(new Factor("Activité", "Industrie et artisanat", 0.01, 1, 0.2, 0, 0))
+factors.push(new Factor("Activité", "Entrepôts et dépôts", 0.01, 0.1, 0.01, 0, 0))
+factors.push(new Factor("Activité", "Autres services", 0.01, 2, 0.5, 0, 0))
 
 // Project
 class Project {
@@ -187,7 +204,6 @@ class Project {
 }
 
 // 
-
 
 
 export default {
@@ -238,13 +254,13 @@ export default {
         console.log('sums all')
         console.log(sums)
 
-        let result = this.geojson.features.map(obj => obj.properties.locations);
+        let result = this.geojson.features.map(obj => obj.properties.locations)
         console.log('result')
         console.log(result)
 
         // temp1[0].properties.locations.filter(el => el.type === 'V')
 
-        return 42
+        return sums
       }
     },
   },
