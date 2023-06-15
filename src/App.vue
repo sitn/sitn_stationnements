@@ -4,13 +4,13 @@
       <!-- LOCATION FORM -->
       <q-step :name="1" title="Localisation" icon="assignment" :done="step > 1">
         <div class="q-pa-md">
-          <div class="text-h5">Localisation du projet</div>
+          <div class="text-h5">Étape 1: Localisation du projet</div>
           <Search @addOption="addRecord"></Search>
           <Map ref="map" :geojson="geojson"></Map>
           <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
         </div>
         <div class="q-pa-md">
-          <div class="text-h5">Détails du projet</div>
+          <div class="text-h5">Étape 2: Calcul du besoin brut</div>
           <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in factors">
             <label class="text-h7 ">{{ item.affectation }}</label>
             <div class="row q-col-gutter-sm">
@@ -26,9 +26,18 @@
                 </template>
                 -->
               </q-input>
-              <q-input class="col-3" bg-color="white" outlined label="Nombre" type="number" name="item.housing"
-                v-model.number="item.housing" min="0.0" max="Inf">
+              <q-input v-if="item.isHousing" class="col-3" bg-color="white" outlined label="Nombre" type="number"
+                name="item.housing" v-model.number="item.housing" min="0.0" max="Inf">
               </q-input>
+              <q-input class="col-3" bg-color="light-blue-1" outlined label="Besoin brut habitant" type="number"
+                name="item.rawResidentNeed" v-model.number="item.rawResidentNeed" readonly>
+              </q-input>
+              <q-input class="col-3" bg-color="light-blue-1" outlined label="Besoin brut visiteur" type="number"
+                name="item.rawVisitorNeed" v-model.number="item.rawVisitorNeed" readonly>
+              </q-input>
+
+              
+
             </div>
           </div>
         </div>
@@ -108,6 +117,15 @@ class Factor {
     this.activityFactor = activityFactor;
     this.area = area;
     this.housing = housing;
+  }
+  get isHousing() {
+    return this.type === "Logement";
+  }
+  get rawResidentNeed() {
+    return this.area * this.areaFactor * this.housingFactor
+  }
+  get rawVisitorNeed() {
+    return this.area * this.areaFactor * this.activityFactor
   }
 }
 
