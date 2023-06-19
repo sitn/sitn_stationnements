@@ -3,23 +3,38 @@
     <div class="q-pa-md">
         <div class="text-h5">Étape 2: Calcul du besoin brut (COMPONENT)</div>
         <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-            <q-select outlined bottom-slots bg-color="white" v-model="affectationModel"
-                :options="this.affectationOptions.filter(o => !o.active)" option-value="name" option-label="name"
-                @update:model-value="selectOption()" multiple label="Affectation">
+            <q-select outlined bottom-slots bg-color="white" v-model="affectationModel" :options="affectationOptions"
+                option-value="name" option-label="name" @update:model-value="selectOption()" multiple
+                label="Affectation(s)">
                 <template v-slot:option="scope">
                     <q-item v-bind="scope.itemProps">
+                        <!--
+                            :options="this.affectationOptions.filter(o => !o.active)"
+                        -->
                         <!--
                   <q-item-section avatar>
                     <q-icon :name="scope.opt.icon" />
                   </q-item-section>
                   -->
-                        <q-item-section avatar class="childDiv">
-                            <q-icon name="add_circle"></q-icon>
-                            <!-- <q-btn flat dense icon="add" color="primary" @click="addItem" label="Ajouter"></q-btn> -->
+                        <q-item-section side>
+                            <!-- <q-checkbox v-model="scope.opt.active" /> -->
+                            <!-- <q-checkbox :model-value="scope.opt.active" /> -->
+
+                            <!-- <q-checkbox :model-value="scope.selected" @update:model-value="scope.toggleOption(scope.opt)" /> -->
                         </q-item-section>
+
+                        <!--
+                        <q-item-section avatar class="childDiv">
+
+                            <q-checkbox v-model="selectModel" :val="scope.opt.active" />
+                            <q-icon name="add_circle"></q-icon>
+                            <q-btn flat dense icon="add" color="primary" @click="addItem" label="Ajouter"></q-btn>
+                        </q-item-section>
+                        -->
                         <q-item-section>
                             <q-item-label>{{ scope.opt.name }}</q-item-label>
-                            <q-item-label caption>{{ scope.opt.name }}</q-item-label>
+                            <q-item-label caption>Selected: {{ scope.selected }}</q-item-label>
+                            <q-item-label caption>Active: {{ scope.opt.active }}</q-item-label>
                         </q-item-section>
                     </q-item>
                 </template>
@@ -28,18 +43,22 @@
                     Sélectionner une affectation et cliquer sur le bouton <b>Ajouter</b>
                 </template>
 
-
+                <!--
                 <template v-slot:after>
-                    <!-- <q-btn round  flat icon="add" @click.stop.prevent></q-btn>-->
                     <q-btn flat icon="add" color="primary" @click="addItem" label="Ajouter"></q-btn>
                 </template>
+                -->
 
             </q-select>
 
         </div>
-
+        <!--
         <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders"
             v-for="(item, key) in this.affectationOptions.filter(o => o.active)">
+            -->
+
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in this.affectationModel">
+
             <label class="text-h7 ">{{ item.name }} </label>
             <div class="row q-col-gutter-sm">
 
@@ -148,7 +167,7 @@ export default {
         }
     },
     computed: {
-        options() {
+        activeOptions() {
             return this.affectationOptions.filter(o => o.active)
         }
     },
@@ -162,9 +181,21 @@ export default {
 
         },
         selectOption() {
-            // affectationOptions: this.affectationOptions.filter(o => !o.active),
+
+            console.log('Select option')
+            console.log(this.affectationModel)
 
             // let index = this.affectationOptions.findIndex((obj) => obj.name === this.affectationModel.name)
+
+            this.affectationOptions.forEach(function (e) {
+                e.active = false
+            });
+
+
+            this.affectationModel.forEach(function (e) {
+                e.active = true
+            });
+
             // this.affectationModel.active = true
 
             // console.log(this.affectationModel.active)
@@ -174,12 +205,20 @@ export default {
         },
         deleteItem(item) {
 
+            console.log(`Delete item with id=${item.name}`)
+            this.affectationModel = this.affectationModel.filter(e => e !== item)
+
             let index = this.affectationOptions.findIndex((obj) => obj.name === item.name)
+            this.affectationOptions[index].active = false
 
             //console.log(item)
             //console.log(`Delete item with id=${item.name}`)
-            console.log(`Deactivate option with name=${item.name}`)
-            this.affectationOptions[index].active = false
+
+
+            // console.log(`Deactivate option with name=${item.name}`)
+
+            // this.affectationOptions[index].active = false
+
 
             // this.$emit('deleteItem', item.id);
 
