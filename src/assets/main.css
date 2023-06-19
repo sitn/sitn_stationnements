@@ -59,3 +59,40 @@ body {
 .bg-legend-6 {
   background: #d8d8d7 !important;
 }
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+
+
+
+.grid-container {
+  padding: 3.75%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+}
+.grid-container > div {
+  background-color: RoyalBlue;
+  padding: 10px;
+}
+
+@media only screen and (min-width: 981px) {
+  .grid_items {
+    grid-template-columns: 30% 30% 30%;
+    grid-row-gap: 50px;
+  }
+  .grid_items > div {
+    padding: 30px;
+  }
+}

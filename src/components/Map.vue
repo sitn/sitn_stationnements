@@ -167,7 +167,7 @@ export default {
                     opacity: 1.0,
                     source: new WMTS({
                         attributions:
-                            'Tiles © <a href="https://sitn.ne.ch/"' +
+                            '© <a href="https://sitn.ne.ch/web/conditions_utilisation/contrat_SITN_MO.htm"' +
                             ' target="_blank">SITN</a>',
                         url: 'https://sitn.ne.ch/mapproxy95/service?',
                         layer: 'plan_ville',
@@ -186,7 +186,7 @@ export default {
                 new ImageLayer({
                     source: new ImageWMS({
                         attributions:
-                            'Tiles © <a href="https://sitn.ne.ch/"' +
+                            '© <a href="https://sitn.ne.ch/web/conditions_utilisation/contrat_SITN_MO.htm"' +
                             ' target="_blank">SITN</a>',
                         crossOrigin: 'anonymous',
                         params: {

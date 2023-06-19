@@ -102,7 +102,7 @@ export default {
             console.log(`Delete item with id=${item.id}`)
             this.$emit('deleteItem', item.id);
 
-            this.$emit('action', { type: "delete", id: item.id });
+            // this.$emit('action', { type: "delete", id: item.id });
 
         },
         focusItem(item) {

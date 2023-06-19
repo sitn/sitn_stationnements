@@ -9,80 +9,70 @@
           <div class="text-h5">Étape 1: Localisation du projet</div>
           <Search @addOption="addRecord"></Search>
           <Map ref="map" :geojson="geojson"></Map>
-          <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
           <div class="q-my-md">
-            <q-card class="my-card text-white" style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)">
+            <q-card class="bg-blue-grey-8 text-white">
               <q-card-section>
-                <div class="text-h6">Résumé de la localisation</div>
+                <div class="text-h6">{{ numberOfparcels }} parcelle(s) sélectionnée(s)</div>
+                <!--Résumé de la localisation-->
                 <div class="text-subtitle2">{{ loctype }}</div>
               </q-card-section>
-
-              <q-card-section class="q-pt-none">
-                {{ lorem }}
-              </q-card-section>
             </q-card>
-
           </div>
+          <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
+
         </div>
 
         <!-- 2. RAW PARKING NEEDS -->
+        <FormB></FormB>
+
+        <!-- 3. NET PARKING NEEDS -->
+
         <div class="q-pa-md">
-          <div class="text-h5">Étape 2: Calcul du besoin brut</div>
-          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in factors">
-            <label class="text-h7 ">{{ item.affectation }}</label>
-            <div class="row q-col-gutter-sm">
+          <div class="text-h5">Étape 3: Calcul du besoin net</div>
+          <div class="grid-container">
+            <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in factors">
 
-              <div class="col">
-                <q-input class="col" bg-color="white" outlined label="" type="number" name="item.affectation"
-                  v-model.number="item.area" min="0.0" max="Inf">
-                  <template v-slot:label>
-                    Surface brute de plancher (SBP) <!-- en m<sup>2</sup> -->
-                  </template>
+              <table>
+                <tr>
+                  <th>{{ item.name }}</th>
 
-                  <template v-slot:append>
-                    <div class="text-body2">m<sup>2</sup></div>
-                  </template>
-
-                </q-input>
-              </div>
-
-              <div class="col">
-                <q-input v-if="item.isHousing" class="col" bg-color="white" outlined label="Nombre de logements"
-                  type="number" name="item.housing" v-model.number="item.housing" min="0.0" max="Inf">
-                </q-input>
-              </div>
-
-              <div class="col">
-                <q-input bg-color="light-blue-1" outlined label="Besoin brut habitant/employé" type="number"
-                  name="item.rawResidentNeed" v-model.number="item.rawResidentNeed" readonly>
-                </q-input>
-              </div>
-
-              <div class="col">
-                <q-input class="col" bg-color="light-blue-1" outlined label="Besoin brut visiteur/client" type="number"
-                  name="item.rawVisitorNeed" v-model.number="item.rawVisitorNeed" readonly>
-                </q-input>
-              </div>
-
-              <div class="col">
-                <q-input class="col" bg-color="light-blue-1" outlined label="Besoin brut total" type="number"
-                  name="item.rawVisitorNeed" v-model.number="item.rawTotalNeed" readonly>
-                </q-input>
-              </div>
+                </tr>
+                <tr>
+                  <td>Fourchette du type de localisation [XX]</td>
+                  <td>Min. 50%</td>
+                  <td>Max. 100%</td>
+                </tr>
+                <tr>
+                  <td>Besoin net habitant/employé</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Besoin net visiteur/client</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
 
             </div>
           </div>
 
-
         </div>
 
-        <!-- 3. NET PARKING NEEDS -->
+
+        <!-- 4. REDUCED NET PARKING NEEDS -->
         <div class="q-pa-md">
-          <div class="text-h5">Étape 3: Calcul du besoin net</div>
+          <div class="text-h5">Étape 4: Calcul du besoin net réduit</div>
 
 
         </div>
 
+        <!-- 5. SUMMARY -->
+        <div class="q-pa-md">
+          <div class="text-h5">Étape 5: Résumé</div>
+
+
+        </div>
 
       </q-step>
       <!-- DETAILS FORM -->
@@ -138,6 +128,7 @@
 import Search from "./components/Search.vue"
 import Map from "./components/Map.vue"
 import Table from "./components/Table.vue"
+import FormB from "./components/FormB.vue"
 import { Quasar } from "quasar";
 import { ref, isProxy, toRaw, effect } from 'vue'
 import GeoJSON from 'ol/format/GeoJSON.js'
@@ -159,14 +150,18 @@ class Mob20 {
 
 // Factor
 class Factor {
-  constructor(type, affectation, areaFactor, housingFactor, activityFactor, area, housing) {
+  constructor(type, name, areaFactor, housingFactor, activityFactor, area, housing) {
     this.type = type
-    this.affectation = affectation
+    this.name = name
     this.areaFactor = parseFloat(areaFactor)
     this.housingFactor = parseFloat(housingFactor)
     this.activityFactor = parseFloat(activityFactor)
     this.area = parseFloat(area)
     this.housing = parseFloat(housing)
+    this.active = false
+  }
+  get id() {
+
   }
   get isHousing() {
     return this.type === "Logement"
@@ -211,7 +206,8 @@ export default {
   components: {
     Map,
     Table,
-    Search
+    Search,
+    FormB
   },
   setup() {
     return {
@@ -225,11 +221,15 @@ export default {
       options: null,
       geojson: {
         'type': 'FeatureCollection',
+        'glouglou': 'blab',
         'features': []
       }
     }
   },
   computed: {
+    numberOfparcels() {
+      return this.geojson.features.length
+    },
     olFeatures() {
       return new GeoJSON().readFeatures(this.geojson)
     },
