@@ -1,7 +1,7 @@
 <template>
     <!-- 2. RAW PARKING NEEDS -->
     <div class="q-pa-md">
-        <div class="text-h5">Étape 2: Calcul du besoin brut (COMPONENT)</div>
+        <div class="text-h5">Étape 2: Calcul du besoin brut</div>
         <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
             <q-select outlined bottom-slots bg-color="white" v-model="affectationModel" :options="affectationOptions"
                 option-value="name" option-label="name" @update:model-value="selectOption()" multiple
@@ -17,7 +17,7 @@
                   </q-item-section>
                   -->
                         <q-item-section side>
-                            <!-- <q-checkbox v-model="scope.opt.active" /> -->
+                            <q-checkbox v-model="scope.opt.active" />
                             <!-- <q-checkbox :model-value="scope.opt.active" /> -->
 
                             <!-- <q-checkbox :model-value="scope.selected" @update:model-value="scope.toggleOption(scope.opt)" /> -->
@@ -40,7 +40,7 @@
                 </template>
 
                 <template v-slot:hint>
-                    Sélectionner une affectation et cliquer sur le bouton <b>Ajouter</b>
+                    Sélectionner une ou plusieurs affectations dans la liste
                 </template>
 
                 <!--
