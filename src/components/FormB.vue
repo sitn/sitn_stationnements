@@ -27,7 +27,7 @@
 
         </div>
 
-        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in this.model">
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in this.project.affectations.filter(e => e.active)">
 
             <label class="text-h7 ">{{ item.name }} </label>
             <div class="row q-col-gutter-sm">

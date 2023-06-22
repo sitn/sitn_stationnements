@@ -160,10 +160,10 @@ class Affectation {
   get rawTotalNeed() {
     return (this.rawResidentNeed + this.rawVisitorNeed).toFixed(2)
   }
-  get netResidentNeed() {
-    return [parseFloat(this.rawResidentNeed), parseFloat(this.rawResidentNeed)]
+  netResidentNeed(range) {
+    return [range[0] * parseFloat(this.rawResidentNeed), range[1] * parseFloat(this.rawResidentNeed)]
   }
-  get netVisitorNeed() {
+  netVisitorNeed(range) {
     return [parseFloat(this.rawVisitorNeed), parseFloat(this.rawVisitorNeed)]
   }
 }
@@ -188,15 +188,16 @@ class Project {
     return 'default'
   }
   get locationType() {
-    return 'IV'
+    return 'II'
   }
-  get ReductionFactors() {
-
+  get reductionFactors() {
+    return locationTypes.filter(obj => obj.name === this.locationType && obj.commune === this.commune)
   }
 }
 
 const project = new Project(null, affectations)
-
+console.log('project.reductionFactors')
+console.log(project.reductionFactors)
 
 export default {
   name: 'App',
@@ -220,7 +221,7 @@ export default {
       options: null,
       geojson: {
         'type': 'FeatureCollection',
-        'glouglou': 'blab',
+        'glouglou': 'blabla',
         'features': []
       }
     }
@@ -228,9 +229,6 @@ export default {
   computed: {
     numberOfparcels() {
       return this.geojson.features.length
-    },
-    olFeatures() {
-      return new GeoJSON().readFeatures(this.geojson)
     },
     loctype() {
 
@@ -256,8 +254,6 @@ export default {
         let result = this.geojson.features.map(obj => obj.properties.locations)
         console.log('result')
         console.log(result)
-
-        // temp1[0].properties.locations.filter(el => el.type === 'V')
 
         return sums
       }
@@ -324,10 +320,8 @@ export default {
     focusRecord(id) {
       console.log(`App.vue | Focus on item with id=${id}`)
       this.map.zoomTo(id)
-      // this.focus = id
     },
     updateProject(obj) {
-
 
       this.project = obj
       console.log('Update project:')
