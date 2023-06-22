@@ -75,6 +75,19 @@ export default {
                 this.model = null;
             }
         },
+        fetchIntersection(body) {
+            var requestOptions = {
+                method: 'POST',
+                headers: '',
+                body: body,
+                redirect: 'follow'
+            };
+
+            fetch("https://sitn.ne.ch/apps/stationnement/", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+        },
         fetchSources(val, update, abort) {
 
             // call abort() when no data is returned
@@ -93,10 +106,7 @@ export default {
                     redirect: "follow",
                 };
 
-                fetch(
-                    `https://sitn.ne.ch/permis_construire/search?query=${encodeURIComponent(
-                        val
-                    )}`,
+                fetch(`https://sitn.ne.ch/permis_construire/search?query=${encodeURIComponent(val)}`,
                     requestOptions
                 )
                     .then((response) => response.json())

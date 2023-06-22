@@ -31,52 +31,52 @@
 
         <div class="q-pa-md">
           <div class="text-h5">Étape 3: Calcul du besoin net</div>
-          <div class="grid-container">
-            <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in factors">
+          <div class="row">
+            <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-4" v-for="(item, key) in factors">
+              <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
 
-              <table>
-                <tr>
-                  <th>{{ item.name }}</th>
+                <table>
+                  <tr>
+                    <th>{{ item.name }}</th>
 
-                </tr>
-                <tr>
-                  <td>Fourchette du type de localisation [XX]</td>
-                  <td>Min. 50%</td>
-                  <td>Max. 100%</td>
-                </tr>
-                <tr>
-                  <td>Besoin net habitant/employé</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Besoin net visiteur/client</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </table>
+                  </tr>
+                  <tr>
+                    <td>Fourchette du type de localisation {{ project.locationType }}</td>
+                    <td>Min. 50%</td>
+                    <td>Max. 100%</td>
+                  </tr>
+                  <tr>
+                    <td>Besoin net habitant/employé</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Besoin net visiteur/client</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </table>
+
+              </div>
 
             </div>
+
           </div>
 
         </div>
 
-
         <!-- 4. REDUCED NET PARKING NEEDS -->
         <div class="q-pa-md">
           <div class="text-h5">Étape 4: Calcul du besoin net réduit</div>
-
-
         </div>
 
         <!-- 5. SUMMARY -->
         <div class="q-pa-md">
           <div class="text-h5">Étape 5: Résumé</div>
-
-
         </div>
 
       </q-step>
+
       <!-- DETAILS FORM -->
       <q-step :name="2" title="Détails" caption="" icon="assignment" :done="step > 2">
         <div class="text-h5">Détails du projet</div>
@@ -200,7 +200,7 @@ class Project {
   }
 }
 
-// 
+const project = new Project(null, factors)
 
 
 export default {
@@ -219,6 +219,7 @@ export default {
   },
   data() {
     return {
+      project: project,
       factors: factors,
       options: null,
       geojson: {
@@ -268,11 +269,34 @@ export default {
   },
   methods: {
 
+    getLocationType(feature) {
+
+      let geojson = { "type": "FeatureCollection", "features": [] }
+      geojson.features.push(feature)
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(geojson),
+        redirect: 'follow'
+      };
+
+      fetch("https://sitn.ne.ch/apps/stationnement/", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+    },
     addRecord(feature) {
 
       console.log(`App.vue | Add new record with id=${feature.id}`)
+      console.log(feature)
 
       console.log(this.geojson.features)
+
+      // this.getLocationType(feature)
 
       // add MOB20 attribute
       let locations = []
