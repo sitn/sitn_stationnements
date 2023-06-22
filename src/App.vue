@@ -30,7 +30,7 @@
                   <q-item-section>
                     <q-item-label>{{ scope.opt.name }}</q-item-label>
                     <q-item-label caption>{{ scope.opt.area.toFixed(0) }} m<sup>2</sup> ({{ (100 *
-                      scope.opt.ratio).toFixed(0) }} %)</q-item-label>
+                      scope.opt.ratio).toFixed(0) }}%)</q-item-label>
                   </q-item-section>
                 </q-item>
               </template>
