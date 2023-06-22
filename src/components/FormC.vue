@@ -1,86 +1,38 @@
 <template>
-    <!-- 2. RAW PARKING NEEDS -->
+    <!-- 3. NET PARKING NEEDS -->
     <div class="q-pa-md">
-        <div class="text-h5">Étape 2: Calcul du besoin brut (COMPONENT)</div>
-        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-            <q-select outlined bg-color="white" v-model="affectationModel"
-                :options="this.affectationOptions.filter(o => !o.active)" option-value="name" option-label="name"
-                @update:model-value="selectOption()" label="Affectation">
-                <template v-slot:option="scope">
-                    <q-item v-bind="scope.itemProps">
-                        <!--
-                  <q-item-section avatar>
-                    <q-icon :name="scope.opt.icon" />
-                  </q-item-section>
-                  -->
-                        <q-item-section>
-                            <q-item-label>{{ scope.opt.name }}</q-item-label>
-                            <q-item-label caption>{{ scope.opt.name }}</q-item-label>
-                        </q-item-section>
-                    </q-item>
-                </template>
-                <!--
-              <template v-slot:hint>
-                Choisir une affectation
-              </template>
-              -->
+        <div class="text-h5">Étape 3: Calcul du besoin net</div>
+        <div class="row">
+            <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-4"
+                v-for="(item, key) in this.project.affectations.filter(e => e.active)">
+                <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
 
-                <template v-slot:after>
-                    <!-- <q-btn round  flat icon="add" @click.stop.prevent></q-btn>-->
-                    <q-btn flat icon="add" color="primary" @click="addItem" label="Ajouter"></q-btn>
-                </template>
+                    <table>
+                        <tr>
+                            <th>{{ item.name }}</th>
 
-            </q-select>
+                        </tr>
+                        <tr>
+                            <td>Fourchette du type de localisation {{ project.locationType }}</td>
+                            <td>Min. 50%</td>
+                            <td>Max. 100%</td>
+                        </tr>
+                        <tr>
+                            <td>Besoin net habitant/employé</td>
+                            <td class="bg-light-blue-1">{{ item.netResidentNeed[0] }}</td>
+                            <td class="bg-light-blue-1">{{ item.netResidentNeed[1] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Besoin net visiteur/client</td>
+                            <td class="bg-light-blue-1">{{ item.netVisitorNeed[0] }}</td>
+                            <td class="bg-light-blue-1">{{ item.netVisitorNeed[1] }}</td>
+                        </tr>
+                    </table>
 
-        </div>
-
-        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders"
-            v-for="(item, key) in this.affectationOptions.filter(o => o.active)">
-            <label class="text-h7 ">{{ item.name }} </label>
-            <div class="row q-col-gutter-sm">
-
-                <div class="col">
-                    <q-input class="col" bg-color="white" outlined label="" type="number" name="item.area"
-                        v-model.number="item.area" min="0.0" max="Inf">
-                        <template v-slot:label>
-                            Surface brute de plancher (SBP) <!-- en m<sup>2</sup> -->
-                        </template>
-
-                        <template v-slot:append>
-                            <div class="text-body2">m<sup>2</sup></div>
-                        </template>
-
-                    </q-input>
-                </div>
-
-                <div class="col">
-                    <q-input v-if="item.isHousing" class="col" bg-color="white" outlined label="Nombre de logements"
-                        type="number" name="item.housing" v-model.number="item.housing" min="0.0" max="Inf">
-                    </q-input>
-                </div>
-
-                <div class="col">
-                    <q-input bg-color="light-blue-1" outlined label="Besoin brut habitant/employé" type="number"
-                        name="item.rawResidentNeed" v-model.number="item.rawResidentNeed" readonly>
-                    </q-input>
-                </div>
-
-                <div class="col">
-                    <q-input class="col" bg-color="light-blue-1" outlined label="Besoin brut visiteur/client" type="number"
-                        name="item.rawVisitorNeed" v-model.number="item.rawVisitorNeed" readonly>
-                    </q-input>
-                </div>
-
-                <div class="col">
-                    <q-input class="col" bg-color="light-blue-1" outlined label="Besoin brut total" type="number"
-                        name="item.rawVisitorNeed" v-model.number="item.rawTotalNeed" readonly>
-                    </q-input>
-                </div>
-                <div class="col">
-                    <q-btn round flat color="grey" name="delete" @click="deleteItem(item)" icon="delete"></q-btn>
                 </div>
 
             </div>
+
         </div>
 
     </div>
@@ -89,58 +41,17 @@
 <script>
 import { ref } from 'vue'
 
-// Factor
-class Factor {
-    constructor(type, name, areaFactor, housingFactor, activityFactor, area, housing) {
-        this.type = type
-        this.name = name
-        this.areaFactor = parseFloat(areaFactor)
-        this.housingFactor = parseFloat(housingFactor)
-        this.activityFactor = parseFloat(activityFactor)
-        this.area = parseFloat(area)
-        this.housing = parseFloat(housing)
-        this.active = false
-    }
-    get isHousing() {
-        return this.type === "Logement"
-    }
-    get rawResidentNeed() {
-        return parseFloat(Math.max(this.area * this.areaFactor * this.housingFactor, this.housing).toFixed(2))
-    }
-    get rawVisitorNeed() {
-        return parseFloat((this.area * this.areaFactor * this.activityFactor).toFixed(2))
-    }
-    get rawTotalNeed() {
-        return (this.rawResidentNeed + this.rawVisitorNeed).toFixed(2)
-    }
-}
-
-const factors = []
-factors.push(new Factor("Logement", "Logements standards", 0.01, 1, 0.1, 0, 0))
-factors.push(new Factor("Logement", "Logements avec encadrement ou étudiants", 0.01, 1, 0.1, 0, 0))
-factors.push(new Factor("Activité", "Services à nombreuse clientèle", 0.01, 2, 1, 0, 0))
-factors.push(new Factor("Activité", "Magasins à nombreuse clientèle", 0.01, 2, 8, 0, 0))
-factors.push(new Factor("Activité", "Autres magasins", 0.01, 1.5, 3.5, 0, 0))
-factors.push(new Factor("Activité", "Industrie et artisanat", 0.01, 1, 0.2, 0, 0))
-factors.push(new Factor("Activité", "Entrepôts et dépôts", 0.01, 0.1, 0.01, 0, 0))
-factors.push(new Factor("Activité", "Autres services", 0.01, 2, 0.5, 0, 0))
-
-
 export default {
-    name: 'Table',
+    name: 'FormC',
     components: {},
-    props: { 'model': Object },
+    props: { 'project': Object },
     emits: [],
     setup() {
         return {
-            // model: ref(null),
         }
     },
     data() {
         return {
-            factors: factors,
-            affectationOptions: factors,
-            affectationModel: null,
         }
     },
     computed: {

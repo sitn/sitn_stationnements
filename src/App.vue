@@ -25,45 +25,10 @@
         </div>
 
         <!-- 2. RAW PARKING NEEDS -->
-        <FormB></FormB>
+        <FormB :project="project" @updateProject="updateProject"></FormB>
 
         <!-- 3. NET PARKING NEEDS -->
-
-        <div class="q-pa-md">
-          <div class="text-h5">Étape 3: Calcul du besoin net</div>
-          <div class="row">
-            <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-4" v-for="(item, key) in factors">
-              <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-
-                <table>
-                  <tr>
-                    <th>{{ item.name }}</th>
-
-                  </tr>
-                  <tr>
-                    <td>Fourchette du type de localisation {{ project.locationType }}</td>
-                    <td>Min. 50%</td>
-                    <td>Max. 100%</td>
-                  </tr>
-                  <tr>
-                    <td>Besoin net habitant/employé</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>Besoin net visiteur/client</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </table>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
+        <FormC :project="project"></FormC>
 
         <!-- 4. REDUCED NET PARKING NEEDS -->
         <div class="q-pa-md">
@@ -131,10 +96,11 @@ import Search from "./components/Search.vue"
 import Map from "./components/Map.vue"
 import Table from "./components/Table.vue"
 import FormB from "./components/FormB.vue"
+import FormC from "./components/FormC.vue"
 import { Quasar } from "quasar";
 import { ref, isProxy, toRaw, effect } from 'vue'
 import GeoJSON from 'ol/format/GeoJSON.js'
-import { Vector as VectorLayer } from 'ol/layer.js'
+// import { Vector as VectorLayer } from 'ol/layer.js'
 
 // Classes
 const colors = { 'I': 'legend-1', 'II': 'legend-2', 'III': 'legend-3', 'IV': 'legend-4', 'V': 'legend-5', 'VI': 'legend-6' }
@@ -150,8 +116,28 @@ class Mob20 {
   }
 }
 
-// Factor
-class Factor {
+// Location types
+class LocationTypes {
+  constructor(commune, name, minHousing, maxHousing, minActivity, maxActivity) {
+    this.commune = commune
+    this.name = name
+    this.minHousing = minHousing
+    this.maxHousing = maxHousing
+    this.minActivity = minActivity
+    this.maxActivity = maxActivity
+  }
+}
+
+const locationTypes = []
+locationTypes.push(new LocationTypes("default", "I", 0.2, 0.5, 0.0, 0.3))
+locationTypes.push(new LocationTypes("default", "II", 0.5, 0.7, 0.2, 0.5))
+locationTypes.push(new LocationTypes("default", "III", 0.7, 1.0, 0.4, 0.7))
+locationTypes.push(new LocationTypes("default", "IV", 0.7, 1.0, 0.5, 0.8))
+locationTypes.push(new LocationTypes("default", "V", 0.7, 1.0, 0.7, 1.0))
+locationTypes.push(new LocationTypes("default", "VI", 0.7, 1.0, 0.9, 1.0))
+
+// Affectation
+class Affectation {
   constructor(type, name, areaFactor, housingFactor, activityFactor, area, housing) {
     this.type = type
     this.name = name
@@ -161,9 +147,6 @@ class Factor {
     this.area = parseFloat(area)
     this.housing = parseFloat(housing)
     this.active = false
-  }
-  get id() {
-
   }
   get isHousing() {
     return this.type === "Logement"
@@ -177,30 +160,42 @@ class Factor {
   get rawTotalNeed() {
     return (this.rawResidentNeed + this.rawVisitorNeed).toFixed(2)
   }
+  get netResidentNeed() {
+    return [parseFloat(this.rawResidentNeed), parseFloat(this.rawResidentNeed)]
+  }
+  get netVisitorNeed() {
+    return [parseFloat(this.rawVisitorNeed), parseFloat(this.rawVisitorNeed)]
+  }
 }
 
-const factors = []
-factors.push(new Factor("Logement", "Logements standards", 0.01, 1, 0.1, 0, 0))
-factors.push(new Factor("Logement", "Logements avec encadrement ou étudiants", 0.01, 1, 0.1, 0, 0))
-factors.push(new Factor("Activité", "Services à nombreuse clientèle", 0.01, 2, 1, 0, 0))
-factors.push(new Factor("Activité", "Magasins à nombreuse clientèle", 0.01, 2, 8, 0, 0))
-factors.push(new Factor("Activité", "Autres magasins", 0.01, 1.5, 3.5, 0, 0))
-factors.push(new Factor("Activité", "Industrie et artisanat", 0.01, 1, 0.2, 0, 0))
-factors.push(new Factor("Activité", "Entrepôts et dépôts", 0.01, 0.1, 0.01, 0, 0))
-factors.push(new Factor("Activité", "Autres services", 0.01, 2, 0.5, 0, 0))
+const affectations = []
+affectations.push(new Affectation("Logement", "Logements standards", 0.01, 1, 0.1, 0, 0))
+affectations.push(new Affectation("Logement", "Logements avec encadrement ou étudiants", 0.01, 1, 0.1, 0, 0))
+affectations.push(new Affectation("Activité", "Services à nombreuse clientèle", 0.01, 2, 1, 0, 0))
+affectations.push(new Affectation("Activité", "Magasins à nombreuse clientèle", 0.01, 2, 8, 0, 0))
+affectations.push(new Affectation("Activité", "Autres magasins", 0.01, 1.5, 3.5, 0, 0))
+affectations.push(new Affectation("Activité", "Industrie et artisanat", 0.01, 1, 0.2, 0, 0))
+affectations.push(new Affectation("Activité", "Entrepôts et dépôts", 0.01, 0.1, 0.01, 0, 0))
+affectations.push(new Affectation("Activité", "Autres services", 0.01, 2, 0.5, 0, 0))
 
 // Project
 class Project {
-  constructor(parcels, factors) {
+  constructor(parcels, affectations) {
     this.parcels = parcels
-    this.factors = factors
+    this.affectations = affectations
+  }
+  get commune() {
+    return 'default'
   }
   get locationType() {
     return 'IV'
   }
+  get ReductionFactors() {
+
+  }
 }
 
-const project = new Project(null, factors)
+const project = new Project(null, affectations)
 
 
 export default {
@@ -209,7 +204,8 @@ export default {
     Map,
     Table,
     Search,
-    FormB
+    FormB,
+    FormC
   },
   setup() {
     return {
@@ -220,7 +216,7 @@ export default {
   data() {
     return {
       project: project,
-      factors: factors,
+      affectations: affectations,
       options: null,
       geojson: {
         'type': 'FeatureCollection',
@@ -296,7 +292,7 @@ export default {
 
       console.log(this.geojson.features)
 
-      // this.getLocationType(feature)
+      this.getLocationType(feature)
 
       // add MOB20 attribute
       let locations = []
@@ -330,7 +326,14 @@ export default {
       this.map.zoomTo(id)
       // this.focus = id
     },
+    updateProject(obj) {
 
+
+      this.project = obj
+      console.log('Update project:')
+      console.log(this.project)
+
+    },
     action(id, name) {
       // console.log(`App.vue | Focus record with id=${id}`)
 
