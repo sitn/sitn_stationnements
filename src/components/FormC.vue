@@ -22,13 +22,13 @@
                         -->
                         <tr>
                             <td>Besoin net habitant/employé</td>
-                            <td class="bg-light-blue-1">{{ item.netResidentNeed([0.5, 1])[0] }}</td>
-                            <td class="bg-light-blue-1">{{ item.netResidentNeed([0.5, 1])[1] }}</td>
+                            <td class="bg-light-blue-1">{{ item.netResidentNeed.min }}</td>
+                            <td class="bg-light-blue-1">{{ item.netResidentNeed.max }}</td>
                         </tr>
                         <tr>
                             <td>Besoin net visiteur/client</td>
-                            <td class="bg-light-blue-1">{{ item.netVisitorNeed([1, 1])[0] }}</td>
-                            <td class="bg-light-blue-1">{{ item.netVisitorNeed([1, 1])[1] }}</td>
+                            <td class="bg-light-blue-1">{{ item.netVisitorNeed.min }}</td>
+                            <td class="bg-light-blue-1">{{ item.netVisitorNeed.max }}</td>
                         </tr>
                     </table>
 
