@@ -21,6 +21,24 @@
             </q-card>
           </div>
           <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
+          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+            <q-select outlined bottom-slots bg-color="white" v-model="project.locationType" :options="locationSums"
+              option-value="name" option-label="name" @update:model-value="selectOption()" label="Type de localisation">
+              <template v-slot:option="scope">
+                <q-item v-bind="scope.itemProps">
+                  <q-item-section>
+                    <q-item-label>Type {{ scope.opt.name }} ({{ scope.opt.area.toFixed(0) }})</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </template>
+
+              <template v-slot:hint>
+                Sélectionner le type de localisation
+              </template>
+
+            </q-select>
+
+          </div>
 
         </div>
 
@@ -41,6 +59,7 @@
         </div>
 
       </q-step>
+
 
       <!-- DETAILS FORM -->
       <q-step :name="2" title="Détails" caption="" icon="assignment" :done="step > 2">
@@ -118,23 +137,22 @@ class Mob20 {
 
 // Location types
 class LocationTypes {
-  constructor(commune, name, minHousing, maxHousing, minActivity, maxActivity) {
+  constructor(commune, name, color, housingRange, activityRange) {
     this.commune = commune
     this.name = name
-    this.minHousing = minHousing
-    this.maxHousing = maxHousing
-    this.minActivity = minActivity
-    this.maxActivity = maxActivity
+    this.color = color
+    this.housingRange = housingRange
+    this.activityRange = activityRange
   }
 }
 
 const locationTypes = []
-locationTypes.push(new LocationTypes("default", "I", 0.2, 0.5, 0.0, 0.3))
-locationTypes.push(new LocationTypes("default", "II", 0.5, 0.7, 0.2, 0.5))
-locationTypes.push(new LocationTypes("default", "III", 0.7, 1.0, 0.4, 0.7))
-locationTypes.push(new LocationTypes("default", "IV", 0.7, 1.0, 0.5, 0.8))
-locationTypes.push(new LocationTypes("default", "V", 0.7, 1.0, 0.7, 1.0))
-locationTypes.push(new LocationTypes("default", "VI", 0.7, 1.0, 0.9, 1.0))
+locationTypes.push(new LocationTypes("default", "I", 'legend-1', { min: 0.2, max: 0.5 }, { min: 0.0, max: 0.3 }))
+locationTypes.push(new LocationTypes("default", "II", 'legend-2', { min: 0.5, max: 0.7 }, { min: 0.2, max: 0.5 }))
+locationTypes.push(new LocationTypes("default", "III", 'legend-3', { min: 0.7, max: 1.0 }, { min: 0.4, max: 0.7 }))
+locationTypes.push(new LocationTypes("default", "IV", 'legend-4', { min: 0.7, max: 1.0 }, { min: 0.5, max: 0.8 }))
+locationTypes.push(new LocationTypes("default", "V", 'legend-5', { min: 0.7, max: 1.0 }, { min: 0.7, max: 1.0 }))
+locationTypes.push(new LocationTypes("default", "VI", 'legend-6', { min: 0.7, max: 1.0 }, { min: 0.9, max: 1.0 }))
 
 // Affectation
 class Affectation {
@@ -144,6 +162,8 @@ class Affectation {
     this.areaFactor = parseFloat(areaFactor)
     this.housingFactor = parseFloat(housingFactor)
     this.activityFactor = parseFloat(activityFactor)
+    this.housingRange = { min: 0.0, max: 1.0 } // super(housingRange)
+    this.activityRange = { min: 0.0, max: 1.0 } // super(activityRange)
     this.area = parseFloat(area)
     this.housing = parseFloat(housing)
     this.active = false
@@ -160,11 +180,11 @@ class Affectation {
   get rawTotalNeed() {
     return (this.rawResidentNeed + this.rawVisitorNeed).toFixed(2)
   }
-  netResidentNeed(range) {
-    return [range[0] * parseFloat(this.rawResidentNeed), range[1] * parseFloat(this.rawResidentNeed)]
+  get netResidentNeed() {
+    return { min: this.housingRange.min * parseFloat(this.rawResidentNeed), max: this.housingRange.max * parseFloat(this.rawResidentNeed) }
   }
-  netVisitorNeed(range) {
-    return [parseFloat(this.rawVisitorNeed), parseFloat(this.rawVisitorNeed)]
+  get netVisitorNeed() {
+    return { min: this.activityRange.min * parseFloat(this.rawVisitorNeed), max: this.activityRange.max * parseFloat(this.rawVisitorNeed) }
   }
 }
 
@@ -180,24 +200,72 @@ affectations.push(new Affectation("Activité", "Autres services", 0.01, 2, 0.5, 
 
 // Project
 class Project {
+  static bibb = ['I', 'II', 'III', 'IV', 'V', 'VI']
   constructor(parcels, affectations) {
     this.parcels = parcels
     this.affectations = affectations
+    this.housingRange = { min: 0.0, max: 1.0 }
+    this.activityRange = { min: 0.0, max: 1.0 }
+    this.locationType = null
   }
+  /*
+  static get labels() {
+    return ['I', 'II', 'III', 'IV', 'V', 'VI']
+  }
+  */
   get commune() {
     return 'default'
   }
+  /*
   get locationType() {
     return 'II'
   }
+  */
+  /*
   get reductionFactors() {
     return locationTypes.filter(obj => obj.name === this.locationType && obj.commune === this.commune)
   }
+  */
+
+  /*
+  set locationType(name) {
+
+    let labels = ['I', 'II', 'III', 'IV', 'V', 'VI']
+
+    if (labels.includes(name)) {
+
+      this._locationType = name
+
+      let ranges = locationTypes.filter(obj => obj.name === name && obj.commune === this.commune)
+
+      this.housingRange = ranges[0].housingRange
+      this.activityRange = ranges[0].activityRange
+      this.affectations.forEach(affectation => {
+
+        affectation.housingRange = this.housingRange
+        affectation.activityRange = this.activityRange
+
+      })
+
+      console.log('adjusting location ranges')
+      console.log(ranges)
+    }
+  }
+  */
+
+
+
 }
 
 const project = new Project(null, affectations)
-console.log('project.reductionFactors')
-console.log(project.reductionFactors)
+
+project.locationType = 'IV'
+// project.housingRange = { min: 0.2, max: 0.9 }
+
+console.log('project.housingRange')
+console.log(project.housingRange)
+console.log('project.activityRange')
+console.log(project.activityRange)
 
 export default {
   name: 'App',
@@ -218,6 +286,15 @@ export default {
     return {
       project: project,
       affectations: affectations,
+      locationTypes: locationTypes,
+      locationSums: [
+        { name: "I", area: 0.0 },
+        { name: "II", area: 0.0 },
+        { name: "III", area: 0.0 },
+        { name: "IV", area: 0.0 },
+        { name: "V", area: 0.0 },
+        { name: "VI", area: 0.0 },
+      ],
       options: null,
       geojson: {
         'type': 'FeatureCollection',
@@ -227,6 +304,9 @@ export default {
     }
   },
   computed: {
+    parcels() {
+
+    },
     numberOfparcels() {
       return this.geojson.features.length
     },
@@ -235,31 +315,47 @@ export default {
       if (this.geojson.features.length > 0) {
 
         let locations = this.geojson.features
-
-        let sums = { 'I': 0.0, 'II': 0.0, 'III': 0.0, 'IV': 0.0, 'V': 0.0, 'VI': 0.0 }
-
+        let locationSums = [
+          { name: "I", area: 0.0 },
+          { name: "II", area: 0.0 },
+          { name: "III", area: 0.0 },
+          { name: "IV", area: 0.0 },
+          { name: "V", area: 0.0 },
+          { name: "VI", area: 0.0 },
+        ]
         this.geojson.features.forEach(feature => {
 
           feature.properties.locations.forEach(location => {
 
-            sums[location.type] += location.area
-
+            // sums[location.type] += location.area
+            let index = this.locationSums.findIndex(item => item.name === location.type)
+            this.locationSums[index].area += location.area
           })
 
         })
 
+        this.locationSums.sort((a, b) => b.area - a.area)
+
         console.log('sums all')
-        console.log(sums)
+        console.log(this.locationSums)
 
         let result = this.geojson.features.map(obj => obj.properties.locations)
         console.log('result')
         console.log(result)
 
-        return sums
+        return this.locationSums[0]
       }
     },
   },
   methods: {
+    selectOption() {
+
+      console.log('Project location type:')
+      console.log(this.project)
+
+      // this.updateProject()
+
+    },
 
     getLocationType(feature) {
 
@@ -316,7 +412,6 @@ export default {
         return obj.id !== id
       })
     },
-
     focusRecord(id) {
       console.log(`App.vue | Focus on item with id=${id}`)
       this.map.zoomTo(id)
