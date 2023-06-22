@@ -23,11 +23,14 @@
           <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
           <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
             <q-select outlined bottom-slots bg-color="white" v-model="project.locationType" :options="locationSums"
-              option-value="name" option-label="name" @update:model-value="selectOption()" label="Type de localisation">
+              option-value="name" option-label="name" @update:model-value="selectOption()"
+              label="Type de localisation du projet">
               <template v-slot:option="scope">
                 <q-item v-bind="scope.itemProps">
                   <q-item-section>
-                    <q-item-label>Type {{ scope.opt.name }} ({{ scope.opt.area.toFixed(0) }})</q-item-label>
+                    <q-item-label>{{ scope.opt.name }}</q-item-label>
+                    <q-item-label caption>{{ scope.opt.area.toFixed(0) }} m<sup>2</sup> ({{ (100 *
+                      scope.opt.ratio).toFixed(0) }} %)</q-item-label>
                   </q-item-section>
                 </q-item>
               </template>
@@ -137,8 +140,8 @@ class Mob20 {
 
 // Location types
 class LocationTypes {
-  constructor(commune, name, color, housingRange, activityRange) {
-    this.commune = commune
+  constructor(name, color, housingRange, activityRange) {
+    // this.commune = commune
     this.name = name
     this.color = color
     this.housingRange = housingRange
@@ -147,12 +150,12 @@ class LocationTypes {
 }
 
 const locationTypes = []
-locationTypes.push(new LocationTypes("default", "I", 'legend-1', { min: 0.2, max: 0.5 }, { min: 0.0, max: 0.3 }))
-locationTypes.push(new LocationTypes("default", "II", 'legend-2', { min: 0.5, max: 0.7 }, { min: 0.2, max: 0.5 }))
-locationTypes.push(new LocationTypes("default", "III", 'legend-3', { min: 0.7, max: 1.0 }, { min: 0.4, max: 0.7 }))
-locationTypes.push(new LocationTypes("default", "IV", 'legend-4', { min: 0.7, max: 1.0 }, { min: 0.5, max: 0.8 }))
-locationTypes.push(new LocationTypes("default", "V", 'legend-5', { min: 0.7, max: 1.0 }, { min: 0.7, max: 1.0 }))
-locationTypes.push(new LocationTypes("default", "VI", 'legend-6', { min: 0.7, max: 1.0 }, { min: 0.9, max: 1.0 }))
+locationTypes.push(new LocationTypes("I", 'legend-1', { min: 0.2, max: 0.5 }, { min: 0.0, max: 0.3 }))
+locationTypes.push(new LocationTypes("II", 'legend-2', { min: 0.5, max: 0.7 }, { min: 0.2, max: 0.5 }))
+locationTypes.push(new LocationTypes("III", 'legend-3', { min: 0.7, max: 1.0 }, { min: 0.4, max: 0.7 }))
+locationTypes.push(new LocationTypes("IV", 'legend-4', { min: 0.7, max: 1.0 }, { min: 0.5, max: 0.8 }))
+locationTypes.push(new LocationTypes("V", 'legend-5', { min: 0.7, max: 1.0 }, { min: 0.7, max: 1.0 }))
+locationTypes.push(new LocationTypes("VI", 'legend-6', { min: 0.7, max: 1.0 }, { min: 0.9, max: 1.0 }))
 
 // Affectation
 class Affectation {
@@ -288,12 +291,12 @@ export default {
       affectations: affectations,
       locationTypes: locationTypes,
       locationSums: [
-        { name: "I", area: 0.0 },
-        { name: "II", area: 0.0 },
-        { name: "III", area: 0.0 },
-        { name: "IV", area: 0.0 },
-        { name: "V", area: 0.0 },
-        { name: "VI", area: 0.0 },
+        { name: "I", area: 0.0, ratio: 0.0 },
+        { name: "II", area: 0.0, ratio: 0.0 },
+        { name: "III", area: 0.0, ratio: 0.0 },
+        { name: "IV", area: 0.0, ratio: 0.0 },
+        { name: "V", area: 0.0, ratio: 0.0 },
+        { name: "VI", area: 0.0, ratio: 0.0 },
       ],
       options: null,
       geojson: {
@@ -316,13 +319,15 @@ export default {
 
         let locations = this.geojson.features
         let locationSums = [
-          { name: "I", area: 0.0 },
-          { name: "II", area: 0.0 },
-          { name: "III", area: 0.0 },
-          { name: "IV", area: 0.0 },
-          { name: "V", area: 0.0 },
-          { name: "VI", area: 0.0 },
+          { name: "I", area: 0.0, ratio: 0.0 },
+          { name: "II", area: 0.0, ratio: 0.0 },
+          { name: "III", area: 0.0, ratio: 0.0 },
+          { name: "IV", area: 0.0, ratio: 0.0 },
+          { name: "V", area: 0.0, ratio: 0.0 },
+          { name: "VI", area: 0.0, ratio: 0.0 },
         ]
+        let totalArea = 0.0
+
         this.geojson.features.forEach(feature => {
 
           feature.properties.locations.forEach(location => {
@@ -330,14 +335,27 @@ export default {
             // sums[location.type] += location.area
             let index = this.locationSums.findIndex(item => item.name === location.type)
             this.locationSums[index].area += location.area
+            // totalArea += location.area
           })
 
+        })
+
+        // compute total area
+        this.locationSums.forEach(location => {
+          totalArea += location.area;
+        })
+
+        // compute relative area for each type
+        this.locationSums.forEach(item => {
+          item.ratio = item.area / totalArea
         })
 
         this.locationSums.sort((a, b) => b.area - a.area)
 
         console.log('sums all')
         console.log(this.locationSums)
+
+        console.log(`Total area ${totalArea}`)
 
         let result = this.geojson.features.map(obj => obj.properties.locations)
         console.log('result')
