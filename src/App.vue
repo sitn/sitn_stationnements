@@ -421,17 +421,16 @@ export default {
         .then(response => response.json())
         .then(result => {
 
-          console.log('Location type')
-          console.log(result)
-          // feature.properties.gigi = result
-          // this.geojson.features[].
+          feature.properties.locations = []
+          result.features.forEach(item => {
 
-          result.features.forEach(feature => {
-
-
+            console.log(`type ${item.properties.type_localisation}`)
+            feature.properties.locations.push(new Mob20(item.properties.type_localisation, item.properties.intersection_area))
 
           })
 
+          // add feature to geojson
+          this.geojson.features.push(feature)
 
         })
         .catch(error => console.log('error', error));
@@ -440,12 +439,12 @@ export default {
 
       console.log(`App.vue | Add new record with id=${feature.id}`)
       console.log(feature)
-
       console.log(this.geojson.features)
 
       this.getLocationType(feature)
 
       // add MOB20 attribute
+      /*
       let locations = []
       locations.push(new Mob20('I', 1000 * Math.random()))
       locations.push(new Mob20('II', 1000 * Math.random()))
@@ -453,16 +452,18 @@ export default {
       locations.push(new Mob20('IV', 1000 * Math.random()))
       locations.push(new Mob20('V', 1000 * Math.random()))
       locations.push(new Mob20('VI', 1000 * Math.random()))
+      feature.properties.locations = locations
+      */
 
+      /*
       console.log('feature.properties')
       console.log(feature.properties)
-      feature.properties.locations = locations
+      */
 
       //console.log(toRaw(feature))
 
       // add feature to geojson
-      this.geojson.features.push(feature)
-
+      // **** this.geojson.features.push(feature)
 
     },
 
