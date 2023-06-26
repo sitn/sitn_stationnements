@@ -34,6 +34,15 @@
                             <td class="bg-light-blue-1">{{ item.netVisitorNeed.min.toFixed(2) }}</td>
                             <td class="bg-light-blue-1">{{ item.netVisitorNeed.max.toFixed(2) }}</td>
                         </tr>
+                        <tr>
+                            <td class="text-weight-bold">Besoin net total</td>
+                            <td class="bg-light-blue-1 text-weight-bold">{{ (item.netResidentNeed.min +
+                                item.netVisitorNeed.min).toFixed(2)
+                            }}</td>
+                            <td class="bg-light-blue-1 text-weight-bold">{{ (item.netResidentNeed.max +
+                                item.netVisitorNeed.max).toFixed(2)
+                            }}</td>
+                        </tr>
                     </table>
 
                 </div>
@@ -72,4 +81,5 @@ export default {
 
 <style>
 @import "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons";
-@import '../assets/quasar.prod.css';</style>
+@import '../assets/quasar.prod.css';
+</style>
