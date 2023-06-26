@@ -22,13 +22,13 @@
                         -->
                         <tr>
                             <td> {{ item.type == "Logement" ? "Besoin net habitant" : "Besoin net employé" }} ({{ 100 *
-                                item.housingRange.min }}% à {{ 100 * item.housingRange.max }}%)</td>
+                                item.range.min }}% à {{ 100 * item.range.max }}%)</td>
                             <td class="bg-light-blue-1">{{ item.netResidentNeed.min.toFixed(2) }}</td>
                             <td class="bg-light-blue-1">{{ item.netResidentNeed.max.toFixed(2) }}</td>
                         </tr>
                         <tr>
                             <td>{{ item.type == "Logement" ? "Besoin net visiteur" : "Besoin net client" }} ({{ 100 *
-                                item.activityRange.min }}% à {{ 100 * item.activityRange.max }}%)</td>
+                                item.range.min }}% à {{ 100 * item.range.max }}%)</td>
                             <td class="bg-light-blue-1">{{ item.netVisitorNeed.min.toFixed(2) }}</td>
                             <td class="bg-light-blue-1">{{ item.netVisitorNeed.max.toFixed(2) }}</td>
                         </tr>
