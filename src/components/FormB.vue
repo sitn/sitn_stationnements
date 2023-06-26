@@ -20,7 +20,7 @@
                 </template>
 
                 <template v-slot:hint>
-                    Sélectionner une ou plusieurs affectations dans la liste
+                    Choisir une ou plusieurs affectations dans la liste
                 </template>
 
             </q-select>
