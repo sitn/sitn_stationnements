@@ -52,8 +52,22 @@
         <FormC :project="project"></FormC>
 
         <!-- 4. REDUCED NET PARKING NEEDS -->
+        <FormD :project="project"></FormD>
+
         <div class="q-pa-md">
           <div class="text-h5">Étape 4: Calcul du besoin net réduit</div>
+          <div>
+            <p>Des facteurs de réduction peuvent être appliqués au besoin net,
+              par le réquérant ou par la commune (articles 31 à 34 du
+              RELConstr.). Les facteurs de réduction sont à porter en déduction
+              du besoin net. Le résultat obtenu se nomme le besoin net réduit.
+              Les facteurs de réduction peuvent intervenir lors de l'examen du
+              dossier par la commune ou les services compétents, notamment en ce
+              qui concerne la législation sur l'environnement et la sauvegarde
+              du patrimoine. Pour les logements avec encadrements ou étudiants,
+              il convient de prendre contact en amont avec la commune pour
+              déterminer si un facteur de réduction s'applique.</p>
+          </div>
         </div>
 
         <!-- 5. SUMMARY -->
@@ -119,6 +133,7 @@ import Map from "./components/Map.vue"
 import Table from "./components/Table.vue"
 import FormB from "./components/FormB.vue"
 import FormC from "./components/FormC.vue"
+import FormD from "./components/FormD.vue"
 import { Quasar } from "quasar";
 import { ref, isProxy, toRaw, effect } from 'vue'
 import GeoJSON from 'ol/format/GeoJSON.js'
@@ -297,7 +312,8 @@ export default {
     Table,
     Search,
     FormB,
-    FormC
+    FormC,
+    FormD
   },
   setup() {
     return {
@@ -314,7 +330,6 @@ export default {
       options: null,
       geojson: {
         'type': 'FeatureCollection',
-        'glouglou': 'blabla',
         'features': []
       }
     }
@@ -343,8 +358,6 @@ export default {
           { name: "VI", area: 0.0, ratio: 0.0 },
         ]
 
-        // let locations = this.geojson.features
-
         console.log('sums all')
         console.log(this.locationSums)
 
@@ -352,10 +365,8 @@ export default {
 
         this.geojson.features.forEach(feature => {
 
-
           feature.properties.locations.forEach(location => {
 
-            // sums[location.type] += location.area
             let index = this.locationSums.findIndex(item => item.name === location.type)
             this.locationSums[index].area += location.area
             // totalArea += location.area
@@ -463,9 +474,6 @@ export default {
       */
 
       //console.log(toRaw(feature))
-
-      // add feature to geojson
-      // **** this.geojson.features.push(feature)
 
     },
 
