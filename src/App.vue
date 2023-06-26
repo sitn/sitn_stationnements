@@ -158,14 +158,15 @@ locationTypes.push(new LocationTypes("VI", 'legend-6', { min: 0.7, max: 1.0 }, {
 
 // Affectation
 class Affectation {
-  constructor(type, name, areaFactor, housingFactor, activityFactor, area, housing) {
+  constructor(type, name, areaFactor, residentFactor, visitorFactor, area, housing) {
     this.type = type
     this.name = name
     this.areaFactor = parseFloat(areaFactor)
-    this.housingFactor = parseFloat(housingFactor)
-    this.activityFactor = parseFloat(activityFactor)
-    this.housingRange = { min: 0.0, max: 1.0 } // super(housingRange)
-    this.activityRange = { min: 0.0, max: 1.0 } // super(activityRange)
+    this.housingFactor = parseFloat(residentFactor)
+    this.activityFactor = parseFloat(visitorFactor)
+    this.range = { min: 0.0, max: 1.0 }
+    // this.housingRange = { min: 0.0, max: 1.0 } // super(housingRange)
+    // this.activityRange = { min: 0.0, max: 1.0 } // super(activityRange)
     this.reductions = {}
     this.area = parseFloat(area)
     this.housing = parseFloat(housing)
@@ -184,10 +185,12 @@ class Affectation {
     return (this.rawResidentNeed + this.rawVisitorNeed).toFixed(2)
   }
   get netResidentNeed() {
-    return { min: this.housingRange.min * parseFloat(this.rawResidentNeed), max: this.housingRange.max * parseFloat(this.rawResidentNeed) }
+    // return { min: this.housingRange.min * parseFloat(this.rawResidentNeed), max: this.housingRange.max * parseFloat(this.rawResidentNeed) }
+    return { min: this.range.min * parseFloat(this.rawResidentNeed), max: this.range.max * parseFloat(this.rawResidentNeed) }
   }
   get netVisitorNeed() {
-    return { min: this.activityRange.min * parseFloat(this.rawVisitorNeed), max: this.activityRange.max * parseFloat(this.rawVisitorNeed) }
+    // return { min: this.activityRange.min * parseFloat(this.rawVisitorNeed), max: this.activityRange.max * parseFloat(this.rawVisitorNeed) }
+    return { min: this.range.min * parseFloat(this.rawVisitorNeed), max: this.range.max * parseFloat(this.rawVisitorNeed) }
   }
 }
 
@@ -268,12 +271,24 @@ class Project {
       this._locationType = location
       let ranges = locationTypes.find(el => el.name === location.name)
 
+      // set project ranges
       this.housingRange = ranges.housingRange
       this.activityRange = ranges.activityRange
+
+      // set ranges for each affectation
       this.affectations.forEach(affectation => {
 
-        affectation.housingRange = ranges.housingRange
-        affectation.activityRange = ranges.activityRange
+        switch (affectation.type) {
+          case 'Logement':
+            affectation.range = ranges.housingRange
+            break
+          case 'Activité':
+            affectation.range = ranges.activityRange
+            break
+        }
+
+        // affectation.housingRange = ranges.housingRange
+        // affectation.activityRange = ranges.activityRange
 
       })
 
