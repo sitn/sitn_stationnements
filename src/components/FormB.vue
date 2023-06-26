@@ -124,6 +124,8 @@ export default {
 
             let index = this.project.affectations.findIndex((obj) => obj.name === item.name)
             this.project.affectations[index].active = false
+            this.project.affectations[index].area = 0.0
+            this.project.affectations[index].housing = 0.0
 
             //console.log(item)
             //console.log(`Delete item with id=${item.name}`)
