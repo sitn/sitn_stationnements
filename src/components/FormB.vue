@@ -115,6 +115,8 @@ export default {
 
             this.project.affectations.forEach(function (e) {
                 e.active = false
+                // e.area = 0.0
+                // e.housing = 0.0
             });
 
             this.model.forEach(function (e) {
