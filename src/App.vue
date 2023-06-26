@@ -16,7 +16,7 @@
               <q-card-section>
                 <div class="text-h6">{{ numberOfparcels }} parcelle(s) sélectionnée(s)</div>
                 <!--Résumé de la localisation-->
-                <div class="text-subtitle2">{{ loctype }}</div>
+                <div class="text-subtitle2">{{ locinfo }}</div>
               </q-card-section>
             </q-card>
           </div>
@@ -36,7 +36,7 @@
               </template>
 
               <template v-slot:hint>
-                Sélectionner le type de localisation
+                Choisir le type de localisation
               </template>
 
             </q-select>
@@ -203,13 +203,12 @@ affectations.push(new Affectation("Activité", "Autres services", 0.01, 2, 0.5, 
 
 // Project
 class Project {
-  static bibb = ['I', 'II', 'III', 'IV', 'V', 'VI']
   constructor(parcels, affectations) {
     this.parcels = parcels
     this.affectations = affectations
     this.housingRange = { min: 0.0, max: 1.0 }
     this.activityRange = { min: 0.0, max: 1.0 }
-    this.locationType = null
+    this._locationType = null
   }
   /*
   static get labels() {
@@ -219,6 +218,24 @@ class Project {
   get commune() {
     return 'default'
   }
+
+  /*
+  get housingRange() {
+    if (this.locationType !== null) {
+
+      let val = locationTypes.find(el => el.name === this.locationType)
+      console.log('housing range is:')
+      console.log(val.housingRange)
+
+      return val.housingRange
+
+    } else {
+      return { min: 0.0, max: 1.0 }
+    }
+  }
+  */
+
+
   /*
   get locationType() {
     return 'II'
@@ -230,40 +247,46 @@ class Project {
   }
   */
 
-  /*
-  set locationType(name) {
+  get locationType() {
+    if (this._locationType !== null) {
+      return this._locationType
+    } else {
+      return null
+    }
+  }
+
+  set locationType(location) {
 
     let labels = ['I', 'II', 'III', 'IV', 'V', 'VI']
 
-    if (labels.includes(name)) {
+    console.log(location)
 
-      this._locationType = name
+    //if (labels.includes(location.name)) {
+    if (location !== null) {
 
-      let ranges = locationTypes.filter(obj => obj.name === name && obj.commune === this.commune)
+      console.log(`App.vue | Location type set to: ${location.name}`)
+      this._locationType = location
+      let ranges = locationTypes.find(el => el.name === location.name)
 
-      this.housingRange = ranges[0].housingRange
-      this.activityRange = ranges[0].activityRange
+      this.housingRange = ranges.housingRange
+      this.activityRange = ranges.activityRange
       this.affectations.forEach(affectation => {
 
-        affectation.housingRange = this.housingRange
-        affectation.activityRange = this.activityRange
+        affectation.housingRange = ranges.housingRange
+        affectation.activityRange = ranges.activityRange
 
       })
 
-      console.log('adjusting location ranges')
-      console.log(ranges)
+      // console.log('adjusting location ranges')
+      // console.log(ranges)
+
     }
+
   }
-  */
-
-
 
 }
 
 const project = new Project(null, affectations)
-
-project.locationType = 'IV'
-// project.housingRange = { min: 0.2, max: 0.9 }
 
 console.log('project.housingRange')
 console.log(project.housingRange)
@@ -313,11 +336,12 @@ export default {
     numberOfparcels() {
       return this.geojson.features.length
     },
-    loctype() {
+    locinfo() {
 
       if (this.geojson.features.length > 0) {
 
         let locations = this.geojson.features
+        /*
         let locationSums = [
           { name: "I", area: 0.0, ratio: 0.0 },
           { name: "II", area: 0.0, ratio: 0.0 },
@@ -326,6 +350,7 @@ export default {
           { name: "V", area: 0.0, ratio: 0.0 },
           { name: "VI", area: 0.0, ratio: 0.0 },
         ]
+        */
         let totalArea = 0.0
 
         this.geojson.features.forEach(feature => {
@@ -371,6 +396,8 @@ export default {
       console.log('Project location type:')
       console.log(this.project)
 
+
+
       // this.updateProject()
 
     },
@@ -388,11 +415,25 @@ export default {
         headers: myHeaders,
         body: JSON.stringify(geojson),
         redirect: 'follow'
-      };
+      }
 
       fetch("https://sitn.ne.ch/apps/stationnement/", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
+        .then(response => response.json())
+        .then(result => {
+
+          console.log('Location type')
+          console.log(result)
+          // feature.properties.gigi = result
+          // this.geojson.features[].
+
+          result.features.forEach(feature => {
+
+
+
+          })
+
+
+        })
         .catch(error => console.log('error', error));
     },
     addRecord(feature) {
@@ -413,6 +454,7 @@ export default {
       locations.push(new Mob20('V', 1000 * Math.random()))
       locations.push(new Mob20('VI', 1000 * Math.random()))
 
+      console.log('feature.properties')
       console.log(feature.properties)
       feature.properties.locations = locations
 
