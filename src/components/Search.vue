@@ -47,7 +47,7 @@ import { ref } from 'vue'
 export default {
     name: 'Search',
     components: {},
-    props: { 'title': String, 'options': Object, 'model': Object, 'selected': Object },
+    props: { 'title': String, 'options': Object, 'model': Object },
     emits: ['addOption'],
     setup() {
         return {
@@ -75,6 +75,7 @@ export default {
                 this.model = null;
             }
         },
+        /*
         fetchIntersection(body) {
             var requestOptions = {
                 method: 'POST',
@@ -84,10 +85,13 @@ export default {
             };
 
             fetch("https://sitn.ne.ch/apps/stationnement/", requestOptions)
-                .then(response => response.text())
-                .then(result => console.log(result))
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result.properties)
+                })
                 .catch(error => console.log('error', error));
         },
+        */
         fetchSources(val, update, abort) {
 
             // call abort() when no data is returned
