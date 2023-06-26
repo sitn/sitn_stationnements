@@ -280,6 +280,8 @@ class Project {
       // console.log('adjusting location ranges')
       // console.log(ranges)
 
+    } else {
+      this._locationType = null
     }
 
   }
@@ -287,11 +289,6 @@ class Project {
 }
 
 const project = new Project(null, affectations)
-
-console.log('project.housingRange')
-console.log(project.housingRange)
-console.log('project.activityRange')
-console.log(project.activityRange)
 
 export default {
   name: 'App',
@@ -313,14 +310,7 @@ export default {
       project: project,
       affectations: affectations,
       locationTypes: locationTypes,
-      locationSums: [
-        { name: "I", area: 0.0, ratio: 0.0 },
-        { name: "II", area: 0.0, ratio: 0.0 },
-        { name: "III", area: 0.0, ratio: 0.0 },
-        { name: "IV", area: 0.0, ratio: 0.0 },
-        { name: "V", area: 0.0, ratio: 0.0 },
-        { name: "VI", area: 0.0, ratio: 0.0 },
-      ],
+      locationSums: [],
       options: null,
       geojson: {
         'type': 'FeatureCollection',
@@ -338,11 +328,13 @@ export default {
     },
     locinfo() {
 
+      // reset sums to 0
+      this.locationSums = []
+
       if (this.geojson.features.length > 0) {
 
-        let locations = this.geojson.features
-        /*
-        let locationSums = [
+        // reset sums to 0
+        this.locationSums = [
           { name: "I", area: 0.0, ratio: 0.0 },
           { name: "II", area: 0.0, ratio: 0.0 },
           { name: "III", area: 0.0, ratio: 0.0 },
@@ -350,10 +342,16 @@ export default {
           { name: "V", area: 0.0, ratio: 0.0 },
           { name: "VI", area: 0.0, ratio: 0.0 },
         ]
-        */
+
+        // let locations = this.geojson.features
+
+        console.log('sums all')
+        console.log(this.locationSums)
+
         let totalArea = 0.0
 
         this.geojson.features.forEach(feature => {
+
 
           feature.properties.locations.forEach(location => {
 
@@ -361,6 +359,7 @@ export default {
             let index = this.locationSums.findIndex(item => item.name === location.type)
             this.locationSums[index].area += location.area
             // totalArea += location.area
+
           })
 
         })
@@ -376,6 +375,8 @@ export default {
         })
 
         this.locationSums.sort((a, b) => b.area - a.area)
+
+        this.locationSums = this.locationSums.filter(obj => obj.area > 0)
 
         console.log('sums all')
         console.log(this.locationSums)
@@ -395,8 +396,6 @@ export default {
 
       console.log('Project location type:')
       console.log(this.project)
-
-
 
       // this.updateProject()
 
@@ -421,16 +420,19 @@ export default {
         .then(response => response.json())
         .then(result => {
 
+          console.log(result)
           feature.properties.locations = []
           result.features.forEach(item => {
 
-            console.log(`type ${item.properties.type_localisation}`)
+            // console.log(`type ${item.properties.type_localisation}`)
             feature.properties.locations.push(new Mob20(item.properties.type_localisation, item.properties.intersection_area))
 
           })
 
           // add feature to geojson
           this.geojson.features.push(feature)
+          console.log('geojson')
+          console.log(this.geojson)
 
         })
         .catch(error => console.log('error', error));
@@ -438,8 +440,8 @@ export default {
     addRecord(feature) {
 
       console.log(`App.vue | Add new record with id=${feature.id}`)
-      console.log(feature)
-      console.log(this.geojson.features)
+      // console.log(feature)
+      // console.log(this.geojson.features)
 
       this.getLocationType(feature)
 
