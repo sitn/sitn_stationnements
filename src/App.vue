@@ -54,22 +54,6 @@
         <!-- 4. REDUCED NET PARKING NEEDS -->
         <FormD :project="project"></FormD>
 
-        <div class="q-pa-md">
-          <div class="text-h5">Étape 4: Calcul du besoin net réduit</div>
-          <div>
-            <p>Des facteurs de réduction peuvent être appliqués au besoin net,
-              par le réquérant ou par la commune (articles 31 à 34 du
-              RELConstr.). Les facteurs de réduction sont à porter en déduction
-              du besoin net. Le résultat obtenu se nomme le besoin net réduit.
-              Les facteurs de réduction peuvent intervenir lors de l'examen du
-              dossier par la commune ou les services compétents, notamment en ce
-              qui concerne la législation sur l'environnement et la sauvegarde
-              du patrimoine. Pour les logements avec encadrements ou étudiants,
-              il convient de prendre contact en amont avec la commune pour
-              déterminer si un facteur de réduction s'applique.</p>
-          </div>
-        </div>
-
         <!-- 5. SUMMARY -->
         <div class="q-pa-md">
           <div class="text-h5">Étape 5: Résumé</div>
@@ -182,6 +166,7 @@ class Affectation {
     this.activityFactor = parseFloat(activityFactor)
     this.housingRange = { min: 0.0, max: 1.0 } // super(housingRange)
     this.activityRange = { min: 0.0, max: 1.0 } // super(activityRange)
+    this.reductions = {}
     this.area = parseFloat(area)
     this.housing = parseFloat(housing)
     this.active = false
