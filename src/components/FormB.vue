@@ -37,7 +37,8 @@
                     <q-input class="col" bg-color="white" outlined label="" type="number" name="item.area"
                         v-model.number="item.area" min="0.0" max="Inf">
                         <template v-slot:label>
-                            Surface brute de plancher (SBP) <!-- en m<sup>2</sup> -->
+                            {{ item.type == "Logement" ? "Surface brute de plancher (SBP)" : "Surface de vente (SV)" }}
+                            <!-- en m<sup>2</sup> -->
                         </template>
 
                         <template v-slot:append>
@@ -54,14 +55,20 @@
                 </div>
 
                 <div class="col">
-                    <q-input bg-color="light-blue-1" outlined label="Besoin brut habitant/employé" type="number"
-                        name="item.rawResidentNeed" v-model.number="item.rawResidentNeed" readonly>
+                    <q-input bg-color="light-blue-1" outlined label="" type="number" name="item.rawResidentNeed"
+                        v-model.number="item.rawResidentNeed" readonly>
+                        <template v-slot:label>
+                            {{ item.type == "Logement" ? "Besoin brut habitant" : "Besoin brut employé" }}
+                        </template>
                     </q-input>
                 </div>
 
                 <div class="col">
-                    <q-input class="col" bg-color="light-blue-1" outlined label="Besoin brut visiteur/client" type="number"
-                        name="item.rawVisitorNeed" v-model.number="item.rawVisitorNeed" readonly>
+                    <q-input class="col" bg-color="light-blue-1" outlined label="" type="number" name="item.rawVisitorNeed"
+                        v-model.number="item.rawVisitorNeed" readonly>
+                        <template v-slot:label>
+                            {{ item.type == "Logement" ? "Besoin brut visiteur" : "Besoin brut client" }}
+                        </template>
                     </q-input>
                 </div>
 
