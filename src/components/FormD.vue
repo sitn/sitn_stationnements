@@ -121,13 +121,6 @@ export default {
 }
 </script>
 
-<style>
-@import "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons";
-@import '../assets/quasar.prod.css';
-
-.info {
-    background-color: #ffbd0033;
-    border-left: 0.5rem solid #e7800a;
-
-}
+<style scoped>
+@import '../assets/table.css';
 </style>
