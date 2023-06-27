@@ -61,7 +61,6 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 
 export default {
     name: 'FormD',
@@ -91,7 +90,7 @@ export default {
 
 .info {
     background-color: #ffbd0033;
-    border-left: 0.5rem solid rgb(146, 84, 13);
+    border-left: 0.5rem solid #e7800a;
 
 }
 </style>
