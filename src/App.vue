@@ -1,61 +1,64 @@
 <template>
-  <div class="bg-white q-pa-md q-ma-md">
+  <div class="bg-white q-pa-md q-ma-lg">
 
-        <!-- 1. LOCATION -->
-        <div class="q-pa-md">
-          <div class="text-h5">Étape 1: Localisation du projet</div>
-          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-            <Search @addOption="addRecord"></Search>
-          </div>
-          <Map ref="map" :geojson="geojson"></Map>
-          <div class="q-my-md">
-            <q-card class="bg-blue-grey-8 text-white">
-              <q-card-section>
-                <div class="text-h6">{{ numberOfparcels }} parcelle(s) sélectionnée(s)</div>
-                <!--Résumé de la localisation-->
-                <div class="text-subtitle2">{{ locinfo }}</div>
-              </q-card-section>
-            </q-card>
-          </div>
-          <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
-          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-            <q-select outlined bottom-slots bg-color="white" v-model="project.locationType" :options="locationSums"
-              option-value="name" option-label="name" @update:model-value="selectOption()"
-              label="Type de localisation du projet">
-              <template v-slot:option="scope">
-                <q-item v-bind="scope.itemProps">
-                  <q-item-section>
-                    <q-item-label>{{ scope.opt.name }}</q-item-label>
-                    <q-item-label caption>{{ scope.opt.area.toFixed(0) }} m<sup>2</sup> ({{ (100 *
-                      scope.opt.ratio).toFixed(1) }}%)</q-item-label>
-                  </q-item-section>
-                </q-item>
-              </template>
+    <!-- 1. LOCATION -->
+    <div class="q-pa-md">
+      <div class="text-h5">Étape 1: Localisation du projet</div>
+      <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+        <Search @addOption="addRecord"></Search>
+      </div>
+      <Map ref="map" :geojson="geojson"></Map>
+      <div class="q-my-md">
+        <q-card class="bg-blue-grey-8 text-white">
+          <q-card-section>
+            <div class="text-h6">{{ numberOfparcels }} parcelle(s) sélectionnée(s)</div>
+            <!--Résumé de la localisation-->
+            <div class="text-subtitle2">{{ locinfo }}</div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
+      <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+        <q-select outlined bottom-slots bg-color="white" v-model="project.locationType" :options="locationSums"
+          option-value="name" option-label="name" @update:model-value="selectOption()"
+          label="Type de localisation du projet">
+          <template v-slot:option="scope">
+            <q-item v-bind="scope.itemProps">
+              <q-item-section>
+                <q-item-label>{{ scope.opt.name }}</q-item-label>
+                <q-item-label caption>{{ scope.opt.area.toFixed(0) }} m<sup>2</sup> ({{ (100 *
+                  scope.opt.ratio).toFixed(1) }}%)</q-item-label>
+              </q-item-section>
+            </q-item>
+          </template>
+          <template v-slot:hint>
+            Choisir le type de localisation
+          </template>
+        </q-select>
+      </div>
 
-              <template v-slot:hint>
-                Choisir le type de localisation
-              </template>
-
-            </q-select>
-
-          </div>
-
-        </div>
-
-        <!-- 2. RAW PARKING NEEDS -->
-        <FormB :project="project" @updateProject="updateProject"></FormB>
-
-        <!-- 3. NET PARKING NEEDS -->
-        <FormC :project="project"></FormC>
-
-        <!-- 4. REDUCED NET PARKING NEEDS -->
-        <FormD :project="project"></FormD>
-
-        <!-- 5. SUMMARY -->
-        <FormE :project="project"></FormE>
-
+    </div>
   </div>
 
+  <!-- 2. RAW PARKING NEEDS -->
+  <div class="bg-white q-pa-md q-ma-lg">
+    <FormB :project="project" @updateProject="updateProject"></FormB>
+  </div>
+
+  <!-- 3. NET PARKING NEEDS -->
+  <div class="bg-white q-pa-md q-ma-lg">
+    <FormC :project="project"></FormC>
+  </div>
+
+  <!-- 4. REDUCED NET PARKING NEEDS -->
+  <div class="bg-white q-pa-md q-ma-lg">
+    <FormD :project="project"></FormD>
+  </div>
+
+  <!-- 5. SUMMARY -->
+  <div class="bg-white q-pa-md q-ma-lg">
+    <FormE :project="project"></FormE>
+  </div>
 </template>
 
 <script>
@@ -66,9 +69,10 @@ import FormB from "./components/FormB.vue"
 import FormC from "./components/FormC.vue"
 import FormD from "./components/FormD.vue"
 import FormE from "./components/FormE.vue"
-import { Quasar } from "quasar";
-import { ref, isProxy, toRaw, effect } from 'vue'
-import GeoJSON from 'ol/format/GeoJSON.js'
+import { ref } from 'vue'
+// import { Quasar } from "quasar";
+// import { ref, isProxy, toRaw, effect } from 'vue'
+// import GeoJSON from 'ol/format/GeoJSON.js'
 // import { Vector as VectorLayer } from 'ol/layer.js'
 
 // Classes
@@ -87,22 +91,22 @@ class Mob20 {
 
 // Location types
 class LocationTypes {
-  constructor(name, color, housingRange, activityRange) {
+  constructor(name, housingRange, activityRange) {
     // this.commune = commune
     this.name = name
-    this.color = color
+    this.ranges = { housing: { min: 0.2, max: 0.5 }, activity: { min: 0.2, max: 0.5 } }
     this.housingRange = housingRange
     this.activityRange = activityRange
   }
 }
 
 const locationTypes = []
-locationTypes.push(new LocationTypes("I", 'legend-1', { min: 0.2, max: 0.5 }, { min: 0.0, max: 0.3 }))
-locationTypes.push(new LocationTypes("II", 'legend-2', { min: 0.5, max: 0.7 }, { min: 0.2, max: 0.5 }))
-locationTypes.push(new LocationTypes("III", 'legend-3', { min: 0.7, max: 1.0 }, { min: 0.4, max: 0.7 }))
-locationTypes.push(new LocationTypes("IV", 'legend-4', { min: 0.7, max: 1.0 }, { min: 0.5, max: 0.8 }))
-locationTypes.push(new LocationTypes("V", 'legend-5', { min: 0.7, max: 1.0 }, { min: 0.7, max: 1.0 }))
-locationTypes.push(new LocationTypes("VI", 'legend-6', { min: 0.7, max: 1.0 }, { min: 0.9, max: 1.0 }))
+locationTypes.push(new LocationTypes("I", { min: 0.2, max: 0.5 }, { min: 0.0, max: 0.3 }))
+locationTypes.push(new LocationTypes("II", { min: 0.5, max: 0.7 }, { min: 0.2, max: 0.5 }))
+locationTypes.push(new LocationTypes("III", { min: 0.7, max: 1.0 }, { min: 0.4, max: 0.7 }))
+locationTypes.push(new LocationTypes("IV", { min: 0.7, max: 1.0 }, { min: 0.5, max: 0.8 }))
+locationTypes.push(new LocationTypes("V", { min: 0.7, max: 1.0 }, { min: 0.7, max: 1.0 }))
+locationTypes.push(new LocationTypes("VI", { min: 0.7, max: 1.0 }, { min: 0.9, max: 1.0 }))
 
 // Reduction factor
 class Reduction {
@@ -115,6 +119,14 @@ class Reduction {
   }
   set factor(val) {
     this._factor = val / 100
+  }
+}
+
+// Need
+class Need {
+  constructor(type,) {
+    this.type = type
+    this.factors = factors
   }
 }
 
@@ -140,11 +152,14 @@ class Affectation {
     obj.resident.net = { min: this.range.min * parseFloat(obj.resident.raw), max: this.range.max * parseFloat(obj.resident.raw) }
     obj.visitor.net = { min: this.range.min * parseFloat(obj.visitor.raw), max: this.range.max * parseFloat(obj.visitor.raw) }
 
-    obj.resident.reduced = { min: this.totalReduction * obj.resident.net.min, max: this.totalReduction * obj.resident.net.max }
-    obj.visitor.reduced = { min: this.totalReduction * obj.visitor.net.min, max: this.totalReduction * obj.visitor.net.max }
+    obj.resident.reduced = { min: (1 - this.totalReduction) * obj.resident.net.min, max: (1 - this.totalReduction) * obj.resident.net.max }
+    obj.visitor.reduced = { min: (1 - this.totalReduction) * obj.visitor.net.min, max: (1 - this.totalReduction) * obj.visitor.net.max }
 
     return obj
 
+  }
+  get totalNeed() {
+    return { min: this.needs.resident.reduced.min + this.needs.visitor.reduced.min, max: this.needs.resident.reduced.max + this.needs.visitor.reduced.max }
   }
   get totalReduction() {
     if (this.reductions.length > 0) {
@@ -157,23 +172,20 @@ class Affectation {
     return this.type === "Logement"
   }
 
+
   get rawResidentNeed() {
     return parseFloat(Math.max(this.area * this.factors.area * this.factors.resident, this.numberOfHouses).toFixed(2))
-    //return parseFloat(Math.max(this.area * this.areaFactor * this.visitorFactor, this.numberOfHouses).toFixed(2))
   }
   get rawVisitorNeed() {
     return parseFloat((this.area * this.factors.area * this.factors.visitor).toFixed(2))
-    // return parseFloat((this.area * this.areaFactor * this.visitorFactor).toFixed(2))
   }
   get rawTotalNeed() {
     return (this.rawResidentNeed + this.rawVisitorNeed).toFixed(2)
   }
   get netResidentNeed() {
-    // return { min: this.housingRange.min * parseFloat(this.rawResidentNeed), max: this.housingRange.max * parseFloat(this.rawResidentNeed) }
     return { min: this.range.min * parseFloat(this.rawResidentNeed), max: this.range.max * parseFloat(this.rawResidentNeed) }
   }
   get netVisitorNeed() {
-    // return { min: this.activityRange.min * parseFloat(this.rawVisitorNeed), max: this.activityRange.max * parseFloat(this.rawVisitorNeed) }
     return { min: this.range.min * parseFloat(this.rawVisitorNeed), max: this.range.max * parseFloat(this.rawVisitorNeed) }
   }
   get reducedNetResidentNeed() {
@@ -194,16 +206,23 @@ class Project {
     this.activityRange = { min: 0.0, max: 1.0 }
     this._locationType = null
   }
+  /*
+  get totalNeed() {
+    if (this.affectations.length > 0) {
+      let obj = { min: 0.0, max: 0.0 }
+      obj.min = this.affectations.reduce((acc, obj) => { return acc + obj.needs.resident.reduced.min + obj.needs.visitor.reduced.min }, 0)
+      obj.max = this.affectations.reduce((acc, obj) => { return acc + obj.needs.resident.reduced.max + obj.needs.visitor.reduced.max }, 0)
+      return obj
+    } else {
+      return { min: 0.0, max: 0.0 }
+    }
+  }
+  */
+
 
   get commune() {
     return 'default'
   }
-
-  /*
-  get reductionFactors() {
-    return locationTypes.filter(obj => obj.name === this.locationType && obj.commune === this.commune)
-  }
-  */
 
   get locationType() {
     if (this._locationType !== null) {
@@ -297,8 +316,7 @@ export default {
   setup() {
     return {
       map: ref(),
-      step: ref(1),
-    };
+    }
   },
   data() {
     return {
@@ -354,7 +372,7 @@ export default {
 
         // compute total area
         this.locationSums.forEach(location => {
-          totalArea += location.area;
+          totalArea += location.area
         })
 
         // compute relative area for each type
@@ -371,10 +389,6 @@ export default {
 
         console.log(`Total area ${totalArea}`)
 
-        let result = this.geojson.features.map(obj => obj.properties.locations)
-        console.log('result')
-        console.log(result)
-
         return this.locationSums[0]
       }
     },
@@ -384,7 +398,6 @@ export default {
 
       console.log('Project location type:')
       console.log(this.project)
-
       // this.updateProject()
 
     },
@@ -412,15 +425,12 @@ export default {
           feature.properties.locations = []
           result.features.forEach(item => {
 
-            // console.log(`type ${item.properties.type_localisation}`)
             feature.properties.locations.push(new Mob20(item.properties.type_localisation, item.properties.intersection_area))
 
           })
 
           // add feature to geojson
           this.geojson.features.push(feature)
-          console.log('geojson')
-          console.log(this.geojson)
 
         })
         .catch(error => console.log('error', error));
@@ -456,7 +466,7 @@ export default {
 
   }
 
-};
+}
 </script>
 
 <style>
