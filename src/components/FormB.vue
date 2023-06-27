@@ -50,7 +50,7 @@
 
                 <div class="col">
                     <q-input v-if="item.isHousing" class="col" bg-color="white" outlined label="Nombre de logements"
-                        type="number" name="item.housing" v-model.number="item.housing" min="0.0" max="Inf">
+                        type="number" name="item.numberOfHouses" v-model.number="item.numberOfHouses" min="0.0" max="Inf">
                     </q-input>
                 </div>
 
@@ -116,7 +116,7 @@ export default {
             this.project.affectations.forEach(function (e) {
                 e.active = false
                 // e.area = 0.0
-                // e.housing = 0.0
+                // e.numberOfHouses = 0.0
             });
 
             this.model.forEach(function (e) {
@@ -134,7 +134,7 @@ export default {
             let index = this.project.affectations.findIndex((obj) => obj.name === item.name)
             this.project.affectations[index].active = false
             this.project.affectations[index].area = 0.0
-            this.project.affectations[index].housing = 0.0
+            this.project.affectations[index].numberOfHouses = 0.0
 
             //console.log(item)
             //console.log(`Delete item with id=${item.name}`)
