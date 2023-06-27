@@ -156,30 +156,56 @@ locationTypes.push(new LocationTypes("IV", 'legend-4', { min: 0.7, max: 1.0 }, {
 locationTypes.push(new LocationTypes("V", 'legend-5', { min: 0.7, max: 1.0 }, { min: 0.7, max: 1.0 }))
 locationTypes.push(new LocationTypes("VI", 'legend-6', { min: 0.7, max: 1.0 }, { min: 0.9, max: 1.0 }))
 
-// Affectation
-class Affectation {
-  constructor(type, name, areaFactor, residentFactor, visitorFactor, area, housing) {
+// Reduction factor
+class Reduction {
+  constructor(type, name, factor, description) {
     this.type = type
     this.name = name
-    this.areaFactor = parseFloat(areaFactor)
-    this.housingFactor = parseFloat(residentFactor)
-    this.activityFactor = parseFloat(visitorFactor)
+    this.factor = factor
+    this.description = description
+  }
+}
+
+const reductions = []
+reductions.push(new Reduction('Logement', 'Reduction 1', 0.0, `Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`))
+reductions.push(new Reduction('Logement', 'Reduction 2', 0.0, `Un facteur de réduction peut s'appliquer pour les logements avec encadrement ou étudiants. Contacter la commune.`))
+
+
+
+// Affectation
+class Affectation {
+  // constructor(type, name, areaFactor, residentFactor, visitorFactor, area, numberOfHouses) {
+  constructor(type, name, factors, reductions, area, numberOfHouses) {
+    this.type = type
+    this.name = name
+    this.factors = factors
     this.range = { min: 0.0, max: 1.0 }
+    this.reductions = reductions
+
+    /*
+    this.areaFactor = parseFloat(areaFactor)
+    this.visitorFactor = parseFloat(residentFactor)
+    this.visitorFactor = parseFloat(visitorFactor)
+    */
+
     // this.housingRange = { min: 0.0, max: 1.0 } // super(housingRange)
     // this.activityRange = { min: 0.0, max: 1.0 } // super(activityRange)
-    this.reductions = {}
+
     this.area = parseFloat(area)
-    this.housing = parseFloat(housing)
+    this.numberOfHouses = parseFloat(numberOfHouses)
     this.active = false
+
   }
   get isHousing() {
     return this.type === "Logement"
   }
   get rawResidentNeed() {
-    return parseFloat(Math.max(this.area * this.areaFactor * this.housingFactor, this.housing).toFixed(2))
+    return parseFloat(Math.max(this.area * this.factors.area * this.factors.resident, this.numberOfHouses).toFixed(2))
+    //return parseFloat(Math.max(this.area * this.areaFactor * this.visitorFactor, this.numberOfHouses).toFixed(2))
   }
   get rawVisitorNeed() {
-    return parseFloat((this.area * this.areaFactor * this.activityFactor).toFixed(2))
+    return parseFloat((this.area * this.factors.area * this.factors.visitor).toFixed(2))
+    // return parseFloat((this.area * this.areaFactor * this.visitorFactor).toFixed(2))
   }
   get rawTotalNeed() {
     return (this.rawResidentNeed + this.rawVisitorNeed).toFixed(2)
@@ -192,8 +218,16 @@ class Affectation {
     // return { min: this.activityRange.min * parseFloat(this.rawVisitorNeed), max: this.activityRange.max * parseFloat(this.rawVisitorNeed) }
     return { min: this.range.min * parseFloat(this.rawVisitorNeed), max: this.range.max * parseFloat(this.rawVisitorNeed) }
   }
+  get reducedNetResidentNeed() {
+
+  }
+  get reducedNetVisitorNeed() {
+
+  }
+
 }
 
+/*
 const affectations = []
 affectations.push(new Affectation("Logement", "Logements standards", 0.01, 1, 0.1, 0, 0))
 affectations.push(new Affectation("Logement", "Logements avec encadrement ou étudiants", 0.01, 1, 0.1, 0, 0))
@@ -203,6 +237,17 @@ affectations.push(new Affectation("Activité", "Autres magasins", 0.01, 1.5, 3.5
 affectations.push(new Affectation("Activité", "Industrie et artisanat", 0.01, 1, 0.2, 0, 0))
 affectations.push(new Affectation("Activité", "Entrepôts et dépôts", 0.01, 0.1, 0.01, 0, 0))
 affectations.push(new Affectation("Activité", "Autres services", 0.01, 2, 0.5, 0, 0))
+*/
+
+const affectations = []
+affectations.push(new Affectation("Logement", "Logements standards", { area: 0.01, resident: 1, visitor: 0.1 }, [], 0, 0))
+affectations.push(new Affectation("Logement", "Logements avec encadrement ou étudiants", { area: 0.01, resident: 1, visitor: 0.1 }, [], 0, 0))
+affectations.push(new Affectation("Activité", "Services à nombreuse clientèle", { area: 0.01, resident: 2, visitor: 1 }, [], 0, 0))
+affectations.push(new Affectation("Activité", "Magasins à nombreuse clientèle", { area: 0.01, resident: 2, visitor: 8 }, [], 0, 0))
+affectations.push(new Affectation("Activité", "Autres magasins", { area: 0.01, resident: 1.5, visitor: 3.5 }, [], 0, 0))
+affectations.push(new Affectation("Activité", "Industrie et artisanat", { area: 0.01, resident: 1, visitor: 0.2 }, [], 0, 0))
+affectations.push(new Affectation("Activité", "Entrepôts et dépôts", { area: 0.01, resident: 0.1, visitor: 0.01 }, [], 0, 0))
+affectations.push(new Affectation("Activité", "Autres services", { area: 0.01, resident: 2, visitor: 0.5 }, [], 0, 0))
 
 // Project
 class Project {
@@ -213,37 +258,11 @@ class Project {
     this.activityRange = { min: 0.0, max: 1.0 }
     this._locationType = null
   }
-  /*
-  static get labels() {
-    return ['I', 'II', 'III', 'IV', 'V', 'VI']
-  }
-  */
+
   get commune() {
     return 'default'
   }
 
-  /*
-  get housingRange() {
-    if (this.locationType !== null) {
-
-      let val = locationTypes.find(el => el.name === this.locationType)
-      console.log('housing range is:')
-      console.log(val.housingRange)
-
-      return val.housingRange
-
-    } else {
-      return { min: 0.0, max: 1.0 }
-    }
-  }
-  */
-
-
-  /*
-  get locationType() {
-    return 'II'
-  }
-  */
   /*
   get reductionFactors() {
     return locationTypes.filter(obj => obj.name === this.locationType && obj.commune === this.commune)
@@ -260,11 +279,10 @@ class Project {
 
   set locationType(location) {
 
-    let labels = ['I', 'II', 'III', 'IV', 'V', 'VI']
-
-    console.log(location)
-
+    // let labels = ['I', 'II', 'III', 'IV', 'V', 'VI']
+    // console.log(location)
     //if (labels.includes(location.name)) {
+
     if (location !== null) {
 
       console.log(`App.vue | Location type set to: ${location.name}`)
@@ -292,9 +310,6 @@ class Project {
 
       })
 
-      // console.log('adjusting location ranges')
-      // console.log(ranges)
-
     } else {
       this._locationType = null
     }
@@ -304,6 +319,21 @@ class Project {
 }
 
 const project = new Project(null, affectations)
+
+const project2 = new Project(
+  [],
+  [
+    new Affectation("Logement", "Logements standards", { area: 0.01, resident: 1, visitor: 0.1 }, [], 0, 0),
+    new Affectation("Logement", "Logements avec encadrement ou étudiants", { area: 0.01, resident: 1, visitor: 0.1 }, [], 0, 0),
+    new Affectation("Activité", "Services à nombreuse clientèle", { area: 0.01, resident: 2, visitor: 1 }, [], 0, 0),
+    new Affectation("Activité", "Magasins à nombreuse clientèle", { area: 0.01, resident: 2, visitor: 8 }, [], 0, 0),
+    new Affectation("Activité", "Autres magasins", { area: 0.01, resident: 1.5, visitor: 3.5 }, [], 0, 0),
+    new Affectation("Activité", "Industrie et artisanat", { area: 0.01, resident: 1, visitor: 0.2 }, [], 0, 0),
+    new Affectation("Activité", "Entrepôts et dépôts", { area: 0.01, resident: 0.1, visitor: 0.01 }, [], 0, 0),
+    new Affectation("Activité", "Autres services", { area: 0.01, resident: 2, visitor: 0.5 }, [], 0, 0)
+  ]
+)
+
 
 export default {
   name: 'App',
