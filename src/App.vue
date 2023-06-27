@@ -17,7 +17,9 @@
           </q-card-section>
         </q-card>
       </div>
+
       <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
+
       <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
         <q-select outlined bottom-slots bg-color="white" v-model="project.locationType" :options="locationSums"
           option-value="name" option-label="name" @update:model-value="selectOption()"
@@ -206,18 +208,17 @@ class Project {
     this.activityRange = { min: 0.0, max: 1.0 }
     this._locationType = null
   }
-  /*
+
   get totalNeed() {
     if (this.affectations.length > 0) {
       let obj = { min: 0.0, max: 0.0 }
-      obj.min = this.affectations.reduce((acc, obj) => { return acc + obj.needs.resident.reduced.min + obj.needs.visitor.reduced.min }, 0)
-      obj.max = this.affectations.reduce((acc, obj) => { return acc + obj.needs.resident.reduced.max + obj.needs.visitor.reduced.max }, 0)
+      obj.min = this.affectations.reduce((acc, obj) => { return acc + obj.totalNeed.min }, 0)
+      obj.max = this.affectations.reduce((acc, obj) => { return acc + obj.totalNeed.max }, 0)
       return obj
     } else {
       return { min: 0.0, max: 0.0 }
     }
   }
-  */
 
 
   get commune() {
