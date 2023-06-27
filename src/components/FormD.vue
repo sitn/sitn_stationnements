@@ -33,9 +33,8 @@
                         <tr v-for="(reduction, index) in affectation.reductions" :key="index">
                             <td>{{ reduction.description }}</td>
                             <td>
-                                <q-input bg-color="white" outlined type="number" name="reduction.factor"
+                                <q-input dense bg-color="white" outlined type="number" name="reduction.factor"
                                     v-model.number="reduction.factor" min="0.0" max="100">
-
                                     <template v-slot:append>
                                         <div class="text-body2">%</div>
                                     </template>
@@ -48,6 +47,45 @@
                                 %</td>
                         </tr>
 
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-4"
+                v-for="(item, key) in this.project.affectations.filter(e => e.active)">
+                <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+
+                    <table>
+                        <tr>
+                            <th>{{ item.name }}</th>
+                            <th>Min.</th>
+                            <th>Max.</th>
+                        </tr>
+
+                        <tr>
+                            <td> {{ item.type == "Logement" ? "Besoin net réduit habitant" : "Besoin net réduit employé" }}
+                            </td>
+                            <td class="bg-light-blue-1">{{ item.reducedNetResidentNeed.min.toFixed(2) }}</td>
+                            <td class="bg-light-blue-1">{{ item.reducedNetResidentNeed.max.toFixed(2) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ item.type == "Logement" ? "Besoin net réduit visiteur" : "Besoin net réduit client" }}
+                            </td>
+                            <td class="bg-light-blue-1">{{ item.reducedNetVisitorNeed.min.toFixed(2) }}</td>
+                            <td class="bg-light-blue-1">{{ item.reducedNetVisitorNeed.max.toFixed(2) }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-weight-bold">Besoin net réduit total</td>
+                            <td class="bg-light-blue-1 text-weight-bold">{{ item.totalNeed.min.toFixed(2) }}</td>
+                            <td class="bg-light-blue-1 text-weight-bold">
+                                {{ item.totalNeed.max.toFixed(2) }}
+                            </td>
+                        </tr>
                     </table>
 
                 </div>
