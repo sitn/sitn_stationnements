@@ -30,7 +30,7 @@
                   <q-item-section>
                     <q-item-label>{{ scope.opt.name }}</q-item-label>
                     <q-item-label caption>{{ scope.opt.area.toFixed(0) }} m<sup>2</sup> ({{ (100 *
-                      scope.opt.ratio).toFixed(0) }}%)</q-item-label>
+                      scope.opt.ratio).toFixed(1) }}%)</q-item-label>
                   </q-item-section>
                 </q-item>
               </template>
@@ -158,42 +158,27 @@ locationTypes.push(new LocationTypes("VI", 'legend-6', { min: 0.7, max: 1.0 }, {
 
 // Reduction factor
 class Reduction {
-  constructor(type, name, factor, description) {
-    this.type = type
-    this.name = name
+  constructor(factor, description) {
     this.factor = factor
     this.description = description
   }
 }
 
-const reductions = []
-reductions.push(new Reduction('Logement', 'Reduction 1', 0.0, `Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`))
-reductions.push(new Reduction('Logement', 'Reduction 2', 0.0, `Un facteur de réduction peut s'appliquer pour les logements avec encadrement ou étudiants. Contacter la commune.`))
-
-
-
 // Affectation
 class Affectation {
-  // constructor(type, name, areaFactor, residentFactor, visitorFactor, area, numberOfHouses) {
   constructor(type, name, factors, reductions, area, numberOfHouses) {
     this.type = type
     this.name = name
     this.factors = factors
     this.range = { min: 0.0, max: 1.0 }
     this.reductions = reductions
-
-    /*
-    this.areaFactor = parseFloat(areaFactor)
-    this.visitorFactor = parseFloat(residentFactor)
-    this.visitorFactor = parseFloat(visitorFactor)
-    */
-
-    // this.housingRange = { min: 0.0, max: 1.0 } // super(housingRange)
-    // this.activityRange = { min: 0.0, max: 1.0 } // super(activityRange)
-
     this.area = parseFloat(area)
     this.numberOfHouses = parseFloat(numberOfHouses)
     this.active = false
+
+  }
+  get totalReduction() {
+    return Math.min(this.reductions.reduce((acc, obj) => { return acc + obj.factor }, 0), 100) / 100
 
   }
   get isHousing() {
@@ -226,28 +211,6 @@ class Affectation {
   }
 
 }
-
-/*
-const affectations = []
-affectations.push(new Affectation("Logement", "Logements standards", 0.01, 1, 0.1, 0, 0))
-affectations.push(new Affectation("Logement", "Logements avec encadrement ou étudiants", 0.01, 1, 0.1, 0, 0))
-affectations.push(new Affectation("Activité", "Services à nombreuse clientèle", 0.01, 2, 1, 0, 0))
-affectations.push(new Affectation("Activité", "Magasins à nombreuse clientèle", 0.01, 2, 8, 0, 0))
-affectations.push(new Affectation("Activité", "Autres magasins", 0.01, 1.5, 3.5, 0, 0))
-affectations.push(new Affectation("Activité", "Industrie et artisanat", 0.01, 1, 0.2, 0, 0))
-affectations.push(new Affectation("Activité", "Entrepôts et dépôts", 0.01, 0.1, 0.01, 0, 0))
-affectations.push(new Affectation("Activité", "Autres services", 0.01, 2, 0.5, 0, 0))
-*/
-
-const affectations = []
-affectations.push(new Affectation("Logement", "Logements standards", { area: 0.01, resident: 1, visitor: 0.1 }, [], 0, 0))
-affectations.push(new Affectation("Logement", "Logements avec encadrement ou étudiants", { area: 0.01, resident: 1, visitor: 0.1 }, [], 0, 0))
-affectations.push(new Affectation("Activité", "Services à nombreuse clientèle", { area: 0.01, resident: 2, visitor: 1 }, [], 0, 0))
-affectations.push(new Affectation("Activité", "Magasins à nombreuse clientèle", { area: 0.01, resident: 2, visitor: 8 }, [], 0, 0))
-affectations.push(new Affectation("Activité", "Autres magasins", { area: 0.01, resident: 1.5, visitor: 3.5 }, [], 0, 0))
-affectations.push(new Affectation("Activité", "Industrie et artisanat", { area: 0.01, resident: 1, visitor: 0.2 }, [], 0, 0))
-affectations.push(new Affectation("Activité", "Entrepôts et dépôts", { area: 0.01, resident: 0.1, visitor: 0.01 }, [], 0, 0))
-affectations.push(new Affectation("Activité", "Autres services", { area: 0.01, resident: 2, visitor: 0.5 }, [], 0, 0))
 
 // Project
 class Project {
@@ -305,9 +268,6 @@ class Project {
             break
         }
 
-        // affectation.housingRange = ranges.housingRange
-        // affectation.activityRange = ranges.activityRange
-
       })
 
     } else {
@@ -315,12 +275,13 @@ class Project {
     }
 
   }
+  getAffectation(name) {
+    return this.affectations.find(obj => obj.name === name)
+  }
 
 }
 
-const project = new Project(null, affectations)
-
-const project2 = new Project(
+const project = new Project(
   [],
   [
     new Affectation("Logement", "Logements standards", { area: 0.01, resident: 1, visitor: 0.1 }, [], 0, 0),
@@ -334,6 +295,20 @@ const project2 = new Project(
   ]
 )
 
+project.getAffectation("Logements standards").reductions = [
+  new Reduction(0.0, `Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`)
+]
+
+project.getAffectation("Logements avec encadrement ou étudiants").reductions = [
+  new Reduction(0.0, `Un facteur de réduction peut s'appliquer pour les logements avec encadrement ou étudiants. Contacter la commune.`),
+  new Reduction(0.0, `Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
+]
+
+project.getAffectation("Autres services").reductions = [
+  new Reduction(0.0, `Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
+  new Reduction(0.0, `Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple`),
+  new Reduction(0.0, `Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
+]
 
 export default {
   name: 'App',
@@ -354,10 +329,8 @@ export default {
   data() {
     return {
       project: project,
-      affectations: affectations,
-      locationTypes: locationTypes,
+      // locationTypes: locationTypes,
       locationSums: [],
-      options: null,
       geojson: {
         'type': 'FeatureCollection',
         'features': []
@@ -481,29 +454,7 @@ export default {
     addRecord(feature) {
 
       console.log(`App.vue | Add new record with id=${feature.id}`)
-      // console.log(feature)
-      // console.log(this.geojson.features)
-
       this.getLocationType(feature)
-
-      // add MOB20 attribute
-      /*
-      let locations = []
-      locations.push(new Mob20('I', 1000 * Math.random()))
-      locations.push(new Mob20('II', 1000 * Math.random()))
-      locations.push(new Mob20('III', 1000 * Math.random()))
-      locations.push(new Mob20('IV', 1000 * Math.random()))
-      locations.push(new Mob20('V', 1000 * Math.random()))
-      locations.push(new Mob20('VI', 1000 * Math.random()))
-      feature.properties.locations = locations
-      */
-
-      /*
-      console.log('feature.properties')
-      console.log(feature.properties)
-      */
-
-      //console.log(toRaw(feature))
 
     },
 
