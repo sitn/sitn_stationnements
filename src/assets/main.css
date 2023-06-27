@@ -72,6 +72,11 @@ td, th {
   padding: 8px;
 }
 
+.info {
+  background-color: #ffbd0033;
+  border-left: 0.5rem solid #e7800a;
+}
+
 .grid-container {
   padding: 3.75%;
   display: grid;
