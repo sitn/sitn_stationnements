@@ -10,8 +10,8 @@
                     <table>
                         <tr>
                             <th>{{ item.name }}</th>
-                            <th>Min.</th>
-                            <th>Max.</th>
+                            <th>Min. {{ 100 * item.range.min }}%</th>
+                            <th>Max. {{ 100 * item.range.max }}%</th>
                         </tr>
                         <!-- 
                         <tr>
@@ -21,14 +21,12 @@
                         </tr>
                         -->
                         <tr>
-                            <td> {{ item.type == "Logement" ? "Besoin net habitant" : "Besoin net employé" }} ({{ 100 *
-                                item.range.min }}% à {{ 100 * item.range.max }}%)</td>
+                            <td> {{ item.type == "Logement" ? "Besoin net habitant" : "Besoin net employé" }}</td>
                             <td class="bg-light-blue-1">{{ item.netResidentNeed.min.toFixed(2) }}</td>
                             <td class="bg-light-blue-1">{{ item.netResidentNeed.max.toFixed(2) }}</td>
                         </tr>
                         <tr>
-                            <td>{{ item.type == "Logement" ? "Besoin net visiteur" : "Besoin net client" }} ({{ 100 *
-                                item.range.min }}% à {{ 100 * item.range.max }}%)</td>
+                            <td>{{ item.type == "Logement" ? "Besoin net visiteur" : "Besoin net client" }}</td>
                             <td class="bg-light-blue-1">{{ item.netVisitorNeed.min.toFixed(2) }}</td>
                             <td class="bg-light-blue-1">{{ item.netVisitorNeed.max.toFixed(2) }}</td>
                         </tr>
