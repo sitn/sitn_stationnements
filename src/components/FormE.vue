@@ -22,8 +22,8 @@
 
                         <tr>
                             <td class="text-weight-bold">Total</td>
-                            <td class="bg-light-blue-1"></td>
-                            <td class="bg-light-blue-1"></td>
+                            <td class="bg-light-blue-1 text-weight-bold">{{ this.project.totalNeed.min.toFixed(2) }}</td>
+                            <td class="bg-light-blue-1 text-weight-bold">{{ this.project.totalNeed.max.toFixed(2) }}</td>
                         </tr>
 
                     </table>
@@ -33,6 +33,8 @@
             </div>
 
         </div>
+
+        <q-btn color="primary" icon="print" label="Imprimer" />
 
     </div>
 </template>
@@ -61,32 +63,6 @@ export default {
 }
 </script>
 
-<style>
-@import "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons";
-@import '../assets/quasar.prod.css';
-
-table {
-    border-collapse: collapse;
-    border: none;
-}
-
-th {
-    border: none;
-    background-color: #455a64;
-    color: white
-}
-
-tr {
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-}
-
-tr:last-child {
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-}
-
-td {
-    border: none !important;
-}
+<style scoped>
+@import '../assets/table.css';
 </style>
