@@ -29,12 +29,12 @@
                     </table>
 
                 </div>
-
+                <q-btn color="indigo" icon="print" label="Imprimer la déclaration" />
             </div>
 
         </div>
 
-        <q-btn color="primary" icon="print" label="Imprimer" />
+
 
     </div>
 </template>
