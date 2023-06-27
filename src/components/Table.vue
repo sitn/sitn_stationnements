@@ -1,5 +1,4 @@
 <template>
-    <!-- <div class="q-pa-md"> -->
     <q-table title="" :rows="rows" :columns="columns" row-key="id" v-model:pagination="pagination" :loading="loading"
         :filter="filter" dense>
         <!-- TABLE BODY -->
@@ -35,7 +34,6 @@
             Aucune parcelle sélectionnée
         </template>
     </q-table>
-    <!--</div> -->
 </template>
 
 <script>
@@ -115,7 +113,5 @@ export default {
 }
 </script>
 
-<style>
-@import "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons";
-@import '../assets/quasar.prod.css';
+<style scoped>
 </style>
