@@ -22,7 +22,6 @@
             <div class="q-pa-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
                 v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.reductions.length > 0)">
 
-                <!-- <div class="text-weight-bold">{{ affectation.name }}</div> -->
                 <div class="bg-grey-2 q-pa-md q-my-none rounded-borders">
 
                     <table>
