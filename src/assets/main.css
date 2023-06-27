@@ -5,10 +5,9 @@ html {
 }
 
 body {
-  background-color: #adadadc5;
+  background-color: #c3c3c3a1;
   height: 100%;
   width: 100%;
-  margin: 0px;
 }
 
 #q-app {
@@ -72,9 +71,6 @@ td, th {
   text-align: left;
   padding: 8px;
 }
-
-
-
 
 .grid-container {
   padding: 3.75%;
