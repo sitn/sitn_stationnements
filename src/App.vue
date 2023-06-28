@@ -2,7 +2,6 @@
   <div class="row justify-center no-print">
     <div class="col-xs-12 col-sm-12 col-md-9">
       <div class="bg-white q-pa-md q-ma-md">
-
         <!-- 1. LOCATION -->
         <div class="q-pa-md">
           <div class="text-h5">Étape 1: Localisation du projet</div>
@@ -336,7 +335,7 @@ export default {
   },
   setup() {
     return {
-      map: ref(),
+      map: ref()
     }
   },
   data() {
