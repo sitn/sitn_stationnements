@@ -1,72 +1,92 @@
 <template>
-  <div class="bg-white q-pa-md q-ma-lg">
+  <div class="row justify-center">
+    <div class="col-xs-12 col-sm-12 col-md-9">
+      <div class="bg-white q-pa-md q-ma-md">
 
-    <!-- 1. LOCATION -->
-    <div class="q-pa-md">
-      <div class="text-h5">Étape 1: Localisation du projet</div>
-      <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-        <Search @addOption="addRecord"></Search>
+        <!-- 1. LOCATION -->
+        <div class="q-pa-md">
+          <div class="text-h5">Étape 1: Localisation du projet</div>
+          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+            <Search @addOption="addRecord"></Search>
+          </div>
+          <Map ref="map" :geojson="geojson"></Map>
+          <div class="q-my-md">
+            <q-card class="bg-blue-grey-8 text-white">
+              <q-card-section>
+                <div class="text-h6">{{ numberOfparcels }} parcelle(s) sélectionnée(s)</div>
+                <div class="text-subtitle2">{{ locinfo }}</div>
+              </q-card-section>
+            </q-card>
+          </div>
+
+          <LocationTable :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord">
+          </LocationTable>
+
+          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+            <q-select outlined bottom-slots bg-color="white" v-model="project.locationType" :options="locationSums"
+              option-value="name" option-label="name" @update:model-value="selectOption()"
+              label="Type de localisation du projet">
+              <template v-slot:option="scope">
+                <q-item v-bind="scope.itemProps">
+                  <q-item-section>
+                    <q-item-label>{{ scope.opt.name }}</q-item-label>
+                    <q-item-label caption>{{ scope.opt.area.toFixed(0) }} m<sup>2</sup> ({{ (100 *
+                      scope.opt.ratio).toFixed(1) }}%)</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </template>
+              <template v-slot:hint>
+                Choisir le type de localisation
+              </template>
+            </q-select>
+          </div>
+
+        </div>
       </div>
-      <Map ref="map" :geojson="geojson"></Map>
-      <div class="q-my-md">
-        <q-card class="bg-blue-grey-8 text-white">
-          <q-card-section>
-            <div class="text-h6">{{ numberOfparcels }} parcelle(s) sélectionnée(s)</div>
-            <!--Résumé de la localisation-->
-            <div class="text-subtitle2">{{ locinfo }}</div>
-          </q-card-section>
-        </q-card>
-      </div>
-
-      <Table :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord"></Table>
-
-      <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-        <q-select outlined bottom-slots bg-color="white" v-model="project.locationType" :options="locationSums"
-          option-value="name" option-label="name" @update:model-value="selectOption()"
-          label="Type de localisation du projet">
-          <template v-slot:option="scope">
-            <q-item v-bind="scope.itemProps">
-              <q-item-section>
-                <q-item-label>{{ scope.opt.name }}</q-item-label>
-                <q-item-label caption>{{ scope.opt.area.toFixed(0) }} m<sup>2</sup> ({{ (100 *
-                  scope.opt.ratio).toFixed(1) }}%)</q-item-label>
-              </q-item-section>
-            </q-item>
-          </template>
-          <template v-slot:hint>
-            Choisir le type de localisation
-          </template>
-        </q-select>
-      </div>
-
     </div>
   </div>
 
   <!-- 2. RAW PARKING NEEDS -->
-  <div class="bg-white q-pa-md q-ma-lg">
-    <FormB :project="project" @updateProject="updateProject"></FormB>
+  <div class="row justify-center">
+    <div class="col-xs-12 col-sm-12 col-md-9">
+      <div class="bg-white q-pa-md q-ma-md">
+        <FormB :project="project" @updateProject="updateProject"></FormB>
+      </div>
+    </div>
   </div>
 
   <!-- 3. NET PARKING NEEDS -->
-  <div class="bg-white q-pa-md q-ma-lg">
-    <FormC :project="project"></FormC>
+  <div class="row justify-center">
+    <div class="col-xs-12 col-sm-12 col-md-9">
+      <div class="bg-white q-pa-md q-ma-md">
+        <FormC :project="project"></FormC>
+      </div>
+    </div>
   </div>
 
   <!-- 4. REDUCED NET PARKING NEEDS -->
-  <div class="bg-white q-pa-md q-ma-lg">
-    <FormD :project="project"></FormD>
+  <div class="row justify-center">
+    <div class="col-xs-12 col-sm-12 col-md-9">
+      <div class="bg-white q-pa-md q-ma-md">
+        <FormD :project="project"></FormD>
+      </div>
+    </div>
   </div>
 
   <!-- 5. SUMMARY -->
-  <div class="bg-white q-pa-md q-ma-lg">
-    <FormE :project="project"></FormE>
+  <div class="row justify-center">
+    <div class="col-xs-12 col-sm-12 col-md-9">
+      <div class="bg-white q-pa-md q-ma-md">
+        <FormE :project="project"></FormE>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Search from "./components/Search.vue"
 import Map from "./components/Map.vue"
-import Table from "./components/Table.vue"
+import LocationTable from "./components/LocationTable.vue"
 import FormB from "./components/FormB.vue"
 import FormC from "./components/FormC.vue"
 import FormD from "./components/FormD.vue"
@@ -220,7 +240,6 @@ class Project {
     }
   }
 
-
   get commune() {
     return 'default'
   }
@@ -307,7 +326,7 @@ export default {
   name: 'App',
   components: {
     Map,
-    Table,
+    LocationTable,
     Search,
     FormB,
     FormC,
@@ -341,6 +360,7 @@ export default {
 
       // reset sums to 0
       this.locationSums = []
+      this.project.locationType = null
 
       if (this.geojson.features.length > 0) {
 
@@ -397,9 +417,8 @@ export default {
   methods: {
     selectOption() {
 
-      console.log('Project location type:')
-      console.log(this.project)
-      // this.updateProject()
+      console.log(`App.vue | Project location type: ${this.project.locationType.name}`)
+
 
     },
 
@@ -438,16 +457,23 @@ export default {
     },
     addRecord(feature) {
 
-      console.log(`App.vue | Add new record with id=${feature.id}`)
       this.getLocationType(feature)
+
+      console.log(`App.vue | Add new record with id=${feature.id}`)
+      console.log(`App.vue | Project location type: ${this.project.locationType}`)
 
     },
 
     deleteRecord(id) {
-      console.log(`App.vue | Delete item with id=${id}`)
-      this.geojson.features = this.geojson.features.filter(function (obj) {
-        return obj.id !== id
+
+      this.geojson.features = this.geojson.features.filter(function (feature) {
+        return feature.id !== id
       })
+
+      console.log(`App.vue | Delete item with id=${id}`)
+      console.log(`App.vue | Project location type: ${this.project.locationType}`)
+      console.log(this.project.locationType)
+
     },
     focusRecord(id) {
       console.log(`App.vue | Focus on item with id=${id}`)
@@ -456,12 +482,9 @@ export default {
     updateProject(obj) {
 
       this.project = obj
+
       console.log('Update project:')
       console.log(this.project)
-
-    },
-    action(id, name) {
-      // console.log(`App.vue | Focus record with id=${id}`)
 
     },
 
@@ -472,6 +495,7 @@ export default {
 
 <style>
 @import './assets/main.css';
-@import "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons";
+@import './assets/print.css';
+@import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons';
 @import './assets/quasar.prod.css';
 </style>
