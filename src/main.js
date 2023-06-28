@@ -1,7 +1,7 @@
-import { createApp, ref } from 'vue'
+import { createApp } from 'vue'
 import { Quasar } from 'quasar'
 import App from './App.vue'
-import './assets/main.css'
+// import './assets/main.css'
 // import './assets/ol.css'
 
 const app = createApp(App)
