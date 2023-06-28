@@ -29,10 +29,12 @@
                     </table>
 
                 </div>
+                <!-- 
                 <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer la déclaration"
                     @click="print" class="no-print" />
                 <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer DOM" @click="printDiv"
                     class="no-print" />
+                    -->
                 <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer PDF" @click="printPDF"
                     class="no-print" />
             </div>
