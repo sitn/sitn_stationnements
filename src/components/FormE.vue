@@ -4,7 +4,7 @@
         <div class="text-h5">Étape 5: Résumé</div>
 
         <div class="row">
-            <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-4">
+            <div class="q-pa-md q-ma-none col-xs-8 col-sm-8 col-md-8">
                 <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
 
                     <table>
@@ -29,12 +29,11 @@
                     </table>
 
                 </div>
-                <q-btn color="indigo" icon="print" label="Imprimer la déclaration" />
+                <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer la déclaration"
+                    @click="print" />
             </div>
 
         </div>
-
-
 
     </div>
 </template>
@@ -58,7 +57,9 @@ export default {
 
     },
     methods: {
-
+        print() {
+            window.print()
+        }
     }
 }
 </script>
