@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-center">
+  <div class="row justify-center no-print">
     <div class="col-xs-12 col-sm-12 col-md-9">
       <div class="bg-white q-pa-md q-ma-md">
 
@@ -47,7 +47,7 @@
   </div>
 
   <!-- 2. RAW PARKING NEEDS -->
-  <div class="row justify-center">
+  <div class="row justify-center no-print">
     <div class="col-xs-12 col-sm-12 col-md-9">
       <div class="bg-white q-pa-md q-ma-md">
         <FormB :project="project" @updateProject="updateProject"></FormB>
@@ -56,7 +56,7 @@
   </div>
 
   <!-- 3. NET PARKING NEEDS -->
-  <div class="row justify-center">
+  <div class="row justify-center no-print">
     <div class="col-xs-12 col-sm-12 col-md-9">
       <div class="bg-white q-pa-md q-ma-md">
         <FormC :project="project"></FormC>
@@ -65,7 +65,7 @@
   </div>
 
   <!-- 4. REDUCED NET PARKING NEEDS -->
-  <div class="row justify-center">
+  <div class="row justify-center no-print">
     <div class="col-xs-12 col-sm-12 col-md-9">
       <div class="bg-white q-pa-md q-ma-md">
         <FormD :project="project"></FormD>
@@ -230,10 +230,11 @@ class Project {
   }
 
   get totalNeed() {
-    if (this.affectations.length > 0) {
+    let activeAffectations = this.affectations.filter(e => e.active)
+    if (activeAffectations > 0) {
       let obj = { min: 0.0, max: 0.0 }
-      obj.min = this.affectations.reduce((acc, obj) => { return acc + obj.totalNeed.min }, 0)
-      obj.max = this.affectations.reduce((acc, obj) => { return acc + obj.totalNeed.max }, 0)
+      obj.min = activeAffectations.reduce((acc, obj) => { return acc + obj.totalNeed.min }, 0)
+      obj.max = activeAffectations.reduce((acc, obj) => { return acc + obj.totalNeed.max }, 0)
       return obj
     } else {
       return { min: 0.0, max: 0.0 }

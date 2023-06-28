@@ -3,7 +3,7 @@
     <div class="q-pa-md">
         <div class="text-h5">Étape 4: Calcul du besoin net réduit</div>
 
-        <div class="q-pa-md q-my-md info">
+        <div id="infobox" class="q-pa-md q-my-md info">
             <div class="text-h6">Information</div>
             Des facteurs de réduction peuvent être appliqués au besoin net,
             par le réquérant ou par la commune (articles 31 à 34 du
