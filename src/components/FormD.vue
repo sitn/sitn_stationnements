@@ -4,6 +4,7 @@
         <div class="text-h5">Étape 4: Calcul du besoin net réduit</div>
 
         <div class="q-pa-md q-my-md info">
+            <div class="text-h6">Information</div>
             Des facteurs de réduction peuvent être appliqués au besoin net,
             par le réquérant ou par la commune (articles 31 à 34 du
             RELConstr.). Les facteurs de réduction sont à porter en déduction
@@ -19,7 +20,7 @@
         </div>
 
         <div class="row">
-            <div class="q-pa-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
+            <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
                 v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.reductions.length > 0)">
 
                 <div class="bg-grey-2 q-pa-md q-my-none rounded-borders">
