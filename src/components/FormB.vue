@@ -6,6 +6,7 @@
             <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations"
                 option-value="name" option-label="name" @update:model-value="selectOption()" multiple
                 label="Affectation(s)">
+
                 <template v-slot:option="scope">
                     <q-item v-bind="scope.itemProps">
                         <q-item-section side>
@@ -36,9 +37,9 @@
                 <div class="col">
                     <q-input class="col" bg-color="white" outlined label="" type="number" name="item.area"
                         v-model.number="item.area" min="0.0" max="Inf">
+
                         <template v-slot:label>
                             {{ item.type == "Logement" ? "Surface brute de plancher (SBP)" : "Surface de vente (SV)" }}
-                            <!-- en m<sup>2</sup> -->
                         </template>
 
                         <template v-slot:append>
