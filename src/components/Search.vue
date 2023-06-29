@@ -9,8 +9,8 @@
         </template>
 
         <template v-slot:option="scope">
-            <q-item v-bind="scope.itemProps" class="parentDiv">
-                <q-item-section avatar class="childDiv">
+            <q-item v-bind="scope.itemProps">
+                <q-item-section avatar>
                     <q-icon name="add_circle"></q-icon>
                     <!-- <q-icon :name="scope.opt.icon"></q-icon> -->
                 </q-item-section>
@@ -41,7 +41,7 @@ import { ref } from 'vue'
 export default {
     name: 'Search',
     components: {},
-    props: { 'title': String, 'options': Object, 'model': Object },
+    props: { 'geojson': Object, 'options': Object, 'model': Object },
     emits: ['addOption'],
     setup() {
         return {
@@ -89,10 +89,17 @@ export default {
                 )
                     .then((response) => response.json())
                     .then((data) => {
-                        this.options = data.features
 
-                        console.log('options')
-                        console.log(this.options)
+                        // let currentOptions = this.geojson.features.map(obj => obj.id)
+                        // this.options = data.features.filter(obj => !currentOptions.includes(obj.id))
+
+                        let currentOptions = this.geojson.features.map(obj => obj.properties.idmai)
+                        this.options = data.features.filter(obj => !currentOptions.includes(obj.properties.idmai))
+
+                        this.options.forEach(option => {
+                            // option.disable = true
+                            option.icon = ''
+                        })
 
                     })
                     .catch((error) => console.log("error", error))
