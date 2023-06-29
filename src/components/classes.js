@@ -4,28 +4,28 @@ const colors = { 'I': 'legend-1', 'II': 'legend-2', 'III': 'legend-3', 'IV': 'le
 
 // Mob 20
 export class Mob20 {
+
   constructor(type, area) {
     this.type = type;
     this.area = parseFloat(area);
   }
+
   get color() {
     return colors[this.type]
   }
+
 }
 
 // Location types
 export class LocationTypes {
-  // constructor(name, housingRange, activityRange) {
+
   constructor(name, ranges) {
-    // this.commune = commune
     this.name = name
     this.ranges = ranges
-    // this.housingRange = housingRange
-    // this.activityRange = activityRange
-
     this.area = 0.0
     this.ratio = 0.0
   }
+
   get active() {
     return this.area > 0
   }
@@ -34,39 +34,63 @@ export class LocationTypes {
 
 // Reduction factor
 export class Reduction {
+
   constructor(factor, description) {
     this._factor = factor
     this.description = description
+
   }
+
   get factor() {
-    return this._factor * 100
+    return this._factor
   }
+
   set factor(val) {
-    this._factor = val / 100
+    this._factor = Math.max(Math.min(val, 100.0), 0.0)
   }
+  
 }
 
 // Need
 export class Need {
+
   constructor(type,) {
     this.type = type
     this.factors = factors
   }
+
 }
 
 // Affectation
 export class Affectation {
+
   constructor(type, name, factors, reductions, area, numberOfHouses) {
     this.type = type
     this.name = name
     this.factors = factors
     this.range = { min: 0.0, max: 1.0 }
     this.reductions = reductions
-    this.area = parseFloat(area)
-    this.numberOfHouses = parseFloat(numberOfHouses)
+    this._area = area
+    this._numberOfHouses = parseFloat(numberOfHouses)
     this.active = false
-
   }
+
+  get area() {
+    return this._area
+  }
+
+  set area(val){
+    this._area = Math.max(parseFloat(val), 0.0)
+  }
+
+  get numberOfHouses() {
+    return this._numberOfHouses
+  }
+
+  set numberOfHouses(val){
+    this._numberOfHouses = Math.max(parseFloat(val), 0.0)
+  }
+
   get needs() {
     let obj = { resident: { raw: 0.0, net: 0.0, reduced: 0.0 }, visitor: { raw: 0.0, net: 0.0, reduced: 0.0 } }
 
@@ -82,9 +106,11 @@ export class Affectation {
     return obj
 
   }
+
   get totalNeed() {
     return { min: this.needs.resident.reduced.min + this.needs.visitor.reduced.min, max: this.needs.resident.reduced.max + this.needs.visitor.reduced.max }
   }
+
   get totalReduction() {
     if (this.reductions.length > 0) {
       return Math.min(this.reductions.reduce((acc, obj) => { return acc + obj.factor }, 0), 100) / 100
@@ -130,6 +156,7 @@ export class Affectation {
 
 // Project
 export class Project {
+
   constructor(parcels, affectations, loctypes) {
     this.parcels = parcels
     this.loctypes = loctypes
@@ -156,10 +183,6 @@ export class Project {
     }
   }
 
-  get commune() {
-    return 'default'
-  }
-
   get locationType() {
     if (this._locationType !== null) {
       return this._locationType
@@ -170,8 +193,7 @@ export class Project {
 
   set locationType(location) {
 
-    // let labels = ['I', 'II', 'III', 'IV', 'V', 'VI']
-    //if (labels.includes(location.name)) {
+    // Location type is set manually by the user with a dropdown list
 
     if (location !== null) {
 
@@ -210,6 +232,7 @@ export class Project {
     }
 
   }
+  
   getAffectation(name) {
     return this.affectations.find(obj => obj.name === name)
   }
