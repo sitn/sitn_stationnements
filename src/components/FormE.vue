@@ -10,9 +10,9 @@
                     <table id="summary-table">
                         <tr>
                             <th>Affectation</th>
-                            <th>Min.</th>
-                            <th>Max.</th>
-                            <th></th>
+                            <th v-if="this.project.hasRange">Min.</th>
+                            <th v-if="this.project.hasRange">Max.</th>
+                            <th v-if="!this.project.hasRange">Fixe</th>
                         </tr>
 
                         <tr v-for="(affectation, index) in this.project.affectations.filter(e => e.active)" :key="index">
@@ -27,11 +27,11 @@
 
                         <tr>
                             <td class="text-weight-bold">Total</td>
-                            <td class="bg-light-blue-1 text-weight-bold">{{
+                            <td v-if="this.project.hasRange" class="bg-light-blue-1 text-weight-bold">{{
                                 this.project.totalNeed.min.toFixed(2) }}</td>
-                            <td class="bg-light-blue-1 text-weight-bold">{{
+                            <td v-if="this.project.hasRange" class="bg-light-blue-1 text-weight-bold">{{
                                 this.project.totalNeed.max.toFixed(2) }}</td>
-                            <td class="bg-light-blue-1">{{
+                            <td v-if="!this.project.hasRange" class="bg-light-blue-1">{{
                                 this.project.totalNeed.max.toFixed(2) }}</td>
                         </tr>
 
