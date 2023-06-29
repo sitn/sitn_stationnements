@@ -13,7 +13,7 @@
             <q-card class="bg-blue-grey-8 text-white">
               <q-card-section>
                 <div class="text-h6">{{ this.geojson.features.length }} parcelle(s) sélectionnée(s)</div>
-                <div class="text-subtitle2">{{ locinfo }}</div>
+                <!-- <div class="text-subtitle2">{{ locinfo }}</div> -->
               </q-card-section>
             </q-card>
           </div>
@@ -41,7 +41,6 @@
                 Choisir le type de localisation
               </template>
             </q-select>
-
 
           </div>
 
@@ -97,10 +96,6 @@ import FormC from "./components/FormC.vue"
 import FormD from "./components/FormD.vue"
 import FormE from "./components/FormE.vue"
 import { ref } from 'vue'
-// import { Quasar } from "quasar";
-// import { ref, isProxy, toRaw, effect } from 'vue'
-// import GeoJSON from 'ol/format/GeoJSON.js'
-// import { Vector as VectorLayer } from 'ol/layer.js'
 
 const project = new Project(
   [],
@@ -167,16 +162,16 @@ export default {
   computed: {
     locinfo() {
 
+      // reset areas to 0
+      this.project.locationType = null
+      this.project.loctypes.forEach(location => {
+        location.area = 0.0
+        location.ratio = 0.0
+      })
+
+      let totalArea = 0.0
+
       if (this.geojson.features.length > 0) {
-
-        // reset areas to 0
-        this.project.locationType = null
-        this.project.loctypes.forEach(location => {
-          location.area = 0.0
-          location.ratio = 0.0
-        })
-
-        let totalArea = 0.0
 
         this.geojson.features.forEach(feature => {
           feature.properties.locations.forEach(location => {
@@ -185,13 +180,6 @@ export default {
             totalArea += location.area
           })
         })
-
-        // compute total area
-        /*
-        this.project.loctypes.forEach(location => {
-          totalArea += location.area
-        })
-        */
 
         // compute relative area for each type
         this.project.loctypes.forEach(item => {
@@ -254,6 +242,8 @@ export default {
       console.log(`App.vue | Delete item with id=${id}`)
       console.log(`App.vue | Project location type: ${this.project.locationType}`)
       console.log(this.project.locationType)
+      console.log(this.project.loctypes)
+
 
     },
     focusRecord(id) {
