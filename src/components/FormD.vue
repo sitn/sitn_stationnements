@@ -64,28 +64,38 @@
                     <table>
                         <tr>
                             <th>{{ item.name }}</th>
-                            <th>Min.</th>
-                            <th>Max.</th>
+                            <th v-if="item.hasRange">Min.</th>
+                            <th v-if="item.hasRange">Max.</th>
+                            <th v-if="!item.hasRange">Fixe</th>
                         </tr>
 
                         <tr>
                             <td> {{ item.type == "Logement" ? "Besoin net réduit habitant" : "Besoin net réduit employé" }}
                             </td>
-                            <td class="bg-light-blue-1">{{ item.reducedNetResidentNeed.min.toFixed(2) }}</td>
-                            <td class="bg-light-blue-1">{{ item.reducedNetResidentNeed.max.toFixed(2) }}</td>
+                            <td v-if="item.hasRange" class="bg-light-blue-1">{{ item.reducedNetResidentNeed.min.toFixed(2)
+                            }}</td>
+                            <td v-if="item.hasRange" class="bg-light-blue-1">{{ item.reducedNetResidentNeed.max.toFixed(2)
+                            }}</td>
+                            <td v-if="!item.hasRange" class="bg-light-blue-1">{{ item.reducedNetResidentNeed.max.toFixed(2)
+                            }}</td>
                         </tr>
                         <tr>
                             <td>{{ item.type == "Logement" ? "Besoin net réduit visiteur" : "Besoin net réduit client" }}
                             </td>
-                            <td class="bg-light-blue-1">{{ item.reducedNetVisitorNeed.min.toFixed(2) }}</td>
-                            <td class="bg-light-blue-1">{{ item.reducedNetVisitorNeed.max.toFixed(2) }}</td>
+                            <td v-if="item.hasRange" class="bg-light-blue-1">{{ item.reducedNetVisitorNeed.min.toFixed(2) }}
+                            </td>
+                            <td v-if="item.hasRange" class="bg-light-blue-1">{{ item.reducedNetVisitorNeed.max.toFixed(2) }}
+                            </td>
+                            <td v-if="!item.hasRange" class="bg-light-blue-1">{{ item.reducedNetVisitorNeed.max.toFixed(2)
+                            }}</td>
                         </tr>
                         <tr>
                             <td class="text-weight-bold">Besoin net réduit total</td>
-                            <td class="bg-light-blue-1 text-weight-bold">{{ item.totalNeed.min.toFixed(2) }}</td>
-                            <td class="bg-light-blue-1 text-weight-bold">
-                                {{ item.totalNeed.max.toFixed(2) }}
-                            </td>
+                            <td v-if="item.hasRange" class="bg-light-blue-1 text-weight-bold">{{
+                                item.totalNeed.min.toFixed(2) }}</td>
+                            <td v-if="item.hasRange" class="bg-light-blue-1 text-weight-bold">{{
+                                item.totalNeed.max.toFixed(2) }}</td>
+                            <td v-if="!item.hasRange" class="bg-light-blue-1">{{ item.totalNeed.max.toFixed(2) }}</td>
                         </tr>
                     </table>
 
@@ -122,6 +132,4 @@ export default {
 }
 </script>
 
-<style scoped>
-@import '../assets/table.css';
-</style>
+<style scoped>@import '../assets/table.css';</style>
