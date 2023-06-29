@@ -5,37 +5,37 @@
 </template>
 
 <script>
-import Map from 'ol/Map.js';
-import View from 'ol/View.js';
-import GeoJSON from 'ol/format/GeoJSON.js';
-import TileLayer from 'ol/layer/Tile.js';
-import VectorSource from 'ol/source/Vector.js';
-import { Image as ImageLayer, Vector as VectorLayer } from 'ol/layer.js';
+import Map from 'ol/Map.js'
+import View from 'ol/View.js'
+import GeoJSON from 'ol/format/GeoJSON.js'
+import TileLayer from 'ol/layer/Tile.js'
+import VectorSource from 'ol/source/Vector.js'
+import { Image as ImageLayer, Vector as VectorLayer } from 'ol/layer.js'
 // import {Image as ImageLayer, Tile as TileLayer} from 'ol/layer.js';
-import Projection from 'ol/proj/Projection';
-import proj4 from 'proj4';
-import { register } from 'ol/proj/proj4';
-import { getTopLeft, getWidth } from 'ol/extent.js';
-import WMTS from 'ol/source/WMTS';
-import WMTSTileGrid from 'ol/tilegrid/WMTS.js';
-import ImageWMS from 'ol/source/ImageWMS.js';
+import Projection from 'ol/proj/Projection'
+import proj4 from 'proj4'
+import { register } from 'ol/proj/proj4'
+import { getTopLeft, getWidth } from 'ol/extent.js'
+import WMTS from 'ol/source/WMTS'
+import WMTSTileGrid from 'ol/tilegrid/WMTS.js'
+import ImageWMS from 'ol/source/ImageWMS.js'
 import { ref, isProxy, toRaw } from 'vue'
 
 // CRS definitions
 proj4.defs(
     "EPSG:2056",
     "+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 +x_0=2600000 +y_0=1200000 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs"
-);
+)
 
 register(proj4);
 
-const extent = [2420000, 976000.0000000001, 2932000, 1360000];
+const extent = [2420000, 976000.0000000001, 2932000, 1360000]
 const projection = new Projection({
     code: 'EPSG:2056',
     extent: extent,
 });
 //const projection = getProjection('EPSG:2056');
-const projectionExtent = projection.getExtent();
+const projectionExtent = projection.getExtent()
 
 const resolutions = [
     249.99999999999994,
@@ -78,7 +78,7 @@ export default {
     computed: {
         olFeatures() {
 
-            return new GeoJSON().readFeatures(this.geojson);
+            return new GeoJSON().readFeatures(this.geojson)
 
         },
         olVectorSource() {
@@ -87,14 +87,13 @@ export default {
             });
         },
         olVectorLayer() {
-            // this.olVectorSource.refresh({ force: true })
             return new VectorLayer({
                 source: this.olVectorSource,
-            });
+            })
         },
 
         featuresCount() {
-            console.log(`Feature count: ${this.olFeatures.length}`)
+            // console.log(`Feature count: ${this.olFeatures.length}`)
             return this.olFeatures.length
         }
 
@@ -119,16 +118,9 @@ export default {
 
         },
         updateSource() {
-            // this.olVectorLayer.changed()
-            // this.olVectorSource.refresh({ force: true })
 
             const view = this.olMap.getView()
             const source = this.vectorLayer.getSource()
-
-            // source.changed()
-            console.log('updateSource')
-            console.log(source)
-            console.log(source.getFeatures());
 
             // console.log(`Number of features: ${source.getFeatures().length}`)
 
@@ -143,15 +135,15 @@ export default {
     },
     mounted() {
 
-        console.log(`Count: ${this.featuresCount}`)
+        // console.log(`Count: ${this.featuresCount}`)
 
         const vectorSource = new VectorSource({
             features: this.olfeatures,
-        });
+        })
 
         const vectorLayer = new VectorLayer({
             source: vectorSource,
-        });
+        })
 
         this.vectorLayer = new VectorLayer({
             source: new VectorSource({
@@ -215,12 +207,9 @@ export default {
 
     },
     watch: {
-
         featuresCount(v) {
             this.updateSource()
-            // this.olfeatures.changed()
-            console.log("Map.vue | featuresCount changed")
-
+            // console.log("Map.vue | featuresCount changed")
         },
     }
 }
