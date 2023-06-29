@@ -19,6 +19,8 @@
             déterminer si un facteur de réduction s'applique.
         </div>
 
+        <q-separator class="q-my-md"/>
+
         <div class="text-h6">Liste des réductions</div>
         <div class="row">
             <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
@@ -56,6 +58,8 @@
             </div>
 
         </div>
+
+        <q-separator class="q-my-md"/>
 
         <div class="text-h6">Besoin net réduit</div>
         <div class="row">
