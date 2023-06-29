@@ -56,7 +56,6 @@ export default {
                 descending: false,
                 page: 1,
                 rowsPerPage: 20,
-                // rowsNumber: 10
             },
             columns: [
                 {
@@ -98,15 +97,11 @@ export default {
             console.log(item)
             console.log(`Delete item with id=${item.id}`)
             this.$emit('deleteItem', item.id);
-
-            // this.$emit('action', { type: "delete", id: item.id });
-
         },
         focusItem(item) {
             console.log(`Table.vue | Focus on item with id=${item.id}`)
             this.$emit('focusItem', item.id);
             this.$emit('action', { type: "focus", id: item.id });
-
         }
     }
 }
