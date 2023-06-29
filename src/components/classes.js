@@ -104,7 +104,6 @@ export class Affectation {
     obj.visitor.reduced = { min: (1 - this.totalReduction) * obj.visitor.net.min, max: (1 - this.totalReduction) * obj.visitor.net.max }
 
     return obj
-
   }
 
   get totalNeed() {
@@ -120,8 +119,8 @@ export class Affectation {
   }
 
   get hasRange() {
-    console.log('Affectation range')
-    console.log(this.range)
+    // console.log('Affectation range')
+    // console.log(this.range)
     return this.range.min !== this.range.max
   }
 
@@ -161,26 +160,27 @@ export class Project {
     this.parcels = parcels
     this.loctypes = loctypes
     this.affectations = affectations
+
     this.ranges = { housing: { min: 0.0, max: 1.0 }, activity: { min: 0.0, max: 1.0 } }
-    this.housingRange = { min: 0.0, max: 1.0 }
-    this.activityRange = { min: 0.0, max: 1.0 }
-    this._locationType = null
+    // this.housingRange = { min: 0.0, max: 1.0 }
+    // this.activityRange = { min: 0.0, max: 1.0 }
+    this._locationType = null // Location type is set manually by the user with a dropdown list
   }
 
   get hasRange() {
-    return false// this.range.min !== this.range.max
+    return this.ranges.housing.min !== this.ranges.housing.max
   }
 
   get totalNeed() {
+
     let activeAffectations = this.affectations.filter(e => e.active)
-    if (activeAffectations > 0) {
-      let obj = { min: 0.0, max: 0.0 }
+    let obj = { min: 0.0, max: 0.0 }
+    if (activeAffectations.length > 0) {
       obj.min = activeAffectations.reduce((acc, obj) => { return acc + obj.totalNeed.min }, 0)
       obj.max = activeAffectations.reduce((acc, obj) => { return acc + obj.totalNeed.max }, 0)
-      return obj
-    } else {
-      return { min: 0.0, max: 0.0 }
     }
+    return obj
+
   }
 
   get locationType() {
@@ -191,27 +191,21 @@ export class Project {
     }
   }
 
-  set locationType(location) {
+  set locationType(val) {
 
-    // Location type is set manually by the user with a dropdown list
+    this._locationType = null
 
-    if (location !== null) {
+    if (val !== null) {
 
-      console.log(`App.vue | Location type set to: ${location.name}`)
-      this._locationType = location
-      // let ranges = locationTypes.find(el => el.name === location.name).ranges
-      let ranges = this.loctypes.find(el => el.name === location.name).ranges
-
-      // console.log('ranges')
-      // console.log(locationType)
+      this._locationType = val
+      let ranges = this.loctypes.find(el => el.name === val.name).ranges
 
       // set project ranges
-      this.housingRange = ranges.housing
-      this.activityRange = ranges.activity
+      // this.housingRange = ranges.housing
+      // this.activityRange = ranges.activity
 
       this.ranges.housing = ranges.housing
       this.ranges.activity = ranges.activity
-
 
       // set ranges for each affectation
       this.affectations.forEach(affectation => {
@@ -227,12 +221,13 @@ export class Project {
 
       })
 
-    } else {
-      this._locationType = null
+      console.log(`App.vue | Location type set to: ${val.name}`)
+      console.log(this.locationType)
+
     }
 
   }
-  
+
   getAffectation(name) {
     return this.affectations.find(obj => obj.name === name)
   }
