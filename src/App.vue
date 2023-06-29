@@ -6,7 +6,7 @@
         <div class="q-pa-md">
           <div class="text-h5">Étape 1: Localisation du projet</div>
           <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-            <Search @addOption="addRecord"></Search>
+            <Search :geojson="geojson" @addOption="addRecord"></Search>
           </div>
           <Map ref="map" :geojson="geojson"></Map>
           <div class="q-my-md">
@@ -158,8 +158,6 @@ export default {
   data() {
     return {
       project: project,
-      // locationTypes: locationTypes,
-      locationSums: [],
       geojson: {
         'type': 'FeatureCollection',
         'features': []
@@ -167,38 +165,9 @@ export default {
     }
   },
   computed: {
-    /*
-    numberOfparcels() {
-      return this.geojson.features.length
-    },
-    */
     locinfo() {
 
-      /*
-      this.project.loctypes.forEach(item => {
-        item.active = false
-      })
-      */
-
-      // reset sums to 0
-      // this.locationSums = []
-      // this.project.locationType = null
-
       if (this.geojson.features.length > 0) {
-
-        // reset sums to 0
-        /*
-        this.locationSums = [
-          { name: "I", area: 0.0, ratio: 0.0 },
-          { name: "II", area: 0.0, ratio: 0.0 },
-          { name: "III", area: 0.0, ratio: 0.0 },
-          { name: "IV", area: 0.0, ratio: 0.0 },
-          { name: "V", area: 0.0, ratio: 0.0 },
-          { name: "VI", area: 0.0, ratio: 0.0 },
-        ]
-        */
-
-        //////////////////////////
 
         // reset areas to 0
         this.project.locationType = null
@@ -207,35 +176,22 @@ export default {
           location.ratio = 0.0
         })
 
-        //////////////////////////
-
-        //console.log('sums all')
-        //console.log(this.locationSums)
-
         let totalArea = 0.0
 
         this.geojson.features.forEach(feature => {
-
           feature.properties.locations.forEach(location => {
-
-            // let index = this.locationSums.findIndex(item => item.name === location.type)
-            // this.locationSums[index].area += location.area
-
             let index = this.project.loctypes.findIndex(item => item.name === location.type)
             this.project.loctypes[index].area += location.area
-
-            // totalArea += location.area
-
+            totalArea += location.area
           })
-
         })
 
-        ////////////////////
-
         // compute total area
+        /*
         this.project.loctypes.forEach(location => {
           totalArea += location.area
         })
+        */
 
         // compute relative area for each type
         this.project.loctypes.forEach(item => {
@@ -243,37 +199,10 @@ export default {
         })
 
         this.project.loctypes.sort((a, b) => b.area - a.area)
-
-        ////////////////////
-
-        // compute total area
-        /*
-        this.locationSums.forEach(location => {
-          totalArea += location.area
-        })
-        */
-
-        // compute relative area for each type
-        /*
-        this.locationSums.forEach(item => {
-          item.ratio = item.area / totalArea
-        })
-
-        this.locationSums.sort((a, b) => b.area - a.area)
-
-        this.locationSums = this.locationSums.filter(obj => obj.area > 0)
-
-        console.log('sums all')
-        console.log(this.locationSums)
-        */
-
-        console.log(`Total area ${totalArea}`)
-
-        // return this.locationSums[0]
         return this.project.loctypes[0]
 
       }
-    },
+    }
   },
   methods: {
     selectOption() {
@@ -281,19 +210,15 @@ export default {
       console.log(`App.vue | Project location type: ${this.project.locationType.name}`)
 
     },
+    addRecord(feature) {
 
-    getLocationType(feature) {
-
-      let geojson = { "type": "FeatureCollection", "features": [] }
-      geojson.features.push(feature)
-
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
+      var myHeaders = new Headers()
+      myHeaders.append("Content-Type", "application/json")
 
       var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: JSON.stringify(geojson),
+        body: JSON.stringify({ "type": "FeatureCollection", "features": [feature] }),
         redirect: 'follow'
       }
 
@@ -313,11 +238,7 @@ export default {
           this.geojson.features.push(feature)
 
         })
-        .catch(error => console.log('error', error));
-    },
-    addRecord(feature) {
-
-      this.getLocationType(feature)
+        .catch(error => console.log('error', error))
 
       console.log(`App.vue | Add new record with id=${feature.id}`)
       console.log(`App.vue | Project location type: ${this.project.locationType}`)
