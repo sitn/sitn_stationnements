@@ -34,12 +34,6 @@
             </q-item>
         </template>
     </q-select>
-    <!--
-        <div class="q-gutter-md">
-            <q-select v-model="model" :options="options" option-label="name" option-value="id" label="Standard" />
-        </div>
-        -->
-    <!--</div> -->
 </template>
 
 <script>
@@ -57,77 +51,57 @@ export default {
     },
     data() {
         return {
-            count: 0
+            // count: 0
         }
     },
     methods: {
         selectOption() {
             if (this.model !== null) {
+
                 // add item
                 console.log(`Search.vue | Option selected: ${this.model.properties.label}`);
 
+                // check if value is already in list
                 this.$emit('addOption', this.model);
-
-                // this.rows.push(this.model.properties);
-                // console.log(toRaw(this.rows));
 
                 // reset selection
                 this.model = null;
             }
         },
-        /*
-        fetchIntersection(body) {
-            var requestOptions = {
-                method: 'POST',
-                headers: '',
-                body: body,
-                redirect: 'follow'
-            };
-
-            fetch("https://sitn.ne.ch/apps/stationnement/", requestOptions)
-                .then(response => response.json())
-                .then(result => {
-                    console.log(result.properties)
-                })
-                .catch(error => console.log('error', error));
-        },
-        */
         fetchSources(val, update, abort) {
 
             // call abort() when no data is returned
             if (val.length < 2) {
-                abort();
-                return;
+                abort()
+                return
             }
 
-            console.log(val);
-
-            // fetch from database
             update(() => {
+
                 var requestOptions = {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },
                     redirect: "follow",
-                };
+                }
 
                 fetch(`https://sitn.ne.ch/permis_construire/search?query=${encodeURIComponent(val)}`,
                     requestOptions
                 )
                     .then((response) => response.json())
                     .then((data) => {
-                        // console.log(data);
-                        this.options = data.features;
-                    })
-                    .catch((error) => console.log("error", error));
-            });
+                        this.options = data.features
 
-            //
+                        console.log('options')
+                        console.log(this.options)
+
+                    })
+                    .catch((error) => console.log("error", error))
+
+            })
+
         },
     },
 }
 </script>
 
-<style>
-@import "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons";
-@import '../assets/quasar.prod.css';
-</style>
+<style scoped></style>
