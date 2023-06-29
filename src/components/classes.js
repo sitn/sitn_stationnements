@@ -160,10 +160,7 @@ export class Project {
     this.parcels = parcels
     this.loctypes = loctypes
     this.affectations = affectations
-
     this.ranges = { housing: { min: 0.0, max: 1.0 }, activity: { min: 0.0, max: 1.0 } }
-    // this.housingRange = { min: 0.0, max: 1.0 }
-    // this.activityRange = { min: 0.0, max: 1.0 }
     this._locationType = null // Location type is set manually by the user with a dropdown list
   }
 
@@ -201,9 +198,6 @@ export class Project {
       let ranges = this.loctypes.find(el => el.name === val.name).ranges
 
       // set project ranges
-      // this.housingRange = ranges.housing
-      // this.activityRange = ranges.activity
-
       this.ranges.housing = ranges.housing
       this.ranges.activity = ranges.activity
 
@@ -212,10 +206,10 @@ export class Project {
 
         switch (affectation.type) {
           case 'Logement':
-            affectation.range = ranges.housing // ranges.housingRange
+            affectation.range = ranges.housing
             break
           case 'Activité':
-            affectation.range = ranges.activity // ranges.activityRange
+            affectation.range = ranges.activity
             break
         }
 
