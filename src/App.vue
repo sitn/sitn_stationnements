@@ -160,7 +160,15 @@ export default {
     }
   },
   computed: {
-    locinfo() {
+    count() {
+      return this.geojson.features.length
+    }
+  },
+  watch: {
+    count() {
+
+      console.log('project.loctypes')
+      console.log(project.loctypes)
 
       // reset areas to 0
       this.project.locationType = null
@@ -187,9 +195,10 @@ export default {
         })
 
         this.project.loctypes.sort((a, b) => b.area - a.area)
-        return this.project.loctypes[0]
+        // return this.project.loctypes[0]
 
       }
+
     }
   },
   methods: {
