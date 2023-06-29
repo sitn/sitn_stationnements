@@ -11,7 +11,6 @@ body {
   font-weight: normal;
 }
 
-/* const colors = { 'I': '#92cba3', 'II': '#cae6c6', 'III': '#92bbd7', 'IV': '#f8d1ae', 'V': '#f97a79', 'VI': '#d8d8d7' }; */
 .text-legend-1 {
   color: #92cba3 !important;
 }
