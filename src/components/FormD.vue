@@ -19,6 +19,7 @@
             déterminer si un facteur de réduction s'applique.
         </div>
 
+        <div class="text-h6">Liste des réductions</div>
         <div class="row">
             <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
                 v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.reductions.length > 0)">
@@ -56,10 +57,11 @@
 
         </div>
 
+        <div class="text-h6">Besoin net réduit</div>
         <div class="row">
             <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-4"
                 v-for="(item, key) in this.project.affectations.filter(e => e.active)">
-                <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+                <div class="bg-grey-2 q-pa-md q-my-none rounded-borders">
 
                     <table>
                         <tr>
@@ -132,4 +134,6 @@ export default {
 }
 </script>
 
-<style scoped>@import '../assets/table.css';</style>
+<style scoped>
+@import '../assets/table.css';
+</style>
