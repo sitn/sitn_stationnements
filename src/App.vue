@@ -18,7 +18,7 @@
             </q-card>
           </div>
 
-          <LocationTable :rows="geojson.features" @action="" @deleteItem="deleteRecord" @focusItem="focusRecord">
+          <LocationTable :rows="geojson.features" @deleteItem="deleteRecord" @focusItem="focusRecord">
           </LocationTable>
 
           <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
@@ -124,12 +124,6 @@ const project = new Project(
   ]
 )
 
-
-
-// TEST
-// project.getLocationType('I').active = true
-
-
 project.getAffectation("Logements standards").reductions = [
   new Reduction(0.0, `Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`)
 ]
@@ -144,10 +138,6 @@ project.getAffectation("Autres services").reductions = [
   new Reduction(0.0, `Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple`),
   new Reduction(0.0, `Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
 ]
-
-console.log('project')
-console.log(project)
-console.log(project.loctypes[0].active)
 
 export default {
   name: 'App',
@@ -218,7 +208,6 @@ export default {
         })
 
         //////////////////////////
-
 
         //console.log('sums all')
         //console.log(this.locationSums)
