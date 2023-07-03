@@ -4,10 +4,17 @@
       <div class="bg-white q-pa-md q-ma-md">
         <!-- 1. LOCATION -->
         <div class="q-pa-md">
-          <div class="text-h5">Étape 1: Localisation du projet</div>
+          <div class="text-h5">1. Localisation du projet</div>
+          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+            <q-input class="col" bg-color="white" outlined label="N° SATAC du projet (si disponible)" type="text"
+              name="project.satac" v-model="project.satac"></q-input>
+          </div>
+
+
           <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
             <Search :geojson="geojson" @addOption="addRecord"></Search>
           </div>
+
           <Map ref="map" :geojson="geojson"></Map>
           <div class="q-my-md">
             <q-card class="bg-blue-grey-8 text-white">

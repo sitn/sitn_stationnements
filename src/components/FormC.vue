@@ -1,7 +1,7 @@
 <template>
     <!-- 3. NET PARKING NEEDS -->
     <div class="q-pa-md">
-        <div class="text-h5">Étape 3: Calcul du besoin net</div>
+        <div class="text-h5">3: Calcul du besoin net (article 28 RELConstr.)</div>
         <div class="row">
             <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-4"
                 v-for="(item, key) in this.project.affectations.filter(e => e.active)">

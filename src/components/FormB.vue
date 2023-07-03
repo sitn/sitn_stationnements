@@ -1,9 +1,10 @@
 <template>
     <!-- 2. RAW PARKING NEEDS -->
     <div class="q-pa-md">
-        <div class="text-h5">Étape 2: Calcul du besoin brut</div>
+        <div class="text-h5">2. Calcul du besoin brut (article 27 RELConstr.)</div>
 
-        <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders" v-if="!this.project.locationType">
+        <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders"
+            v-if="!this.project.locationType">
             <template v-slot:avatar>
                 <q-icon name="error" color="white" />
             </template>
@@ -12,8 +13,8 @@
 
         <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
             <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations"
-                option-value="name" option-label="name" @update:model-value="selectOption()" multiple
-                label="Affectation(s)" :disable="!this.project.locationType">
+                option-value="name" option-label="name" @update:model-value="selectOption()" multiple label="Affectation(s)"
+                :disable="!this.project.locationType">
 
                 <template v-slot:option="scope">
                     <q-item v-bind="scope.itemProps">

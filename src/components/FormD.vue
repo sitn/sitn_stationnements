@@ -1,7 +1,7 @@
 <template>
     <!-- 3. NET PARKING NEEDS -->
     <div class="q-pa-md">
-        <div class="text-h5">Étape 4: Calcul du besoin net réduit</div>
+        <div class="text-h5">4. Calcul du besoin net réduit (article 29 RELConstr.)</div>
 
         <div id="infobox" class="q-pa-md q-my-md info">
             <div class="text-h6">Information</div>
@@ -19,7 +19,7 @@
             déterminer si un facteur de réduction s'applique.
         </div>
 
-        <q-separator class="q-my-md"/>
+        <q-separator class="q-my-md" />
 
         <div class="text-h6">Liste des réductions</div>
         <div class="row">
@@ -59,7 +59,7 @@
 
         </div>
 
-        <q-separator class="q-my-md"/>
+        <q-separator class="q-my-md" />
 
         <div class="text-h6">Besoin net réduit</div>
         <div class="row">

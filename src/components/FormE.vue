@@ -1,7 +1,7 @@
 <template>
     <!-- 3. NET PARKING NEEDS -->
     <div class="q-pa-md">
-        <div class="text-h5">Étape 5: Résumé</div>
+        <div class="text-h5">5. Nombre de places de stationnement à réaliser (article 30 RELConstr.)</div>
 
         <div class="row">
             <div id="summary-container" class="q-pa-md q-ma-none col-xs-8 col-sm-8 col-md-8">
@@ -26,13 +26,13 @@
                         </tr>
 
                         <tr>
-                            <td class="text-weight-bold">Total</td>
+                            <td class="text-weight-bold">Total (arrondi supérieur)</td>
                             <td v-if="this.project.hasRange" class="bg-light-blue-1 text-weight-bold">{{
-                                this.project.totalNeed.min.toFixed(2) }}</td>
+                                Math.ceil(this.project.totalNeed.min) }}</td>
                             <td v-if="this.project.hasRange" class="bg-light-blue-1 text-weight-bold">{{
-                                this.project.totalNeed.max.toFixed(2) }}</td>
+                                Math.ceil(this.project.totalNeed.max) }}</td>
                             <td v-if="!this.project.hasRange" class="bg-light-blue-1">{{
-                                this.project.totalNeed.max.toFixed(2) }}</td>
+                                Math.ceil(this.project.totalNeed.max) }}</td>
                         </tr>
 
                     </table>

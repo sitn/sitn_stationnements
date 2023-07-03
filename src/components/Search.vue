@@ -1,6 +1,15 @@
 <template>
     <!--<div class="q-pa-md"> -->
-    <q-select outlined bg-color="white" v-model="model" autofocus use-input hide-selected input-debounce="0" clearable
+
+    <!--
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+            <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations"
+                option-value="name" option-label="name" @update:model-value="selectOption()" multiple label="Affectation(s)"
+                :disable="!this.project.locationType">
+
+        -->
+
+    <q-select outlined bg-color="white" v-model="model" autofocus use-input hide-selected input-debounce="0"
         :options="options" option-label="features.properties.label" option-value="features.id"
         @update:model-value="selectOption()" @filter="fetchSources" @filter-abort="" label="N° de parcelle ou EGRID"
         hint="Cliquer pour ajouter une parcelle à la liste" class="q-py-md">
