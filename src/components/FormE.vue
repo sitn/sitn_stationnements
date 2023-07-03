@@ -61,6 +61,8 @@
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import pdfMake from 'pdfmake/build/pdfmake';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import { logo } from './logo.js';
+
 
 export default {
     name: 'FormE',
@@ -84,24 +86,59 @@ export default {
         },
         printPDF() {
 
-            let table = [[{ text: 'Affectation', style: 'tableHeader' }, { text: 'Min', style: 'tableHeader' }, { text: 'Max', style: 'tableHeader' }]]
+            let printDate = new Date().toLocaleString('fr-CH')
+
+            let table = [[
+                { text: 'Affectation', style: 'tableHeader' },
+                { text: 'Min', style: 'tableHeader' },
+                { text: 'Max', style: 'tableHeader' }
+            ]]
 
             this.project.affectations.filter(e => e.active).forEach(affectation => {
                 table.push([affectation.name, affectation.totalNeed.min.toFixed(2), affectation.totalNeed.max.toFixed(2)])
             })
 
-            table.push(['Total', this.project.totalNeed.min.toFixed(2), this.project.totalNeed.max.toFixed(2)])
+            table.push(['Total (arrondi supérieur)', Math.ceil(this.project.totalNeed.min), Math.ceil(this.project.totalNeed.max)])
 
 
             let docDefinition = {
                 pageSize: 'A4',
                 pageOrientation: 'portrait',
                 // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-                pageMargins: [40, 60, 40, 60],
-                header: 'simple text',
-                footer: (currentPage, pageCount) => { return `${currentPage.toString()} / ${pageCount}` },
+                pageMargins: [40, 50, 40, 60],
+                header: '',
+                footer: (currentPage, pageCount) => {
+                    return { text: `${currentPage.toString()} / ${pageCount}`, alignment: 'center' }
+                },
                 content: [
-                    'Résumé',
+                    {
+                        svg: logo,
+                        width: 150,
+                        margin: [0, 0, 0, 10]
+                    },
+                    {
+                        text: 'Annexe à joindre à la demande de permis',
+                        style: 'body',
+                        margin: [0, 20, 0, 20]
+                    },
+                    {
+                        text: 'CALCUL DU NOMBRE DE PLACES DE STATIONNEMENT VOITURE',
+                        style: 'header'
+                    },
+                    // A4 measures 210 × 297 millimeters or 8.27 × 11.69 inches. In PostScript, its dimensions are rounded off to 595 × 842 points.
+                    { canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 0.5 }] },
+                    {
+                        text: `Dossier SATAC n° : ${this.project.satac}`,
+                        style: 'body'
+                    },
+                    {
+                        text: `Calcul effectué le : ${printDate}`,
+                        style: 'body'
+                    },
+                    {
+                        text: `Conformément aux articles 26 à 37d du RELConstr., le calcul du nombre de places de stationnement voiture à réaliser pour le projet sis sur le(s) biens-fonds XXX, XXXX, XXXX, de la commune XXXX est détaillé ci-dessous.`,
+                        style: 'body'
+                    },
                     {
                         style: 'tableExample',
                         table: {
@@ -122,24 +159,30 @@ export default {
                         bold: true,
                         margin: [0, 10, 0, 5]
                     },
+                    body: {
+                        fontSize: 10,
+                        bold: false,
+                        margin: [0, 10, 0, 5]
+                    },
                     tableExample: {
+                        fontSize: 10,
                         margin: [0, 5, 0, 15]
                     },
                     tableHeader: {
                         bold: true,
-                        fontSize: 13,
+                        fontSize: 10,
                         color: 'black',
                         fillColor: '#eeeeee',
                         padding: '10px',
                         margin: [5, 5, 5, 5]
                     }
                 },
-
             }
 
             pdfMake.createPdf(docDefinition).download();
 
         },
+
         printDiv() {
 
             const s = new XMLSerializer()
