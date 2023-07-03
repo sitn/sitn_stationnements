@@ -165,6 +165,10 @@ export class Project {
     this.satac = null
   }
 
+  get commune() {
+    
+  }
+
   get hasRange() {
     return this.ranges.housing.min !== this.ranges.housing.max
   }
