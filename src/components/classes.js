@@ -1,6 +1,5 @@
 // Communes
-
-const communes = [
+export var communes = [
   {"numcom": 60, "comnom": "La Chaux-de-Fonds"},
   {"numcom": 58, "comnom": "Les Ponts-de-Martel"},
   {"numcom": 3, "comnom": "Saint-Blaise"},
@@ -30,8 +29,10 @@ const communes = [
   {"numcom": 35, "comnom": "Les Verri\u00e8res"}
 ]
 
-// Classes
+communes = communes.sort((a, b) => a.comnom.toLowerCase().localeCompare(b.comnom.toLowerCase()))
+// communes = communes.sort((a, b) => a.numcom - b.numcom)
 
+// Classes
 const colors = { 'I': 'legend-1', 'II': 'legend-2', 'III': 'legend-3', 'IV': 'legend-4', 'V': 'legend-5', 'VI': 'legend-6' }
 
 // Mob 20
@@ -195,10 +196,7 @@ export class Project {
     this.ranges = { housing: { min: 0.0, max: 1.0 }, activity: { min: 0.0, max: 1.0 } }
     this._locationType = null // Location type is set manually by the user with a dropdown list
     this.satac = null
-  }
-
-  get commune() {
-    
+    this.commune = null
   }
 
   get hasRange() {
