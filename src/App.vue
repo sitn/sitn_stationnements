@@ -6,6 +6,8 @@
         <div class="q-pa-md">
           <div class="text-h4 q-py-lg">CALCUL DU NOMBRE DE PLACES DE STATIONNEMENT VOITURE</div>
           <div class="text-h5">1. Localisation du projet</div>
+
+          <!-- N° SATAC -->
           <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
             <q-input class="col" bg-color="white" outlined label="N° SATAC du projet (si disponible)" type="text"
               name="project.satac" v-model="project.satac"
@@ -16,11 +18,12 @@
             </q-input>
           </div>
 
-
+          <!-- PARCEL SEARCH -->
           <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
             <Search :geojson="geojson" @addOption="addRecord"></Search>
           </div>
 
+          <!-- PARCEL MAP -->
           <Map ref="map" :geojson="geojson"></Map>
           <div class="q-my-md">
             <q-card class="bg-blue-grey-8 text-white">
@@ -31,6 +34,7 @@
             </q-card>
           </div>
 
+          <!-- PARCEL TABLE -->
           <LocationTable :rows="geojson.features" @deleteItem="deleteRecord" @focusItem="focusRecord">
           </LocationTable>
 
@@ -217,7 +221,7 @@ export default {
   methods: {
     myRule(val) {
       if (val === null) {
-        return 'You must make a selection!'
+        return 'Veuillez indiquer un type de localisation'
       }
     },
     validateSatac(str) {
@@ -254,6 +258,9 @@ export default {
 
           // add feature to geojson
           this.geojson.features.push(feature)
+
+          // add parcel to project
+          this.project.parcels.push()
 
         })
         .catch(error => console.log('error', error))
