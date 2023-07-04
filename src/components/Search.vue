@@ -11,8 +11,8 @@
 
     <q-select outlined bg-color="white" v-model="model" autofocus use-input hide-selected input-debounce="0"
         :options="options" option-label="features.properties.label" option-value="features.id"
-        @update:model-value="selectOption()" @filter="fetchSources" @filter-abort="" label="N° de parcelle ou EGRID"
-        hint="Cliquer pour ajouter une parcelle à la liste">
+        @update:model-value="selectOption()" @filter="fetchSources" label="N° de parcelle ou EGRID"
+        hint="Cliquer pour ajouter une parcelle à la liste" :disable="!this.project.commune">
         <template v-slot:prepend>
             <q-icon name="search" @click.stop.prevent></q-icon>
         </template>
@@ -50,7 +50,7 @@ import { ref } from 'vue'
 export default {
     name: 'Search',
     components: {},
-    props: { 'geojson': Object, 'options': Object, 'model': Object },
+    props: { 'geojson': Object, 'options': Object, 'model': Object, 'project': Object },
     emits: ['addOption'],
     setup() {
         return {
@@ -77,34 +77,37 @@ export default {
                 this.model = null;
             }
         },
-        fetchSources(val, update, abort) {
+        fetchSources(query, update, abort) {
 
-            // call abort() when no data is returned
-            if (val.length < 2) {
+            // call abort() if query is too short
+            if (query.length < 2) {
                 abort()
                 return
             }
 
-            update(() => {
 
-                var requestOptions = {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                    redirect: "follow",
-                }
 
-                let commune = 'Le Locle'
-                let query = `${val} ${commune}`
+            var requestOptions = {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+                redirect: "follow",
+            }
 
-                fetch(`https://sitn.ne.ch/permis_construire/search?query=${encodeURIComponent(query)}`,
-                    requestOptions
-                )
-                    .then((response) => response.json())
-                    .then((data) => {
+            // let query = `${val} ${this.commune.comnom}`
+            // let query = `${val}`
+            // console.log(`query: ${query}`)
 
-                        // let currentOptions = this.geojson.features.map(obj => obj.id)
-                        // this.options = data.features.filter(obj => !currentOptions.includes(obj.id))
-                        data.features = data.features.filter(obj => obj.properties.comnom === commune)
+
+            fetch(`https://sitn.ne.ch/permis_construire/search?query=${encodeURIComponent(query)}`,
+                requestOptions
+            )
+                .then((response) => response.json())
+                .then((data) => {
+
+                    update(() => {
+
+                        data.features = data.features.filter(obj => obj.properties.comnom === this.project.commune.comnom)
+                        // data.features = data.features.filter(obj => obj.properties.comnum === this.commune.numcom)
 
                         // remove options that have already been selected
                         let currentOptions = this.geojson.features.map(obj => obj.properties.idmai)
@@ -116,11 +119,17 @@ export default {
                         })
 
                     })
-                    .catch((error) => console.log("error", error))
 
-            })
+                })
+                .catch((error) => console.log("error", error))
+
+
+
 
         },
+        abortFilterFn() {
+            // console.log('delayed filter aborted')
+        }
     },
 }
 </script>
