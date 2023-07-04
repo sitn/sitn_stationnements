@@ -154,7 +154,10 @@ export default {
                         ul: this.project.parcels,
                         style: 'body'
                     },
-
+                    {
+                        text: 'Nombre de places de stationnement à réaliser (article 30 RELConstr.)',
+                        style: 'subheader'
+                    },
                     {
                         style: 'tableExample',
                         table: {
@@ -172,7 +175,7 @@ export default {
                         margin: [0, 0, 0, 5]
                     },
                     subheader: {
-                        fontSize: 16,
+                        fontSize: 12,
                         bold: true,
                         margin: [0, 10, 0, 5]
                     },
