@@ -210,6 +210,7 @@ export default {
       console.log('project.loctypes')
       console.log(project.loctypes)
 
+
       // reset areas to 0
       this.project.locationType = null
       this.project.loctypes.forEach(location => {
@@ -233,6 +234,12 @@ export default {
         this.project.loctypes.forEach(item => {
           item.ratio = item.area / totalArea
         })
+
+        // if there is only one location type, select it by default
+        console.log(this.project.loctypes.find(e => e.active))
+        if (this.project.loctypes.filter(e => e.active).length === 1) {
+          this.project.locationType = this.project.loctypes.find(e => e.active)
+        }
 
         this.project.loctypes.sort((a, b) => b.area - a.area)
         // return this.project.loctypes[0]
@@ -315,7 +322,6 @@ export default {
       console.log(`App.vue | Project location type: ${this.project.locationType}`)
       console.log(this.project.locationType)
       console.log(this.project.loctypes)
-
 
     },
 
