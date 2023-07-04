@@ -126,19 +126,35 @@ export default {
                         style: 'header'
                     },
                     // A4 measures 210 × 297 millimeters or 8.27 × 11.69 inches. In PostScript, its dimensions are rounded off to 595 × 842 points.
-                    { canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 0.5 }] },
                     {
-                        text: `Dossier SATAC n° : ${this.project.satac}`,
+                        canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 0.5 }],
+                        margin: [0, 10, 0, 10]
+                    },
+                    {
+                        text: `Conformément aux articles 26 à 37d du RELConstr., le calcul du nombre de places de stationnement voiture à réaliser pour le projet sis est détaillé ci-dessous.`,
                         style: 'body'
                     },
                     {
-                        text: `Calcul effectué le : ${printDate}`,
+                        text: `Calcul effectué le: ${printDate}`,
                         style: 'body'
                     },
                     {
-                        text: `Conformément aux articles 26 à 37d du RELConstr., le calcul du nombre de places de stationnement voiture à réaliser pour le projet sis sur le(s) biens-fonds XXX, XXXX, XXXX, de la commune XXXX est détaillé ci-dessous.`,
+                        text: `Dossier SATAC n°: ${this.project.satac}`,
                         style: 'body'
                     },
+                    {
+                        text: `Commune: ${this.project.commune.comnom}`,
+                        style: 'body'
+                    },
+                    {
+                        text: 'Biens-fonds:',
+                        style: 'body'
+                    },
+                    {
+                        ul: this.project.parcels,
+                        style: 'body'
+                    },
+
                     {
                         style: 'tableExample',
                         table: {
@@ -149,10 +165,11 @@ export default {
                     },
                 ],
                 styles: {
+                    // margins [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
                     header: {
                         fontSize: 18,
                         bold: true,
-                        margin: [0, 0, 0, 10]
+                        margin: [0, 0, 0, 5]
                     },
                     subheader: {
                         fontSize: 16,
@@ -162,7 +179,7 @@ export default {
                     body: {
                         fontSize: 10,
                         bold: false,
-                        margin: [0, 10, 0, 5]
+                        margin: [0, 5, 0, 5]
                     },
                     tableExample: {
                         fontSize: 10,
