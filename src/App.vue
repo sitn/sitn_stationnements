@@ -18,9 +18,29 @@
             </q-input>
           </div>
 
+          <!-- COMMUNE -->
+          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+            <q-select outlined bottom-slots bg-color="white" v-model="project.commune" :options="communes"
+              option-value="comnom" option-label="comnom" @update:model-value="" label="Commune" :rules="[]">
+
+              <template v-slot:option="scope">
+                <q-item v-bind="scope.itemProps">
+                  <q-item-section>
+                    <q-item-label>{{ scope.opt.comnom }}</q-item-label>
+                    <q-item-label caption>n° {{ scope.opt.numcom }}</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </template>
+
+              <template v-slot:hint>
+                Choisir la commune
+              </template>
+            </q-select>
+          </div>
+
           <!-- PARCEL SEARCH -->
           <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-            <Search :geojson="geojson" @addOption="addRecord"></Search>
+            <Search :geojson="geojson" :project="project" @addOption="addRecord"></Search>
           </div>
 
           <!-- PARCEL MAP -->
@@ -38,6 +58,7 @@
           <LocationTable :rows="geojson.features" @deleteItem="deleteRecord" @focusItem="focusRecord">
           </LocationTable>
 
+          <!-- LOCATION TYPE -->
           <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
 
             <q-select outlined bottom-slots bg-color="white" v-model="project.locationType"
@@ -104,7 +125,7 @@
 </template>
 
 <script>
-import { Project, Affectation, Reduction, LocationTypes, Need, Mob20 } from "./components/classes.js"
+import { Project, Affectation, Reduction, LocationTypes, Need, Mob20, communes } from "./components/classes.js"
 import Search from "./components/Search.vue"
 import Map from "./components/Map.vue"
 import LocationTable from "./components/LocationTable.vue"
@@ -169,6 +190,7 @@ export default {
   },
   data() {
     return {
+      communes: communes,
       project: project,
       geojson: {
         'type': 'FeatureCollection',
@@ -259,8 +281,8 @@ export default {
           // add feature to geojson
           this.geojson.features.push(feature)
 
-          // add parcel to project
-          this.project.parcels.push()
+          // update parcels in project
+          this.project.parcels = this.geojson.features.map(x => x.properties.idmai)
 
         })
         .catch(error => console.log('error', error))
@@ -276,6 +298,9 @@ export default {
         return feature.id !== id
       })
 
+      // update parcels in project
+      this.project.parcels = this.geojson.features.map(x => x.properties.idmai)
+
       console.log(`App.vue | Delete item with id=${id}`)
       console.log(`App.vue | Project location type: ${this.project.locationType}`)
       console.log(this.project.locationType)
@@ -283,10 +308,12 @@ export default {
 
 
     },
+
     focusRecord(id) {
       console.log(`App.vue | Focus on item with id=${id}`)
       this.map.zoomTo(id)
     },
+
     updateProject(obj) {
 
       this.project = obj
