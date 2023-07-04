@@ -93,7 +93,10 @@ export default {
                     redirect: "follow",
                 }
 
-                fetch(`https://sitn.ne.ch/permis_construire/search?query=${encodeURIComponent(val)}`,
+                let commune = 'Le Locle'
+                let query = `${val} ${commune}`
+
+                fetch(`https://sitn.ne.ch/permis_construire/search?query=${encodeURIComponent(query)}`,
                     requestOptions
                 )
                     .then((response) => response.json())
@@ -101,7 +104,9 @@ export default {
 
                         // let currentOptions = this.geojson.features.map(obj => obj.id)
                         // this.options = data.features.filter(obj => !currentOptions.includes(obj.id))
+                        data.features = data.features.filter(obj => obj.properties.comnom === commune)
 
+                        // remove options that have already been selected
                         let currentOptions = this.geojson.features.map(obj => obj.properties.idmai)
                         this.options = data.features.filter(obj => !currentOptions.includes(obj.properties.idmai))
 
