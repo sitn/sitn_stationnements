@@ -1,3 +1,35 @@
+// Communes
+
+const communes = [
+  {"numcom": 60, "comnom": "La Chaux-de-Fonds"},
+  {"numcom": 58, "comnom": "Les Ponts-de-Martel"},
+  {"numcom": 3, "comnom": "Saint-Blaise"},
+  {"numcom": 57, "comnom": "La Chaux-du-Milieu"},
+  {"numcom": 61, "comnom": "Les Planchettes"},
+  {"numcom": 10, "comnom": "Ligni\u00e8res"},
+  {"numcom": 55, "comnom": "Le Cerneux-P\u00e9quignot"},
+  {"numcom": 56, "comnom": "La Br\u00e9vine"},
+  {"numcom": 7, "comnom": "Cressier (NE)"},
+  {"numcom": 12, "comnom": "Cortaillod"},
+  {"numcom": 33, "comnom": "La C\u00f4te-aux-F\u00e9es"},
+  {"numcom": 72, "comnom": "Val-de-Travers"},
+  {"numcom": 74, "comnom": "Val-de-Ruz"},
+  {"numcom": 59, "comnom": "Brot-Plamboz"},
+  {"numcom": 75, "comnom": "Rochefort"},
+  {"numcom": 2, "comnom": "Hauterive (NE)"},
+  {"numcom": 11, "comnom": "Boudry"},
+  {"numcom": 73, "comnom": "Milvignes"},
+  {"numcom": 9, "comnom": "Le Landeron"},
+  {"numcom": 78, "comnom": "Le Locle"},
+  {"numcom": 62, "comnom": "La Sagne"},
+  {"numcom": 76, "comnom": "La Grande B\u00e9roche"},
+  {"numcom": 6, "comnom": "Cornaux"},
+  {"numcom": 77, "comnom": "Neuch\u00e2tel"},
+  {"numcom": 8, "comnom": "Enges"},
+  {"numcom": 71, "comnom": "La T\u00e8ne"},
+  {"numcom": 35, "comnom": "Les Verri\u00e8res"}
+]
+
 // Classes
 
 const colors = { 'I': 'legend-1', 'II': 'legend-2', 'III': 'legend-3', 'IV': 'legend-4', 'V': 'legend-5', 'VI': 'legend-6' }
