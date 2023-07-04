@@ -65,6 +65,60 @@ export class LocationTypes {
 
 }
 
+const locations =  [
+  new LocationTypes("I", { housing: { min: 0.2, max: 0.5 }, activity: { min: 0.0, max: 0.3 } }),
+  new LocationTypes("II", { housing: { min: 0.5, max: 0.7 }, activity: { min: 0.2, max: 0.5 } }),
+  new LocationTypes("III", { housing: { min: 0.7, max: 1.0 }, activity: { min: 0.4, max: 0.7 } }),
+  new LocationTypes("IV", { housing: { min: 0.7, max: 1.0 }, activity: { min: 0.5, max: 0.8 } }),
+  new LocationTypes("V", { housing: { min: 0.7, max: 0.7 }, activity: { min: 0.7, max: 0.7 } }),
+  new LocationTypes("VI", { housing: { min: 0.7, max: 1.0 }, activity: { min: 0.9, max: 1.0 } })
+]
+
+
+export class LocationType {
+
+  constructor(commune, type, affectation, min, max) {
+    this.commune = commune
+    this.type = type
+    this.affectation = affectation
+    this.min = 0.0
+    this.max = 0.0
+  }
+
+}
+
+const mylocations =  [
+
+  new LocationType('Boudry', 'I', 'housing', 0.2, 0.5 ),
+  new LocationType('Boudry', 'I', 'activity', 0.0, 0.3 ),
+  new LocationType('Boudry', 'II', 'housing', 0.5, 0.7 ),
+  new LocationType('Boudry', 'II', 'activity', 0.2, 0.5 ),
+  new LocationType('Boudry', 'III', 'housing', 0.7, 1.0 ),
+  new LocationType('Boudry', 'III', 'activity', 0.4, 0.7 ),
+  new LocationType('Boudry', 'IV', 'housing', 0.7, 1.0 ),
+  new LocationType('Boudry', 'IV', 'activity', 0.5, 0.8 ),
+  new LocationType('Boudry', 'V', 'housing', 0.7, 1.0 ),
+  new LocationType('Boudry', 'V', 'activity', 0.7, 1.0 ),
+  new LocationType('Boudry', 'VI', 'housing', 0.7, 1.0 ),
+  new LocationType('Boudry', 'VI', 'activity', 0.9, 1.0 ),
+
+  new LocationType('Brot-Plamboz', 'I', 'housing', 0.2, 0.5 ),
+  new LocationType('Brot-Plamboz', 'I', 'activity', 0.0, 0.3 ),
+  new LocationType('Brot-Plamboz', 'II', 'housing', 0.5, 0.7 ),
+  new LocationType('Brot-Plamboz', 'II', 'activity', 0.2, 0.5 ),
+  new LocationType('Brot-Plamboz', 'III', 'housing', 0.7, 1.0 ),
+  new LocationType('Brot-Plamboz', 'III', 'activity', 0.4, 0.7 ),
+  new LocationType('Brot-Plamboz', 'IV', 'housing', 0.7, 1.0 ),
+  new LocationType('Brot-Plamboz', 'IV', 'activity', 0.5, 0.8 ),
+  new LocationType('Brot-Plamboz', 'V', 'housing', 0.7, 1.0 ),
+  new LocationType('Brot-Plamboz', 'V', 'activity', 0.7, 1.0 ),
+  new LocationType('Brot-Plamboz', 'VI', 'housing', 0.7, 1.0 ),
+  new LocationType('Brot-Plamboz', 'VI', 'activity', 0.9, 1.0 ),
+
+
+
+]
+
 // Reduction factor
 export class Reduction {
 
@@ -160,7 +214,6 @@ export class Affectation {
   get isHousing() {
     return this.type === "Logement"
   }
-
 
   get rawResidentNeed() {
     return parseFloat(Math.max(this.area * this.factors.area * this.factors.resident, this.numberOfHouses).toFixed(2))
