@@ -4,6 +4,7 @@
       <div class="bg-white q-pa-md q-ma-md">
         <!-- 1. LOCATION -->
         <div class="q-pa-md">
+          <div class="text-h4 q-py-lg">CALCUL DU NOMBRE DE PLACES DE STATIONNEMENT VOITURE</div>
           <div class="text-h5">1. Localisation du projet</div>
           <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
             <q-input class="col" bg-color="white" outlined label="N° SATAC du projet (si disponible)" type="text"
@@ -37,7 +38,7 @@
 
             <q-select outlined bottom-slots bg-color="white" v-model="project.locationType"
               :options="project.loctypes.filter(e => e.active)" option-value="name" option-label="name"
-              @update:model-value="selectOption()" label="Type de localisation du projet" :rules="[myRule]" autofocus>
+              @update:model-value="selectOption()" label="Type de localisation du projet" :rules="[myRule]">
 
               <template v-slot:option="scope">
                 <q-item v-bind="scope.itemProps">
