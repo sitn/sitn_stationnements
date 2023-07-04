@@ -162,7 +162,7 @@ export default {
                             '© <a href="https://sitn.ne.ch/web/conditions_utilisation/contrat_SITN_MO.htm"' +
                             ' target="_blank">SITN</a>',
                         url: 'https://sitn.ne.ch/mapproxy95/service?',
-                        layer: 'plan_ville',
+                        layer: 'plan_cadastral', // plan_ville
                         matrixSet: 'EPSG2056',
                         format: 'image/png',
                         projection: projection,
