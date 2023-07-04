@@ -21,13 +21,14 @@
           <!-- COMMUNE -->
           <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
             <q-select outlined bottom-slots bg-color="white" v-model="project.commune" :options="communes"
-              option-value="comnom" option-label="comnom" @update:model-value="" label="Commune" :rules="[]">
+              option-value="comnom" option-label="comnom" @update:model-value="resetParcels()" label="Commune"
+              :rules="[]">
 
               <template v-slot:option="scope">
                 <q-item v-bind="scope.itemProps">
                   <q-item-section>
                     <q-item-label>{{ scope.opt.comnom }}</q-item-label>
-                    <q-item-label caption>n° {{ scope.opt.numcom }}</q-item-label>
+                    <!-- <q-item-label caption>n° {{ scope.opt.numcom }}</q-item-label> -->
                   </q-item-section>
                 </q-item>
               </template>
@@ -241,19 +242,28 @@ export default {
     }
   },
   methods: {
+
     myRule(val) {
       if (val === null) {
         return 'Veuillez indiquer un type de localisation'
       }
     },
+
     validateSatac(str) {
       return new RegExp('^[0-9]+$').test(str) || str.length === 0
     },
+
+    resetParcels() {
+      this.project.parcels = []
+      this.geojson.features = []
+    },
+
     selectOption() {
 
       console.log(`App.vue | Project location type: ${this.project.locationType.name}`)
 
     },
+
     addRecord(feature) {
 
       var myHeaders = new Headers()
