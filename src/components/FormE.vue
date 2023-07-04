@@ -147,6 +147,10 @@ export default {
                         style: 'body'
                     },
                     {
+                        text: `Type de localisation: ${this.project.locationType.name}`,
+                        style: 'body'
+                    },
+                    {
                         text: 'Biens-fonds:',
                         style: 'body'
                     },
