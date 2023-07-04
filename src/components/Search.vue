@@ -12,7 +12,7 @@
     <q-select outlined bg-color="white" v-model="model" autofocus use-input hide-selected input-debounce="0"
         :options="options" option-label="features.properties.label" option-value="features.id"
         @update:model-value="selectOption()" @filter="fetchSources" @filter-abort="" label="N° de parcelle ou EGRID"
-        hint="Cliquer pour ajouter une parcelle à la liste" class="q-py-md">
+        hint="Cliquer pour ajouter une parcelle à la liste">
         <template v-slot:prepend>
             <q-icon name="search" @click.stop.prevent></q-icon>
         </template>
