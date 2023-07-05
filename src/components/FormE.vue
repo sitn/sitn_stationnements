@@ -86,6 +86,30 @@ export default {
         },
         printPDF() {
 
+            let test = this.project.affectations
+                .filter(obj => obj.active === true) // .filter(obj => obj.type === 'Activité' && obj.active === true)
+                .map(obj =>
+                    [
+                        [
+                            { rowSpan: 2, text: obj.name, alignment: 'left' },
+                            { text: 'Besoin net habitant', alignment: 'right' },
+                            { text: obj.needs.resident.net.min.toFixed(1), alignment: 'right' },
+                            { text: obj.needs.resident.net.max.toFixed(1), alignment: 'right' },
+                        ],
+                        [
+                            {},
+                            { text: 'Besoin net visiteur', alignment: 'right' },
+                            { text: obj.needs.visitor.net.min.toFixed(1), alignment: 'right' },
+                            { text: obj.needs.visitor.net.max.toFixed(1), alignment: 'right' },
+                        ]
+                    ])
+                .flat(1)
+
+            console.log('PRINT PDF')
+            console.log(test)
+
+            // let label = { Logement: { 'Habitant': }, Activité: { 'Employé'} }
+
             let docDefinition = {
                 pageSize: 'A4',
                 pageOrientation: 'portrait',
@@ -150,13 +174,13 @@ export default {
                             bold: true,
                         },
                         {
-                            style: 'tableExample',
+                            style: 'table',
                             table: {
                                 headerRows: 1,
                                 body: [
                                     [
                                         { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
-                                        { text: 'SBP', style: 'tableHeader', alignment: 'right' },
+                                        { text: 'SBP [m²]', style: 'tableHeader', alignment: 'right' },
                                         { text: 'Logements', style: 'tableHeader', alignment: 'right' },
                                         { text: 'Besoin brut habitant', style: 'tableHeader', alignment: 'right' },
                                         { text: 'Besoin brut visiteur', style: 'tableHeader', alignment: 'right' },
@@ -165,12 +189,12 @@ export default {
                                     ...this.project.affectations
                                         .filter(obj => obj.type === 'Logement' && obj.active === true)
                                         .map(obj => [
-                                            { text: obj.name, alignment: 'left' },
+                                            { text: obj.name, style: 'tableBody', alignment: 'left' },
                                             { text: obj.area.toFixed(1), alignment: 'right' },
-                                            { text: obj.numberOfHouses, alignment: 'right' },
-                                            { text: obj.needs.resident.raw.toFixed(1), alignment: 'right' },
-                                            { text: obj.needs.visitor.raw.toFixed(1), alignment: 'right' },
-                                            { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), alignment: 'right' },
+                                            { text: obj.numberOfHouses, style: 'tableBody', alignment: 'right' },
+                                            { text: obj.needs.resident.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                            { text: obj.needs.visitor.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                            { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), style: 'tableBody', alignment: 'right' },
                                         ])
                                 ]
                             },
@@ -183,13 +207,13 @@ export default {
                         bold: true,
                     },
                     {
-                        style: 'tableExample',
+                        style: 'table',
                         table: {
                             headerRows: 1,
                             body: [
                                 [
                                     { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'SV', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'SV [m²]', style: 'tableHeader', alignment: 'right' },
                                     { text: 'Besoin brut employé', style: 'tableHeader', alignment: 'right' },
                                     { text: 'Besoin brut client', style: 'tableHeader', alignment: 'right' },
                                     { text: 'Besoin brut total', style: 'tableHeader', alignment: 'right' },
@@ -197,11 +221,11 @@ export default {
                                 ...this.project.affectations
                                     .filter(obj => obj.type === 'Activité' && obj.active === true)
                                     .map(obj => [
-                                        { text: obj.name, alignment: 'left' },
-                                        { text: obj.area.toFixed(1), alignment: 'right' },
-                                        { text: obj.needs.resident.raw.toFixed(1), alignment: 'right' },
-                                        { text: obj.needs.visitor.raw.toFixed(1), alignment: 'right' },
-                                        { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), alignment: 'right' },
+                                        { text: obj.name, style: 'tableBody', alignment: 'left' },
+                                        { text: obj.area.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                        { text: obj.needs.resident.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                        { text: obj.needs.visitor.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                        { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), style: 'tableBody', alignment: 'right' },
                                     ])
                             ]
                         },
@@ -218,46 +242,11 @@ export default {
                         style: 'body'
                     },
                     {
-                        style: 'tableExample',
-                        table: {
-                            headerRows: 1,
-                            body: [
-                                [
-                                    { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'Min.', style: 'tableHeader', alignment: 'right' },
-                                    { text: 'Max.', style: 'tableHeader', alignment: 'right' },
-                                ],
-                                [
-                                    { rowSpan: 2, text: 'Logements standards', alignment: 'left' },
-                                    { text: 'Besoin net habitant', alignment: 'left' },
-                                    { text: '226.10', alignment: 'right' },
-                                    { text: '323.00', alignment: 'right' },
-                                ],
-                                [
-                                    '',
-                                    { text: 'Besoin net visiteur', alignment: 'left' },
-                                    { text: '8.62', alignment: 'right' },
-                                    { text: '12.31', alignment: 'right' },
-                                ],
-                                [
-                                    { rowSpan: 2, text: 'Logements standards', alignment: 'left' },
-                                    { text: 'Besoin net habitant', alignment: 'left' },
-                                    { text: '226.10', alignment: 'right' },
-                                    { text: '323.00', alignment: 'right' },
-                                ],
-                                [
-                                    '',
-                                    { text: 'Besoin net visiteur', alignment: 'left' },
-                                    { text: '8.62', alignment: 'right' },
-                                    { text: '12.31', alignment: 'right' },
-                                ],
-                            ]
-                        },
-                        layout: 'lightHorizontalLines'
+                        text: `Fourchette du nombre de places:`,
+                        style: 'body'
                     },
                     {
-                        style: 'tableExample',
+                        style: 'table',
                         table: {
                             headerRows: 1,
                             body: [
@@ -268,14 +257,97 @@ export default {
                                 ],
                                 [
                                     { text: 'Logement', alignment: 'left' },
-                                    { text: `${(this.project.locationType.ranges.housing.min * 100).toFixed(0)} %`, alignment: 'right' },
-                                    { text: `${(this.project.locationType.ranges.housing.max * 100).toFixed(0)} %`, alignment: 'right' }
+                                    { text: `${(this.project.locationType.ranges.housing.min * 100).toFixed(0)} %`, style: 'tableBody', alignment: 'right' },
+                                    { text: `${(this.project.locationType.ranges.housing.max * 100).toFixed(0)} %`, style: 'tableBody', alignment: 'right' }
                                 ],
                                 [
                                     { text: 'Activité', alignment: 'left' },
-                                    { text: `${(this.project.locationType.ranges.activity.min * 100).toFixed(0)} %`, alignment: 'right' },
-                                    { text: `${(this.project.locationType.ranges.activity.max * 100).toFixed(0)} %`, alignment: 'right' }
+                                    { text: `${(this.project.locationType.ranges.activity.min * 100).toFixed(0)} %`, style: 'tableBody', alignment: 'right' },
+                                    { text: `${(this.project.locationType.ranges.activity.max * 100).toFixed(0)} %`, style: 'tableBody', alignment: 'right' }
                                 ]
+                            ]
+                        },
+                        layout: 'lightHorizontalLines'
+                    },
+                    {
+                        style: 'table',
+                        table: {
+                            headerRows: 1,
+                            body: [
+                                [
+                                    { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Min.', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Max.', style: 'tableHeader', alignment: 'right' },
+                                ],
+                                ...this.project.affectations
+                                    .filter(obj => obj.active === true) // .filter(obj => obj.type === 'Activité' && obj.active === true)
+                                    .map(obj =>
+                                        [
+                                            [
+                                                { rowSpan: 3, text: obj.name, style: 'tableBody', alignment: 'left' },
+                                                { text: obj.labels.primary, style: 'tableBody', alignment: 'left' },
+                                                { text: obj.needs.resident.net.min.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                                { text: obj.needs.resident.net.max.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                            ],
+                                            [
+                                                {},
+                                                { text: obj.labels.secondary, style: 'tableBody', alignment: 'left' },
+                                                { text: obj.needs.visitor.net.min.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                                { text: obj.needs.visitor.net.max.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                            ],
+                                            [
+                                                {},
+                                                { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left' },
+                                                { text: (obj.needs.resident.net.min + obj.needs.visitor.net.min).toFixed(1), style: 'tableBody', bold: true, alignment: 'right' },
+                                                { text: (obj.needs.resident.net.max + obj.needs.visitor.net.max).toFixed(1), style: 'tableBody', bold: true, alignment: 'right' },
+                                            ]
+                                        ])
+                                    .flat(1)
+                            ]
+                        },
+                        layout: 'lightHorizontalLines'
+                    },
+                    {
+                        text: 'Calcul du besoin net réduit (article 29 RELConstr.)',
+                        style: 'subheader',
+                        pageBreak: 'before'
+                    },
+                    {
+                        style: 'table',
+                        table: {
+                            headerRows: 1,
+                            body: [
+                                [
+                                    { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Min.', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Max.', style: 'tableHeader', alignment: 'right' },
+                                ],
+                                ...this.project.affectations
+                                    .filter(obj => obj.active === true) // .filter(obj => obj.type === 'Activité' && obj.active === true)
+                                    .map(obj =>
+                                        [
+                                            [
+                                                { rowSpan: 3, text: obj.name, style: 'tableBody', alignment: 'left' },
+                                                { text: obj.labels.primary, style: 'tableBody', alignment: 'left' },
+                                                { text: obj.needs.resident.reduced.min.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                                { text: obj.needs.resident.reduced.max.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                            ],
+                                            [
+                                                {},
+                                                { text: obj.labels.secondary, style: 'tableBody', alignment: 'left' },
+                                                { text: obj.needs.visitor.reduced.min.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                                { text: obj.needs.visitor.reduced.max.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                            ],
+                                            [
+                                                {},
+                                                { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left' },
+                                                { text: (obj.needs.resident.reduced.min + obj.needs.visitor.reduced.min).toFixed(1), style: 'tableBody', bold: true, alignment: 'right' },
+                                                { text: (obj.needs.resident.reduced.max + obj.needs.visitor.reduced.max).toFixed(1), style: 'tableBody', bold: true, alignment: 'right' },
+                                            ]
+                                        ])
+                                    .flat(1)
                             ]
                         },
                         layout: 'lightHorizontalLines'
@@ -286,7 +358,7 @@ export default {
                         pageBreak: 'before'
                     },
                     {
-                        style: 'tableExample',
+                        style: 'table',
                         table: {
                             headerRows: 1,
                             body: [
@@ -327,20 +399,23 @@ export default {
                     body: {
                         fontSize: 10,
                         bold: false,
-                        margin: [0, 5, 0, 5]
+                        margin: [0, 5, 0, 5],
                     },
-                    tableExample: {
+                    table: {
                         fontSize: 10,
-                        margin: [0, 5, 0, 15],
+                        margin: [0, 10, 0, 10],
                     },
                     tableHeader: {
                         bold: true,
                         fontSize: 10,
                         color: 'black',
                         fillColor: '#eeeeee',
-                        padding: '10px',
-                        margin: [5, 5, 5, 5]
-                    }
+                        margin: [2, 5, 2, 5]
+                    },
+                    tableBody: {
+                        fontSize: 10,
+                        margin: [2, 0, 2, 0],
+                    },
                 },
             }
 
