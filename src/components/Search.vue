@@ -1,14 +1,4 @@
 <template>
-    <!--<div class="q-pa-md"> -->
-
-    <!--
-        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-            <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations"
-                option-value="name" option-label="name" @update:model-value="selectOption()" multiple label="Affectation(s)"
-                :disable="!this.project.locationType">
-
-        -->
-
     <q-select outlined bg-color="white" v-model="model" autofocus use-input hide-selected input-debounce="0"
         :options="options" option-label="features.properties.label" option-value="features.id"
         @update:model-value="selectOption()" @filter="fetchSources" label="N° de parcelle ou EGRID"
@@ -85,18 +75,11 @@ export default {
                 return
             }
 
-
-
             var requestOptions = {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow",
             }
-
-            // let query = `${val} ${this.commune.comnom}`
-            // let query = `${val}`
-            // console.log(`query: ${query}`)
-
 
             fetch(`https://sitn.ne.ch/permis_construire/search?query=${encodeURIComponent(query)}`,
                 requestOptions
@@ -122,9 +105,6 @@ export default {
 
                 })
                 .catch((error) => console.log("error", error))
-
-
-
 
         },
         abortFilterFn() {
