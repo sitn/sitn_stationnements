@@ -86,53 +86,6 @@ export default {
         },
         printPDF() {
 
-            let printDate = new Date().toLocaleString('fr-CH')
-
-            let table = [[
-                { text: 'Affectation', style: 'tableHeader' },
-                { text: 'Min', style: 'tableHeader' },
-                { text: 'Max', style: 'tableHeader' }
-            ]]
-
-            this.project.affectations.filter(e => e.active).forEach(affectation => {
-                table.push([
-                    { text: affectation.name },
-                    { text: affectation.totalNeed.min.toFixed(2), alignment: 'right' },
-                    { text: affectation.totalNeed.max.toFixed(2), alignment: 'right' }
-                ])
-            })
-
-            table.push([
-                { text: 'Total (arrondi supérieur)', alignment: 'left', bold: true },
-                { text: Math.ceil(this.project.totalNeed.min), alignment: 'right', bold: true },
-                { text: Math.ceil(this.project.totalNeed.max), alignment: 'right', bold: true }
-            ])
-
-            console.log('PRINT PDF')
-
-            let test = this.project.affectations
-                .filter(obj => obj.active === true) // .filter(obj => obj.type === 'Logement' && obj.active === true)
-                .map(obj => [
-                    { text: obj.name, alignment: 'left' },
-                    { text: obj.area.toFixed(1), alignment: 'right' },
-                    { text: obj.numberOfHouses, alignment: 'right' },
-                    { text: obj.needs.resident.raw.toFixed(1), alignment: 'right' },
-                    { text: obj.needs.visitor.raw.toFixed(1), alignment: 'right' },
-                    { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), alignment: 'right' },
-                ])
-
-            console.log(test)
-
-            let test2 = this.project.affectations
-                .filter(obj => obj.active === true)
-                .map(obj => [
-                    { text: obj.name, alignment: 'left' },
-                    { text: obj.totalNeed.min.toFixed(2), alignment: 'right' },
-                    { text: obj.totalNeed.max.toFixed(2), alignment: 'right' }
-                ])
-            console.log(test2)
-
-
             let docDefinition = {
                 pageSize: 'A4',
                 pageOrientation: 'portrait',
@@ -167,7 +120,7 @@ export default {
                         style: 'body'
                     },
                     {
-                        text: `Calcul effectué le: ${printDate}`,
+                        text: `Calcul effectué le: ${new Date().toLocaleString('fr-CH')}`,
                         style: 'body'
                     },
                     {
@@ -190,38 +143,40 @@ export default {
                         text: 'Calcul du besoin brut (article 27 RELConstr.)',
                         style: 'subheader'
                     },
-                    {
-                        text: 'Logement',
-                        style: 'body',
-                        bold: true,
-                    },
-                    {
-                        style: 'tableExample',
-                        table: {
-                            headerRows: 1,
-                            body: [
-                                [
-                                    { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'SBP', style: 'tableHeader', alignment: 'right' },
-                                    { text: 'Logements', style: 'tableHeader', alignment: 'right' },
-                                    { text: 'Besoin brut habitant', style: 'tableHeader', alignment: 'right' },
-                                    { text: 'Besoin brut visiteur', style: 'tableHeader', alignment: 'right' },
-                                    { text: 'Besoin brut total', style: 'tableHeader', alignment: 'right' },
-                                ],
-                                ...this.project.affectations
-                                    .filter(obj => obj.type === 'Logement' && obj.active === true)
-                                    .map(obj => [
-                                        { text: obj.name, alignment: 'left' },
-                                        { text: obj.area.toFixed(1), alignment: 'right' },
-                                        { text: obj.numberOfHouses, alignment: 'right' },
-                                        { text: obj.needs.resident.raw.toFixed(1), alignment: 'right' },
-                                        { text: obj.needs.visitor.raw.toFixed(1), alignment: 'right' },
-                                        { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), alignment: 'right' },
-                                    ])
-                            ]
+                    [
+                        {
+                            text: 'Logement',
+                            style: 'body',
+                            bold: true,
                         },
-                        layout: 'lightHorizontalLines'
-                    },
+                        {
+                            style: 'tableExample',
+                            table: {
+                                headerRows: 1,
+                                body: [
+                                    [
+                                        { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
+                                        { text: 'SBP', style: 'tableHeader', alignment: 'right' },
+                                        { text: 'Logements', style: 'tableHeader', alignment: 'right' },
+                                        { text: 'Besoin brut habitant', style: 'tableHeader', alignment: 'right' },
+                                        { text: 'Besoin brut visiteur', style: 'tableHeader', alignment: 'right' },
+                                        { text: 'Besoin brut total', style: 'tableHeader', alignment: 'right' },
+                                    ],
+                                    ...this.project.affectations
+                                        .filter(obj => obj.type === 'Logement' && obj.active === true)
+                                        .map(obj => [
+                                            { text: obj.name, alignment: 'left' },
+                                            { text: obj.area.toFixed(1), alignment: 'right' },
+                                            { text: obj.numberOfHouses, alignment: 'right' },
+                                            { text: obj.needs.resident.raw.toFixed(1), alignment: 'right' },
+                                            { text: obj.needs.visitor.raw.toFixed(1), alignment: 'right' },
+                                            { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), alignment: 'right' },
+                                        ])
+                                ]
+                            },
+                            layout: 'lightHorizontalLines'
+                        }
+                    ],
                     {
                         text: 'Activité',
                         style: 'body',
@@ -255,11 +210,51 @@ export default {
 
                     {
                         text: 'Calcul du besoin net (article 28 RELConstr.)',
-                        style: 'subheader'
+                        style: 'subheader',
+                        pageBreak: 'before'
                     },
                     {
                         text: `Type de localisation: ${this.project.locationType.name}`,
                         style: 'body'
+                    },
+                    {
+                        style: 'tableExample',
+                        table: {
+                            headerRows: 1,
+                            body: [
+                                [
+                                    { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Min.', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Max.', style: 'tableHeader', alignment: 'right' },
+                                ],
+                                [
+                                    { rowSpan: 2, text: 'Logements standards', alignment: 'left' },
+                                    { text: 'Besoin net habitant', alignment: 'left' },
+                                    { text: '226.10', alignment: 'right' },
+                                    { text: '323.00', alignment: 'right' },
+                                ],
+                                [
+                                    '',
+                                    { text: 'Besoin net visiteur', alignment: 'left' },
+                                    { text: '8.62', alignment: 'right' },
+                                    { text: '12.31', alignment: 'right' },
+                                ],
+                                [
+                                    { rowSpan: 2, text: 'Logements standards', alignment: 'left' },
+                                    { text: 'Besoin net habitant', alignment: 'left' },
+                                    { text: '226.10', alignment: 'right' },
+                                    { text: '323.00', alignment: 'right' },
+                                ],
+                                [
+                                    '',
+                                    { text: 'Besoin net visiteur', alignment: 'left' },
+                                    { text: '8.62', alignment: 'right' },
+                                    { text: '12.31', alignment: 'right' },
+                                ],
+                            ]
+                        },
+                        layout: 'lightHorizontalLines'
                     },
                     {
                         style: 'tableExample',
