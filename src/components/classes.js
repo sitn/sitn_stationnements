@@ -65,6 +65,7 @@ export class LocationTypes {
 
 }
 
+/*
 const locations =  [
   new LocationTypes("I", { housing: { min: 0.2, max: 0.5 }, activity: { min: 0.0, max: 0.3 } }),
   new LocationTypes("II", { housing: { min: 0.5, max: 0.7 }, activity: { min: 0.2, max: 0.5 } }),
@@ -115,9 +116,8 @@ const mylocations =  [
   new LocationType('Brot-Plamboz', 'VI', 'housing', 0.7, 1.0 ),
   new LocationType('Brot-Plamboz', 'VI', 'activity', 0.9, 1.0 ),
 
-
-
 ]
+*/
 
 // Reduction factor
 export class Reduction {
