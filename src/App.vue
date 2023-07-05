@@ -276,8 +276,6 @@ export default {
       var myHeaders = new Headers()
       myHeaders.append("Content-Type", "application/json")
 
-      console.log(JSON.stringify({ "type": "FeatureCollection", "features": [feature] }))
-
       var requestOptions = {
         method: 'POST',
         headers: myHeaders,
