@@ -95,10 +95,18 @@ export default {
             ]]
 
             this.project.affectations.filter(e => e.active).forEach(affectation => {
-                table.push([affectation.name, affectation.totalNeed.min.toFixed(2), affectation.totalNeed.max.toFixed(2)])
+                table.push([
+                    { text: affectation.name },
+                    { text: affectation.totalNeed.min.toFixed(2), alignment: 'right' },
+                    { text: affectation.totalNeed.max.toFixed(2), alignment: 'right' }
+                ])
             })
 
-            table.push(['Total (arrondi supérieur)', Math.ceil(this.project.totalNeed.min), Math.ceil(this.project.totalNeed.max)])
+            table.push([
+                { text: 'Total (arrondi supérieur)', alignment: 'left', bold: true },
+                { text: Math.ceil(this.project.totalNeed.min), alignment: 'right', bold: true },
+                { text: Math.ceil(this.project.totalNeed.max), alignment: 'right', bold: true }
+            ])
 
 
             let docDefinition = {
@@ -147,16 +155,44 @@ export default {
                         style: 'body'
                     },
                     {
-                        text: `Type de localisation: ${this.project.locationType.name}`,
-                        style: 'body'
-                    },
-                    {
                         text: 'Biens-fonds:',
                         style: 'body'
                     },
                     {
                         ul: this.project.parcels,
                         style: 'body'
+                    },
+                    {
+                        text: 'Calcul du besoin net (article 28 RELConstr.)',
+                        style: 'subheader'
+                    },
+                    {
+                        text: `Type de localisation: ${this.project.locationType.name}`,
+                        style: 'body'
+                    },
+                    {
+                        style: 'tableExample',
+                        table: {
+                            headerRows: 1,
+                            body: [
+                                [
+                                    { text: 'Catégorie', style: 'tableHeader' },
+                                    { text: 'Min. %', style: 'tableHeader' },
+                                    { text: 'Max. %', style: 'tableHeader' }
+                                ],
+                                [
+                                    { text: 'Logement' },
+                                    { text: (this.project.locationType.ranges.housing.min * 100).toFixed(0), alignment: 'right' },
+                                    { text: (this.project.locationType.ranges.housing.max * 100).toFixed(0), alignment: 'right' }
+                                ],
+                                [
+                                    { text: 'Activité' },
+                                    { text: (this.project.locationType.ranges.activity.min * 100).toFixed(0), alignment: 'right' },
+                                    { text: (this.project.locationType.ranges.activity.max * 100).toFixed(0), alignment: 'right' }
+                                ]
+                            ]
+                        },
+                        layout: 'lightHorizontalLines'
                     },
                     {
                         text: 'Nombre de places de stationnement à réaliser (article 30 RELConstr.)',
@@ -190,7 +226,7 @@ export default {
                     },
                     tableExample: {
                         fontSize: 10,
-                        margin: [0, 5, 0, 15]
+                        margin: [0, 5, 0, 15],
                     },
                     tableHeader: {
                         bold: true,
@@ -203,7 +239,7 @@ export default {
                 },
             }
 
-            pdfMake.createPdf(docDefinition).download();
+            pdfMake.createPdf(docDefinition).download('ne_calcul_stationnement.pdf');
 
         },
 
