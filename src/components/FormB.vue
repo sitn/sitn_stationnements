@@ -13,8 +13,8 @@
 
         <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
             <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations"
-                option-value="name" option-label="name" @update:model-value="selectOption()" multiple label="Affectation(s)"
-                :disable="!this.project.locationType">
+                option-value="name" option-label="name" @add="addOption()" @remove="removeOption()"
+                @update:model-value="selectOption()" multiple label="Affectation(s)" :disable="!this.project.locationType">
 
                 <template v-slot:option="scope">
                     <q-item v-bind="scope.itemProps">
@@ -116,20 +116,35 @@ export default {
     computed: {
     },
     methods: {
+        addOption() {
+            console.log('Add option')
+        },
+        removeOption() {
+            console.log('Remove option')
+        },
         selectOption() {
 
             console.log('Select option')
             console.log(this.model)
 
-            this.project.affectations.forEach(function (e) {
-                e.active = false
-                // e.area = 0.0
-                // e.numberOfHouses = 0.0
-            });
+            let activeOptions = this.model.map(obj => obj.name)
 
+            // all affectations not in the model should be set to non-active
+            this.project.affectations.forEach(function (e) {
+
+                if (!activeOptions.includes(e.name)) {
+                    e.active = false
+                    e.area = 0.0
+                    e.numberOfHouses = 0.0
+                }
+
+            })
+
+            // set all elements in model (selected) to active
+            // changing the model here will also change the project prop
             this.model.forEach(function (e) {
                 e.active = true
-            });
+            })
 
             this.updateProject()
 
@@ -141,6 +156,7 @@ export default {
 
             let index = this.project.affectations.findIndex((obj) => obj.name === item.name)
             this.project.affectations[index].active = false
+
             this.project.affectations[index].area = 0.0
             this.project.affectations[index].numberOfHouses = 0.0
 
