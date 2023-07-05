@@ -108,6 +108,14 @@ export default {
                 { text: Math.ceil(this.project.totalNeed.max), alignment: 'right', bold: true }
             ])
 
+            console.log('PRINT PDF')
+            let test = this.project.affectations
+                .filter(obj => obj.type === 'Logement' && obj.active === true)
+                .map(obj => [{ text: obj.name }, { text: obj.area }, { text: obj.numberOfHouses }])
+
+            console.log(test)
+
+
 
             let docDefinition = {
                 pageSize: 'A4',
@@ -163,6 +171,45 @@ export default {
                         style: 'body'
                     },
                     {
+                        text: 'Calcul du besoin brut (article 27 RELConstr.)',
+                        style: 'subheader'
+                    },
+                    {
+                        style: 'tableExample',
+                        table: {
+                            headerRows: 1,
+                            body: [
+                                [
+                                    { text: 'Affectation', style: 'tableHeader' },
+                                    { text: 'SBP', style: 'tableHeader' },
+                                    { text: 'Logements', style: 'tableHeader' },
+                                    { text: 'Besoin brut habitant', style: 'tableHeader' },
+                                    { text: 'Besoin brut visiteur', style: 'tableHeader' },
+                                    { text: 'Besoin brut total', style: 'tableHeader' },
+                                ],
+                                [
+                                    { text: 'Logement standards' },
+                                    { text: '', alignment: 'right' },
+                                    { text: '', alignment: 'right' },
+                                    { text: '', alignment: 'right' },
+                                    { text: '', alignment: 'right' },
+                                    { text: '', alignment: 'right' }
+                                ],
+                                [
+                                    { text: 'Logements avec encadrement ou étudiants' },
+                                    { text: '', alignment: 'right' },
+                                    { text: '', alignment: 'right' },
+                                    { text: '', alignment: 'right' },
+                                    { text: '', alignment: 'right' },
+                                    { text: '', alignment: 'right' }
+                                ]
+                            ]
+                        },
+                        layout: 'lightHorizontalLines'
+                    },
+
+
+                    {
                         text: 'Calcul du besoin net (article 28 RELConstr.)',
                         style: 'subheader'
                     },
@@ -196,7 +243,8 @@ export default {
                     },
                     {
                         text: 'Nombre de places de stationnement à réaliser (article 30 RELConstr.)',
-                        style: 'subheader'
+                        style: 'subheader',
+                        pageBreak: 'before'
                     },
                     {
                         style: 'tableExample',
