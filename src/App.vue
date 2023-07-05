@@ -64,7 +64,7 @@
 
             <q-select outlined bottom-slots bg-color="white" v-model="project.locationType"
               :options="project.loctypes.filter(e => e.active)" option-value="name" option-label="name"
-              @update:model-value="selectOption()" label="Type de localisation du projet" :rules="[myRule]">
+              @update:model-value="selectOption()" label="Type de localisation du projet" :rules="[validateLocalisation]">
 
               <template v-slot:option="scope">
                 <q-item v-bind="scope.itemProps">
@@ -250,7 +250,7 @@ export default {
   },
   methods: {
 
-    myRule(val) {
+    validateLocalisation(val) {
       if (val === null) {
         return 'Veuillez indiquer un type de localisation'
       }
