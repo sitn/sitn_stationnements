@@ -162,6 +162,15 @@ export class Affectation {
     this.active = false
   }
 
+  get labels() {
+    switch (this.type) {
+      case 'Logement':
+        return {primary: 'Habitant', secondary: 'Visiteur'}
+      case 'Activité':
+        return { primary: 'Employé', secondary: 'Client' }
+    }
+  }
+
   get area() {
     return this._area
   }
