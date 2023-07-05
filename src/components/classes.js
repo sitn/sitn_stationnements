@@ -248,7 +248,7 @@ export class Project {
     this.affectations = affectations
     this.ranges = { housing: { min: 0.0, max: 1.0 }, activity: { min: 0.0, max: 1.0 } }
     this._locationType = null // Location type is set manually by the user with a dropdown list
-    this.satac = null
+    this.satac = ''
     this.commune = null
   }
 
