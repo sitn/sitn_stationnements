@@ -57,10 +57,27 @@
 
 // https://github.com/vitejs/vite/issues/1041
 // https://github.com/bpampuch/pdfmake/issues/1459
+// https://github.com/bpampuch/pdfmake/issues/2486
+// https://www.youtube.com/watch?v=vK0WIrbxxcw
+// https://github.com/bpampuch/pdfmake/issues/1877
 
-import * as pdfFonts from "pdfmake/build/vfs_fonts";
+
+// import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import pdfFonts from 'pdfmake/build/fonts.js';
 import pdfMake from 'pdfmake/build/pdfmake';
+
+//pdfMake.vfs = pdfFonts;
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
+
+
+// import * as pdfMake from 'pdfmake/build/pdfmake';
+// import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+// import 'pdfmake/build/vfs_fonts';
+
+// pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 /*
 // DOES NOT WORK
