@@ -58,7 +58,8 @@
 
                 <div class="col">
                     <q-input v-if="item.isHousing" class="col" bg-color="white" outlined label="Nombre de logements"
-                        type="number" name="item.numberOfHouses" v-model.number="item.numberOfHouses" min="0.0" max="Inf">
+                        type="number" name="item.numberOfHouses" v-model.number="item.numberOfHouses" min="0.0" max="Inf"
+                        step="1">
                     </q-input>
                 </div>
 
