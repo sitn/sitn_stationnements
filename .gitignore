@@ -1,4 +1,5 @@
 AppWithStepper.vue
+todo.txt
 node_modules/
 dist/
 src/components/store.js
