@@ -184,7 +184,7 @@ export class Affectation {
   }
 
   set numberOfHouses(val){
-    this._numberOfHouses = Math.max(parseFloat(val), 0.0)
+    this._numberOfHouses = Math.max(parseFloat(val).toFixed(0), 0.0)
   }
 
   get needs() {
