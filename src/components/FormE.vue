@@ -4,34 +4,35 @@
         <!-- <div class="text-h5">5. Nombre de places de stationnement à réaliser (article 30 RELConstr.)</div> -->
 
         <div class="row">
-            <div id="summary-container" class="q-pa-md q-ma-none col-xs-8 col-sm-8 col-md-8">
+            <div id="summary-container" class="col-xs-8 col-sm-8 col-md-8">
+                <!-- <div id="summary-container" class="q-pa-md q-ma-none col-xs-8 col-sm-8 col-md-8"> -->
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
                         <tr>
                             <th>Affectation</th>
-                            <th v-if="this.project.hasRange">Min.</th>
-                            <th v-if="this.project.hasRange">Max.</th>
-                            <th v-if="!this.project.hasRange">Fixe</th>
+                            <th v-if="this.project.hasRange" class="text-right">Min.</th>
+                            <th v-if="this.project.hasRange" class="text-right">Max.</th>
+                            <th v-if="!this.project.hasRange" class="text-right">Fixe</th>
                         </tr>
 
                         <tr v-for="(affectation, index) in this.project.affectations.filter(e => e.active)" :key="index">
                             <td>{{ affectation.name }}</td>
-                            <td v-if="affectation.hasRange" class="bg-light-blue-1">{{ affectation.totalNeed.min.toFixed(2)
+                            <td v-if="affectation.hasRange" class="bg-light-blue-1 text-right">{{ affectation.totalNeed.min.toFixed(2)
                             }}</td>
-                            <td v-if="affectation.hasRange" class="bg-light-blue-1">{{ affectation.totalNeed.max.toFixed(2)
+                            <td v-if="affectation.hasRange" class="bg-light-blue-1 text-right">{{ affectation.totalNeed.max.toFixed(2)
                             }}</td>
-                            <td v-if="!affectation.hasRange" class="bg-light-blue-1">{{ affectation.totalNeed.max.toFixed(2)
+                            <td v-if="!affectation.hasRange" class="bg-light-blue-1 text-right">{{ affectation.totalNeed.max.toFixed(2)
                             }}</td>
                         </tr>
 
                         <tr>
                             <td class="text-weight-bold">Total (arrondi supérieur)</td>
-                            <td v-if="this.project.hasRange" class="bg-light-blue-1 text-weight-bold">{{
+                            <td v-if="this.project.hasRange" class="bg-light-blue-1 text-weight-bold text-right">{{
                                 Math.ceil(this.project.totalNeed.min) }}</td>
-                            <td v-if="this.project.hasRange" class="bg-light-blue-1 text-weight-bold">{{
+                            <td v-if="this.project.hasRange" class="bg-light-blue-1 text-weight-bold text-right">{{
                                 Math.ceil(this.project.totalNeed.max) }}</td>
-                            <td v-if="!this.project.hasRange" class="bg-light-blue-1">{{
+                            <td v-if="!this.project.hasRange" class="bg-light-blue-1 text-right">{{
                                 Math.ceil(this.project.totalNeed.max) }}</td>
                         </tr>
 
