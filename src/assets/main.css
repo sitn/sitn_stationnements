@@ -259,6 +259,17 @@ body:after {
   background: #d8d8d7 !important;
 }
 
+/* Official state colors */
+
+.bg-ne-green {
+  background: rgb(0 151 118) !important;
+}
+
+.text-ne-green {
+  background: rgb(0 151 118) !important;
+}
+
+
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
