@@ -1,3 +1,5 @@
+/* FONTS */
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -188,6 +190,7 @@ body {
   width: 100%;
 }
 
+/* PROTOYPE BANNER */
 body:after {
   content: "Prototype";
   position: fixed;
@@ -195,7 +198,7 @@ body:after {
   height: 40px;
   background: #d62f2f;
   top: 50px;
-  right: -80px;
+  left: -80px;
   text-align: center;
   font-size: 1.2em;
   font-family: "Gill Sans", sans-serif;
@@ -203,7 +206,8 @@ body:after {
   font-weight: bold;
   color: #fff;
   line-height: 41px;
-  transform: rotate(45deg);
+  transform: rotate(-45deg);
+  z-index: 9999;
 }
 
 #q-app {
@@ -295,27 +299,3 @@ th {
   /* background-color: #ffbd0033; */
   border-left: 1rem solid #ffa726 !important;
 }
-
-/*
-.grid-container {
-  padding: 3.75%;
-  display: grid;
-  grid-template-columns: 100%;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-}
-.grid-container > div {
-  background-color: RoyalBlue;
-  padding: 10px;
-}
-
-@media only screen and (min-width: 981px) {
-  .grid_items {
-    grid-template-columns: 30% 30% 30%;
-    grid-row-gap: 50px;
-  }
-  .grid_items > div {
-    padding: 30px;
-  }
-}
-*/
