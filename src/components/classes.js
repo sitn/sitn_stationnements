@@ -122,8 +122,9 @@ const mylocations =  [
 // Reduction factor
 export class Reduction {
 
-  constructor(factor, description) {
+  constructor(factor, range = { min: 0.0, max: 100 }, description) {
     this._factor = factor
+    this.range = range
     this.description = description
 
   }
@@ -133,7 +134,7 @@ export class Reduction {
   }
 
   set factor(val) {
-    this._factor = Math.max(Math.min(val, 100.0), 0.0)
+    this._factor = Math.max(Math.min(val, this.range.max), this.range.min)
   }
 
 }
