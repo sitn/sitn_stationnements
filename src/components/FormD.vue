@@ -4,7 +4,7 @@
         <!-- <div class="text-h5">4. Calcul du besoin net réduit (article 29 RELConstr.)</div> -->
 
         <!-- LOCATION TYPE INFOBOX  -->
-        <q-card flat  class="bg-grey-1 q-pa-md q-my-md infobox">
+        <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox">
 
             <q-card-section horizontal>
 
@@ -104,7 +104,7 @@
 
         <div class="text-h6">Besoin net réduit</div>
         <div class="row">
-            <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-4"
+            <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6"
                 v-for="(item, key) in this.project.affectations.filter(e => e.active)">
                 <div class="bg-grey-2 q-pa-md q-my-none rounded-borders">
 
