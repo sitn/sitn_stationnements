@@ -1,7 +1,7 @@
 <template>
-    <!-- 3. NET PARKING NEEDS -->
+    <!-- 4. REDUCED PARKING NEEDS -->
     <div class="q-pa-md">
-        <div class="text-h5">4. Calcul du besoin net réduit (article 29 RELConstr.)</div>
+        <!-- <div class="text-h5">4. Calcul du besoin net réduit (article 29 RELConstr.)</div> -->
 
         <!-- LOCATION TYPE INFOBOX  -->
         <q-card flat  class="bg-grey-1 q-pa-md q-my-md infobox">
