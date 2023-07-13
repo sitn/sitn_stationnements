@@ -1,7 +1,7 @@
 <template>
-    <!-- 3. NET PARKING NEEDS -->
+    <!-- 5. SUMMARY -->
     <div class="q-pa-md">
-        <div class="text-h5">5. Nombre de places de stationnement à réaliser (article 30 RELConstr.)</div>
+        <!-- <div class="text-h5">5. Nombre de places de stationnement à réaliser (article 30 RELConstr.)</div> -->
 
         <div class="row">
             <div id="summary-container" class="q-pa-md q-ma-none col-xs-8 col-sm-8 col-md-8">
