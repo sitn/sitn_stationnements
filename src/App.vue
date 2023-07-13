@@ -1,129 +1,132 @@
 <template>
-  <div class="row justify-center no-print">
-    <div class="col-xs-12 col-sm-12 col-md-9">
-      <div class="bg-white q-pa-md q-ma-md">
-        <!-- 1. LOCATION -->
-        <div class="q-pa-md">
-          <div class="text-h4 q-py-lg">CALCUL DU NOMBRE DE PLACES DE STATIONNEMENT VOITURE</div>
-          <div class="text-h5">1. Localisation du projet</div>
-
-          <!-- N° SATAC -->
-          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-            <q-input class="col" bg-color="white" outlined label="N° SATAC du projet (si disponible)" type="text"
-              name="project.satac" v-model="project.satac"
-              :rules="[(val) => validateSatac(val) || 'Seuls les chiffres sans espaces sont admis']">
-              <template v-slot:hint>
-                Entrer le n° SATAC avec des chiffres seulement et sans espaces
-              </template>
-            </q-input>
-          </div>
-
-          <!-- COMMUNE -->
-          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-            <q-select outlined bottom-slots bg-color="white" v-model="project.commune" :options="communes"
-              option-value="comnom" option-label="comnom" @update:model-value="resetParcels()" label="Commune"
-              :rules="[]">
-
-              <template v-slot:option="scope">
-                <q-item v-bind="scope.itemProps">
-                  <q-item-section>
-                    <q-item-label>{{ scope.opt.comnom }}</q-item-label>
-                    <!-- <q-item-label caption>n° {{ scope.opt.numcom }}</q-item-label> -->
-                  </q-item-section>
-                </q-item>
-              </template>
-
-              <template v-slot:hint>
-                Choisir la commune
-              </template>
-            </q-select>
-          </div>
-
-          <!-- PARCEL SEARCH -->
-          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-            <Search :geojson="geojson" :project="project" @addOption="addRecord"></Search>
-          </div>
-
-          <!-- PARCEL MAP -->
-          <Map ref="map" :geojson="geojson"></Map>
-          <div class="q-my-md">
-            <q-card class="bg-blue-grey-8 text-white">
-              <q-card-section>
-                <div class="text-h6">{{ this.geojson.features.length }} parcelle(s) sélectionnée(s)</div>
-                <!-- <div class="text-subtitle2">{{ locinfo }}</div> -->
-              </q-card-section>
-            </q-card>
-          </div>
-
-          <!-- PARCEL TABLE -->
-          <LocationTable :rows="geojson.features" @deleteItem="deleteRecord" @focusItem="focusRecord">
-          </LocationTable>
-
-          <!-- LOCATION TYPE -->
-          <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-
-            <q-select outlined bottom-slots bg-color="white" v-model="project.locationType"
-              :options="project.loctypes.filter(e => e.active)" option-value="name" option-label="name"
-              @update:model-value="selectOption()" label="Type de localisation du projet" :rules="[validateLocalisation]">
-
-              <template v-slot:option="scope">
-                <q-item v-bind="scope.itemProps">
-                  <q-item-section>
-                    <q-item-label>{{ scope.opt.name }}</q-item-label>
-                    <q-item-label caption>{{ scope.opt.area.toFixed(1) }} m<sup>2</sup> ({{ (100 *
-                      scope.opt.ratio).toFixed(1) }}%)</q-item-label>
-                  </q-item-section>
-                </q-item>
-              </template>
-
-              <template v-slot:hint>
-                Choisir le type de localisation
-              </template>
-            </q-select>
-
-          </div>
-
-          <!-- LOCATION TYPE INFOBOX  -->
-          <q-card v-if="this.project.loctypes.filter(e => e.active).length > 1" flat
-            class="bg-grey-1 q-pa-md q-my-md infobox">
-
-            <q-card-section horizontal>
-
-              <q-card-actions vertical class="justify-around q-pa-xs">
-                <q-icon name="info" color="orange-5" size="3em" />
-              </q-card-actions>
-
-              <q-card-section class="q-pa-xs">
-                <div class="text-body1 text-weight-bold">Justification du type de localisation</div>
-
-                <div class="text-body1">
-                  La ou les parcelles se trouvent sur plusieurs types de localisation. Le choix du type de localisation
-                  à considérer doit être justifié dans le champs ci-dessous. La justification peut être faite par rapport
-                  à la surface de la parcelle concernée par les types de localisation (prise en compte du type de
-                  localisation dont la surface recoupe en majorité celle de la parcelle) ou par la localisation du projet
-                  sur la
-                  parcelle (emplacement du bâtiment, de l'entrée) en fonction du ou des arrêts de transports publics.
-                </div>
-              </q-card-section>
-
-            </q-card-section>
-
-          </q-card>
-
-          <!-- LOCATION TYPE JUSTIFICATION  -->
-          <div v-if="this.project.loctypes.filter(e => e.active).length > 1"
-            class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-            <q-input v-model="project.locationTypeJustification" outlined bg-color="white" type="textarea"
-              label="Justification du type de localisation du projet" />
-          </div>
-
-        </div>
-      </div>
+  <!-- TITLE -->
+  <div class="row justify-center no-print q-my-xl">
+    <div class="col-xs-12 col-sm-12 col-md-8">
+      <div class="text-h4 q-pa-md">CALCUL DU NOMBRE DE PLACES DE STATIONNEMENT VOITURE</div>
     </div>
   </div>
 
+  <!-- 1. LOCATION -->
+  <FormSection title="1. Localisation du projet">
+    <template v-slot:content>
+      <!-- 1. LOCATION -->
+      <div class="q-pa-md">
 
-   <!-- 2. RAW PARKING NEEDS -->
+        <!-- N° SATAC -->
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+          <q-input class="col" bg-color="white" outlined label="N° SATAC du projet (si disponible)" type="text"
+            name="project.satac" v-model="project.satac"
+            :rules="[(val) => validateSatac(val) || 'Seuls les chiffres sans espaces sont admis']">
+            <template v-slot:hint>
+              Entrer le n° SATAC avec des chiffres seulement et sans espaces
+            </template>
+          </q-input>
+        </div>
+
+        <!-- COMMUNE -->
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+          <q-select outlined bottom-slots bg-color="white" v-model="project.commune" :options="communes"
+            option-value="comnom" option-label="comnom" @update:model-value="resetParcels()" label="Commune" :rules="[]">
+
+            <template v-slot:option="scope">
+              <q-item v-bind="scope.itemProps">
+                <q-item-section>
+                  <q-item-label>{{ scope.opt.comnom }}</q-item-label>
+                  <!-- <q-item-label caption>n° {{ scope.opt.numcom }}</q-item-label> -->
+                </q-item-section>
+              </q-item>
+            </template>
+
+            <template v-slot:hint>
+              Choisir la commune
+            </template>
+          </q-select>
+        </div>
+
+        <!-- PARCEL SEARCH -->
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+          <Search :geojson="geojson" :project="project" @addOption="addRecord"></Search>
+        </div>
+
+        <!-- PARCEL MAP -->
+        <Map ref="map" :geojson="geojson"></Map>
+        <div class="q-my-md">
+          <q-card class="bg-blue-grey-8 text-white">
+            <q-card-section>
+              <div class="text-h6">{{ this.geojson.features.length }} parcelle(s) sélectionnée(s)</div>
+              <!-- <div class="text-subtitle2">{{ locinfo }}</div> -->
+            </q-card-section>
+          </q-card>
+        </div>
+
+        <!-- PARCEL TABLE -->
+        <LocationTable :rows="geojson.features" @deleteItem="deleteRecord" @focusItem="focusRecord">
+        </LocationTable>
+
+        <!-- LOCATION TYPE -->
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+
+          <q-select outlined bottom-slots bg-color="white" v-model="project.locationType"
+            :options="project.loctypes.filter(e => e.active)" option-value="name" option-label="name"
+            @update:model-value="selectOption()" label="Type de localisation du projet" :rules="[validateLocalisation]">
+
+            <template v-slot:option="scope">
+              <q-item v-bind="scope.itemProps">
+                <q-item-section>
+                  <q-item-label>{{ scope.opt.name }}</q-item-label>
+                  <q-item-label caption>{{ scope.opt.area.toFixed(1) }} m<sup>2</sup> ({{ (100 *
+                    scope.opt.ratio).toFixed(1) }}%)</q-item-label>
+                </q-item-section>
+              </q-item>
+            </template>
+
+            <template v-slot:hint>
+              Choisir le type de localisation
+            </template>
+          </q-select>
+
+        </div>
+
+        <!-- LOCATION TYPE INFOBOX  -->
+        <q-card v-if="this.project.loctypes.filter(e => e.active).length > 1" flat
+          class="bg-grey-1 q-pa-md q-my-md infobox">
+
+          <q-card-section horizontal>
+
+            <q-card-actions vertical class="justify-around q-pa-xs">
+              <q-icon name="info" color="orange-5" size="3em" />
+            </q-card-actions>
+
+            <q-card-section class="q-pa-xs">
+              <div class="text-body1 text-weight-bold">Justification du type de localisation</div>
+
+              <div class="text-body1">
+                La ou les parcelles se trouvent sur plusieurs types de localisation. Le choix du type de localisation
+                à considérer doit être justifié dans le champs ci-dessous. La justification peut être faite par rapport
+                à la surface de la parcelle concernée par les types de localisation (prise en compte du type de
+                localisation dont la surface recoupe en majorité celle de la parcelle) ou par la localisation du projet
+                sur la
+                parcelle (emplacement du bâtiment, de l'entrée) en fonction du ou des arrêts de transports publics.
+              </div>
+            </q-card-section>
+
+          </q-card-section>
+
+        </q-card>
+
+        <!-- LOCATION TYPE JUSTIFICATION  -->
+        <div v-if="this.project.loctypes.filter(e => e.active).length > 1"
+          class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+          <q-input v-model="project.locationTypeJustification" outlined bg-color="white" type="textarea"
+            label="Justification du type de localisation du projet" />
+        </div>
+
+      </div>
+
+    </template>
+  </FormSection>
+
+  <!-- 2. RAW PARKING NEEDS -->
   <FormSection title="2. Calcul du besoin brut (article 27 RELConstr.)">
     <template v-slot:content>
       <FormB :project="project" @updateProject="updateProject"></FormB>
@@ -150,7 +153,6 @@
       <FormE :project="project"></FormE>
     </template>
   </FormSection>
-
 </template>
 
 <script>
