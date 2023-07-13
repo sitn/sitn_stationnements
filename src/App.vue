@@ -81,6 +81,17 @@
               </template>
             </q-select>
 
+            La ou les parcelles se trouvent sur plusieurs types de localisation. Le choix du type de localisation à
+            considérer doit être justifié dans le champs ci-dessous. La justification peut être faite par rapport à la
+            surface de la parcelle concernée par les types de localisation (prise en compte du type de localisation dont
+            la surface recoupe en majorité celle de la parcelle) ou par la localisation du projet sur la parcelle
+            (emplacement du bâtiment, de l’entrée) en fonction du ou des arrêts de transports publics.
+
+            <div>
+              <q-input v-model="text" outlined bg-color="white" type="textarea"
+                label="Justification du type de localisation du projet" />
+            </div>
+
           </div>
 
         </div>
@@ -377,6 +388,7 @@ export default {
 <style>
 @import './assets/main.css';
 @import './assets/print.css';
-@import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons';
+/* @import 'https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round'; */
+/* @import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons|Material+Icons+Outlined|Material+Icons+Round'; */
 @import './assets/quasar.prod.css';
 </style>
