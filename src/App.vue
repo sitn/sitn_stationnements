@@ -81,17 +81,40 @@
               </template>
             </q-select>
 
-            La ou les parcelles se trouvent sur plusieurs types de localisation. Le choix du type de localisation à
-            considérer doit être justifié dans le champs ci-dessous. La justification peut être faite par rapport à la
-            surface de la parcelle concernée par les types de localisation (prise en compte du type de localisation dont
-            la surface recoupe en majorité celle de la parcelle) ou par la localisation du projet sur la parcelle
-            (emplacement du bâtiment, de l’entrée) en fonction du ou des arrêts de transports publics.
+          </div>
 
-            <div>
-              <q-input v-model="text" outlined bg-color="white" type="textarea"
-                label="Justification du type de localisation du projet" />
-            </div>
+          <!-- LOCATION TYPE INFOBOX  -->
+          <q-card v-if="this.project.loctypes.filter(e => e.active).length > 1" flat
+            class="bg-grey-1 q-pa-md q-my-md infobox">
 
+            <q-card-section horizontal>
+
+              <q-card-actions vertical class="justify-around q-pa-xs">
+                <q-icon name="info" color="orange-5" size="3em" />
+              </q-card-actions>
+
+              <q-card-section class="q-pa-xs">
+                <div class="text-body1 text-weight-bold">Justification du type de localisation</div>
+
+                <div class="text-body1">
+                  La ou les parcelles se trouvent sur plusieurs types de localisation. Le choix du type de localisation
+                  à considérer doit être justifié dans le champs ci-dessous. La justification peut être faite par rapport
+                  à la surface de la parcelle concernée par les types de localisation (prise en compte du type de
+                  localisation dont la surface recoupe en majorité celle de la parcelle) ou par la localisation du projet
+                  sur la
+                  parcelle (emplacement du bâtiment, de l'entrée) en fonction du ou des arrêts de transports publics.
+                </div>
+              </q-card-section>
+
+            </q-card-section>
+
+          </q-card>
+
+          <!-- LOCATION TYPE JUSTIFICATION  -->
+          <div v-if="this.project.loctypes.filter(e => e.active).length > 1"
+            class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+            <q-input v-model="text" outlined bg-color="white" type="textarea"
+              label="Justification du type de localisation du projet" />
           </div>
 
         </div>
@@ -389,5 +412,4 @@ export default {
 @import './assets/main.css';
 @import './assets/print.css';
 /* @import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons|Material+Icons+Outlined|Material+Icons+Round'; */
-@import './assets/quasar.prod.css';
-</style>
+@import './assets/quasar.prod.css';</style>
