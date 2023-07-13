@@ -10,31 +10,31 @@
                     <table>
                         <tr>
                             <th>{{ item.name }}</th>
-                            <th v-if="item.hasRange">Min. {{ 100 * item.range.min }}%</th>
-                            <th v-if="item.hasRange">Max. {{ 100 * item.range.max }}%</th>
-                            <th v-if="!item.hasRange">Fixe {{ 100 * item.range.max }}%</th>
+                            <th v-if="item.hasRange" class="text-right">Min. {{ 100 * item.range.min }}%</th>
+                            <th v-if="item.hasRange" class="text-right">Max. {{ 100 * item.range.max }}%</th>
+                            <th v-if="!item.hasRange" class="text-right">Fixe {{ 100 * item.range.max }}%</th>
                         </tr>
                         <tr>
                             <td> {{ item.type == "Logement" ? "Besoin net habitant" : "Besoin net employé" }}</td>
-                            <td v-if="item.hasRange" class="bg-light-blue-1">{{ item.netResidentNeed.min.toFixed(2) }}</td>
-                            <td v-if="item.hasRange" class="bg-light-blue-1">{{ item.netResidentNeed.max.toFixed(2) }}</td>
-                            <td v-if="!item.hasRange" class="bg-light-blue-1">{{ item.netResidentNeed.max.toFixed(2) }}</td>
+                            <td v-if="item.hasRange" class="bg-light-blue-1 text-right">{{ item.netResidentNeed.min.toFixed(2) }}</td>
+                            <td v-if="item.hasRange" class="bg-light-blue-1 text-right">{{ item.netResidentNeed.max.toFixed(2) }}</td>
+                            <td v-if="!item.hasRange" class="bg-light-blue-1 text-right">{{ item.netResidentNeed.max.toFixed(2) }}</td>
                         </tr>
                         <tr>
                             <td>{{ item.type == "Logement" ? "Besoin net visiteur" : "Besoin net client" }}</td>
-                            <td v-if="item.hasRange" class="bg-light-blue-1">{{ item.netVisitorNeed.min.toFixed(2) }}</td>
-                            <td v-if="item.hasRange" class="bg-light-blue-1">{{ item.netVisitorNeed.max.toFixed(2) }}</td>
-                            <td v-if="!item.hasRange" class="bg-light-blue-1">{{ item.netVisitorNeed.max.toFixed(2) }}</td>
+                            <td v-if="item.hasRange" class="bg-light-blue-1 text-right">{{ item.netVisitorNeed.min.toFixed(2) }}</td>
+                            <td v-if="item.hasRange" class="bg-light-blue-1 text-right">{{ item.netVisitorNeed.max.toFixed(2) }}</td>
+                            <td v-if="!item.hasRange" class="bg-light-blue-1 text-right">{{ item.netVisitorNeed.max.toFixed(2) }}</td>
                         </tr>
                         <tr>
                             <td class="text-weight-bold">Besoin net total</td>
-                            <td v-if="item.hasRange" class="bg-light-blue-1 text-weight-bold">{{ (item.netResidentNeed.min +
+                            <td v-if="item.hasRange" class="bg-light-blue-1 text-weight-bold text-right">{{ (item.netResidentNeed.min +
                                 item.netVisitorNeed.min).toFixed(2)
                             }}</td>
-                            <td v-if="item.hasRange" class="bg-light-blue-1 text-weight-bold">{{ (item.netResidentNeed.max +
+                            <td v-if="item.hasRange" class="bg-light-blue-1 text-weight-bold text-right">{{ (item.netResidentNeed.max +
                                 item.netVisitorNeed.max).toFixed(2)
                             }}</td>
-                            <td v-if="!item.hasRange" class="bg-light-blue-1 text-weight-bold">{{ (item.netResidentNeed.max
+                            <td v-if="!item.hasRange" class="bg-light-blue-1 text-weight-bold text-right">{{ (item.netResidentNeed.max
                                 + item.netVisitorNeed.max).toFixed(2)
                             }}</td>
                         </tr>
