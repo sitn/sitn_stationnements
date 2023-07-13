@@ -5,5 +5,9 @@ import App from './App.vue'
 // import './assets/ol.css'
 
 const app = createApp(App)
-app.use(Quasar, { config: {} })
+app.use(Quasar, {
+    config: {
+    },
+
+})
 app.mount('#q-app')
