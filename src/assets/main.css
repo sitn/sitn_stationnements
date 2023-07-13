@@ -180,6 +180,8 @@
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
+/*  */
+
 body {
   background-color: #c3c3c3a1;
   height: 100%;
@@ -210,6 +212,8 @@ body:after {
   margin: 0 auto;
   font-weight: normal;
 }
+
+/* CUSTOM COLORS */
 
 .text-legend-1 {
   color: #92cba3 !important;
@@ -259,7 +263,7 @@ body:after {
   background: #d8d8d7 !important;
 }
 
-/* Official state colors */
+/* OFFICIAL STATE COLORS */
 
 .bg-ne-green {
   background: rgb(0 151 118) !important;
@@ -270,8 +274,10 @@ body:after {
 }
 
 
+/* TABLES */
+
 table {
-  font-family: arial, sans-serif;
+  /* font-family: arial, sans-serif; */
   border-collapse: collapse;
   width: 100%;
 }
@@ -282,6 +288,8 @@ th {
   text-align: left;
   padding: 8px;
 }
+
+/* INFO BOXES */
 
 .infobox {
   /* background-color: #ffbd0033; */
