@@ -388,7 +388,6 @@ export default {
 <style>
 @import './assets/main.css';
 @import './assets/print.css';
-/* @import 'https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round'; */
 /* @import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons|Material+Icons+Outlined|Material+Icons+Round'; */
 @import './assets/quasar.prod.css';
 </style>
