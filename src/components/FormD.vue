@@ -3,6 +3,42 @@
     <div class="q-pa-md">
         <div class="text-h5">4. Calcul du besoin net réduit (article 29 RELConstr.)</div>
 
+        <!-- LOCATION TYPE INFOBOX  -->
+        <q-card flat  class="bg-grey-1 q-pa-md q-my-md infobox">
+
+            <q-card-section horizontal>
+
+                <q-card-actions vertical class="justify-around q-pa-xs">
+                    <q-icon name="info" color="orange-5" size="3em" />
+                </q-card-actions>
+
+                <q-card-section class="q-pa-xs">
+                    <div class="text-body1 text-weight-bold">Facteurs de réduction</div>
+
+                    <div class="text-body1 q-pa-none">
+                        <ul>
+                            <li>Des facteurs de réduction peuvent être appliqués au besoin net,
+                                par le réquérant ou par la commune (articles 31 à 34 du
+                                RELConstr.). Les facteurs de réduction sont à porter en déduction
+                                du besoin net. Le résultat obtenu se nomme le besoin net réduit.</li>
+
+                            <li>Les facteurs de réduction peuvent intervenir lors de l'examen du
+                                dossier par la commune ou les services compétents, notamment en ce
+                                qui concerne la législation sur l'environnement et la sauvegarde
+                                du patrimoine.</li>
+
+                            <li>Pour les logements avec encadrements ou étudiants,
+                                il convient de prendre contact en amont avec la commune pour
+                                déterminer si un facteur de réduction s'applique.</li>
+                        </ul>
+                    </div>
+                </q-card-section>
+
+            </q-card-section>
+
+        </q-card>
+
+        <!-- 
         <div id="infobox" class="q-pa-md q-my-md info">
             <div class="text-h6">
                 <q-icon name="o_info" color="black"/>Information
@@ -22,8 +58,9 @@
             il convient de prendre contact en amont avec la commune pour
             déterminer si un facteur de réduction s'applique.
         </div>
+        -->
 
-        <q-separator class="q-my-md" />
+        <!-- <q-separator class="q-my-md" /> -->
 
         <div class="text-h6">Liste des réductions</div>
         <div class="row">
