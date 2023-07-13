@@ -4,7 +4,11 @@
         <div class="text-h5">4. Calcul du besoin net réduit (article 29 RELConstr.)</div>
 
         <div id="infobox" class="q-pa-md q-my-md info">
-            <div class="text-h6">Information</div>
+            <div class="text-h6">
+                <q-icon name="o_info" color="black"/>Information
+                <q-icon name="info" color="black"/>
+                
+            </div>
             Des facteurs de réduction peuvent être appliqués au besoin net,
             par le réquérant ou par la commune (articles 31 à 34 du
             RELConstr.). Les facteurs de réduction sont à porter en déduction
