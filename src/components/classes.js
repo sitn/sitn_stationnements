@@ -1,32 +1,32 @@
 // Communes
 export var communes = [
-  {"numcom": 60, "comnom": "La Chaux-de-Fonds"},
-  {"numcom": 58, "comnom": "Les Ponts-de-Martel"},
-  {"numcom": 3, "comnom": "Saint-Blaise"},
-  {"numcom": 57, "comnom": "La Chaux-du-Milieu"},
-  {"numcom": 61, "comnom": "Les Planchettes"},
-  {"numcom": 10, "comnom": "Ligni\u00e8res"},
-  {"numcom": 55, "comnom": "Le Cerneux-P\u00e9quignot"},
-  {"numcom": 56, "comnom": "La Br\u00e9vine"},
-  {"numcom": 7, "comnom": "Cressier (NE)"},
-  {"numcom": 12, "comnom": "Cortaillod"},
-  {"numcom": 33, "comnom": "La C\u00f4te-aux-F\u00e9es"},
-  {"numcom": 72, "comnom": "Val-de-Travers"},
-  {"numcom": 74, "comnom": "Val-de-Ruz"},
-  {"numcom": 59, "comnom": "Brot-Plamboz"},
-  {"numcom": 75, "comnom": "Rochefort"},
-  {"numcom": 2, "comnom": "Hauterive (NE)"},
-  {"numcom": 11, "comnom": "Boudry"},
-  {"numcom": 73, "comnom": "Milvignes"},
-  {"numcom": 9, "comnom": "Le Landeron"},
-  {"numcom": 78, "comnom": "Le Locle"},
-  {"numcom": 62, "comnom": "La Sagne"},
-  {"numcom": 76, "comnom": "La Grande B\u00e9roche"},
-  {"numcom": 6, "comnom": "Cornaux"},
-  {"numcom": 77, "comnom": "Neuch\u00e2tel"},
-  {"numcom": 8, "comnom": "Enges"},
-  {"numcom": 71, "comnom": "La T\u00e8ne"},
-  {"numcom": 35, "comnom": "Les Verri\u00e8res"}
+  { "numcom": 60, "comnom": "La Chaux-de-Fonds" },
+  { "numcom": 58, "comnom": "Les Ponts-de-Martel" },
+  { "numcom": 3, "comnom": "Saint-Blaise" },
+  { "numcom": 57, "comnom": "La Chaux-du-Milieu" },
+  { "numcom": 61, "comnom": "Les Planchettes" },
+  { "numcom": 10, "comnom": "Ligni\u00e8res" },
+  { "numcom": 55, "comnom": "Le Cerneux-P\u00e9quignot" },
+  { "numcom": 56, "comnom": "La Br\u00e9vine" },
+  { "numcom": 7, "comnom": "Cressier (NE)" },
+  { "numcom": 12, "comnom": "Cortaillod" },
+  { "numcom": 33, "comnom": "La C\u00f4te-aux-F\u00e9es" },
+  { "numcom": 72, "comnom": "Val-de-Travers" },
+  { "numcom": 74, "comnom": "Val-de-Ruz" },
+  { "numcom": 59, "comnom": "Brot-Plamboz" },
+  { "numcom": 75, "comnom": "Rochefort" },
+  { "numcom": 2, "comnom": "Hauterive (NE)" },
+  { "numcom": 11, "comnom": "Boudry" },
+  { "numcom": 73, "comnom": "Milvignes" },
+  { "numcom": 9, "comnom": "Le Landeron" },
+  { "numcom": 78, "comnom": "Le Locle" },
+  { "numcom": 62, "comnom": "La Sagne" },
+  { "numcom": 76, "comnom": "La Grande B\u00e9roche" },
+  { "numcom": 6, "comnom": "Cornaux" },
+  { "numcom": 77, "comnom": "Neuch\u00e2tel" },
+  { "numcom": 8, "comnom": "Enges" },
+  { "numcom": 71, "comnom": "La T\u00e8ne" },
+  { "numcom": 35, "comnom": "Les Verri\u00e8res" }
 ]
 
 communes = communes.sort((a, b) => a.comnom.toLowerCase().localeCompare(b.comnom.toLowerCase()))
@@ -135,7 +135,7 @@ export class Reduction {
   set factor(val) {
     this._factor = Math.max(Math.min(val, 100.0), 0.0)
   }
-  
+
 }
 
 // Need
@@ -165,7 +165,7 @@ export class Affectation {
   get labels() {
     switch (this.type) {
       case 'Logement':
-        return {primary: 'Habitant', secondary: 'Visiteur'}
+        return { primary: 'Habitant', secondary: 'Visiteur' }
       case 'Activité':
         return { primary: 'Employé', secondary: 'Client' }
     }
@@ -175,7 +175,7 @@ export class Affectation {
     return this._area
   }
 
-  set area(val){
+  set area(val) {
     this._area = Math.max(parseFloat(val), 0.0)
   }
 
@@ -183,7 +183,7 @@ export class Affectation {
     return this._numberOfHouses
   }
 
-  set numberOfHouses(val){
+  set numberOfHouses(val) {
     this._numberOfHouses = Math.max(parseFloat(val).toFixed(0), 0.0)
   }
 
@@ -257,6 +257,7 @@ export class Project {
     this.affectations = affectations
     this.ranges = { housing: { min: 0.0, max: 1.0 }, activity: { min: 0.0, max: 1.0 } }
     this._locationType = null // Location type is set manually by the user with a dropdown list
+    this.locationTypeJustification = null
     this.satac = ''
     this.commune = null
   }
