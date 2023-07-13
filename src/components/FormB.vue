@@ -1,7 +1,7 @@
 <template>
     <!-- 2. RAW PARKING NEEDS -->
     <div class="q-pa-md">
-        <div class="text-h5">2. Calcul du besoin brut (article 27 RELConstr.)</div>
+        <!-- <div class="text-h5">2. Calcul du besoin brut (article 27 RELConstr.)</div> -->
 
         <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders"
             v-if="!this.project.locationType">
