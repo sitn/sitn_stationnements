@@ -113,7 +113,7 @@
           <!-- LOCATION TYPE JUSTIFICATION  -->
           <div v-if="this.project.loctypes.filter(e => e.active).length > 1"
             class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-            <q-input v-model="text" outlined bg-color="white" type="textarea"
+            <q-input v-model="project.locationTypeJustification" outlined bg-color="white" type="textarea"
               label="Justification du type de localisation du projet" />
           </div>
 
@@ -412,4 +412,5 @@ export default {
 @import './assets/main.css';
 @import './assets/print.css';
 /* @import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons|Material+Icons+Outlined|Material+Icons+Round'; */
-@import './assets/quasar.prod.css';</style>
+@import './assets/quasar.prod.css';
+</style>
