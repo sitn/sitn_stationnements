@@ -67,7 +67,7 @@
             <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
                 v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.reductions.length > 0)">
 
-                <div class="bg-grey-2 q-pa-md q-my-none rounded-borders">
+                <div class="bg-white q-pa-md q-my-none rounded-borders">
 
                     <table>
 
@@ -106,7 +106,7 @@
         <div class="row">
             <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6"
                 v-for="(item, key) in this.project.affectations.filter(e => e.active)">
-                <div class="bg-grey-2 q-pa-md q-my-none rounded-borders">
+                <div class="bg-white q-pa-md q-my-none rounded-borders">
 
                     <table>
                         <tr>
