@@ -5,7 +5,7 @@
 
         <div class="row">
             <div id="summary-container" class="q-pa-md q-ma-none col-xs-8 col-sm-8 col-md-8">
-                <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
                         <tr>
