@@ -122,45 +122,40 @@
     </div>
   </div>
 
-  <!-- 2. RAW PARKING NEEDS -->
-  <div class="row justify-center no-print">
-    <div class="col-xs-12 col-sm-12 col-md-9">
-      <div class="bg-white q-pa-md q-ma-md">
-        <FormB :project="project" @updateProject="updateProject"></FormB>
-      </div>
-    </div>
-  </div>
+
+   <!-- 2. RAW PARKING NEEDS -->
+  <FormSection title="2. Calcul du besoin brut (article 27 RELConstr.)">
+    <template v-slot:content>
+      <FormB :project="project" @updateProject="updateProject"></FormB>
+    </template>
+  </FormSection>
 
   <!-- 3. NET PARKING NEEDS -->
-  <div class="row justify-center no-print">
-    <div class="col-xs-12 col-sm-12 col-md-9">
-      <div class="bg-white q-pa-md q-ma-md">
-        <FormC :project="project"></FormC>
-      </div>
-    </div>
-  </div>
+  <FormSection title="3. Calcul du besoin net (article 28 RELConstr.)">
+    <template v-slot:content>
+      <FormC :project="project"></FormC>
+    </template>
+  </FormSection>
 
   <!-- 4. REDUCED NET PARKING NEEDS -->
-  <div class="row justify-center no-print">
-    <div class="col-xs-12 col-sm-12 col-md-9">
-      <div class="bg-white q-pa-md q-ma-md">
-        <FormD :project="project"></FormD>
-      </div>
-    </div>
-  </div>
+  <FormSection title="4. Calcul du besoin net réduit (article 29 RELConstr.)">
+    <template v-slot:content>
+      <FormD :project="project"></FormD>
+    </template>
+  </FormSection>
 
   <!-- 5. SUMMARY -->
-  <div class="row justify-center">
-    <div class="col-xs-12 col-sm-12 col-md-9">
-      <div class="bg-white q-pa-md q-ma-md">
-        <FormE :project="project"></FormE>
-      </div>
-    </div>
-  </div>
+  <FormSection title="5. Nombre de places de stationnement à réaliser (article 30 RELConstr.)">
+    <template v-slot:content>
+      <FormE :project="project"></FormE>
+    </template>
+  </FormSection>
+
 </template>
 
 <script>
 import { Project, Affectation, Reduction, LocationTypes, Need, Mob20, communes } from "./components/classes.js"
+import FormSection from "./components/FormSection.vue"
 import Search from "./components/Search.vue"
 import Map from "./components/Map.vue"
 import LocationTable from "./components/LocationTable.vue"
@@ -240,6 +235,7 @@ project.getAffectation("Autres services").reductions = [
 export default {
   name: 'App',
   components: {
+    FormSection,
     Map,
     LocationTable,
     Search,
