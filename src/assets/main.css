@@ -272,9 +272,9 @@ th {
   padding: 8px;
 }
 
-.info {
-  background-color: #ffbd0033;
-  border-left: 0.5rem solid #e7800a;
+.infobox {
+  /* background-color: #ffbd0033; */
+  border-left: 1rem solid #ffa726 !important;
 }
 
 /*
