@@ -64,7 +64,7 @@
         </LocationTable>
 
         <!-- LOCATION TYPE -->
-        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+        <div class="bg-grey-2 q-pa-md q-my-md rounded-borders">
 
           <q-select outlined bottom-slots bg-color="white" v-model="project.locationType"
             :options="project.loctypes.filter(e => e.active)" option-value="name" option-label="name"
