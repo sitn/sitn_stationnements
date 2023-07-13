@@ -41,9 +41,9 @@
             <label class="text-h7 ">{{ item.name }} </label>
             <div class="row q-col-gutter-sm">
 
-                <div class="col-xs-12 col-sm-12 col-md-2">
-                    <q-input class="col" bg-color="white" outlined label="" type="number" name="item.area"
-                        v-model.number="item.area" min="0.0" max="Inf">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
+                    <q-input bg-color="white" outlined label="" type="number" name="item.area" v-model.number="item.area"
+                        min="0.0" max="Inf">
 
                         <template v-slot:label>
                             {{ item.type == "Logement" ? "Surface brute de plancher (SBP)" : "Surface de vente (SV)" }}
@@ -56,14 +56,14 @@
                     </q-input>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-2 col-lg">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
                     <q-input v-if="item.isHousing" class="col" bg-color="white" outlined label="Nombre de logements"
                         type="number" name="item.numberOfHouses" v-model.number="item.numberOfHouses" min="0.0" max="Inf"
                         step="1">
                     </q-input>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-2 col-lg">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
                     <q-input bg-color="light-blue-1" outlined label="" type="number" name="item.rawResidentNeed"
                         v-model.number="item.rawResidentNeed" readonly>
                         <template v-slot:label>
@@ -72,8 +72,8 @@
                     </q-input>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-2 col-lg">
-                    <q-input class="col" bg-color="light-blue-1" outlined label="" type="number" name="item.rawVisitorNeed"
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
+                    <q-input bg-color="light-blue-1" outlined label="" type="number" name="item.rawVisitorNeed"
                         v-model.number="item.rawVisitorNeed" readonly>
                         <template v-slot:label>
                             {{ item.type == "Logement" ? "Besoin brut visiteur" : "Besoin brut client" }}
@@ -81,12 +81,13 @@
                     </q-input>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-2 col-lg">
-                    <q-input class="col" bg-color="light-blue-1" outlined label="Besoin brut total" type="number"
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
+                    <q-input bg-color="light-blue-1" outlined label="Besoin brut total" type="number"
                         name="item.rawVisitorNeed" v-model.number="item.rawTotalNeed" readonly>
                     </q-input>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-2 col-lg">
+                <!-- <div class="col-xs-12 col-sm-12 col-md-2 col-lg"> -->
+                <div>
                     <q-btn round flat color="grey" name="delete" @click="deleteItem(item)" icon="delete"></q-btn>
                 </div>
 
