@@ -217,7 +217,10 @@ export class Affectation {
   get hasRange() {
     // console.log('Affectation range')
     // console.log(this.range)
-    return this.range.min !== this.range.max
+    // UNCOMMENT NEXT LINE TO ACTIVATE ADAPTIVE COLUMNS (2 COLUMNS IF THE FACTOR HAS A RANGE, 1 COLUMN IF THE FACTOR IS UNIQUE)
+    // return this.range.min !== this.range.max
+    return true
+
   }
 
   get isHousing() {
@@ -263,7 +266,9 @@ export class Project {
   }
 
   get hasRange() {
-    return this.ranges.housing.min !== this.ranges.housing.max
+    // UNCOMMENT NEXT LINE TO ACTIVATE ADAPTIVE COLUMNS (2 COLUMNS IF THE FACTOR HAS A RANGE, 1 COLUMN IF THE FACTOR IS UNIQUE)
+    // return this.ranges.housing.min !== this.ranges.housing.max
+    return true
   }
 
   get totalNeed() {
