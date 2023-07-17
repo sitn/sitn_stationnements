@@ -122,7 +122,8 @@ const mylocations =  [
 // Reduction factor
 export class Reduction {
 
-  constructor(factor, range = { min: 0.0, max: 100 }, description) {
+  constructor(name, factor = 0.0, range = { min: 0.0, max: 100 }, description) {
+    this.name = name
     this._factor = factor
     this.range = range
     this.description = description
@@ -265,13 +266,20 @@ export class Project {
     this.affectations = affectations
     this.ranges = { housing: { min: 0.0, max: 1.0 }, activity: { min: 0.0, max: 1.0 } }
     this._locationType = null // Location type is set manually by the user with a dropdown list
-    this.locationTypeJustification = null
+    this.locationTypeJustification = ''
     this.satac = ''
     this.commune = null
   }
 
+  get reductions() {
+    return this.affectations
+      .filter(e => e.valid)
+      .map(e => e.reductions)
+      .flat(1)
+  }
+
   get hasAffectation() {
-    return this.affectations.filter(e => e.active).length > 0 && this.affectations.filter(e => e.active).map(o => o.valid).every(Boolean)
+    return this.affectations.filter(e => e.active).length > 0 && this.affectations.filter(e => e.active).map(e => e.valid).every(Boolean)
   }
 
   get isValid() {
