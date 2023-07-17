@@ -3,8 +3,16 @@
     <div class="q-pa-md">
         <!-- <div class="text-h5">5. Nombre de places de stationnement à réaliser (article 30 RELConstr.)</div> -->
 
-        <div class="row">
-            <div id="summary-container" class="col-xs-8 col-sm-8 col-md-8">
+        <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders"
+            v-if="!this.project.hasAffectation">
+            <template v-slot:avatar>
+                <q-icon name="error" color="white" />
+            </template>
+            <span class="text-body1">Veuillez compléter l'étape précédente</span>
+        </q-banner>
+
+        <div class="row" v-if="this.project.hasAffectation">
+            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
                 <!-- <div id="summary-container" class="q-pa-md q-ma-none col-xs-8 col-sm-8 col-md-8"> -->
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
