@@ -107,7 +107,7 @@ export default {
         printPDF() {
 
             let test = this.project.affectations
-                .filter(obj => obj.active === true) // .filter(obj => obj.type === 'Activité' && obj.active === true)
+                .filter(e => e.valid === true) // .filter(obj => obj.type === 'Activité' && obj.active === true)
                 .map(obj =>
                     [
                         [
