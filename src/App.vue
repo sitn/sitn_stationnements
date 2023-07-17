@@ -1,17 +1,8 @@
 <template>
-  <!-- LOGO -->
-  <!-- 
-  <svg class='svgCorner svgCornerTR' id='svg4' viewBox='0 0 150 150'>               
-    <path id='path1' d='M0 150L150 150L0 0'/>
-  </svg>
-  -->
+  <!-- HEADER -->
   <q-layout view="hHh lpR fFf" class="shadow-2 rounded-borders">
     <q-header>
       <q-toolbar class="bg-white text-black">
-
-        <q-avatar>
-          <!-- <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg"> -->
-        </q-avatar>
 
         <q-toolbar-title class="text-center">CALCUL DU NOMBRE DE PLACES DE STATIONNEMENT VOITURE</q-toolbar-title>
         <a href="https://www.ne.ch/autorites/DDTE/SCAT/Pages/accueil.aspx" target="_blank"><img
@@ -19,19 +10,6 @@
 
       </q-toolbar>
     </q-header>
-
-    <!--
-    <img class='svgCorner' src="./assets/img/ne.ch_RVB.svg" alt="Neuchâtel" height="70" />
-    -->
-
-    <!-- TITLE -->
-    <!-- 
-    <div class="row justify-center no-print q-my-xl">
-      <div class="col-xs-12 col-sm-12 col-md-8">
-        <div class="text-h4 q-pa-md">CALCUL DU NOMBRE DE PLACES DE STATIONNEMENT VOITURE</div>
-      </div>
-    </div>
-    -->
 
     <q-page-container>
       <q-page class="q-pa-md">
@@ -152,7 +130,7 @@
               <div v-if="this.project.loctypes.filter(e => e.active).length > 1"
                 class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
                 <q-input v-model="project.locationTypeJustification" outlined bg-color="white" type="textarea"
-                 maxlength="500" counter label="Justification du type de localisation du projet" />
+                  maxlength="500" counter label="Justification du type de localisation du projet" />
               </div>
 
             </div>
