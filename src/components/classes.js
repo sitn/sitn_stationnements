@@ -163,6 +163,10 @@ export class Affectation {
     this.active = false
   }
 
+  get valid() {
+    return this._area > 0 && (this._numberOfHouses > 0 || this.type === 'Activité')
+  }
+
   get labels() {
     switch (this.type) {
       case 'Logement':
@@ -264,6 +268,14 @@ export class Project {
     this.locationTypeJustification = null
     this.satac = ''
     this.commune = null
+  }
+
+  get hasAffectation() {
+    return this.affectations.filter(e => e.active).length > 0 && this.affectations.filter(e => e.active).map(o => o.valid).every(Boolean)
+  }
+
+  get isValid() {
+    return this.hasAffectation && this._locationType !== null && this.commune !== null
   }
 
   get hasRange() {
