@@ -8,10 +8,10 @@
             <template v-slot:avatar>
                 <q-icon name="error" color="white" />
             </template>
-            <span class="text-body1">Veuillez choisir les parcelles et indiquer le type de localisation à l'étape 1</span>
+            <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-if="this.project.locationType">
             <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations"
                 option-value="name" option-label="name" @add="addOption()" @remove="removeOption()"
                 @update:model-value="selectOption()" multiple label="Affectation(s)" :disable="!this.project.locationType">
@@ -39,7 +39,7 @@
             <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders"
                 v-for="(item, key) in this.project.affectations.filter(e => e.active)">
 
-                <label class="text-h7 ">{{ item.name }} {{item.isValid}}</label>
+                <label class="text-h7 ">{{ item.name }} {{ item.isValid }}</label>
                 <div class="row q-col-gutter-sm">
 
 
