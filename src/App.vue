@@ -14,7 +14,8 @@
         </q-avatar>
 
         <q-toolbar-title class="text-center">CALCUL DU NOMBRE DE PLACES DE STATIONNEMENT VOITURE</q-toolbar-title>
-        <img src="./assets/img/logo_right.svg" alt="Neuchâtel" />
+        <a href="https://www.ne.ch/autorites/DDTE/SCAT/Pages/accueil.aspx" target="_blank"><img
+            src="./assets/img/logo_right.svg" alt="Neuchâtel" /></a>
 
       </q-toolbar>
     </q-header>
