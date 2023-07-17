@@ -6,11 +6,11 @@
             <q-tr :props="props">
                 <!-- label column -->
                 <q-td key="label" :props="props">
-                    <b>{{ props.row.properties.label }}</b>
+                    {{ props.row.properties.label }}
                 </q-td>
                 <!-- commune column -->
                 <q-td key="comnom" :props="props">
-                    <b>{{ props.row.properties.comnom }}</b>
+                    {{ props.row.properties.comnom }}
                 </q-td>
                 <!-- commune column -->
                 <q-td key="type" :props="props">
