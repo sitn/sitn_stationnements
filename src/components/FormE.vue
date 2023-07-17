@@ -125,6 +125,16 @@ export default {
                     ])
                 .flat(1)
 
+
+            let test2 = this.project.affectations
+                .filter(obj => obj.valid === true)
+                .map(obj => obj.reductions)
+                .flat(1)
+
+            console.log('TEST2')
+            console.log(test2)
+
+
             // let label = { Logement: { 'Habitant': }, Activité: { 'Employé'} }
 
             let docDefinition = {
@@ -210,6 +220,7 @@ export default {
                         text: 'Logement',
                         style: 'body',
                         bold: true,
+                        render: this.project.affectations.filter(e => e.valid && e.type === 'Logement').length > 0
                     },
                     {
                         style: 'table',
@@ -237,13 +248,13 @@ export default {
                             ]
                         },
                         layout: 'lightHorizontalLines',
-                        render: true
+                        render: this.project.affectations.filter(e => e.valid && e.type === 'Logement').length > 0
                     },
                     {
                         text: 'Activité',
                         style: 'body',
                         bold: true,
-                        render: true
+                        render: this.project.affectations.filter(e => e.valid && e.type === 'Activité').length > 0
                     },
                     {
                         style: 'table',
@@ -269,17 +280,12 @@ export default {
                             ]
                         },
                         layout: 'lightHorizontalLines',
-                        render: true
+                        render: this.project.affectations.filter(e => e.valid && e.type === 'Activité').length > 0
                     },
                     {
                         text: 'Calcul du besoin net (article 28 RELConstr.)',
                         style: 'subheader',
                         pageBreak: 'before',
-                        render: true
-                    },
-                    {
-                        text: `Type de localisation: ${this.project.locationType.name}`,
-                        style: 'body',
                         render: true
                     },
                     {
@@ -324,7 +330,7 @@ export default {
                                     { text: 'Max.', style: 'tableHeader', alignment: 'right' },
                                 ],
                                 ...this.project.affectations
-                                    .filter(obj => obj.active === true) // .filter(obj => obj.type === 'Activité' && obj.active === true)
+                                    .filter(o => o.active === true) // .filter(obj => obj.type === 'Activité' && obj.active === true)
                                     .map(obj =>
                                         [
                                             [
@@ -359,7 +365,34 @@ export default {
                         render: true
                     },
                     {
-                        text: 'Facteurs de réduction',
+                        text: 'Facteurs de réduction:',
+                        style: 'body',
+                        render: true
+                    },
+                    {
+                        style: 'table',
+                        table: {
+                            headerRows: 1,
+                            body: [
+                                [
+                                    { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Réduction', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Facteur', style: 'tableHeader', alignment: 'right' }
+                                ],
+                                ...this.project.affectations
+                                    .filter(o => o.valid)
+                                    .map(o => [
+                                        { text: o.name, style: 'tableBody', alignment: 'left' },
+                                        { text: o.area.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                        { text: 0, style: 'tableBody', alignment: 'right' },
+                                    ])
+                            ]
+                        },
+                        layout: 'lightHorizontalLines',
+                        render: true
+                    },
+                    {
+                        text: 'Besoin net réduit:',
                         style: 'body',
                         render: true
                     },
