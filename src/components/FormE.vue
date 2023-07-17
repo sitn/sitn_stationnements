@@ -26,11 +26,14 @@
 
                         <tr v-for="(affectation, index) in this.project.affectations.filter(e => e.active)" :key="index">
                             <td>{{ affectation.name }}</td>
-                            <td v-if="affectation.hasRange" class="bg-light-blue-1 text-right">{{ affectation.totalNeed.min.toFixed(2)
+                            <td v-if="affectation.hasRange" class="bg-light-blue-1 text-right">{{
+                                affectation.totalNeed.min.toFixed(2)
                             }}</td>
-                            <td v-if="affectation.hasRange" class="bg-light-blue-1 text-right">{{ affectation.totalNeed.max.toFixed(2)
+                            <td v-if="affectation.hasRange" class="bg-light-blue-1 text-right">{{
+                                affectation.totalNeed.max.toFixed(2)
                             }}</td>
-                            <td v-if="!affectation.hasRange" class="bg-light-blue-1 text-right">{{ affectation.totalNeed.max.toFixed(2)
+                            <td v-if="!affectation.hasRange" class="bg-light-blue-1 text-right">{{
+                                affectation.totalNeed.max.toFixed(2)
                             }}</td>
                         </tr>
 
@@ -79,37 +82,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-
-
-
-// import * as pdfMake from 'pdfmake/build/pdfmake';
-// import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-// import 'pdfmake/build/vfs_fonts';
-
-// pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-/*
-// DOES NOT WORK
-import pdfMake from 'pdfmake/build/pdfmake'
-import pdfFonts from 'pdfmake/build/vfs_fonts'
-pdfMake.vfs = pdfFonts.pdfMake.vfs
-*/
-
-/*
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-*/
-
-
-/*
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-*/
-
 import { logo } from './logo.js';
-
 
 export default {
     name: 'FormE',
@@ -152,9 +125,6 @@ export default {
                     ])
                 .flat(1)
 
-            console.log('PRINT PDF')
-            console.log(test)
-
             // let label = { Logement: { 'Habitant': }, Activité: { 'Employé'} }
 
             let docDefinition = {
@@ -170,88 +140,110 @@ export default {
                     {
                         svg: logo,
                         width: 150,
-                        margin: [0, 0, 0, 10]
+                        margin: [0, 0, 0, 10],
+                        render: true
                     },
                     {
                         text: 'Annexe à joindre à la demande de permis',
                         style: 'body',
-                        margin: [0, 20, 0, 20]
+                        margin: [0, 20, 0, 20],
+                        render: true
                     },
                     {
                         text: 'CALCUL DU NOMBRE DE PLACES DE STATIONNEMENT VOITURE',
-                        style: 'header'
+                        style: 'header',
+                        render: true
                     },
                     // A4 measures 210 × 297 millimeters or 8.27 × 11.69 inches. In PostScript, its dimensions are rounded off to 595 × 842 points.
                     {
                         canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 0.5 }],
-                        margin: [0, 10, 0, 10]
+                        margin: [0, 10, 0, 10],
+                        render: true
                     },
                     {
                         text: `Conformément aux articles 26 à 37d du RELConstr., le calcul du nombre de places de stationnement voiture à réaliser pour le projet sis est détaillé ci-dessous.`,
-                        style: 'body'
+                        style: 'body',
+                        render: true
                     },
                     {
                         text: `Calcul effectué le: ${new Date().toLocaleString('fr-CH')}`,
-                        style: 'body'
+                        style: 'body',
+                        render: true
                     },
                     {
                         text: `Dossier SATAC n°: ${this.project.satac}`,
-                        style: 'body'
+                        style: 'body',
+                        render: true
                     },
                     {
                         text: `Commune: ${this.project.commune.comnom}`,
-                        style: 'body'
-                    },
-                    {
-                        text: 'Biens-fonds:',
-                        style: 'body'
+                        style: 'body',
+                        render: true
                     },
                     {
                         ul: this.project.parcels,
-                        style: 'body'
+                        style: 'body',
+                        render: true
                     },
                     {
-                        text: 'Calcul du besoin brut (article 27 RELConstr.)',
-                        style: 'subheader'
+                        text: `Type de localisation: ${this.project.locationType.name}`,
+                        style: 'body',
+                        render: true
                     },
-                    [
-                        {
-                            text: 'Logement',
-                            style: 'body',
-                            bold: true,
+                    {
+                        text: 'Justification du type de localisation:',
+                        style: 'body',
+                        render: this.project.locationTypeJustification.trim() !== ''
+                    },
+                    {
+                        text: `${this.project.locationTypeJustification}`,
+                        style: 'body',
+                        render: this.project.locationTypeJustification.trim() !== ''
+                    },
+                    {
+                        pageBreak: 'before',
+                        text: 'Calcul du besoin brut (article 27 RELConstr.)',
+                        style: 'subheader',
+                        render: true
+                    },
+                    {
+                        text: 'Logement',
+                        style: 'body',
+                        bold: true,
+                    },
+                    {
+                        style: 'table',
+                        table: {
+                            headerRows: 1,
+                            body: [
+                                [
+                                    { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'SBP [m²]', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Logements', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Besoin brut habitant', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Besoin brut visiteur', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Besoin brut total', style: 'tableHeader', alignment: 'right' },
+                                ],
+                                ...this.project.affectations
+                                    .filter(obj => obj.type === 'Logement' && obj.active === true)
+                                    .map(obj => [
+                                        { text: obj.name, style: 'tableBody', alignment: 'left' },
+                                        { text: obj.area.toFixed(1), alignment: 'right' },
+                                        { text: obj.numberOfHouses, style: 'tableBody', alignment: 'right' },
+                                        { text: obj.needs.resident.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                        { text: obj.needs.visitor.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                        { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), style: 'tableBody', alignment: 'right' },
+                                    ])
+                            ]
                         },
-                        {
-                            style: 'table',
-                            table: {
-                                headerRows: 1,
-                                body: [
-                                    [
-                                        { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
-                                        { text: 'SBP [m²]', style: 'tableHeader', alignment: 'right' },
-                                        { text: 'Logements', style: 'tableHeader', alignment: 'right' },
-                                        { text: 'Besoin brut habitant', style: 'tableHeader', alignment: 'right' },
-                                        { text: 'Besoin brut visiteur', style: 'tableHeader', alignment: 'right' },
-                                        { text: 'Besoin brut total', style: 'tableHeader', alignment: 'right' },
-                                    ],
-                                    ...this.project.affectations
-                                        .filter(obj => obj.type === 'Logement' && obj.active === true)
-                                        .map(obj => [
-                                            { text: obj.name, style: 'tableBody', alignment: 'left' },
-                                            { text: obj.area.toFixed(1), alignment: 'right' },
-                                            { text: obj.numberOfHouses, style: 'tableBody', alignment: 'right' },
-                                            { text: obj.needs.resident.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
-                                            { text: obj.needs.visitor.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
-                                            { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), style: 'tableBody', alignment: 'right' },
-                                        ])
-                                ]
-                            },
-                            layout: 'lightHorizontalLines'
-                        }
-                    ],
+                        layout: 'lightHorizontalLines',
+                        render: true
+                    },
                     {
                         text: 'Activité',
                         style: 'body',
                         bold: true,
+                        render: true
                     },
                     {
                         style: 'table',
@@ -276,21 +268,24 @@ export default {
                                     ])
                             ]
                         },
-                        layout: 'lightHorizontalLines'
+                        layout: 'lightHorizontalLines',
+                        render: true
                     },
-
                     {
                         text: 'Calcul du besoin net (article 28 RELConstr.)',
                         style: 'subheader',
-                        pageBreak: 'before'
+                        pageBreak: 'before',
+                        render: true
                     },
                     {
                         text: `Type de localisation: ${this.project.locationType.name}`,
-                        style: 'body'
+                        style: 'body',
+                        render: true
                     },
                     {
                         text: `Fourchette du nombre de places:`,
-                        style: 'body'
+                        style: 'body',
+                        render: true
                     },
                     {
                         style: 'table',
@@ -314,7 +309,8 @@ export default {
                                 ]
                             ]
                         },
-                        layout: 'lightHorizontalLines'
+                        layout: 'lightHorizontalLines',
+                        render: true
                     },
                     {
                         style: 'table',
@@ -353,12 +349,19 @@ export default {
                                     .flat(1)
                             ]
                         },
-                        layout: 'lightHorizontalLines'
+                        layout: 'lightHorizontalLines',
+                        render: true
                     },
                     {
                         text: 'Calcul du besoin net réduit (article 29 RELConstr.)',
                         style: 'subheader',
-                        pageBreak: 'before'
+                        pageBreak: 'before',
+                        render: true
+                    },
+                    {
+                        text: 'Facteurs de réduction',
+                        style: 'body',
+                        render: true
                     },
                     {
                         style: 'table',
@@ -397,12 +400,14 @@ export default {
                                     .flat(1)
                             ]
                         },
-                        layout: 'lightHorizontalLines'
+                        layout: 'lightHorizontalLines',
+                        render: true
                     },
                     {
                         text: 'Nombre de places de stationnement à réaliser (article 30 RELConstr.)',
                         style: 'subheader',
-                        pageBreak: 'before'
+                        pageBreak: 'before',
+                        render: true
                     },
                     {
                         style: 'table',
@@ -428,7 +433,8 @@ export default {
                                 ]
                             ]
                         },
-                        layout: 'lightHorizontalLines'
+                        layout: 'lightHorizontalLines',
+                        render: true
                     },
                 ],
                 styles: {
@@ -465,6 +471,11 @@ export default {
                     },
                 },
             }
+
+            // filter content to be rendered
+            console.log('PRINT PDF')
+            console.log(docDefinition.content.filter(o => o.render))
+            docDefinition.content = docDefinition.content.filter(o => o.render)
 
             pdfMake.createPdf(docDefinition).download('ne_calcul_stationnement.pdf');
 
