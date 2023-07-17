@@ -35,64 +35,72 @@
             </q-select>
         </div>
 
-        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders"
-            v-for="(item, key) in this.project.affectations.filter(e => e.active)">
+        <q-form ref="form" greedy>
+            <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders"
+                v-for="(item, key) in this.project.affectations.filter(e => e.active)">
 
-            <label class="text-h7 ">{{ item.name }} </label>
-            <div class="row q-col-gutter-sm">
+                <label class="text-h7 ">{{ item.name }} {{item.isValid}}</label>
+                <div class="row q-col-gutter-sm">
 
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
-                    <q-input bg-color="white" outlined label="" type="number" name="item.area" v-model.number="item.area"
-                        min="0.0" max="Inf">
 
-                        <template v-slot:label>
-                            {{ item.type == "Logement" ? "Surface brute de plancher (SBP)" : "Surface de vente (SV)" }}
-                        </template>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
+                        <q-input bg-color="white" outlined label="" type="number" name="item.area"
+                            v-model.number="item.area" min="0.0" max="Inf" :rules="[validatePositive]">
 
-                        <template v-slot:append>
-                            <div class="text-body2">m<sup>2</sup></div>
-                        </template>
+                            <template v-slot:label>
+                                {{ item.type == "Logement" ? "Surface brute de plancher (SBP)" : "Surface de vente (SV)" }}
+                            </template>
 
-                    </q-input>
+                            <template v-slot:append>
+                                <div class="text-body2">m<sup>2</sup></div>
+                            </template>
+
+                        </q-input>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
+                        <q-input v-if="item.isHousing" class="col" bg-color="white" outlined label="Nombre de logements"
+                            type="number" name="item.numberOfHouses" v-model.number="item.numberOfHouses" min="0.0"
+                            max="Inf" step="1" :rules="[validatePositive]">
+                        </q-input>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
+                        <q-input bg-color="light-blue-1" outlined label="" type="number" name="item.rawResidentNeed"
+                            v-model.number="item.rawResidentNeed" readonly>
+                            <template v-slot:label>
+                                {{ item.type == "Logement" ? "Besoin brut habitant" : "Besoin brut employé" }}
+                            </template>
+                        </q-input>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
+                        <q-input bg-color="light-blue-1" outlined label="" type="number" name="item.rawVisitorNeed"
+                            v-model.number="item.rawVisitorNeed" readonly>
+                            <template v-slot:label>
+                                {{ item.type == "Logement" ? "Besoin brut visiteur" : "Besoin brut client" }}
+                            </template>
+                        </q-input>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
+                        <q-input bg-color="light-blue-1" outlined label="Besoin brut total" type="number"
+                            name="item.rawVisitorNeed" v-model.number="item.rawTotalNeed" readonly>
+                        </q-input>
+                    </div>
+                    <!-- <div class="col-xs-12 col-sm-12 col-md-2 col-lg"> -->
+                    <div>
+                        <q-btn round flat color="grey" name="delete" @click="deleteItem(item)" icon="delete"></q-btn>
+                    </div>
+
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
-                    <q-input v-if="item.isHousing" class="col" bg-color="white" outlined label="Nombre de logements"
-                        type="number" name="item.numberOfHouses" v-model.number="item.numberOfHouses" min="0.0" max="Inf"
-                        step="1">
-                    </q-input>
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
-                    <q-input bg-color="light-blue-1" outlined label="" type="number" name="item.rawResidentNeed"
-                        v-model.number="item.rawResidentNeed" readonly>
-                        <template v-slot:label>
-                            {{ item.type == "Logement" ? "Besoin brut habitant" : "Besoin brut employé" }}
-                        </template>
-                    </q-input>
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
-                    <q-input bg-color="light-blue-1" outlined label="" type="number" name="item.rawVisitorNeed"
-                        v-model.number="item.rawVisitorNeed" readonly>
-                        <template v-slot:label>
-                            {{ item.type == "Logement" ? "Besoin brut visiteur" : "Besoin brut client" }}
-                        </template>
-                    </q-input>
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
-                    <q-input bg-color="light-blue-1" outlined label="Besoin brut total" type="number"
-                        name="item.rawVisitorNeed" v-model.number="item.rawTotalNeed" readonly>
-                    </q-input>
-                </div>
-                <!-- <div class="col-xs-12 col-sm-12 col-md-2 col-lg"> -->
-                <div>
-                    <q-btn round flat color="grey" name="delete" @click="deleteItem(item)" icon="delete"></q-btn>
-                </div>
 
             </div>
-        </div>
+
+
+
+        </q-form>
 
     </div>
 </template>
@@ -117,7 +125,15 @@ export default {
     },
     computed: {
     },
+    mounted() {
+
+        this.$nextTick(() => { this.$refs.form.validate() })
+
+    },
     methods: {
+        validatePositive(val) {
+            return val !== null && val !== '' && val > 0.0 || "Veuillez entrer une valeur positive"
+        },
         addOption() {
             console.log('Add option')
         },
@@ -148,6 +164,7 @@ export default {
                 e.active = true
             })
 
+            this.$nextTick(() => { this.$refs.form.validate() })
             this.updateProject()
 
         },
