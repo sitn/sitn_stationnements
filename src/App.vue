@@ -152,7 +152,7 @@
               <div v-if="this.project.loctypes.filter(e => e.active).length > 1"
                 class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
                 <q-input v-model="project.locationTypeJustification" outlined bg-color="white" type="textarea"
-                  label="Justification du type de localisation du projet" />
+                 maxlength="500" counter label="Justification du type de localisation du projet" />
               </div>
 
             </div>
