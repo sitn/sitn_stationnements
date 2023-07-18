@@ -201,8 +201,8 @@ export default {
                             body: [
                                 [
                                     { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'SBP m²', style: 'tableHeader', alignment: 'right', noWrap: true },
                                     { text: 'Logements', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: 'SBP m²', style: 'tableHeader', alignment: 'right', noWrap: true },
                                     { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
                                     { text: 'Besoin brut', style: 'tableHeader', alignment: 'right', noWrap: true },
                                 ],
@@ -211,8 +211,8 @@ export default {
                                     .map(obj => [
                                         [
                                             { rowSpan: 3, text: obj.name, style: 'tableBody', alignment: 'left' },
-                                            { rowSpan: 3, text: obj.area.toFixed(1), alignment: 'right' },
                                             { rowSpan: 3, text: obj.numberOfHouses, style: 'tableBody', alignment: 'right' },
+                                            { rowSpan: 3, text: obj.area.toFixed(1), alignment: 'right' },
                                             { text: 'Habitant', style: 'tableBody', alignment: 'left' },
                                             { text: obj.needs.resident.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
                                         ],
@@ -402,7 +402,7 @@ export default {
                                         ),
                                         [
                                             {},
-                                            { text: 'Total', style: 'tableBody', bold: true, alignment: 'left' },
+                                            { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left' },
                                             { text: `${(o.totalReduction * 100).toFixed(1)} %`, style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                         ],
                                     ]
