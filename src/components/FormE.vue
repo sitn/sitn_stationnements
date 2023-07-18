@@ -288,6 +288,7 @@ export default {
                         pageBreak: 'before',
                         render: true
                     },
+                    /*
                     {
                         text: `Fourchette du nombre de places:`,
                         style: 'subsubheader',
@@ -318,8 +319,9 @@ export default {
                         layout: 'lightHorizontalLines',
                         render: true
                     },
+                    */
                     {
-                        text: `Besoin net:`,
+                        text: `Besoin net pour logement:`,
                         style: 'subsubheader',
                         render: true
                     },
@@ -327,15 +329,62 @@ export default {
                         style: 'table',
                         table: {
                             headerRows: 1,
+                            widths: ['*', 'auto', 'auto', 'auto'],
                             body: [
                                 [
                                     { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
                                     { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'Min.', style: 'tableHeader', alignment: 'right', noWrap: true },
-                                    { text: 'Max.', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: `Min. ${(this.project.locationType.ranges.housing.min * 100).toFixed(0)} %`, style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: `Max. ${(this.project.locationType.ranges.housing.max * 100).toFixed(0)} %`, style: 'tableHeader', alignment: 'right', noWrap: true },
                                 ],
                                 ...this.project.affectations
-                                    .filter(e => e.valid) // .filter(obj => obj.type === 'Activité' && obj.active === true)
+                                    .filter(e => e.valid && e.type === 'Logement')
+                                    .map(obj =>
+                                        [
+                                            [
+                                                { rowSpan: 3, text: obj.name, style: 'tableBody', alignment: 'left' },
+                                                { text: obj.labels.primary, style: 'tableBody', alignment: 'left' },
+                                                { text: obj.needs.resident.net.min.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: obj.needs.resident.net.max.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                            ],
+                                            [
+                                                {},
+                                                { text: obj.labels.secondary, style: 'tableBody', alignment: 'left' },
+                                                { text: obj.needs.visitor.net.min.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: obj.needs.visitor.net.max.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                            ],
+                                            [
+                                                {},
+                                                { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left' },
+                                                { text: (obj.needs.resident.net.min + obj.needs.visitor.net.min).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                                { text: (obj.needs.resident.net.max + obj.needs.visitor.net.max).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                            ]
+                                        ])
+                                    .flat(1)
+                            ]
+                        },
+                        layout: 'lightHorizontalLines',
+                        render: true
+                    },
+                    {
+                        text: `Besoin net pour activité:`,
+                        style: 'subsubheader',
+                        render: true
+                    },
+                    {
+                        style: 'table',
+                        table: {
+                            headerRows: 1,
+                            widths: ['*', 'auto', 'auto', 'auto'],
+                            body: [
+                                [
+                                    { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
+                                    { text: `Min. ${(this.project.locationType.ranges.activity.min * 100).toFixed(0)} %`, style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: `Max. ${(this.project.locationType.ranges.activity.max * 100).toFixed(0)} %`, style: 'tableHeader', alignment: 'right', noWrap: true },
+                                ],
+                                ...this.project.affectations
+                                    .filter(e => e.valid && e.type === 'Activité')
                                     .map(obj =>
                                         [
                                             [
@@ -479,8 +528,8 @@ export default {
                                     .filter(obj => obj.active === true)
                                     .map(obj => [
                                         { text: obj.name, alignment: 'left' },
-                                        { text: obj.totalNeed.min.toFixed(2), alignment: 'right' },
-                                        { text: obj.totalNeed.max.toFixed(2), alignment: 'right' }
+                                        { text: obj.totalNeed.min.toFixed(1), alignment: 'right' },
+                                        { text: obj.totalNeed.max.toFixed(1), alignment: 'right' }
                                     ]),
                                 [
                                     { text: 'Total (arrondi supérieur)', alignment: 'left', bold: true },
