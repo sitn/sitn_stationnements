@@ -217,6 +217,11 @@ export default {
                         render: true
                     },
                     {
+                        text: `Biens-fonds:`,
+                        style: 'body',
+                        render: true
+                    },
+                    {
                         ul: this.project.parcels,
                         style: 'body',
                         render: true
@@ -243,9 +248,8 @@ export default {
                         render: true
                     },
                     {
-                        text: 'Besoin brut pour logement',
-                        style: 'body',
-                        bold: true,
+                        text: 'Besoin brut pour logement:',
+                        style: 'subsubheader',
                         render: this.project.affectations.filter(e => e.valid && e.type === 'Logement').length > 0
                     },
                     {
@@ -277,9 +281,8 @@ export default {
                         render: this.project.affectations.filter(e => e.valid && e.type === 'Logement').length > 0
                     },
                     {
-                        text: 'Besoin brut pour activité',
-                        style: 'body',
-                        bold: true,
+                        text: 'Besoin brut pour activité:',
+                        style: 'subsubheader',
                         render: this.project.affectations.filter(e => e.valid && e.type === 'Activité').length > 0
                     },
                     {
@@ -316,8 +319,7 @@ export default {
                     },
                     {
                         text: `Fourchette du nombre de places:`,
-                        style: 'body',
-                        bold: true,
+                        style: 'subsubheader',
                         render: true
                     },
                     {
@@ -347,8 +349,7 @@ export default {
                     },
                     {
                         text: `Besoin net:`,
-                        style: 'body',
-                        bold: true,
+                        style: 'subsubheader',
                         render: true
                     },
                     {
@@ -399,8 +400,7 @@ export default {
                     },
                     {
                         text: 'Facteurs de réduction:',
-                        style: 'body',
-                        bold: true,
+                        style: 'subsubheader',
                         render: true
                     },
                     {
@@ -438,7 +438,7 @@ export default {
                     },
                     {
                         text: 'Besoin net réduit:',
-                        style: 'body',
+                        style: 'subsubheader',
                         render: true
                     },
                     {
@@ -526,6 +526,11 @@ export default {
                         fontSize: 12,
                         bold: true,
                         margin: [0, 10, 0, 5]
+                    },
+                    subsubheader: {
+                        fontSize: 10,
+                        bold: true,
+                        margin: [0, 5, 0, 5],
                     },
                     body: {
                         fontSize: 10,
