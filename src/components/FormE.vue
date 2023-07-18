@@ -201,21 +201,36 @@ export default {
                                 [
                                     { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
                                     { text: 'SBP m²', style: 'tableHeader', alignment: 'right', noWrap: true },
-                                    { text: 'Logements', style: 'tableHeader', alignment: 'right' },
-                                    { text: 'Besoin brut habitant', style: 'tableHeader', alignment: 'right' },
-                                    { text: 'Besoin brut visiteur', style: 'tableHeader', alignment: 'right' },
-                                    { text: 'Besoin brut total', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Logements', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Besoin brut', style: 'tableHeader', alignment: 'right' },
                                 ],
                                 ...this.project.affectations
-                                    .filter(obj => obj.type === 'Logement' && obj.active === true)
+                                    .filter(obj => obj.type === 'Logement' && obj.valid === true)
                                     .map(obj => [
-                                        { text: obj.name, style: 'tableBody', alignment: 'left' },
-                                        { text: obj.area.toFixed(1), alignment: 'right' },
-                                        { text: obj.numberOfHouses, style: 'tableBody', alignment: 'right' },
-                                        { text: obj.needs.resident.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
-                                        { text: obj.needs.visitor.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
-                                        { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), style: 'tableBody', alignment: 'right' },
+                                        [
+                                            { rowSpan: 3, text: obj.name, style: 'tableBody', alignment: 'left' },
+                                            { rowSpan: 3, text: obj.area.toFixed(1), alignment: 'right' },
+                                            { rowSpan: 3, text: obj.numberOfHouses, style: 'tableBody', alignment: 'right' },
+                                            { text: 'Habitant', style: 'tableBody', alignment: 'left' },
+                                            { text: obj.needs.resident.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                        ],
+                                        [
+                                            {},
+                                            {},
+                                            {},
+                                            { text: 'Visiteur', style: 'tableBody', alignment: 'left' },
+                                            { text: obj.needs.visitor.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                        ],
+                                        [
+                                            {},
+                                            {},
+                                            {},
+                                            { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left' },
+                                            { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), style: 'tableBody', bold: true, alignment: 'right' },
+                                        ],
                                     ])
+                                    .flat(1)
                             ]
                         },
                         layout: 'lightHorizontalLines',
