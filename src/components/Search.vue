@@ -107,7 +107,7 @@ export default {
 
         },
         abortFilterFn() {
-            // console.log('delayed filter aborted')
+            // console.log('filter aborted')
         }
     },
 }
