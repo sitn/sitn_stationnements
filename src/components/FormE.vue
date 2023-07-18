@@ -214,7 +214,7 @@ export default {
                     },
                     // A4 measures 210 × 297 millimeters or 8.27 × 11.69 inches. In PostScript, its dimensions are rounded off to 595 × 842 points.
                     {
-                        canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 0.5 }],
+                        canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 141.732, y2: 5, lineWidth: 0.5 }],
                         margin: [0, 10, 0, 10],
                         render: true
                     },
@@ -626,7 +626,7 @@ export default {
                 styles: {
                     // margins [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
                     header: {
-                        fontSize: 16,
+                        fontSize: 14,
                         bold: true,
                         margin: [0, 0, 0, 5]
                     },
