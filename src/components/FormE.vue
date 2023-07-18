@@ -263,6 +263,7 @@ export default {
                         style: 'table',
                         table: {
                             headerRows: 1,
+                            dontBreakRows: true,
                             widths: ['*', 'auto', 'auto', 'auto', 100],
                             body: [
                                 [
@@ -312,6 +313,7 @@ export default {
                         style: 'table',
                         table: {
                             headerRows: 1,
+                            dontBreakRows: true,
                             widths: ['*', 'auto', 'auto', 100],
                             body: [
                                 [
@@ -395,6 +397,7 @@ export default {
                         style: 'table',
                         table: {
                             headerRows: 1,
+                            dontBreakRows: true,
                             widths: ['*', 'auto', 'auto', 'auto'],
                             body: [
                                 [
@@ -441,6 +444,7 @@ export default {
                         style: 'table',
                         table: {
                             headerRows: 1,
+                            dontBreakRows: true,
                             widths: ['*', 'auto', 'auto', 'auto'],
                             body: [
                                 [
@@ -493,6 +497,7 @@ export default {
                         style: 'table',
                         table: {
                             headerRows: 1,
+                            dontBreakRows: true,
                             widths: ['*', 'auto', 'auto'],
                             body: [
                                 [
@@ -537,6 +542,7 @@ export default {
                         style: 'table',
                         table: {
                             headerRows: 1,
+                            dontBreakRows: true,
                             widths: ['*', 'auto', 'auto', 'auto'],
                             body: [
                                 [
@@ -584,6 +590,7 @@ export default {
                         style: 'table',
                         table: {
                             headerRows: 1,
+                            dontBreakRows: true,
                             body: [
                                 [
                                     { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
