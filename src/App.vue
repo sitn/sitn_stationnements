@@ -34,7 +34,7 @@
               <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
                 <q-select outlined bottom-slots bg-color="white" v-model="project.commune" :options="communes"
                   option-value="comnom" option-label="comnom" @update:model-value="resetParcels()" label="Commune"
-                  :rules="[]">
+                  :rules="[(val) => val !== null || 'Veuillez choisir la commune']">
 
                   <template v-slot:option="scope">
                     <q-item v-bind="scope.itemProps">
@@ -130,7 +130,7 @@
               <div v-if="this.project.loctypes.filter(e => e.active).length > 1"
                 class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
                 <q-input v-model="project.locationTypeJustification" outlined bg-color="white" type="textarea"
-                  maxlength="500" counter label="Justification du type de localisation du projet" />
+                  maxlength="500" counter label="Justification du type de localisation du projet" :rules="[(val) => val.length > 3 || 'Veuillez justifier le choix du type de localisation']" />
               </div>
 
             </div>
