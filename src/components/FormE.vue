@@ -1,7 +1,6 @@
 <template>
     <!-- 5. SUMMARY -->
     <div class="q-pa-md">
-        <!-- <div class="text-h5">5. Nombre de places de stationnement à réaliser (article 30 RELConstr.)</div> -->
 
         <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders"
             v-if="!this.project.hasAffectation">
@@ -13,7 +12,6 @@
 
         <div class="row" v-if="this.project.hasAffectation">
             <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
-                <!-- <div id="summary-container" class="q-pa-md q-ma-none col-xs-8 col-sm-8 col-md-8"> -->
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
@@ -55,7 +53,7 @@
                     @click="print" class="no-print" />
                 <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer DOM" @click="printDiv"
                     class="no-print" />
-                    -->
+                -->
                 <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer PDF" @click="printPDF"
                     class="no-print" />
             </div>
@@ -105,63 +103,6 @@ export default {
             window.print()
         },
         printPDF() {
-
-            let test = this.project.affectations
-                .filter(e => e.valid === true) // .filter(obj => obj.type === 'Activité' && obj.active === true)
-                .map(obj =>
-                    [
-                        [
-                            { rowSpan: 2, text: obj.name, alignment: 'left' },
-                            { text: 'Besoin net habitant', alignment: 'right' },
-                            { text: obj.needs.resident.net.min.toFixed(1), alignment: 'right' },
-                            { text: obj.needs.resident.net.max.toFixed(1), alignment: 'right' },
-                        ],
-                        [
-                            {},
-                            { text: 'Besoin net visiteur', alignment: 'right' },
-                            { text: obj.needs.visitor.net.min.toFixed(1), alignment: 'right' },
-                            { text: obj.needs.visitor.net.max.toFixed(1), alignment: 'right' },
-                        ]
-                    ])
-                .flat(1)
-
-
-            console.log('TEST1')
-            console.log(this.project.reductions)
-
-            let test2 = this.project.affectations
-                .filter(e => e.valid)
-                .map(e => e.reductions.map((obj) => ({ ...obj, label: e.name })))
-                .flat(1)
-
-            console.log('TEST2')
-            console.log(test2)
-
-            let test3 = this.project.affectations
-                .filter(o => o.valid && o.reductions.length > 0)
-                .map(o => [
-                    [
-                        { rowSpan: o.reductions.length, text: o.name, style: 'tableBody', alignment: 'left' },
-                        { text: o.reductions[0].name, style: 'tableBody', alignment: 'right' },
-                        { text: o.reductions[0].factor, style: 'tableBody', alignment: 'right' },
-                    ],
-                    ...o.reductions.slice(1).map(
-                        e => [
-                            {},
-                            { text: e.name, style: 'tableBody', alignment: 'right' },
-                            { text: e.factor, style: 'tableBody', alignment: 'right' },
-                        ]
-                    )
-                ]
-                )
-
-            // o.reductions.slice(1);
-
-            console.log('TEST3')
-            console.log(test3)
-
-
-            // let label = { Logement: { 'Habitant': }, Activité: { 'Employé'} }
 
             let docDefinition = {
                 pageSize: 'A4',
@@ -417,17 +358,22 @@ export default {
                                     .filter(o => o.valid && o.reductions.length > 0)
                                     .map(o => [
                                         [
-                                            { rowSpan: o.reductions.length, text: o.name, style: 'tableBody', alignment: 'left' },
+                                            { rowSpan: o.reductions.length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
                                             { text: o.reductions[0].name, style: 'tableBody', alignment: 'left' },
-                                            { text: `${o.reductions[0].factor} %`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: `${o.reductions[0].factor.toFixed(1)} %`, style: 'tableBody', alignment: 'right', noWrap: true },
                                         ],
                                         ...o.reductions.slice(1).map(
                                             e => [
                                                 {},
                                                 { text: e.name, style: 'tableBody', alignment: 'left' },
-                                                { text: `${e.factor} %`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: `${e.factor.toFixed(1)} %`, style: 'tableBody', alignment: 'right', noWrap: true },
                                             ]
-                                        )
+                                        ),
+                                        [
+                                            {},
+                                            { text: 'Total', style: 'tableBody', bold: true, alignment: 'left' },
+                                            { text: `${(o.totalReduction * 100).toFixed(1)} %`, style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                        ],
                                     ]
                                     )
                                     .flat(1)
@@ -629,9 +575,7 @@ export default {
             a.document.write('</body></html>')
             a.document.close()
             */
-
             // a.print()
-
 
         }
     }
