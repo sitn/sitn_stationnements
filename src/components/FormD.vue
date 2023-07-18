@@ -50,7 +50,7 @@
             <div class="text-h6">Liste des réductions</div>
             <div class="row">
                 <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
-                    v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.reductions.length > 0)">
+                    v-for="(affectation, key) in this.project.affectations.filter(e => e.valid && e.reductions.length > 0)">
 
                     <div class="bg-white q-pa-md q-my-none rounded-borders">
 
