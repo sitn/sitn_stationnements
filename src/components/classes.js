@@ -127,7 +127,6 @@ export class Reduction {
     this._factor = factor
     this.range = range
     this.description = description
-
   }
 
   get factor() {
@@ -166,6 +165,10 @@ export class Affectation {
 
   get valid() {
     return this._area > 0 && (this._numberOfHouses > 0 || this.type === 'Activité')
+  }
+
+  get myReductions() {
+
   }
 
   get labels() {
@@ -274,7 +277,7 @@ export class Project {
   get reductions() {
     return this.affectations
       .filter(e => e.valid)
-      .map(e => e.reductions)
+      .map(e => e.reductions.map((o) => ({ ...o, affectationName: e.name })))
       .flat(1)
   }
 
