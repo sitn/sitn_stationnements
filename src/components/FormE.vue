@@ -126,13 +126,39 @@ export default {
                 .flat(1)
 
 
+            console.log('TEST1')
+            console.log(this.project.reductions)
+
             let test2 = this.project.affectations
-                .filter(obj => obj.valid === true)
-                .map(obj => obj.reductions)
+                .filter(e => e.valid)
+                .map(e => e.reductions.map((obj) => ({ ...obj, label: e.name })))
                 .flat(1)
 
             console.log('TEST2')
             console.log(test2)
+
+            let test3 = this.project.affectations
+                .filter(o => o.valid && o.reductions.length > 0)
+                .map(o => [
+                    [
+                        { rowSpan: o.reductions.length, text: o.name, style: 'tableBody', alignment: 'left' },
+                        { text: o.reductions[0].name, style: 'tableBody', alignment: 'right' },
+                        { text: o.reductions[0].factor, style: 'tableBody', alignment: 'right' },
+                    ],
+                    ...o.reductions.slice(1).map(
+                        e => [
+                            {},
+                            { text: e.name, style: 'tableBody', alignment: 'right' },
+                            { text: e.factor, style: 'tableBody', alignment: 'right' },
+                        ]
+                    )
+                ]
+                )
+
+            // o.reductions.slice(1);
+
+            console.log('TEST3')
+            console.log(test3)
 
 
             // let label = { Logement: { 'Habitant': }, Activité: { 'Employé'} }
@@ -217,7 +243,7 @@ export default {
                         render: true
                     },
                     {
-                        text: 'Logement',
+                        text: 'Besoin brut pour logement',
                         style: 'body',
                         bold: true,
                         render: this.project.affectations.filter(e => e.valid && e.type === 'Logement').length > 0
@@ -229,7 +255,7 @@ export default {
                             body: [
                                 [
                                     { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'SBP [m²]', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'SBP m²', style: 'tableHeader', alignment: 'right', noWrap: true },
                                     { text: 'Logements', style: 'tableHeader', alignment: 'right' },
                                     { text: 'Besoin brut habitant', style: 'tableHeader', alignment: 'right' },
                                     { text: 'Besoin brut visiteur', style: 'tableHeader', alignment: 'right' },
@@ -251,7 +277,7 @@ export default {
                         render: this.project.affectations.filter(e => e.valid && e.type === 'Logement').length > 0
                     },
                     {
-                        text: 'Activité',
+                        text: 'Besoin brut pour activité',
                         style: 'body',
                         bold: true,
                         render: this.project.affectations.filter(e => e.valid && e.type === 'Activité').length > 0
@@ -263,13 +289,13 @@ export default {
                             body: [
                                 [
                                     { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'SV [m²]', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'SV m²', style: 'tableHeader', alignment: 'right', noWrap: true },
                                     { text: 'Besoin brut employé', style: 'tableHeader', alignment: 'right' },
                                     { text: 'Besoin brut client', style: 'tableHeader', alignment: 'right' },
                                     { text: 'Besoin brut total', style: 'tableHeader', alignment: 'right' },
                                 ],
                                 ...this.project.affectations
-                                    .filter(obj => obj.type === 'Activité' && obj.active === true)
+                                    .filter(e => e.valid && e.type === 'Activité')
                                     .map(obj => [
                                         { text: obj.name, style: 'tableBody', alignment: 'left' },
                                         { text: obj.area.toFixed(1), style: 'tableBody', alignment: 'right' },
@@ -291,6 +317,7 @@ export default {
                     {
                         text: `Fourchette du nombre de places:`,
                         style: 'body',
+                        bold: true,
                         render: true
                     },
                     {
@@ -300,22 +327,28 @@ export default {
                             body: [
                                 [
                                     { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'Min. %', style: 'tableHeader', alignment: 'right' },
-                                    { text: 'Max. %', style: 'tableHeader', alignment: 'right' }
+                                    { text: 'Min. %', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: 'Max. %', style: 'tableHeader', alignment: 'right', noWrap: true }
                                 ],
                                 [
                                     { text: 'Logement', alignment: 'left' },
-                                    { text: `${(this.project.locationType.ranges.housing.min * 100).toFixed(0)} %`, style: 'tableBody', alignment: 'right' },
-                                    { text: `${(this.project.locationType.ranges.housing.max * 100).toFixed(0)} %`, style: 'tableBody', alignment: 'right' }
+                                    { text: `${(this.project.locationType.ranges.housing.min * 100).toFixed(0)} %`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: `${(this.project.locationType.ranges.housing.max * 100).toFixed(0)} %`, style: 'tableBody', alignment: 'right', noWrap: true }
                                 ],
                                 [
                                     { text: 'Activité', alignment: 'left' },
-                                    { text: `${(this.project.locationType.ranges.activity.min * 100).toFixed(0)} %`, style: 'tableBody', alignment: 'right' },
-                                    { text: `${(this.project.locationType.ranges.activity.max * 100).toFixed(0)} %`, style: 'tableBody', alignment: 'right' }
+                                    { text: `${(this.project.locationType.ranges.activity.min * 100).toFixed(0)} %`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: `${(this.project.locationType.ranges.activity.max * 100).toFixed(0)} %`, style: 'tableBody', alignment: 'right', noWrap: true }
                                 ]
                             ]
                         },
                         layout: 'lightHorizontalLines',
+                        render: true
+                    },
+                    {
+                        text: `Besoin net:`,
+                        style: 'body',
+                        bold: true,
                         render: true
                     },
                     {
@@ -326,30 +359,30 @@ export default {
                                 [
                                     { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
                                     { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'Min.', style: 'tableHeader', alignment: 'right' },
-                                    { text: 'Max.', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Min.', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: 'Max.', style: 'tableHeader', alignment: 'right', noWrap: true },
                                 ],
                                 ...this.project.affectations
-                                    .filter(o => o.active === true) // .filter(obj => obj.type === 'Activité' && obj.active === true)
+                                    .filter(e => e.valid) // .filter(obj => obj.type === 'Activité' && obj.active === true)
                                     .map(obj =>
                                         [
                                             [
                                                 { rowSpan: 3, text: obj.name, style: 'tableBody', alignment: 'left' },
                                                 { text: obj.labels.primary, style: 'tableBody', alignment: 'left' },
-                                                { text: obj.needs.resident.net.min.toFixed(1), style: 'tableBody', alignment: 'right' },
-                                                { text: obj.needs.resident.net.max.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                                { text: obj.needs.resident.net.min.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: obj.needs.resident.net.max.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                             ],
                                             [
                                                 {},
                                                 { text: obj.labels.secondary, style: 'tableBody', alignment: 'left' },
-                                                { text: obj.needs.visitor.net.min.toFixed(1), style: 'tableBody', alignment: 'right' },
-                                                { text: obj.needs.visitor.net.max.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                                { text: obj.needs.visitor.net.min.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: obj.needs.visitor.net.max.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                             ],
                                             [
                                                 {},
                                                 { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left' },
-                                                { text: (obj.needs.resident.net.min + obj.needs.visitor.net.min).toFixed(1), style: 'tableBody', bold: true, alignment: 'right' },
-                                                { text: (obj.needs.resident.net.max + obj.needs.visitor.net.max).toFixed(1), style: 'tableBody', bold: true, alignment: 'right' },
+                                                { text: (obj.needs.resident.net.min + obj.needs.visitor.net.min).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                                { text: (obj.needs.resident.net.max + obj.needs.visitor.net.max).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                             ]
                                         ])
                                     .flat(1)
@@ -367,6 +400,7 @@ export default {
                     {
                         text: 'Facteurs de réduction:',
                         style: 'body',
+                        bold: true,
                         render: true
                     },
                     {
@@ -376,16 +410,27 @@ export default {
                             body: [
                                 [
                                     { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'Réduction', style: 'tableHeader', alignment: 'right' },
-                                    { text: 'Facteur', style: 'tableHeader', alignment: 'right' }
+                                    { text: 'Facteur de réduction', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Valeur %', style: 'tableHeader', alignment: 'right', noWrap: true }
                                 ],
                                 ...this.project.affectations
-                                    .filter(o => o.valid)
+                                    .filter(o => o.valid && o.reductions.length > 0)
                                     .map(o => [
-                                        { text: o.name, style: 'tableBody', alignment: 'left' },
-                                        { text: o.area.toFixed(1), style: 'tableBody', alignment: 'right' },
-                                        { text: 0, style: 'tableBody', alignment: 'right' },
-                                    ])
+                                        [
+                                            { rowSpan: o.reductions.length, text: o.name, style: 'tableBody', alignment: 'left' },
+                                            { text: o.reductions[0].name, style: 'tableBody', alignment: 'left' },
+                                            { text: `${o.reductions[0].factor} %`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                        ],
+                                        ...o.reductions.slice(1).map(
+                                            e => [
+                                                {},
+                                                { text: e.name, style: 'tableBody', alignment: 'left' },
+                                                { text: `${e.factor} %`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                            ]
+                                        )
+                                    ]
+                                    )
+                                    .flat(1)
                             ]
                         },
                         layout: 'lightHorizontalLines',
@@ -449,8 +494,8 @@ export default {
                             body: [
                                 [
                                     { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'Min', style: 'tableHeader', alignment: 'right' },
-                                    { text: 'Max', style: 'tableHeader', alignment: 'right' }
+                                    { text: 'Min.', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Max.', style: 'tableHeader', alignment: 'right' }
                                 ],
                                 ...this.project.affectations
                                     .filter(obj => obj.active === true)
