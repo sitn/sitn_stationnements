@@ -1,7 +1,6 @@
 <template>
     <!-- 2. RAW PARKING NEEDS -->
     <div class="q-pa-md">
-        <!-- <div class="text-h5">2. Calcul du besoin brut (article 27 RELConstr.)</div> -->
 
         <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders"
             v-if="!this.project.locationType">
@@ -41,7 +40,6 @@
 
                 <label class="text-h7 ">{{ item.name }} {{ item.isValid }}</label>
                 <div class="row q-col-gutter-sm">
-
 
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
                         <q-input bg-color="white" outlined label="" type="number" name="item.area"
@@ -88,17 +86,14 @@
                             name="item.rawVisitorNeed" v-model.number="item.rawTotalNeed" readonly>
                         </q-input>
                     </div>
-                    <!-- <div class="col-xs-12 col-sm-12 col-md-2 col-lg"> -->
+
                     <div>
                         <q-btn round flat color="grey" name="delete" @click="deleteItem(item)" icon="delete"></q-btn>
                     </div>
 
                 </div>
 
-
             </div>
-
-
 
         </q-form>
 
@@ -178,9 +173,6 @@ export default {
 
             this.project.affectations[index].area = 0.0
             this.project.affectations[index].numberOfHouses = 0.0
-
-            //console.log(item)
-            //console.log(`Delete item with id=${item.name}`)
 
             this.updateProject()
 
