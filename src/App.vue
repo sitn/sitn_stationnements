@@ -209,44 +209,44 @@ project.getAffectation("Logements standards").reductions = [
 ]
 
 project.getAffectation("Logements avec encadrement ou étudiants").reductions = [
-  new Reduction("Facteur de réduction logements particuliers (art. 34)", 0.0, { min: 0.0, max: 50 }, `(art. 34) Un facteur de réduction peut s'appliquer pour les logements avec encadrement ou étudiants. Contacter la commune.`),
-  new Reduction("Facteur de réduction protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
+  new Reduction("Logements particuliers (art. 34)", 0.0, { min: 0.0, max: 50 }, `(art. 34) Un facteur de réduction peut s'appliquer pour les logements avec encadrement ou étudiants. Contacter la commune.`),
+  new Reduction("Protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
 ]
 
 project.getAffectation("Services à nombreuse clientèle").reductions = [
-  new Reduction("Facteur de réduction plan de mobilité (art. 31)", 0.0, { min: 0.0, max: 100 }, `(art. 31) Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
-  new Reduction("Facteur de réduction utilisation multiple (art. 32)", 0.0, { min: 0.0, max: 100 }, `(art. 32) Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.`),
-  new Reduction("Facteur de réduction protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
+  new Reduction("Plan de mobilité (art. 31)", 0.0, { min: 0.0, max: 100 }, `(art. 31) Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
+  new Reduction("Utilisation multiple (art. 32)", 0.0, { min: 0.0, max: 100 }, `(art. 32) Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.`),
+  new Reduction("Protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
 ]
 
 project.getAffectation("Magasins à nombreuse clientèle").reductions = [
-  new Reduction("Facteur de réduction plan de mobilité (art. 31)", 0.0, { min: 0.0, max: 100 }, `(art. 31) Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
-  new Reduction("Facteur de réduction utilisation multiple (art. 32)", 0.0, { min: 0.0, max: 100 }, `(art. 32) Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.`),
-  new Reduction("Facteur de réduction protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
+  new Reduction("Plan de mobilité (art. 31)", 0.0, { min: 0.0, max: 100 }, `(art. 31) Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
+  new Reduction("Utilisation multiple (art. 32)", 0.0, { min: 0.0, max: 100 }, `(art. 32) Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.`),
+  new Reduction("Protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
 ]
 
 project.getAffectation("Autres magasins").reductions = [
-  new Reduction("Facteur de réduction plan de mobilité (art. 31)", 0.0, { min: 0.0, max: 100 }, `(art. 31) Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
-  new Reduction("Facteur de réduction utilisation multiple (art. 32)", 0.0, { min: 0.0, max: 100 }, `(art. 32) Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.`),
-  new Reduction("Facteur de réduction protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
+  new Reduction("Plan de mobilité (art. 31)", 0.0, { min: 0.0, max: 100 }, `(art. 31) Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
+  new Reduction("Utilisation multiple (art. 32)", 0.0, { min: 0.0, max: 100 }, `(art. 32) Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.`),
+  new Reduction("Protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
 ]
 
 project.getAffectation("Industrie et artisanat").reductions = [
-  new Reduction("Facteur de réduction plan de mobilité (art. 31)", 0.0, { min: 0.0, max: 100 }, `(art. 31) Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
-  new Reduction("Facteur de réduction utilisation multiple (art. 32)", 0.0, { min: 0.0, max: 100 }, `(art. 32) Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.`),
-  new Reduction("Facteur de réduction protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
+  new Reduction("Plan de mobilité (art. 31)", 0.0, { min: 0.0, max: 100 }, `(art. 31) Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
+  new Reduction("Utilisation multiple (art. 32)", 0.0, { min: 0.0, max: 100 }, `(art. 32) Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.`),
+  new Reduction("Protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
 ]
 
 project.getAffectation("Entrepôts et dépôts").reductions = [
-  new Reduction("Facteur de réduction plan de mobilité (art. 31)", 0.0, { min: 0.0, max: 100 }, `(art. 31) Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
-  new Reduction("Facteur de réduction utilisation multiple (art. 32)", 0.0, { min: 0.0, max: 100 }, `(art. 32) Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.`),
-  new Reduction("Facteur de réduction protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
+  new Reduction("Plan de mobilité (art. 31)", 0.0, { min: 0.0, max: 100 }, `(art. 31) Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
+  new Reduction("Utilisation multiple (art. 32)", 0.0, { min: 0.0, max: 100 }, `(art. 32) Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.`),
+  new Reduction("Protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
 ]
 
 project.getAffectation("Autres services").reductions = [
-  new Reduction("Facteur de réduction plan de mobilité (art. 31)", 0.0, { min: 0.0, max: 100 }, `(art. 31) Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
-  new Reduction("Facteur de réduction utilisation multiple (art. 32)", 0.0, { min: 0.0, max: 100 }, `(art. 32) Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.`),
-  new Reduction("Facteur de réduction protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
+  new Reduction("Plan de mobilité (art. 31)", 0.0, { min: 0.0, max: 100 }, `(art. 31) Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.`),
+  new Reduction("Utilisation multiple (art. 32)", 0.0, { min: 0.0, max: 100 }, `(art. 32) Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.`),
+  new Reduction("Protection de l'environnement et sauvegarde du patrimoine (art. 33)", 0.0, { min: 0.0, max: 100 }, `(art. 33) Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.`),
 ]
 
 export default {
