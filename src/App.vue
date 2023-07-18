@@ -329,6 +329,8 @@ export default {
         this.project.loctypes.sort((a, b) => b.area - a.area)
         // return this.project.loctypes[0]
 
+        this.$nextTick(() => { this.$refs.form.validate() })
+
       }
 
     }
@@ -424,6 +426,8 @@ export default {
     updateProject(obj) {
 
       this.project = obj
+      this.$nextTick(() => { this.$refs.form.validate() })
+
       console.log('Update project:')
       console.log(this.project)
 
