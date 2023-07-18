@@ -390,8 +390,8 @@ export default {
           this.geojson.features.push(feature)
 
           // update parcels in project
-          this.project.parcels = this.geojson.features.map(x => x.properties.idmai)
-
+          // this.project.parcels = this.geojson.features.map(x => ({ parcel: x.properties.idmai.split("_")[1], cadastre: x.properties.cadnom }))
+          this.project.parcels = this.geojson.features.map(x => (`n° ${x.properties.idmai.split("_")[1]}, cadastre de ${x.properties.cadnom}`))
         })
         .catch(error => console.log('error', error))
 
