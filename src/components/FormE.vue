@@ -142,26 +142,7 @@ export default {
                                 noWrap: true
                             }
                         ],
-                        /*
-                        stack: [
-                            {
-                                text: `${currentPage.toString()} / ${pageCount}`,
-                                fontSize: 8,
-                                alignment: 'center',
-                                margin: [0, 0, 0, 15],
-                            },
-                            {
-                                text: 'RUE DE TIVOLI 5, CASE POSTALE, CH-2002 NEUCHÂTEL',
-                                fontSize: 8,
-                                alignment: 'left'
-                            },
-                            {
-                                text: 'TÉL. 032 889 67 40, FAX 032 722 03 84, SERVICE.AMENAGEMENTTERRITOIRE@NE.CH, WWW.NE.CH',
-                                fontSize: 8,
-                                alignment: 'left',
-                            },
-                        ],
-                        */
+                        // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
                         margin: this.mmToPoints([30, 0, 20, 0])
                     }
 
@@ -176,6 +157,7 @@ export default {
                     {
                         svg: logo,
                         width: 130,
+                        // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
                         margin: [0, 0, 0, 15],
                         render: true
                     },
@@ -186,6 +168,7 @@ export default {
                                 width: 150,
                                 fontSize: 8,
                                 bold: true,
+                                // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
                                 margin: [0, 0, 0, 2],
                             }],
                         render: true
@@ -197,6 +180,7 @@ export default {
                                 width: 150,
                                 fontSize: 7,
                                 bold: false,
+                                // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
                                 margin: [0, 0, 0, 0],
                             }],
                         render: true
@@ -208,14 +192,15 @@ export default {
                         render: true
                     },
                     {
-                        text: 'CALCUL DU NOMBRE DE PLACES DE STATIONNEMENT VOITURE',
+                        text: 'Calcul du nombre de places de stationnement voiture', // 'CALCUL DU NOMBRE DE PLACES DE STATIONNEMENT VOITURE',
                         style: 'header',
                         render: true
                     },
                     // A4 measures 210 × 297 millimeters or 8.27 × 11.69 inches. In PostScript, its dimensions are rounded off to 595 × 842 points.
                     {
-                        canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 141.732, y2: 5, lineWidth: 0.5 }],
-                        margin: [0, 10, 0, 10],
+                        canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 141.732, y2: 5, lineWidth: 0.4 }],
+                        // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+                        margin: [0, 5, 0, 5],
                         render: true
                     },
                     {
@@ -292,23 +277,23 @@ export default {
                                     .map(obj => [
                                         [
                                             { rowSpan: 3, text: obj.name, style: 'tableBody', alignment: 'left' },
-                                            { rowSpan: 3, text: obj.numberOfHouses, style: 'tableBody', alignment: 'right' },
-                                            { rowSpan: 3, text: obj.area.toFixed(1), alignment: 'right' },
-                                            { text: 'Habitant', style: 'tableBody', alignment: 'left' },
-                                            { text: obj.needs.resident.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                            { rowSpan: 3, text: obj.numberOfHouses, style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { rowSpan: 3, text: obj.area.toFixed(1), alignment: 'right', noWrap: true },
+                                            { text: 'Habitant', style: 'tableBody', alignment: 'left', noWrap: true },
+                                            { text: obj.needs.resident.raw.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                         ],
                                         [
                                             {},
                                             {},
                                             {},
-                                            { text: 'Visiteur', style: 'tableBody', alignment: 'left' },
-                                            { text: obj.needs.visitor.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                            { text: 'Visiteur', style: 'tableBody', alignment: 'left', noWrap: true },
+                                            { text: obj.needs.visitor.raw.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                         ],
                                         [
                                             {},
                                             {},
                                             {},
-                                            { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left' },
+                                            { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
                                             { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), style: 'tableBody', bold: true, alignment: 'right' },
                                         ],
                                     ])
@@ -341,19 +326,19 @@ export default {
                                         [
                                             { rowSpan: 3, text: obj.name, style: 'tableBody', alignment: 'left' },
                                             { rowSpan: 3, text: obj.area.toFixed(1), alignment: 'right' },
-                                            { text: 'Employé', style: 'tableBody', alignment: 'left' },
-                                            { text: obj.needs.resident.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                            { text: 'Employé', style: 'tableBody', alignment: 'left', noWrap: true },
+                                            { text: obj.needs.resident.raw.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                         ],
                                         [
                                             {},
                                             {},
-                                            { text: 'Client', style: 'tableBody', alignment: 'left' },
-                                            { text: obj.needs.visitor.raw.toFixed(1), style: 'tableBody', alignment: 'right' },
+                                            { text: 'Client', style: 'tableBody', alignment: 'left', noWrap: true },
+                                            { text: obj.needs.visitor.raw.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                         ],
                                         [
                                             {},
                                             {},
-                                            { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left' },
+                                            { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
                                             { text: (obj.needs.resident.raw + obj.needs.visitor.raw).toFixed(1), style: 'tableBody', bold: true, alignment: 'right' },
                                         ],
                                     ])
@@ -436,7 +421,7 @@ export default {
                                             ],
                                             [
                                                 {},
-                                                { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left' },
+                                                { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
                                                 { text: (obj.needs.resident.net.min + obj.needs.visitor.net.min).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                                 { text: (obj.needs.resident.net.max + obj.needs.visitor.net.max).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                             ]
@@ -482,7 +467,7 @@ export default {
                                             ],
                                             [
                                                 {},
-                                                { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left' },
+                                                { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
                                                 { text: (obj.needs.resident.net.min + obj.needs.visitor.net.min).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                                 { text: (obj.needs.resident.net.max + obj.needs.visitor.net.max).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                             ]
@@ -532,7 +517,7 @@ export default {
                                         ),
                                         [
                                             {},
-                                            { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left' },
+                                            { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
                                             { text: `${(o.totalReduction * 100).toFixed(1)} %`, style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                         ],
                                     ]
@@ -578,7 +563,7 @@ export default {
                                             ],
                                             [
                                                 {},
-                                                { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left' },
+                                                { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
                                                 { text: (obj.needs.resident.reduced.min + obj.needs.visitor.reduced.min).toFixed(1), style: 'tableBody', bold: true, alignment: 'right' },
                                                 { text: (obj.needs.resident.reduced.max + obj.needs.visitor.reduced.max).toFixed(1), style: 'tableBody', bold: true, alignment: 'right' },
                                             ]
@@ -613,9 +598,9 @@ export default {
                                         { text: obj.totalNeed.max.toFixed(1), alignment: 'right' }
                                     ]),
                                 [
-                                    { text: 'Total (arrondi supérieur)', alignment: 'left', bold: true },
-                                    { text: Math.ceil(this.project.totalNeed.min), alignment: 'right', bold: true },
-                                    { text: Math.ceil(this.project.totalNeed.max), alignment: 'right', bold: true }
+                                    { text: 'Total (arrondi supérieur)', alignment: 'left', bold: true, noWrap: true },
+                                    { text: Math.ceil(this.project.totalNeed.min), alignment: 'right', bold: true, noWrap: true },
+                                    { text: Math.ceil(this.project.totalNeed.max), alignment: 'right', bold: true, noWrap: true }
                                 ]
                             ]
                         },
@@ -626,7 +611,7 @@ export default {
                 styles: {
                     // margins [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
                     header: {
-                        fontSize: 14,
+                        fontSize: 13,
                         bold: true,
                         margin: [0, 0, 0, 5]
                     },
