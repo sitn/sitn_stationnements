@@ -159,7 +159,6 @@ export default {
                 e.active = true
             })
 
-            this.$nextTick(() => { this.$refs.form.validate() })
             this.updateProject()
 
         },
@@ -178,6 +177,7 @@ export default {
 
         },
         updateProject() {
+            this.$nextTick(() => { this.$refs.form.validate() })
             this.$emit('updateProject', this.project);
         }
     }
