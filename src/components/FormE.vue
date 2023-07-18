@@ -102,22 +102,103 @@ export default {
         print() {
             window.print()
         },
+        mmToPoints(mm) {
+            let arr = [mm]
+            return arr.flat(1).map(x => 2.834645 * x)
+        },
         printPDF() {
 
             let docDefinition = {
                 pageSize: 'A4',
                 pageOrientation: 'portrait',
                 // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-                pageMargins: [40, 50, 40, 60],
+                pageMargins: this.mmToPoints([30, 20, 20, 20]),
                 header: '',
                 footer: (currentPage, pageCount) => {
-                    return { text: `${currentPage.toString()} / ${pageCount}`, alignment: 'center' }
+
+                    return {
+                        columns: [
+                            [
+                                {
+                                    text: ['RUE DE TIVOLI 5, CASE POSTALE, CH-2002 NEUCHÂTEL'],
+                                    width: '*',
+                                    fontSize: 8,
+                                    alignment: 'left',
+
+                                },
+                                {
+                                    text: ['TÉL. 032 889 67 40, FAX 032 722 03 84, SERVICE.AMENAGEMENTTERRITOIRE@NE.CH, WWW.NE.CH'],
+                                    width: '*',
+                                    fontSize: 8,
+                                    alignment: 'left',
+
+                                }
+                            ],
+                            {
+                                text: `${currentPage.toString()} / ${pageCount}`,
+                                width: 'auto',
+                                fontSize: 8,
+                                alignment: 'right',
+                                noWrap: true
+                            }
+                        ],
+                        /*
+                        stack: [
+                            {
+                                text: `${currentPage.toString()} / ${pageCount}`,
+                                fontSize: 8,
+                                alignment: 'center',
+                                margin: [0, 0, 0, 15],
+                            },
+                            {
+                                text: 'RUE DE TIVOLI 5, CASE POSTALE, CH-2002 NEUCHÂTEL',
+                                fontSize: 8,
+                                alignment: 'left'
+                            },
+                            {
+                                text: 'TÉL. 032 889 67 40, FAX 032 722 03 84, SERVICE.AMENAGEMENTTERRITOIRE@NE.CH, WWW.NE.CH',
+                                fontSize: 8,
+                                alignment: 'left',
+                            },
+                        ],
+                        */
+                        margin: this.mmToPoints([30, 0, 20, 0])
+                    }
+
+                },
+                info: {
+                    title: 'Calcul du nombre de places de stationnement',
+                    author: 'Etat de Neuchâtel',
+                    subject: '',
+                    keywords: 'stationnement, neuchâtel',
                 },
                 content: [
                     {
                         svg: logo,
-                        width: 150,
-                        margin: [0, 0, 0, 10],
+                        width: 130,
+                        margin: [0, 0, 0, 15],
+                        render: true
+                    },
+                    {
+                        columns: [
+                            {
+                                text: `DÉPARTEMENT DU DÉVELOPPEMENT TERRITORIAL ET DE L'ENVIRONNEMENT`,
+                                width: 150,
+                                fontSize: 8,
+                                bold: true,
+                                margin: [0, 0, 0, 2],
+                            }],
+                        render: true
+                    },
+                    {
+                        columns: [
+                            {
+                                text: `SERVICE DE L'AMÉNAGEMENT DU TERRITOIRE`,
+                                width: 150,
+                                fontSize: 7,
+                                bold: false,
+                                margin: [0, 0, 0, 0],
+                            }],
                         render: true
                     },
                     {
@@ -545,7 +626,7 @@ export default {
                 styles: {
                     // margins [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
                     header: {
-                        fontSize: 18,
+                        fontSize: 16,
                         bold: true,
                         margin: [0, 0, 0, 5]
                     },
