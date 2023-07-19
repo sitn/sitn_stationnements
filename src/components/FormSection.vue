@@ -5,11 +5,11 @@
             <div class="bg-blue-grey-6 text-white text-h5 q-pa-md q-mx-md">{{ title }}</div>
             <div class="bg-white q-pa-md q-mx-md">
 
-                <q-form ref="form" greedy>
+                <!-- <q-form ref="form" greedy> -->
 
-                    <slot name="content"></slot>
+                <slot name="content"></slot>
 
-                </q-form>
+                <!-- </q-form> -->
 
             </div>
         </div>
@@ -35,10 +35,10 @@ export default {
         }
     },
     computed: {
-    }, 
+    },
     mounted() {
 
-        this.$nextTick(() => { this.$refs.form.validate() })
+        // this.$nextTick(() => { this.$refs.form.validate() })
 
     },
     methods: {
