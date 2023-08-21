@@ -11,6 +11,30 @@
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
+        <!-- Sélectionner le facteur min/max -->
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+            <q-select outlined bottom-slots bg-color="white" v-model="project.commune" :options="communes"
+                option-value="comnom" option-label="comnom" @update:model-value="resetParcels()" label="Commune"
+                :rules="[(val) => val !== null || 'Veuillez choisir le facteur de réduction']">
+
+                <template v-slot:option="scope">
+                    <q-item v-bind="scope.itemProps">
+                        <q-item-section>
+                            <q-item-label>{{ scope.opt.comnom }}</q-item-label>
+                            <!-- <q-item-label caption>n° {{ scope.opt.numcom }}</q-item-label> -->
+                        </q-item-section>
+                    </q-item>
+                </template>
+
+                <template v-slot:hint>
+                    Choisir la commune
+                </template>
+            </q-select>
+        </div>
+
+
+
+
         <div v-if="this.project.hasAffectation" class="row">
             <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6"
                 v-for="(item, key) in this.project.affectations.filter(e => e.valid)">
