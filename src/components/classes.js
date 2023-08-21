@@ -152,9 +152,10 @@ export class Need {
 // Affectation
 export class Affectation {
 
-  constructor(type, name, factors, reductions, area, numberOfHouses) {
+  constructor(type, name, description, factors, reductions, area, numberOfHouses) {
     this.type = type
     this.name = name
+    this.description = description
     this.factors = factors
     this.range = { min: 0.0, max: 1.0 }
     this.reductions = reductions
