@@ -191,14 +191,14 @@ import { ref } from 'vue'
 const project = new Project(
   [],
   [
-    new Affectation("Logement", "Logements standards", { area: 0.01, resident: 1, visitor: 0.1 }, [], 0, 0),
-    new Affectation("Logement", "Logements avec encadrement ou étudiants", { area: 0.01, resident: 1, visitor: 0.1 }, [], 0, 0),
-    new Affectation("Activité", "Services à nombreuse clientèle", { area: 0.01, resident: 2, visitor: 1 }, [], 0, 0),
-    new Affectation("Activité", "Magasins à nombreuse clientèle", { area: 0.01, resident: 2, visitor: 8 }, [], 0, 0),
-    new Affectation("Activité", "Autres magasins", { area: 0.01, resident: 1.5, visitor: 3.5 }, [], 0, 0),
-    new Affectation("Activité", "Industrie et artisanat", { area: 0.01, resident: 1, visitor: 0.2 }, [], 0, 0),
-    new Affectation("Activité", "Entrepôts et dépôts", { area: 0.01, resident: 0.1, visitor: 0.01 }, [], 0, 0),
-    new Affectation("Activité", "Autres services", { area: 0.01, resident: 2, visitor: 0.5 }, [], 0, 0)
+    new Affectation("Logement", "Logements standards", "", { area: 0.01, resident: 1, visitor: 0.1 }, [], 0, 0),
+    new Affectation("Logement", "Logements avec encadrement ou étudiants", "", { area: 0.01, resident: 1, visitor: 0.1 }, [], 0, 0),
+    new Affectation("Activité", "Industrie et artisanat", "", { area: 0.01, resident: 1, visitor: 0.2 }, [], 0, 0),
+    new Affectation("Activité", "Entrepôts et dépôts", "", { area: 0.01, resident: 0.1, visitor: 0.01 }, [], 0, 0),
+    new Affectation("Activité", "Services à nombreuse clientèle", "(banque, poste administration publique avec guichets, agence de voyage médecin, dentiste, cabinet de soins, eproduction et copie, nettoyage chimique coiffeur,…)", { area: 0.01, resident: 2, visitor: 1 }, [], 0, 0),
+    new Affectation("Activité", "Autres services", "", { area: 0.01, resident: 2, visitor: 0.5 }, [], 0, 0),
+    new Affectation("Activité", "Magasins à nombreuse clientèle", "(alimentation, pharmacie, droguerie, grand magasin, kiosque, …)", { area: 0.01, resident: 2, visitor: 8 }, [], 0, 0),
+    new Affectation("Activité", "Autres magasins", "(librairie, ménage, quincaillerie horlogerie, bijouterie, ameublement, magasins spécialisés)", { area: 0.01, resident: 1.5, visitor: 3.5 }, [], 0, 0),
   ],
   [
     new LocationTypes("I", { housing: { min: 0.2, max: 0.5 }, activity: { min: 0.0, max: 0.4 } }),
