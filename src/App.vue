@@ -201,11 +201,11 @@ const project = new Project(
     new Affectation("Activité", "Autres services", { area: 0.01, resident: 2, visitor: 0.5 }, [], 0, 0)
   ],
   [
-    new LocationTypes("I", { housing: { min: 0.2, max: 0.5 }, activity: { min: 0.0, max: 0.3 } }),
+    new LocationTypes("I", { housing: { min: 0.2, max: 0.5 }, activity: { min: 0.0, max: 0.4 } }),
     new LocationTypes("II", { housing: { min: 0.5, max: 0.7 }, activity: { min: 0.2, max: 0.5 } }),
     new LocationTypes("III", { housing: { min: 0.7, max: 1.0 }, activity: { min: 0.4, max: 0.7 } }),
     new LocationTypes("IV", { housing: { min: 0.7, max: 1.0 }, activity: { min: 0.5, max: 0.8 } }),
-    new LocationTypes("V", { housing: { min: 0.7, max: 0.7 }, activity: { min: 0.7, max: 0.7 } }),
+    new LocationTypes("V", { housing: { min: 0.7, max: 1.0 }, activity: { min: 0.7, max: 1.0 } }),
     new LocationTypes("VI", { housing: { min: 0.7, max: 1.0 }, activity: { min: 0.9, max: 1.0 } })
   ]
 )
