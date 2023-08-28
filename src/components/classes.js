@@ -29,6 +29,7 @@ export var communes = [
   { "numcom": 35, "comnom": "Les Verri\u00e8res" }
 ]
 
+// sort alphabetically
 communes = communes.sort((a, b) => a.comnom.toLowerCase().localeCompare(b.comnom.toLowerCase()))
 // communes = communes.sort((a, b) => a.numcom - b.numcom)
 
