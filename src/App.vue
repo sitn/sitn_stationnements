@@ -199,6 +199,7 @@ const project = new Project(
     new Affectation("Activité", "Autres services", "", { area: 0.01, resident: 2, visitor: 0.5 }, [], 0, 0),
     new Affectation("Activité", "Magasins à nombreuse clientèle", "(alimentation, pharmacie, droguerie, grand magasin, kiosque, …)", { area: 0.01, resident: 2, visitor: 8 }, [], 0, 0),
     new Affectation("Activité", "Autres magasins", "(librairie, ménage, quincaillerie horlogerie, bijouterie, ameublement, magasins spécialisés)", { area: 0.01, resident: 1.5, visitor: 3.5 }, [], 0, 0),
+    new Affectation("Activité", "Autre affectation", "(selon norme VSS)", { area: 0.01, resident: 1.5, visitor: 3.5 }, [], 0, 0),
   ],
   [
     new LocationTypes("I", { housing: { min: 0.2, max: 0.5 }, activity: { min: 0.0, max: 0.4 } }),
