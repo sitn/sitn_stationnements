@@ -22,6 +22,7 @@
                         </q-item-section>
                         <q-item-section>
                             <q-item-label>{{ scope.opt.name }}</q-item-label>
+                            <q-item-label caption>{{ scope.opt.description }}</q-item-label>
                             <!-- <q-item-label caption>Selected: {{ scope.selected }}</q-item-label> -->
                             <!-- <q-item-label caption>Active: {{ scope.opt.active }}</q-item-label> -->
                         </q-item-section>
