@@ -1,4 +1,19 @@
+import communes_json from '../assets/data/communes.json'
+import affectations_json from '../assets/data/affectations.json'
+
+console.log('communes')
+console.log(communes_json)
+console.log('affectations_json')
+console.log(affectations_json)
+
+
+export var communes = communes_json
+
+// export { communes2 } from '../assets/data/communes.json'
+// export default communes2;
+
 // Communes
+/*
 export var communes = [
   { "numcom": 60, "comnom": "La Chaux-de-Fonds" },
   { "numcom": 58, "comnom": "Les Ponts-de-Martel" },
@@ -28,6 +43,7 @@ export var communes = [
   { "numcom": 71, "comnom": "La T\u00e8ne" },
   { "numcom": 35, "comnom": "Les Verri\u00e8res" }
 ]
+*/
 
 // sort alphabetically
 communes = communes.sort((a, b) => a.comnom.toLowerCase().localeCompare(b.comnom.toLowerCase()))
