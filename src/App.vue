@@ -177,7 +177,10 @@
 </template>
 
 <script>
-import { Project, Affectation, Reduction, LocationTypes, Need, Mob20, communes } from "./components/classes.js"
+import communes from './assets/data/communes.json'
+import affectations from './assets/data/affectations.json'
+
+import { Project, Affectation, Reduction, LocationTypes, Mob20 } from "./components/classes.js"
 import FormSection from "./components/FormSection.vue"
 import Search from "./components/Search.vue"
 import Map from "./components/Map.vue"
