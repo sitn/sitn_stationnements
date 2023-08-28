@@ -1,126 +1,187 @@
 [
     {
-        "name": "Industrie, artisanat",
+        "name": "Logements standards",
+        "type": "Logement",
+        "description": ""
+    },
+    {
+        "name": "Logements avec encadrement ou étudiants",
+        "type": "Logement",
         "description": ""
     },
     {
         "name": "Entrepôts et dépôts",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Services à nombreuse clientèle",
+        "type": "Activité",
         "description": "(banque, poste administration publique avec guichets, agence de voyage médecin, dentiste, cabinet de soins, eproduction et copie, nettoyage chimique coiffeur,…)"
     },
     {
         "name": "Autres services",
+        "type": "Activité",
         "description": "(administration publique sans guichet, bureau d’ingénieur ou d’architecte, étude d’avocat, assurance, caisse maladie, administration d’industries, fiduciaire, laboratoire, entreprise de transport,…)"
     },
     {
         "name": "Magasins à nombreuse clientèle",
+        "type": "Activité",
         "description": "(alimentation, pharmacie, droguerie, grand magasin, kiosque, …)"
     },
     {
         "name": "Autres magasins",
+        "type": "Activité",
         "description": "(librairie, ménage, quincaillerie horlogerie, bijouterie, ameublement, magasins spécialisés)"
     },
     {
         "name": "Hôtel",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Auberge de jeunesse",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Restaurant, café, bar",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Petit hôpital, clinique",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Etablissement pour personnes âgées, sanatorium",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Cinéma",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Théâtre, opéra, salle de concert",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Musée, espace d’exposition, galerie",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Bibliothèque",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Discothèque",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Eglise, mosquée, synagogue",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Cimetière",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Crèche, jardin d’enfant",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "École primaire ou secondaire",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Gymnase, lycée",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Conservatoire",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "École professionnelle",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Haute école, université",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Cours pour adultes",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Salle de réunion ou de conférence",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Patinoire",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Picine couverte",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Plage et piscine en plein air",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Halle de gymnastrique",
+        "type": "Activité",
         "description": ""
     },
     {
         "name": "Centre de fitness",
+        "type": "Activité",
         "description": ""
     },
+    {
+        "name": "Stade d'athlétisme avec terrains de jeu",
+        "type": "Activité",
+        "description": ""
+    },
+    {
+        "name": "Stade (football, hoykey)",
+        "type": "Activité",
+        "description": ""
+    },
+    {
+        "name": "Tennis",
+        "type": "Activité",
+        "description": ""
+    },
+    {
+        "name": "Stand de tir",
+        "type": "Activité",
+        "description": ""
+    },
+    {
+        "name": "Stand de tir",
+        "type": "Activité",
+        "description": ""
+    }
 ]
