@@ -1,0 +1,126 @@
+[
+    {
+        "name": "Industrie, artisanat",
+        "description": ""
+    },
+    {
+        "name": "Entrepôts et dépôts",
+        "description": ""
+    },
+    {
+        "name": "Services à nombreuse clientèle",
+        "description": "(banque, poste administration publique avec guichets, agence de voyage médecin, dentiste, cabinet de soins, eproduction et copie, nettoyage chimique coiffeur,…)"
+    },
+    {
+        "name": "Autres services",
+        "description": "(administration publique sans guichet, bureau d’ingénieur ou d’architecte, étude d’avocat, assurance, caisse maladie, administration d’industries, fiduciaire, laboratoire, entreprise de transport,…)"
+    },
+    {
+        "name": "Magasins à nombreuse clientèle",
+        "description": "(alimentation, pharmacie, droguerie, grand magasin, kiosque, …)"
+    },
+    {
+        "name": "Autres magasins",
+        "description": "(librairie, ménage, quincaillerie horlogerie, bijouterie, ameublement, magasins spécialisés)"
+    },
+    {
+        "name": "Hôtel",
+        "description": ""
+    },
+    {
+        "name": "Auberge de jeunesse",
+        "description": ""
+    },
+    {
+        "name": "Restaurant, café, bar",
+        "description": ""
+    },
+    {
+        "name": "Petit hôpital, clinique",
+        "description": ""
+    },
+    {
+        "name": "Etablissement pour personnes âgées, sanatorium",
+        "description": ""
+    },
+    {
+        "name": "Cinéma",
+        "description": ""
+    },
+    {
+        "name": "Théâtre, opéra, salle de concert",
+        "description": ""
+    },
+    {
+        "name": "Musée, espace d’exposition, galerie",
+        "description": ""
+    },
+    {
+        "name": "Bibliothèque",
+        "description": ""
+    },
+    {
+        "name": "Discothèque",
+        "description": ""
+    },
+    {
+        "name": "Eglise, mosquée, synagogue",
+        "description": ""
+    },
+    {
+        "name": "Cimetière",
+        "description": ""
+    },
+    {
+        "name": "Crèche, jardin d’enfant",
+        "description": ""
+    },
+    {
+        "name": "École primaire ou secondaire",
+        "description": ""
+    },
+    {
+        "name": "Gymnase, lycée",
+        "description": ""
+    },
+    {
+        "name": "Conservatoire",
+        "description": ""
+    },
+    {
+        "name": "École professionnelle",
+        "description": ""
+    },
+    {
+        "name": "Haute école, université",
+        "description": ""
+    },
+    {
+        "name": "Cours pour adultes",
+        "description": ""
+    },
+    {
+        "name": "Salle de réunion ou de conférence",
+        "description": ""
+    },
+    {
+        "name": "Patinoire",
+        "description": ""
+    },
+    {
+        "name": "Picine couverte",
+        "description": ""
+    },
+    {
+        "name": "Plage et piscine en plein air",
+        "description": ""
+    },
+    {
+        "name": "Halle de gymnastrique",
+        "description": ""
+    },
+    {
+        "name": "Centre de fitness",
+        "description": ""
+    },
+]
