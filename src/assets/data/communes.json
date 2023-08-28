@@ -1,0 +1,202 @@
+[
+    {
+        "numcom": 11,
+        "comnom": "Boudry"
+    },
+    {
+        "numcom": 59,
+        "comnom": "Brot-Plamboz"
+    },
+    {
+        "numcom": 6,
+        "comnom": "Cornaux"
+    },
+    {
+        "numcom": 12,
+        "comnom": "Cortaillod"
+    },
+    {
+        "numcom": 7,
+        "comnom": "Cressier (NE)"
+    },
+    {
+        "numcom": 8,
+        "comnom": "Enges"
+    },
+    {
+        "numcom": 2,
+        "comnom": "Hauterive (NE)"
+    },
+    {
+        "numcom": 56,
+        "comnom": "La Brévine"
+    },
+    {
+        "numcom": 60,
+        "comnom": "La Chaux-de-Fonds",
+        "factors": [
+            {
+                "zone": "I",
+                "values": [
+                    {
+                        "type": "housing",
+                        "min": 0.2,
+                        "max": 0.5
+                    },
+                    {
+                        "type": "activity",
+                        "min": 0.0,
+                        "max": 0.4
+                    }
+                ]
+            },
+            {
+                "zone": "II",
+                "values": [
+                    {
+                        "type": "housing",
+                        "min": 0.5,
+                        "max": 0.7
+                    },
+                    {
+                        "type": "activity",
+                        "min": 0.2,
+                        "max": 0.5
+                    }
+                ]
+            },
+            {
+                "zone": "III",
+                "values": [
+                    {
+                        "type": "housing",
+                        "min": 0.7,
+                        "max": 1.0
+                    },
+                    {
+                        "type": "activity",
+                        "min": 0.4,
+                        "max": 0.7
+                    }
+                ]
+            },
+            {
+                "zone": "IV",
+                "values": [
+                    {
+                        "type": "housing",
+                        "min": 0.7,
+                        "max": 1.0
+                    },
+                    {
+                        "type": "activity",
+                        "min": 0.5,
+                        "max": 0.8
+                    }
+                ]
+            },
+            {
+                "zone": "V",
+                "values": [
+                    {
+                        "type": "housing",
+                        "min": 0.7,
+                        "max": 1.0
+                    },
+                    {
+                        "type": "activity",
+                        "min": 0.7,
+                        "max": 1.0
+                    }
+                ]
+            },
+            {
+                "zone": "VI",
+                "values": [
+                    {
+                        "type": "housing",
+                        "min": 0.7,
+                        "max": 1.0
+                    },
+                    {
+                        "type": "activity",
+                        "min": 0.9,
+                        "max": 1.0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "numcom": 57,
+        "comnom": "La Chaux-du-Milieu"
+    },
+    {
+        "numcom": 33,
+        "comnom": "La Côte-aux-Fées"
+    },
+    {
+        "numcom": 76,
+        "comnom": "La Grande Béroche"
+    },
+    {
+        "numcom": 62,
+        "comnom": "La Sagne"
+    },
+    {
+        "numcom": 71,
+        "comnom": "La Tène"
+    },
+    {
+        "numcom": 55,
+        "comnom": "Le Cerneux-Péquignot"
+    },
+    {
+        "numcom": 9,
+        "comnom": "Le Landeron"
+    },
+    {
+        "numcom": 78,
+        "comnom": "Le Locle"
+    },
+    {
+        "numcom": 61,
+        "comnom": "Les Planchettes"
+    },
+    {
+        "numcom": 58,
+        "comnom": "Les Ponts-de-Martel"
+    },
+    {
+        "numcom": 35,
+        "comnom": "Les Verrières"
+    },
+    {
+        "numcom": 10,
+        "comnom": "Lignières"
+    },
+    {
+        "numcom": 73,
+        "comnom": "Milvignes"
+    },
+    {
+        "numcom": 77,
+        "comnom": "Neuchâtel"
+    },
+    {
+        "numcom": 75,
+        "comnom": "Rochefort"
+    },
+    {
+        "numcom": 3,
+        "comnom": "Saint-Blaise"
+    },
+    {
+        "numcom": 74,
+        "comnom": "Val-de-Ruz"
+    },
+    {
+        "numcom": 72,
+        "comnom": "Val-de-Travers"
+    }
+]
