@@ -178,8 +178,8 @@
 
 <script>
 import communes from './assets/data/communes.json'
+import { affectations2 } from "./assets/data/affectations.js"
 import affectations from './assets/data/affectations.json'
-
 import { Project, Affectation, Reduction, LocationTypes, Mob20 } from "./components/classes.js"
 import FormSection from "./components/FormSection.vue"
 import Search from "./components/Search.vue"
@@ -190,6 +190,14 @@ import FormC from "./components/FormC.vue"
 import FormD from "./components/FormD.vue"
 import FormE from "./components/FormE.vue"
 import { ref } from 'vue'
+
+
+console.log("affectations2")
+console.log(affectations2)
+console.log(affectations2[0].factors[0].formula(123))
+
+
+
 
 const project = new Project(
   [],
