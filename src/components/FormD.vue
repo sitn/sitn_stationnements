@@ -12,7 +12,7 @@
         </q-banner>
 
         <!-- LOCATION TYPE INFOBOX  -->
-        <div v-if="this.project.hasAffectation"> 
+        <div v-if="this.project.hasAffectation">
             <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox">
 
                 <q-card-section horizontal>
@@ -47,7 +47,7 @@
 
             </q-card>
 
-            <div class="text-h6">Liste des réductions</div>
+            <div class="text-h6">Liste des facteurs de réduction </div>
             <div class="row">
                 <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
                     v-for="(affectation, key) in this.project.affectations.filter(e => e.valid && e.reductions.length > 0)">
@@ -176,4 +176,6 @@ export default {
 }
 </script>
 
-<style scoped>@import '../assets/table.css';</style>
+<style scoped>
+@import '../assets/table.css';
+</style>
