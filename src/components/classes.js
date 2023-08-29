@@ -9,6 +9,65 @@ console.log(affectations_json)
 
 export var communes = communes_json
 
+export class MyAffectation {
+
+  // constructor
+  constructor(type, name, description, factors = []) {
+    this.type = type
+    this.name = name
+    this.description = description
+    this.factors = factors
+    this.active = false
+  }
+
+  // getters
+
+  // setters
+
+  // methods
+
+}
+
+
+const myaffectations = [
+  new MyAffectation(
+    "Logement",
+    "Logements standards",
+    "",
+    [
+      { name: "Habitant", inputs: ["Surface m2"], formula: ((x) => 0.01 * x) },
+      { name: "Visiteur", inputs: ["Surface m2"], formula: ((x) => 0.001 * x) }
+    ]
+  ),
+  new MyAffectation(
+    "Logement",
+    "Logements avec encadrement ou étudiants",
+    "",
+    [
+      { name: "Habitant", inputs: ["Surface m2"], formula: ((x) => 0.01 * x) },
+      { name: "Visiteur", inputs: ["Surface m2"], formula: ((x) => 0.001 * x) }
+    ]
+  ),
+  new MyAffectation(
+    "Activité",
+    "Industrie, artisanat",
+    "",
+    [
+      { name: "Habitant", inputs: ["Surface m2"], formula: ((x) => 0.01 * x) },
+      { name: "Visiteur", inputs: ["Surface m2"], formula: ((x) => 0.002 * x) }
+    ]
+  ),
+
+]
+
+
+const bibi = new MyAffectation("Logement", "Logements standards", "")
+
+
+
+
+
+
 // export { communes2 } from '../assets/data/communes.json'
 // export default communes2;
 
