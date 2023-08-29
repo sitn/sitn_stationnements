@@ -11,7 +11,14 @@
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
+        <div>{{ this.factors }}</div>
+        <!-- 
         <div>{{ project.commune.factors.find((e) => e.zone === project.locationType.name) }}</div>
+        <div>{{ project.commune.factors.find((e) => e.zone === project.locationType.name).values }}</div>
+        <div>{{ project.commune.factors.find((e) => e.zone === project.locationType.name).values.find((e) => e.type ===
+            "housing") }}</div>
+        -->
+
 
         <div v-if="this.project.hasAffectation" class="row">
             <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6"
@@ -70,8 +77,8 @@
 </template>
 
 <script>
-import { isNullOrUndefined } from 'pdfmake/build/pdfmake';
-import { ref } from 'vue'
+// import { isNullOrUndefined } from 'pdfmake/build/pdfmake';
+// import { ref } from 'vue'
 
 export default {
     name: 'FormC',
@@ -88,6 +95,16 @@ export default {
         }
     },
     computed: {
+        factors() {
+
+            if (this.project.commune === null || this.project.locationType === null) {
+                return "Commune not selected"
+            } else {
+                console.log(this.project.commune.factors.find((e) => e.zone === this.project.locationType.name))
+                return this.project.commune.factors.find((e) => e.zone === this.project.locationType.name)
+            }
+
+        }
 
     },
     methods: {
