@@ -8,16 +8,17 @@ export const affectations2 = [
             {
                 "name": "Habitant",
                 "input": [
-                    "Surface brute de plancher (SBP)"
+                    "Surface brute de plancher (SBP)",
+                    "Nombre de logements"
                 ],
-                "formula": ((x) => 0.01 * x)
+                "formula": ((x, y, r = 1.0) => Math.max(0.01 * x, y) * r)
             },
             {
                 "name": "Visiteur",
                 "input": [
                     "Surface m2"
                 ],
-                "formula": ((x) => 0.001 * x)
+                "formula": ((x, y, r = 1.0) => Math.max(0.001 * x, y) * r)
             }
         ]
     },
@@ -32,14 +33,14 @@ export const affectations2 = [
                 "input": [
                     "Surface brute de plancher (SBP)"
                 ],
-                "formula": ((x) => 0.01 * x)
+                "formula": ((x, r = 1.0) => 0.01 * x * r)
             },
             {
                 "name": "Visiteur",
                 "input": [
                     "Surface m2"
                 ],
-                "formula": ((x) => 0.001 * x)
+                "formula": ((x, r = 1.0) => 0.001 * x * r)
             }
         ]
     },
@@ -54,14 +55,14 @@ export const affectations2 = [
                 "input": [
                     "Surface brute de plancher (SBP)"
                 ],
-                "formula": ((x) => 0.01 * x)
+                "formula": ((x, r = 1.0) => 0.01 * x * r)
             },
             {
                 "name": "Visiteur",
                 "input": [
                     "Surface m2"
                 ],
-                "formula": ((x) => 0.002 * x)
+                "formula": ((x, r = 1.0) => 0.002 * x * r)
             }
         ]
     },
@@ -234,7 +235,7 @@ export const affectations2 = [
         "unit": "Par 100 m² de parcelle"
     },
     {
-        "name": "Halle de gymnastrique",
+        "name": "Halle de gymnastique",
         "type": "Activité",
         "description": "",
         "unit": "Par 100 m² de halle et en plus par spectacteur"
