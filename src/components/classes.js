@@ -1,21 +1,16 @@
 import communes_json from '../assets/data/communes.json'
-import affectations_json from '../assets/data/affectations.json'
-
-console.log('communes')
-console.log(communes_json)
-console.log('affectations_json')
-console.log(affectations_json)
-
+// import affectations_json from '../assets/data/affectations.json'
 
 export var communes = communes_json
 
 export class MyAffectation {
 
   // constructor
-  constructor(type, name, description, factors = []) {
+  constructor(type, name, description, variables = [], factors = []) {
     this.type = type
     this.name = name
     this.description = description
+    this.variables = variables
     this.factors = factors
     this.active = false
   }
@@ -29,84 +24,90 @@ export class MyAffectation {
 }
 
 
-const myaffectations = [
+export const myaffectations = [
   new MyAffectation(
     "Logement",
     "Logements standards",
-    "",
+    "blablabla 1",
     [
-      { name: "Habitant", inputs: ["Surface m2"], formula: ((x) => 0.01 * x) },
-      { name: "Visiteur", inputs: ["Surface m2"], formula: ((x) => 0.001 * x) }
+      { name: "Surface brute de plancher [SBP]", unit: "m<sup>2</sup>", value: null },
+      { name: "Nombre de logements", unit: "", value: null },
+    ],
+    [
+      { name: "Habitant", formula: ((x, r = 1.0) => Math.max(0.01 * x[0], x[1]) * r) },
+      { name: "Visiteur", formula: ((x, r = 1.0) => Math.max(0.001 * x[0], x[1]) * r) }
+      // { name: "Habitant", formula: ((x, y, r = 1.0) => Math.max(0.01 * x, y) * r) },
+      // { name: "Visiteur", formula: ((x, y, r = 1.0) => Math.max(0.001 * x, y) * r) }
     ]
   ),
   new MyAffectation(
     "Logement",
     "Logements avec encadrement ou étudiants",
-    "",
+    "blablabla 2",
     [
-      { name: "Habitant", inputs: ["Surface m2"], formula: ((x) => 0.01 * x) },
-      { name: "Visiteur", inputs: ["Surface m2"], formula: ((x) => 0.001 * x) }
+      { name: "Surface brute de plancher [SBP]", unit: "m<sup>2</sup>", value: null },
+      { name: "Nombre de logements", unit: "", value: null },
+    ],
+    [
+      { name: "Habitant", formula: ((x, r = 1.0) => Math.max(0.01 * x[0], x[1]) * r) },
+      { name: "Visiteur", formula: ((x, r = 1.0) => Math.max(0.001 * x[0], x[1]) * r) }
     ]
   ),
   new MyAffectation(
     "Activité",
     "Industrie, artisanat",
-    "",
+    "blablabla 3",
     [
-      { name: "Habitant", inputs: ["Surface m2"], formula: ((x) => 0.01 * x) },
-      { name: "Visiteur", inputs: ["Surface m2"], formula: ((x) => 0.002 * x) }
+      { name: "Surface de vente", unit: "m<sup>2</sup>", value: null },
+    ],
+    [
+      { name: "Habitant", formula: ((x) => 0.01 * x[0]) },
+      { name: "Visiteur", formula: ((x) => 0.002 * x[0]) }
     ]
   ),
-
+  new MyAffectation(
+    "Activité",
+    "Mini-golf",
+    "blablabla 4",
+    [
+      { name: "Nombre d'équipements", unit: "", value: null },
+    ],
+    [
+      { name: "Total", formula: ((x) => 6 * x[0]) }
+    ]
+  ),
+  new MyAffectation(
+    "Activité",
+    "Gymnase, lycée",
+    "blablabla 4",
+    [
+      { name: "Nombre de salles de classes", unit: "", value: null },
+      { name: "Nombre d'élèves >= 18 ans", unit: "", value: null },
+    ],
+    [
+      { name: "Total", formula: ((x) => x[0] + 0.1 * x[1]) },
+    ]
+  ),
+  new MyAffectation(
+    "Activité",
+    "Test (calcul manuelle)",
+    "blablabla 4",
+    [
+      { name: "Nombre de places habitant", unit: "", value: null },
+      { name: "Nombre de places visiteur", unit: "", value: null },
+    ],
+    [
+      { name: "Habitant", formula: ((x) => x[0]) },
+      { name: "Visiteur", formula: ((x) => x[1]) }
+    ]
+  ),
 ]
 
+// const bibi = new MyAffectation("Logement", "Logements standards", "")
 
-const bibi = new MyAffectation("Logement", "Logements standards", "")
-
-
-
-
-
-
-// export { communes2 } from '../assets/data/communes.json'
-// export default communes2;
-
-// Communes
-/*
-export var communes = [
-  { "numcom": 60, "comnom": "La Chaux-de-Fonds" },
-  { "numcom": 58, "comnom": "Les Ponts-de-Martel" },
-  { "numcom": 3, "comnom": "Saint-Blaise" },
-  { "numcom": 57, "comnom": "La Chaux-du-Milieu" },
-  { "numcom": 61, "comnom": "Les Planchettes" },
-  { "numcom": 10, "comnom": "Ligni\u00e8res" },
-  { "numcom": 55, "comnom": "Le Cerneux-P\u00e9quignot" },
-  { "numcom": 56, "comnom": "La Br\u00e9vine" },
-  { "numcom": 7, "comnom": "Cressier (NE)" },
-  { "numcom": 12, "comnom": "Cortaillod" },
-  { "numcom": 33, "comnom": "La C\u00f4te-aux-F\u00e9es" },
-  { "numcom": 72, "comnom": "Val-de-Travers" },
-  { "numcom": 74, "comnom": "Val-de-Ruz" },
-  { "numcom": 59, "comnom": "Brot-Plamboz" },
-  { "numcom": 75, "comnom": "Rochefort" },
-  { "numcom": 2, "comnom": "Hauterive (NE)" },
-  { "numcom": 11, "comnom": "Boudry" },
-  { "numcom": 73, "comnom": "Milvignes" },
-  { "numcom": 9, "comnom": "Le Landeron" },
-  { "numcom": 78, "comnom": "Le Locle" },
-  { "numcom": 62, "comnom": "La Sagne" },
-  { "numcom": 76, "comnom": "La Grande B\u00e9roche" },
-  { "numcom": 6, "comnom": "Cornaux" },
-  { "numcom": 77, "comnom": "Neuch\u00e2tel" },
-  { "numcom": 8, "comnom": "Enges" },
-  { "numcom": 71, "comnom": "La T\u00e8ne" },
-  { "numcom": 35, "comnom": "Les Verri\u00e8res" }
-]
-*/
 
 // sort alphabetically
 communes = communes.sort((a, b) => a.comnom.toLowerCase().localeCompare(b.comnom.toLowerCase()))
-// communes = communes.sort((a, b) => a.numcom - b.numcom)
 
 // Classes
 const colors = { 'I': 'legend-1', 'II': 'legend-2', 'III': 'legend-3', 'IV': 'legend-4', 'V': 'legend-5', 'VI': 'legend-6' }
