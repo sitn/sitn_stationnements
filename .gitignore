@@ -1,9 +1,7 @@
-AppWithStepper.vue
-todo.txt
-node_modules/
+backup/
 dist/
 doc/
+node_modules/
 src/components/store.js
-doc/~$230630_RemarquesAppliweb.docx
-doc/~$230630_LayoutPDF.docx
-doc/~$Calcul_net_2.xlsx
+AppWithStepper.vue
+todo.txt
