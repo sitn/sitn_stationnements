@@ -8,13 +8,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4
+                        "max": 0.4,
+                        "effective": null
                     }
                 ]
             },
@@ -23,13 +27,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     }
                 ]
             },
@@ -38,13 +46,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     }
                 ]
             },
@@ -53,13 +65,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
-                        "max": 0.8
+                        "max": 0.8,
+                        "effective": null
                     }
                 ]
             },
@@ -68,13 +84,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             },
@@ -83,13 +103,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             }
@@ -104,13 +128,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4
+                        "max": 0.4,
+                        "effective": null
                     }
                 ]
             },
@@ -119,13 +147,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     }
                 ]
             },
@@ -134,13 +166,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     }
                 ]
             },
@@ -149,13 +185,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
-                        "max": 0.8
+                        "max": 0.8,
+                        "effective": null
                     }
                 ]
             },
@@ -164,13 +204,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             },
@@ -179,13 +223,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             }
@@ -200,13 +248,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4
+                        "max": 0.4,
+                        "effective": null
                     }
                 ]
             },
@@ -215,13 +267,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     }
                 ]
             },
@@ -230,13 +286,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     }
                 ]
             },
@@ -245,13 +305,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
-                        "max": 0.8
+                        "max": 0.8,
+                        "effective": null
                     }
                 ]
             },
@@ -260,13 +324,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             },
@@ -275,13 +343,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             }
@@ -296,13 +368,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4
+                        "max": 0.4,
+                        "effective": null
                     }
                 ]
             },
@@ -311,13 +387,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     }
                 ]
             },
@@ -326,13 +406,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     }
                 ]
             },
@@ -341,13 +425,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
-                        "max": 0.8
+                        "max": 0.8,
+                        "effective": null
                     }
                 ]
             },
@@ -356,13 +444,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             },
@@ -371,13 +463,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             }
@@ -392,13 +488,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4
+                        "max": 0.4,
+                        "effective": null
                     }
                 ]
             },
@@ -407,13 +507,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     }
                 ]
             },
@@ -422,13 +526,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     }
                 ]
             },
@@ -437,13 +545,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
-                        "max": 0.8
+                        "max": 0.8,
+                        "effective": null
                     }
                 ]
             },
@@ -452,13 +564,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             },
@@ -467,13 +583,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             }
@@ -488,13 +608,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4
+                        "max": 0.4,
+                        "effective": null
                     }
                 ]
             },
@@ -503,13 +627,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     }
                 ]
             },
@@ -518,13 +646,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     }
                 ]
             },
@@ -533,13 +665,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
-                        "max": 0.8
+                        "max": 0.8,
+                        "effective": null
                     }
                 ]
             },
@@ -548,13 +684,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             },
@@ -563,13 +703,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             }
@@ -584,13 +728,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4
+                        "max": 0.4,
+                        "effective": null
                     }
                 ]
             },
@@ -599,13 +747,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     }
                 ]
             },
@@ -614,13 +766,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     }
                 ]
             },
@@ -629,13 +785,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
-                        "max": 0.8
+                        "max": 0.8,
+                        "effective": null
                     }
                 ]
             },
@@ -644,13 +804,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             },
@@ -659,13 +823,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             }
@@ -680,13 +848,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4
+                        "max": 0.4,
+                        "effective": null
                     }
                 ]
             },
@@ -695,13 +867,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     }
                 ]
             },
@@ -710,13 +886,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     }
                 ]
             },
@@ -725,13 +905,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
-                        "max": 0.8
+                        "max": 0.8,
+                        "effective": null
                     }
                 ]
             },
@@ -740,13 +924,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             },
@@ -755,13 +943,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             }
@@ -776,13 +968,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4
+                        "max": 0.4,
+                        "effective": null
                     }
                 ]
             },
@@ -791,13 +987,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     }
                 ]
             },
@@ -806,13 +1006,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     }
                 ]
             },
@@ -821,13 +1025,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
-                        "max": 0.8
+                        "max": 0.8,
+                        "effective": null
                     }
                 ]
             },
@@ -836,13 +1044,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             },
@@ -851,13 +1063,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             }
@@ -872,13 +1088,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4
+                        "max": 0.4,
+                        "effective": null
                     }
                 ]
             },
@@ -887,13 +1107,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     }
                 ]
             },
@@ -902,13 +1126,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     }
                 ]
             },
@@ -917,13 +1145,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
-                        "max": 0.8
+                        "max": 0.8,
+                        "effective": null
                     }
                 ]
             },
@@ -932,13 +1164,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             },
@@ -947,13 +1183,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             }
@@ -968,13 +1208,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4
+                        "max": 0.4,
+                        "effective": null
                     }
                 ]
             },
@@ -983,13 +1227,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     }
                 ]
             },
@@ -998,13 +1246,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     }
                 ]
             },
@@ -1013,13 +1265,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
-                        "max": 0.8
+                        "max": 0.8,
+                        "effective": null
                     }
                 ]
             },
@@ -1028,13 +1284,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             },
@@ -1043,13 +1303,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     }
                 ]
             }
@@ -1064,13 +1328,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4
+                        "max": 0.4,
+                        "effective": null
                     }
                 ]
             },
@@ -1079,13 +1347,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
-                        "max": 0.5
+                        "max": 0.5,
+                        "effective": null
                     }
                 ]
             },
@@ -1094,13 +1366,17 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
-                        "max": 1.0
+                        "max": 1.0,
+                        "effective": null
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
-                        "max": 0.7
+                        "max": 0.7,
+                        "effective": null
                     }
                 ]
             },
@@ -1109,11 +1385,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -1124,11 +1402,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -1139,11 +1419,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -1160,11 +1442,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -1175,11 +1459,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -1190,11 +1476,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -1205,11 +1493,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -1220,11 +1510,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -1235,11 +1527,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -1256,11 +1550,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -1271,11 +1567,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -1286,11 +1584,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -1301,11 +1601,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -1316,11 +1618,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -1331,11 +1635,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -1352,11 +1658,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -1367,11 +1675,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -1382,11 +1692,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -1397,11 +1709,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -1412,11 +1726,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -1427,11 +1743,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -1448,11 +1766,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -1463,11 +1783,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -1478,11 +1800,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -1493,11 +1817,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -1508,11 +1834,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -1523,11 +1851,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -1544,11 +1874,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -1559,11 +1891,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -1574,11 +1908,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -1589,11 +1925,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -1604,11 +1942,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -1619,11 +1959,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -1640,11 +1982,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -1655,11 +1999,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -1670,11 +2016,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -1685,11 +2033,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -1700,11 +2050,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -1715,11 +2067,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -1736,11 +2090,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -1751,11 +2107,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -1766,11 +2124,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -1781,11 +2141,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -1796,11 +2158,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -1811,11 +2175,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -1832,11 +2198,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -1847,11 +2215,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -1862,11 +2232,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -1877,11 +2249,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -1892,11 +2266,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -1907,11 +2283,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -1928,11 +2306,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -1943,11 +2323,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -1958,11 +2340,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -1973,11 +2357,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -1988,11 +2374,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -2003,11 +2391,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -2024,11 +2414,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -2039,11 +2431,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -2054,11 +2448,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -2069,11 +2465,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -2084,11 +2482,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -2099,11 +2499,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -2120,11 +2522,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -2135,11 +2539,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -2150,11 +2556,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -2165,11 +2573,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -2180,11 +2590,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -2195,11 +2607,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -2216,11 +2630,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -2231,11 +2647,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -2246,11 +2664,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -2261,11 +2681,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -2276,11 +2698,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -2291,11 +2715,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -2312,11 +2738,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -2327,11 +2755,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -2342,11 +2772,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -2357,11 +2789,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -2372,11 +2806,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -2387,11 +2823,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -2408,11 +2846,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -2423,11 +2863,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -2438,11 +2880,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -2453,11 +2897,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -2468,11 +2914,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -2483,11 +2931,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
@@ -2504,11 +2954,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.2,
                         "max": 0.5
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.0,
                         "max": 0.4
                     }
@@ -2519,11 +2971,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.5,
                         "max": 0.7
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.2,
                         "max": 0.5
                     }
@@ -2534,11 +2988,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.4,
                         "max": 0.7
                     }
@@ -2549,11 +3005,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.5,
                         "max": 0.8
                     }
@@ -2564,11 +3022,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.7,
                         "max": 1.0
                     }
@@ -2579,11 +3039,13 @@
                 "values": [
                     {
                         "type": "housing",
+                        "label": "Logement",
                         "min": 0.7,
                         "max": 1.0
                     },
                     {
                         "type": "activity",
+                        "label": "Activité",
                         "min": 0.9,
                         "max": 1.0
                     }
