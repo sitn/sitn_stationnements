@@ -145,6 +145,104 @@
           </template>
         </FormSection>
 
+
+        <!-- TEST -->
+        <FormSection title="TEST">
+          <template v-slot:content>
+
+            <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+              <q-select outlined bottom-slots bg-color="white" v-model="selected" :options="this.options"
+                option-value="name" option-label="name" @add="" @remove="" @update:model-value="selectAffectation()"
+                multiple label="Affectation(s)">
+
+                <template v-slot:option="scope">
+                  <q-item v-bind="scope.itemProps">
+                    <q-item-section side>
+                      <q-checkbox v-model="scope.opt.active" />
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label>{{ scope.opt.name }}</q-item-label>
+                      <q-item-label caption>{{ scope.opt.description }}</q-item-label>
+                      <!-- <q-item-label caption>Selected: {{ scope.selected }}</q-item-label> -->
+                      <!-- <q-item-label caption>Active: {{ scope.opt.active }}</q-item-label> -->
+                    </q-item-section>
+                  </q-item>
+                </template>
+
+                <template v-slot:hint>
+                  Choisir une ou plusieurs affectations dans la liste
+                </template>
+              </q-select>
+            </div>
+
+
+
+            <q-form ref="form" greedy>
+              <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders"
+                v-for="(item, key) in this.options.filter(e => e.active)">
+
+                <label class="text-h7 ">{{ item.name }}</label>
+                <div class="row q-col-gutter-sm">
+
+
+
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2" v-for="(item2, key2) in item.variables">
+                    <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item2.value"
+                      min="0.0" max="Inf" :rules="[]">
+
+                      <template v-slot:label>
+                        {{ item2.name }}
+                      </template>
+
+                      <template v-slot:append>
+                        <div class="text-body2" v-html="item2.unit"></div>
+                      </template>
+
+                    </q-input>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2" v-for="(item3, key3) in item.factors">
+                    <q-input bg-color="light-blue-1" outlined label="" type="number" name=""
+                      v-model.number="item.rawResidentNeed" readonly>
+                      <template v-slot:label>
+                        In: {{ item.variables.map(x => x.value) }} |
+                        Out: {{ item3.formula(item.variables.map(x => x.value), 1.0) }}
+                      </template>
+                    </q-input>
+                  </div>
+
+                  <!-- 
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
+                    <q-input bg-color="light-blue-1" outlined label="" type="number" name="item.rawVisitorNeed"
+                      v-model.number="item.rawVisitorNeed" readonly>
+                      <template v-slot:label>
+                        {{ item.type == "Logement" ? "Besoin brut visiteur" : "Besoin brut client" }}
+                      </template>
+                    </q-input>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
+                    <q-input bg-color="light-blue-1" outlined label="Besoin brut total" type="number"
+                      name="item.rawVisitorNeed" v-model.number="item.rawTotalNeed" readonly>
+                    </q-input>
+                  </div>
+                  -->
+
+                  <div>
+                    <q-btn round flat color="grey" name="delete" @click="deleteItem(item)" icon="delete"></q-btn>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </q-form>
+
+
+          </template>
+        </FormSection>
+
+
         <!-- 2. RAW PARKING NEEDS -->
         <FormSection title="2. Calcul du besoin brut (article 27 RELConstr.)">
           <template v-slot:content>
@@ -180,8 +278,8 @@
 <script>
 import communes from './assets/data/communes.json'
 import { affectations2 } from "./assets/data/affectations.js"
-import affectations from './assets/data/affectations.json'
-import { Project, Affectation, Reduction, LocationTypes, Mob20 } from "./components/classes.js"
+// import affectations from './assets/data/affectations.json'
+import { Project, Affectation, Reduction, LocationTypes, Mob20, myaffectations } from "./components/classes.js"
 import FormSection from "./components/FormSection.vue"
 import Search from "./components/Search.vue"
 import Map from "./components/Map.vue"
@@ -193,11 +291,14 @@ import FormE from "./components/FormE.vue"
 import { ref } from 'vue'
 
 
+console.log("myaffectations")
+console.log(myaffectations)
+
+
 console.log("affectations2")
 console.log(affectations2)
-console.log(affectations2[0].factors[0].formula(123))
-
-
+console.log(affectations2[0].factors[0].formula(1253, 15))
+console.log(affectations2[0].factors[0].formula(1253, 15, 0.7))
 
 
 const project = new Project(
@@ -287,6 +388,8 @@ export default {
   },
   data() {
     return {
+      selected: [], // TEST
+      options: myaffectations, // TEST
       communes: communes,
       project: project,
       geojson: {
@@ -443,6 +546,13 @@ export default {
 
       console.log('Update project:')
       console.log(this.project)
+
+    },
+
+    selectAffectation() {
+
+      console.log('Select affectation')
+      console.log(this.selected)
 
     },
 
