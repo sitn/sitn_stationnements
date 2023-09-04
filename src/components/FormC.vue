@@ -12,13 +12,31 @@
         </q-banner>
 
         <div>{{ this.factors }}</div>
+
+        <!-- Factor -->
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in this.factors.values">
+
+            <q-input class="col" bg-color="white" outlined label="" type="number" name="" v-model="item.effective"
+                :min=item.min :max=item.max
+                :rules="[(val) => validateRange(val) || 'Seuls les chiffres sans espaces sont admis']">
+                <template v-slot:label>
+                    {{ item.label }}
+                </template>
+                <template v-slot:hint>
+                    Entrer un pourcentage entre {{ item.min * 100 }} et {{ item.max * 100 }}% (Localisation de type {{
+                        this.factors.zone }})
+                </template>
+            </q-input>
+
+        </div>
+
+
         <!-- 
         <div>{{ project.commune.factors.find((e) => e.zone === project.locationType.name) }}</div>
         <div>{{ project.commune.factors.find((e) => e.zone === project.locationType.name).values }}</div>
         <div>{{ project.commune.factors.find((e) => e.zone === project.locationType.name).values.find((e) => e.type ===
             "housing") }}</div>
         -->
-
 
         <div v-if="this.project.hasAffectation" class="row">
             <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6"
@@ -28,41 +46,32 @@
                     <table>
                         <tr>
                             <th>{{ item.name }}</th>
-                            <th v-if="item.hasRange" class="text-right">Min. {{ 100 * item.range.min }}%</th>
-                            <th v-if="item.hasRange" class="text-right">Max. {{ 100 * item.range.max }}%</th>
-                            <th v-if="!item.hasRange" class="text-right">Fixe {{ 100 * item.range.max }}%</th>
+                            <th class="text-right">Min. {{ 100 * item.range.min }}%</th>
+                            <th class="text-right">Max. {{ 100 * item.range.max }}%</th>
                         </tr>
                         <tr>
                             <td> {{ item.type == "Logement" ? "Besoin net habitant" : "Besoin net employé" }}</td>
-                            <td v-if="item.hasRange" class="bg-light-blue-1 text-right">{{
+                            <td class="bg-light-blue-1 text-right">{{
                                 item.netResidentNeed.min.toFixed(2) }}</td>
-                            <td v-if="item.hasRange" class="bg-light-blue-1 text-right">{{
-                                item.netResidentNeed.max.toFixed(2) }}</td>
-                            <td v-if="!item.hasRange" class="bg-light-blue-1 text-right">{{
+                            <td class="bg-light-blue-1 text-right">{{
                                 item.netResidentNeed.max.toFixed(2) }}</td>
                         </tr>
                         <tr>
                             <td>{{ item.type == "Logement" ? "Besoin net visiteur" : "Besoin net client" }}</td>
-                            <td v-if="item.hasRange" class="bg-light-blue-1 text-right">{{
+                            <td class="bg-light-blue-1 text-right">{{
                                 item.netVisitorNeed.min.toFixed(2) }}</td>
-                            <td v-if="item.hasRange" class="bg-light-blue-1 text-right">{{
-                                item.netVisitorNeed.max.toFixed(2) }}</td>
-                            <td v-if="!item.hasRange" class="bg-light-blue-1 text-right">{{
+                            <td class="bg-light-blue-1 text-right">{{
                                 item.netVisitorNeed.max.toFixed(2) }}</td>
                         </tr>
                         <tr>
                             <td class="text-weight-bold">Besoin net total</td>
-                            <td v-if="item.hasRange" class="bg-light-blue-1 text-weight-bold text-right">{{
+                            <td class="bg-light-blue-1 text-weight-bold text-right">{{
                                 (item.netResidentNeed.min +
                                     item.netVisitorNeed.min).toFixed(2)
                             }}</td>
-                            <td v-if="item.hasRange" class="bg-light-blue-1 text-weight-bold text-right">{{
+                            <td class="bg-light-blue-1 text-weight-bold text-right">{{
                                 (item.netResidentNeed.max +
                                     item.netVisitorNeed.max).toFixed(2)
-                            }}</td>
-                            <td v-if="!item.hasRange" class="bg-light-blue-1 text-weight-bold text-right">{{
-                                (item.netResidentNeed.max
-                                    + item.netVisitorNeed.max).toFixed(2)
                             }}</td>
                         </tr>
                     </table>
@@ -108,6 +117,10 @@ export default {
 
     },
     methods: {
+
+        validateRange(val) {
+            return val >= 0.0 && val <= 1.0
+        },
 
     },
     mounted() {
