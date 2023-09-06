@@ -112,16 +112,17 @@
                                 <table>
                                     <tr>
                                         <th>{{ item.name }}</th>
-                                        <th class="text-right">Places</th>
+                                        <th class="text-right"># Places</th>
                                     </tr>
 
                                     <tr v-for="(factor, key2) in item.factors">
                                         <td> {{ factor.name }}</td>
                                         <td class="bg-light-blue-1 text-right">
-                                            {{ factor.reducedOutput[key2] }}</td>
+                                            {{ item.reducedOutput[key2] }} </td>
                                     </tr>
 
-                                    <!-- 
+                                    <!-- {{ factor.reducedOutput[key2] }}
+
                                     <tr>
                                         <td class="text-weight-bold">Besoin net réduit total</td>
                                         <td class="bg-light-blue-1 text-weight-bold text-right">{{
