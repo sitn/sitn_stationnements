@@ -34,15 +34,15 @@ export class Affectation {
   }
 
   get output() {
-    return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), 1.0))
+    return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), 1.0, 0.0))
   }
 
   get netOutput() {
-    return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction))
+    return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, 0.0))
   }
 
   get reducedOutput() {
-    return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.totalReduction))
+    return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, this.specialReduction))
   }
 
   get totalOutput() {
@@ -50,11 +50,11 @@ export class Affectation {
   }
 
   get ordinaryReduction() {
-    return Math.min(this.reductions.filter((x) => x.type === "reduction").reduce((acc, obj) => { return acc + obj.value }, 0), 1.0)
+    return Math.min(this.variables.filter((x) => x.type === "reduction").reduce((acc, obj) => { return acc + obj.value }, 0), 1.0)
   }
 
   get specialReduction() {
-    return Math.min(this.reductions.filter((x) => x.type === "special reduction").reduce((acc, obj) => { return acc + obj.value }, 0), 1.0)
+    return Math.min(this.variables.filter((x) => x.type === "special reduction").reduce((acc, obj) => { return acc + obj.value }, 0), 100.0)
   }
 
 
@@ -87,13 +87,11 @@ export const affectations = [
       { name: "Surface brute de plancher [SBP]", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "Nombre de logements", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 }
+      { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 }
     ],
     [
-      { name: "Habitant", formula: ((x, ro = 1.0, rs = 1.0) => Math.max(0.01 * x[0], x[1]) * ro * rs) },
-      { name: "Visiteur", formula: ((x, ro = 1.0, rs = 1.0) => 0.001 * x[0] * ro * rs) }
-      // { name: "Habitant", formula: ((x, y, r = 1.0) => Math.max(0.01 * x, y) * r) },
-      // { name: "Visiteur", formula: ((x, y, r = 1.0) => Math.max(0.001 * x, y) * r) }
+      { name: "Habitant", formula: ((x, f = 1.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * f * (1 - r / 100)) },
+      { name: "Visiteur", formula: ((x, f = 1.0, r = 0.0) => 0.001 * x[0] * f * (1 - r / 100)) }
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
@@ -109,12 +107,12 @@ export const affectations = [
       { name: "Surface brute de plancher [SBP]", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "Nombre de logements", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art. 34", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
+      { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 34", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
-      { name: "Habitant", formula: ((x, ro = 1.0) => Math.max(0.01 * x[0], x[1]) * ro) },
-      { name: "Visiteur", formula: ((x, ro = 1.0) => 0.001 * x[0] * ro) }
+      { name: "Habitant", formula: ((x, f = 1.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * f * (1 - r / 100)) },
+      { name: "Visiteur", formula: ((x, f = 1.0, r = 0.0) => 0.001 * x[0] * f * (1 - r / 100)) }
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
@@ -129,13 +127,13 @@ export const affectations = [
     [
       { name: "Surface brute de plancher [SBP]", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art. 31", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art. 32", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
+      { name: "art. 31", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 32", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
-      { name: "Habitant", formula: ((x, ro = 1.0) => (0.02 * x[0]) * ro) },
-      { name: "Visiteur", formula: ((x, ro = 1.0) => (0.001 * x[0]) * ro) }
+      { name: "Habitant", formula: ((x, f = 1.0, r = 0.0) => (0.02 * x[0]) * f * (1 - r / 100)) },
+      { name: "Visiteur", formula: ((x, f = 1.0, r = 0.0) => (0.001 * x[0]) * f * (1 - r / 100)) }
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
@@ -151,8 +149,8 @@ export const affectations = [
       { name: "Surface brute de plancher [SBP]", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
     ],
     [
-      { name: "Personnel", formula: ((x, ro = 1.0) => (0.02 * x[0]) * ro) },
-      { name: "Clients", formula: ((x, ro = 1.0) => (0.08 * x[0]) * ro) }
+      { name: "Personnel", formula: ((x, f = 1.0, r = 0.0) => (0.02 * x[0]) * f * (1 - r / 100)) },
+      { name: "Clients", formula: ((x, f = 1.0, r = 0.0) => (0.08 * x[0]) * f * (1 - r / 100)) }
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
@@ -168,8 +166,8 @@ export const affectations = [
       { name: "Surface de vente", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
     ],
     [
-      { name: "Personnel", formula: ((x, r = 1.0) => 0.01 * x[0] * r) },
-      { name: "Client", formula: ((x, r = 1.0) => 0.002 * x[0] * r) }
+      { name: "Personnel", formula: ((x, f = 1.0, r = 0.0) => 0.01 * x[0] * f * (1 - r / 100)) },
+      { name: "Client", formula: ((x, f = 1.0, r = 0.0) => 0.002 * x[0] * f * (1 - r / 100)) }
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
@@ -185,7 +183,7 @@ export const affectations = [
       { name: "Nombre d'équipements", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
     ],
     [
-      { name: "Total", formula: ((x, r = 1.0) => 6 * x[0] * r) }
+      { name: "Total", formula: ((x, f = 1.0, r = 0.0) => 6 * x[0] * f * (1 - r / 100)) }
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
@@ -200,7 +198,7 @@ export const affectations = [
       { name: "Nombre d'élèves >= 18 ans", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
     ],
     [
-      { name: "Total", formula: ((x, r = 1.0) => (x[0] + 0.1 * x[1]) * r) },
+      { name: "Total", formula: ((x, ro = 1.0, rs = 0.0) => (x[0] + 0.1 * x[1]) * ro) },
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
@@ -215,8 +213,8 @@ export const affectations = [
       { name: "Nombre de places visiteur", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
     ],
     [
-      { name: "Habitant", formula: ((x, r = 1.0) => x[0] * r) },
-      { name: "Visiteur", formula: ((x, r = 1.0) => x[1] * r) }
+      { name: "Habitant", formula: ((x, ro = 1.0, rs = 0.0) => x[0] * ro) },
+      { name: "Visiteur", formula: ((x, ro = 1.0, rs = 0.0) => x[1] * ro) }
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
