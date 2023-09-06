@@ -10,14 +10,14 @@
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-        <div>{{ this.factors }}</div>
+        <div>{{ this.factors }}</div><br>
 
         <q-form ref="form" greedy>
 
             <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in this.factors.values">
 
                 <q-input class="col" bg-color="white" outlined label="" :hint="`${item.min} ≥ x ≤ ${item.max}`"
-                    type="number" name="" v-model="item.effective" :min=item.min :max=item.max
+                    type="number" name="" v-model.number="item.effective" :min=item.min :max=item.max
                     :rules="[val => validateRange(val, item.min, item.max)]">
                     <template v-slot:label>
                         {{ item.label }}
@@ -42,7 +42,7 @@
 
                             <tr>
                                 <th>{{ item.name }}</th>
-                                <th class="text-right"> x {{ item.netReduction }}</th>
+                                <th class="text-right"> x {{ item.ordinaryReduction }}</th>
                             </tr>
 
                             <tr v-for="(item3, key3) in item.factors">
@@ -58,7 +58,7 @@
                                 </td>
 
                             </tr>
-                            
+
                         </table>
 
                     </div>
@@ -101,9 +101,7 @@ export default {
 
                 this.project.affectations.forEach(function (e) {
 
-                    let item = e.reductions.find((x) => x.type === 'reduction')
-                    // console.log('factors')
-                    // console.log(item)
+                    let item = e.variables.find((x) => x.type === 'reduction')
 
                     if (e.type === "Logement") {
 
@@ -119,8 +117,8 @@ export default {
 
                 })
 
-                console.log('locationFactors')
-                console.log(locationFactors)
+                // console.log('locationFactors')
+                // console.log(locationFactors)
 
                 return locationFactors
             }
