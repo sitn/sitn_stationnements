@@ -45,9 +45,8 @@ export class Affectation {
     return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, this.specialReduction))
   }
 
-
   get totalOutput() {
-    return 0
+    return this.reducedOutput.reduce((acc, obj) => { return acc + obj }, 0)
   }
 
   get ordinaryReduction() {
@@ -61,16 +60,17 @@ export class Affectation {
   }
 
 
-
-
+  /*
   get netReduction() {
     return Math.min(this.reductions.filter((x) => x.type === "reduction").reduce((acc, obj) => { return acc + obj.value }, 0), 1.0)
   }
+  */
 
+  /*
   get totalReduction() {
     return Math.min(this.reductions.reduce((acc, obj) => { return acc + obj.value }, 0), 1.0)
   }
-
+  */
 
 
   // setters
@@ -97,8 +97,8 @@ export const affectations = [
       { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 }
     ],
     [
-      { name: "Habitant", formula: ((x, f = 1.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * f * (1 - r / 100)) },
-      { name: "Visiteur", formula: ((x, f = 1.0, r = 0.0) => 0.001 * x[0] * f * (1 - r / 100)) }
+      { name: "Habitants", formula: ((x, f = 1.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * f * (1 - r / 100)) },
+      { name: "Visiteurs", formula: ((x, f = 1.0, r = 0.0) => 0.001 * x[0] * f * (1 - r / 100)) }
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
@@ -118,8 +118,8 @@ export const affectations = [
       { name: "art. 34", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
-      { name: "Habitant", formula: ((x, f = 1.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * f * (1 - r / 100)) },
-      { name: "Visiteur", formula: ((x, f = 1.0, r = 0.0) => 0.001 * x[0] * f * (1 - r / 100)) }
+      { name: "Habitants", formula: ((x, f = 1.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * f * (1 - r / 100)) },
+      { name: "Visiteurs", formula: ((x, f = 1.0, r = 0.0) => 0.001 * x[0] * f * (1 - r / 100)) }
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
@@ -139,8 +139,8 @@ export const affectations = [
       { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
-      { name: "Habitant", formula: ((x, f = 1.0, r = 0.0) => (0.02 * x[0]) * f * (1 - r / 100)) },
-      { name: "Visiteur", formula: ((x, f = 1.0, r = 0.0) => (0.001 * x[0]) * f * (1 - r / 100)) }
+      { name: "Personnel", formula: ((x, f = 1.0, r = 0.0) => (0.02 * x[0]) * f * (1 - r / 100)) },
+      { name: "Clients", formula: ((x, f = 1.0, r = 0.0) => (0.001 * x[0]) * f * (1 - r / 100)) }
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
@@ -182,7 +182,7 @@ export const affectations = [
     ],
     [
       { name: "Personnel", formula: ((x, f = 1.0, r = 0.0) => 0.01 * x[0] * f * (1 - r / 100)) },
-      { name: "Client", formula: ((x, f = 1.0, r = 0.0) => 0.002 * x[0] * f * (1 - r / 100)) }
+      { name: "Clients", formula: ((x, f = 1.0, r = 0.0) => 0.002 * x[0] * f * (1 - r / 100)) }
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
@@ -240,8 +240,8 @@ export const affectations = [
       { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
-      { name: "Habitant", formula: ((x, ro = 1.0, rs = 0.0) => x[0] * ro) },
-      { name: "Visiteur", formula: ((x, ro = 1.0, rs = 0.0) => x[1] * ro) }
+      { name: "Habitants", formula: ((x, ro = 1.0, rs = 0.0) => x[0] * ro) },
+      { name: "Visiteurs", formula: ((x, ro = 1.0, rs = 0.0) => x[1] * ro) }
     ],
     [
       { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
