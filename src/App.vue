@@ -168,13 +168,11 @@
 
 
         <!-- 5. SUMMARY -->
-        <!--
         <FormSection title="5. Nombre de places de stationnement à réaliser (article 30 RELConstr.)">
           <template v-slot:content>
             <FormE :project="project"></FormE>
           </template>
         </FormSection>
-        -->
 
       </q-page>
     </q-page-container>
