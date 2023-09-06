@@ -45,17 +45,22 @@ export class Affectation {
     return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, this.specialReduction))
   }
 
+
   get totalOutput() {
     return 0
   }
 
   get ordinaryReduction() {
-    return Math.min(this.variables.filter((x) => x.type === "reduction").reduce((acc, obj) => { return acc + obj.value }, 0), 1.0)
+    return this.variables.filter((x) => x.type === "reduction").reduce((acc, obj) => { return acc + obj.value }, 0)
+    // return Math.min(this.variables.filter((x) => x.type === "reduction").reduce((acc, obj) => { return acc + obj.value }, 0), 1.0)
   }
+
 
   get specialReduction() {
     return Math.min(this.variables.filter((x) => x.type === "special reduction").reduce((acc, obj) => { return acc + obj.value }, 0), 100.0)
   }
+
+
 
 
   get netReduction() {
@@ -65,6 +70,8 @@ export class Affectation {
   get totalReduction() {
     return Math.min(this.reductions.reduce((acc, obj) => { return acc + obj.value }, 0), 1.0)
   }
+
+
 
   // setters
   /*
@@ -147,6 +154,10 @@ export const affectations = [
     "(alimentation, pharmacie, droguerie, grand magasin, kiosque, …)",
     [
       { name: "Surface brute de plancher [SBP]", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
+      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
+      { name: "art. 31", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 32", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "Personnel", formula: ((x, f = 1.0, r = 0.0) => (0.02 * x[0]) * f * (1 - r / 100)) },
@@ -164,6 +175,10 @@ export const affectations = [
     "",
     [
       { name: "Surface de vente", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
+      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
+      { name: "art. 31", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 32", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "Personnel", formula: ((x, f = 1.0, r = 0.0) => 0.01 * x[0] * f * (1 - r / 100)) },
@@ -181,6 +196,10 @@ export const affectations = [
     "",
     [
       { name: "Nombre d'équipements", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
+      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
+      { name: "art. 31", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 32", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "Total", formula: ((x, f = 1.0, r = 0.0) => 6 * x[0] * f * (1 - r / 100)) }
@@ -196,6 +215,10 @@ export const affectations = [
     [
       { name: "Nombre de salles de classes", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "Nombre d'élèves >= 18 ans", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
+      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
+      { name: "art. 31", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 32", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "Total", formula: ((x, ro = 1.0, rs = 0.0) => (x[0] + 0.1 * x[1]) * ro) },
@@ -211,6 +234,10 @@ export const affectations = [
     [
       { name: "Nombre de places habitant", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "Nombre de places visiteur", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
+      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
+      { name: "art. 31", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 32", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "art. 33", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "Habitant", formula: ((x, ro = 1.0, rs = 0.0) => x[0] * ro) },
