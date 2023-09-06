@@ -39,10 +39,12 @@
                     <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                         <table>
+
                             <tr>
                                 <th>{{ item.name }}</th>
                                 <th class="text-right"> x {{ item.netReduction }}</th>
                             </tr>
+
                             <tr v-for="(item3, key3) in item.factors">
                                 <td> {{ item3.name }}</td>
                                 <td class="bg-light-blue-1 text-right">
@@ -56,6 +58,7 @@
                                 </td>
 
                             </tr>
+                            
                         </table>
 
                     </div>
