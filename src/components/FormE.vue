@@ -17,43 +17,28 @@
                     <table id="summary-table">
                         <tr>
                             <th>Affectation</th>
-                            <th v-if="this.project.hasRange" class="text-right">Min.</th>
-                            <th v-if="this.project.hasRange" class="text-right">Max.</th>
-                            <th v-if="!this.project.hasRange" class="text-right">Fixe</th>
+                            <th class="text-right"># Places</th>
                         </tr>
 
                         <tr v-for="(affectation, index) in this.project.affectations.filter(e => e.active)" :key="index">
                             <td>{{ affectation.name }}</td>
-                            <td v-if="affectation.hasRange" class="bg-light-blue-1 text-right">{{
-                                affectation.totalNeed.min.toFixed(2)
-                            }}</td>
-                            <td v-if="affectation.hasRange" class="bg-light-blue-1 text-right">{{
-                                affectation.totalNeed.max.toFixed(2)
-                            }}</td>
-                            <td v-if="!affectation.hasRange" class="bg-light-blue-1 text-right">{{
-                                affectation.totalNeed.max.toFixed(2)
-                            }}</td>
+                            <td class="bg-light-blue-1 text-right">
+                                {{
+                                    affectation.totalOutput.toFixed(2)
+                                }}</td>
                         </tr>
 
                         <tr>
                             <td class="text-weight-bold">Total (arrondi supérieur)</td>
-                            <td v-if="this.project.hasRange" class="bg-light-blue-1 text-weight-bold text-right">{{
-                                Math.ceil(this.project.totalNeed.min) }}</td>
-                            <td v-if="this.project.hasRange" class="bg-light-blue-1 text-weight-bold text-right">{{
-                                Math.ceil(this.project.totalNeed.max) }}</td>
-                            <td v-if="!this.project.hasRange" class="bg-light-blue-1 text-right">{{
-                                Math.ceil(this.project.totalNeed.max) }}</td>
+                            <td class="bg-light-blue-1 text-right">
+                                Overall total
+                            </td>
+                            <!-- {{Math.ceil(this.project.totalNeed.max) }} -->
                         </tr>
 
                     </table>
 
                 </div>
-                <!-- 
-                <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer la déclaration"
-                    @click="print" class="no-print" />
-                <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer DOM" @click="printDiv"
-                    class="no-print" />
-                -->
                 <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer PDF" @click="printPDF"
                     class="no-print" />
             </div>
