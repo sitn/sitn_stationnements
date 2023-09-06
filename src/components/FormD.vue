@@ -58,7 +58,7 @@
                     <div class="text-h6">Liste des facteurs de réduction </div>
                     <div class="row">
                         <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
-                            v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.reductions.length > 0)">
+                            v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.variables.filter((x) => x.type === 'special reduction').length > 0)">
 
                             <!-- e => e.valid && e.reductions.length > 0 -->
 
@@ -76,7 +76,8 @@
                                         <td>{{ reduction.name }}</td>
                                         <td>
                                             <q-input dense bg-color="white" outlined type="number" name="reduction.factor"
-                                                v-model.number="reduction.value" :min=reduction.min :max=reduction.max>
+                                                v-model.number="reduction.value" :min=reduction.min :max=reduction.max
+                                                :rules="[val => validateRange(val, reduction.min, reduction.max)]">
                                                 <template v-slot:append>
                                                     <div class="text-body2">%</div>
                                                 </template>
@@ -87,8 +88,7 @@
                                     <tr>
                                         <td class="text-weight-bold">Total</td>
                                         <td class="bg-light-blue-1 text-weight-bold text-right">{{
-                                            (affectation.totalReduction *
-                                                100).toFixed(1) }}
+                                            (affectation.specialReduction).toFixed(1) }}
                                             %</td>
                                     </tr>
 
@@ -102,48 +102,41 @@
 
                     <q-separator class="q-my-md" />
 
-                    <!-- 
-            <div class="text-h6">Besoin net réduit</div>
-            <div class="row">
-                <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6"
-                    v-for="(item, key) in this.project.affectations.filter(e => e.active)">
-                    <div class="bg-white q-pa-md q-my-none rounded-borders">
 
-                        <table>
-                            <tr>
-                                <th>{{ item.name }}</th>
-                                <th class="text-right">Fixe</th>
-                            </tr>
+                    <div class="text-h6">Besoin net réduit</div>
+                    <div class="row">
+                        <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6"
+                            v-for="(item, key) in this.project.affectations.filter(e => e.active)">
+                            <div class="bg-white q-pa-md q-my-none rounded-borders">
 
-                            <tr>
-                                <td> {{ item.type == "Logement" ? "Besoin net réduit habitant" : "Besoin net réduit employé"
-                                }}
-                                </td>
-                                <td class="bg-light-blue-1 text-right">{{
-                                    item.reducedNetResidentNeed.min.toFixed(2)
-                                }}</td>
-                            </tr>
-                            <tr>
-                                <td>{{ item.type == "Logement" ? "Besoin net réduit visiteur" : "Besoin net réduit client"
-                                }}
-                                </td>
-                                <td class="bg-light-blue-1 text-right">{{
-                                    item.reducedNetVisitorNeed.min.toFixed(2) }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-weight-bold">Besoin net réduit total</td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">{{
-                                    item.totalNeed.min.toFixed(2) }}</td>
-                            </tr>
-                        </table>
+                                <table>
+                                    <tr>
+                                        <th>{{ item.name }}</th>
+                                        <th class="text-right">Places</th>
+                                    </tr>
+
+                                    <tr v-for="(factor, key2) in item.factors">
+                                        <td> {{ factor.name }}</td>
+                                        <td class="bg-light-blue-1 text-right">
+                                            {{ factor.reducedOutput[key2] }}</td>
+                                    </tr>
+
+                                    <!-- 
+                                    <tr>
+                                        <td class="text-weight-bold">Besoin net réduit total</td>
+                                        <td class="bg-light-blue-1 text-weight-bold text-right">{{
+                                            item.totalNeed.min.toFixed(2) }}</td>
+                                    </tr>
+                                    -->
+
+                                </table>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
-                </div>
-
-            </div>
-            -->
 
                 </div>
         </div>
@@ -169,8 +162,18 @@ export default {
     },
     methods: {
 
+        validateRange(val, min, max) {
+            let isValid = val !== null && val >= min && val <= max
+            if (isValid === false) {
+                val = null
+            }
+            return isValid || `Veuillez entrer une valeur entre ${min} et ${max}`
+        },
+
     }
 }
 </script>
 
-<style scoped>@import '../assets/table.css';</style>
+<style scoped>
+@import '../assets/table.css';
+</style>
