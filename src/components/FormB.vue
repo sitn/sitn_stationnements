@@ -10,21 +10,24 @@
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-if="this.project.locationType">
+
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+
             <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations"
                 option-value="name" option-label="name" @add="addOption()" @remove="removeOption()"
-                @update:model-value="selectOption()" multiple label="Affectation(s)" :disable="!this.project.locationType">
+                @update:model-value="selectOption()" multiple label="Affectation(s)">
 
                 <template v-slot:option="scope">
                     <q-item v-bind="scope.itemProps">
                         <q-item-section side>
-                            <q-checkbox v-model="scope.opt.active" />
+                            <q-checkbox :model-value="scope.selected" @update:model-value="scope.toggleOption(scope.opt)" />
+                            <!-- v-model="scope.opt.active"  :model-value="selected" -->
                         </q-item-section>
                         <q-item-section>
                             <q-item-label>{{ scope.opt.name }}</q-item-label>
                             <q-item-label caption>{{ scope.opt.description }}</q-item-label>
-                            <!-- <q-item-label caption>Selected: {{ scope.selected }}</q-item-label> -->
-                            <!-- <q-item-label caption>Active: {{ scope.opt.active }}</q-item-label> -->
+                            <q-item-label caption>Selected: {{ scope.selected }}</q-item-label>
+                            <q-item-label caption>Active: {{ scope.opt.active }}</q-item-label>
                         </q-item-section>
                     </q-item>
                 </template>
@@ -33,58 +36,50 @@
                     Choisir une ou plusieurs affectations dans la liste
                 </template>
             </q-select>
+
         </div>
 
         <q-form ref="form" greedy>
+
             <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders"
                 v-for="(item, key) in this.project.affectations.filter(e => e.active)">
 
-                <label class="text-h7 ">{{ item.name }} {{ item.isValid }}</label>
+                <label class="text-h7 ">{{ item.name }}</label>
                 <div class="row q-col-gutter-sm">
 
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
-                        <q-input bg-color="white" outlined label="" type="number" name="item.area"
-                            v-model.number="item.area" min="0.0" max="Inf" :rules="[validatePositive]">
+                    <!-- input fields -->
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2"
+                        v-for="(item2, key2) in item.variables.filter((x) => x.type === 'measurement')">
+                        <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item2.value"
+                            :min=item2.min :max=item2.max :hint="`${item2.min} ≥ x ≤ ${item2.max}`">
+                            <!-- :rules="[validatePositive]" -->
 
                             <template v-slot:label>
-                                {{ item.type == "Logement" ? "Surface brute de plancher (SBP)" : "Surface de vente (SV)" }}
+                                {{ item2.name }}
                             </template>
 
                             <template v-slot:append>
-                                <div class="text-body2">m<sup>2</sup></div>
+                                <div class="text-body2" v-html="item2.unit"></div>
+                            </template>
+
+                            <template v-slot:hint>
+
                             </template>
 
                         </q-input>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
-                        <q-input v-if="item.isHousing" class="col" bg-color="white" outlined label="Nombre de logements"
-                            type="number" name="item.numberOfHouses" v-model.number="item.numberOfHouses" min="0.0"
-                            max="Inf" step="1" :rules="[validatePositive]">
-                        </q-input>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
-                        <q-input bg-color="light-blue-1" outlined label="" type="number" name="item.rawResidentNeed"
-                            v-model.number="item.rawResidentNeed" readonly>
+                    <!-- output fields -->
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 self-end" v-for="(item3, key3) in item.factors">
+                        <q-input bg-color="light-blue-1" outlined label="" type="number" name="" v-model="item.output[key3]"
+                            readonly hint="">
                             <template v-slot:label>
-                                {{ item.type == "Logement" ? "Besoin brut habitant" : "Besoin brut employé" }}
+                                {{ item3.name }} (key: {{ key3 }})
+                                <!-- 
+                                In: {{ item.variables.map(x => x.value) }} |
+                                Out: {{ item3.formula(item.variables.map(x => x.value), 1.0) }}
+                                -->
                             </template>
-                        </q-input>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
-                        <q-input bg-color="light-blue-1" outlined label="" type="number" name="item.rawVisitorNeed"
-                            v-model.number="item.rawVisitorNeed" readonly>
-                            <template v-slot:label>
-                                {{ item.type == "Logement" ? "Besoin brut visiteur" : "Besoin brut client" }}
-                            </template>
-                        </q-input>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg">
-                        <q-input bg-color="light-blue-1" outlined label="Besoin brut total" type="number"
-                            name="item.rawVisitorNeed" v-model.number="item.rawTotalNeed" readonly>
                         </q-input>
                     </div>
 
@@ -102,7 +97,6 @@
 </template>
 
 <script>
-// import { ref } from 'vue'
 
 export default {
     name: 'FormB',
@@ -123,6 +117,9 @@ export default {
     },
     mounted() {
 
+        console.log('FORM B - Affectations')
+        console.log(this.project.affectations)
+
         this.$nextTick(() => { this.$refs.form.validate() })
 
     },
@@ -138,9 +135,6 @@ export default {
         },
         selectOption() {
 
-            console.log('Select option')
-            console.log(this.model)
-
             let activeOptions = this.model.map(obj => obj.name)
 
             // all affectations not in the model should be set to non-active
@@ -148,8 +142,6 @@ export default {
 
                 if (!activeOptions.includes(e.name)) {
                     e.active = false
-                    e.area = 0.0
-                    e.numberOfHouses = 0.0
                 }
 
             })
@@ -159,6 +151,12 @@ export default {
             this.model.forEach(function (e) {
                 e.active = true
             })
+
+            // this.model = this.project.affectations.filter(e => e.active === true)
+
+            console.log('Select option')
+            console.log(this.model)
+
 
             this.updateProject()
 
