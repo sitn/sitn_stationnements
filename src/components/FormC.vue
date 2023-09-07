@@ -14,23 +14,25 @@
 
         <q-form ref="form" greedy>
 
-            <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in this.factors.values">
+            <div class="row q-col-gutter-lg q-pa-md q-my-sm">
+                <div class="col-xs-12 col-sm-6 bg-grey-2 q-pa-md q-my-sm rounded-borders"
+                    v-for="(item, key) in this.factors.values">
 
-                <q-input class="col" bg-color="white" outlined label="" type="number" name=""
-                    v-model.number="item.effective" :min=item.min :max=item.max
-                    :rules="[val => validateRange(val, item.min, item.max)]">
-                    <!-- :hint="`${item.min} ≥ x ≤ ${item.max}`" -->
-                    <template v-slot:label>
-                        {{ item.label }}
-                    </template>
-                    <!-- 
+                    <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective"
+                        :min=item.min :max=item.max :rules="[val => validateRange(val, item.min, item.max)]">
+                        <!-- :hint="`${item.min} ≥ x ≤ ${item.max}`" -->
+                        <template v-slot:label>
+                            {{ item.label }}
+                        </template>
+                        <!-- 
                     <template v-slot:hint>
                         Entrer un pourcentage entre {{ item.min * 100 }} et {{ item.max * 100 }}% (Localisation de type {{
                             this.factors.zone }})
                     </template>
                     -->
-                </q-input>
+                    </q-input>
 
+                </div>
             </div>
 
 
