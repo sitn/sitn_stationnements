@@ -49,13 +49,13 @@
                             <tr v-for="(item3, key3) in item.factors">
                                 <td> {{ item3.name }}</td>
                                 <td class="bg-light-blue-1 text-right">
-                                    {{ item.netOutput[key3] }}</td>
+                                    {{ item.netOutput[key3].toFixed(2) }}</td>
                             </tr>
 
                             <tr>
                                 <td class="text-weight-bold">Besoin net total</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    Mytotal
+                                    {{ item.totalNetOutput.toFixed(2) }}
                                 </td>
 
                             </tr>
@@ -145,7 +145,9 @@ export default {
 
     },
     mounted() {
+
         this.$nextTick(() => { this.$refs.form.validate() })
+
     }
 }
 </script>
