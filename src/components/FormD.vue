@@ -118,17 +118,16 @@
                                     <tr v-for="(factor, key2) in item.factors">
                                         <td> {{ factor.name }}</td>
                                         <td class="bg-light-blue-1 text-right">
-                                            {{ item.reducedOutput[key2] }} </td>
+                                            {{ item.reducedOutput[key2].toFixed(2) }} </td>
                                     </tr>
 
-                                    <!-- {{ factor.reducedOutput[key2] }}
 
                                     <tr>
                                         <td class="text-weight-bold">Besoin net réduit total</td>
                                         <td class="bg-light-blue-1 text-weight-bold text-right">{{
-                                            item.totalNeed.min.toFixed(2) }}</td>
+                                            item.totalReducedOutput.toFixed(2) }}</td>
                                     </tr>
-                                    -->
+
 
                                 </table>
 
