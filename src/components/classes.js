@@ -4,27 +4,15 @@ import communes_json from '../assets/data/communes.json'
 export var communes = communes_json.sort((a, b) => a.comnom.toLowerCase().localeCompare(b.comnom.toLowerCase()))
 
 
-class Formula {
-
-  // constructor
-  constructor(name, equation) {
-    this.name = name
-    this.equation = equation
-  }
-
-}
-
-
 export class Affectation {
 
   // constructor
-  constructor(type, name, description, variables = [], factors = [], reductions = []) {
+  constructor(type, name, description, variables = [], factors = []) {
     this.type = type
     this.name = name
     this.description = description
     this.variables = variables
     this.factors = factors
-    this.reductions = reductions
     this.active = false
   }
 
@@ -46,14 +34,23 @@ export class Affectation {
   }
 
   get totalOutput() {
+    return this.output.reduce((acc, obj) => { return acc + obj }, 0)
+  }
+
+  get totalNetOutput() {
+    return this.netOutput.reduce((acc, obj) => { return acc + obj }, 0)
+  }
+
+  get totalReducedOutput() {
     return this.reducedOutput.reduce((acc, obj) => { return acc + obj }, 0)
   }
+
+
 
   get ordinaryReduction() {
     return this.variables.filter((x) => x.type === "reduction").reduce((acc, obj) => { return acc + obj.value }, 0)
     // return Math.min(this.variables.filter((x) => x.type === "reduction").reduce((acc, obj) => { return acc + obj.value }, 0), 1.0)
   }
-
 
   get specialReduction() {
     return Math.min(this.variables.filter((x) => x.type === "special reduction").reduce((acc, obj) => { return acc + obj.value }, 0), 100.0)
@@ -99,11 +96,6 @@ export const affectations = [
     [
       { name: "Habitants", formula: ((x, f = 1.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * f * (1 - r / 100)) },
       { name: "Visiteurs", formula: ((x, f = 1.0, r = 0.0) => 0.001 * x[0] * f * (1 - r / 100)) }
-    ],
-    [
-      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art 1", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art 2", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
     ]
   ),
   new Affectation(
@@ -120,11 +112,6 @@ export const affectations = [
     [
       { name: "Habitants", formula: ((x, f = 1.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * f * (1 - r / 100)) },
       { name: "Visiteurs", formula: ((x, f = 1.0, r = 0.0) => 0.001 * x[0] * f * (1 - r / 100)) }
-    ],
-    [
-      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art 1", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art 2", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
     ]
   ),
   new Affectation(
@@ -141,11 +128,6 @@ export const affectations = [
     [
       { name: "Personnel", formula: ((x, f = 1.0, r = 0.0) => (0.02 * x[0]) * f * (1 - r / 100)) },
       { name: "Clients", formula: ((x, f = 1.0, r = 0.0) => (0.01 * x[0]) * f * (1 - r / 100)) }
-    ],
-    [
-      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art 1", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art 2", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
     ]
   ),
   new Affectation(
@@ -162,11 +144,6 @@ export const affectations = [
     [
       { name: "Personnel", formula: ((x, f = 1.0, r = 0.0) => (0.02 * x[0]) * f * (1 - r / 100)) },
       { name: "Clients", formula: ((x, f = 1.0, r = 0.0) => (0.08 * x[0]) * f * (1 - r / 100)) }
-    ],
-    [
-      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art 1", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art 2", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
     ]
   ),
   new Affectation(
@@ -183,11 +160,6 @@ export const affectations = [
     [
       { name: "Personnel", formula: ((x, f = 1.0, r = 0.0) => 0.01 * x[0] * f * (1 - r / 100)) },
       { name: "Clients", formula: ((x, f = 1.0, r = 0.0) => 0.002 * x[0] * f * (1 - r / 100)) }
-    ],
-    [
-      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art 1", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
-      { name: "art 2", type: "special reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
     ]
   ),
   new Affectation(
@@ -203,9 +175,6 @@ export const affectations = [
     ],
     [
       { name: "Total", formula: ((x, f = 1.0, r = 0.0) => 6 * x[0] * f * (1 - r / 100)) }
-    ],
-    [
-      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
     ]
   ),
   new Affectation(
@@ -222,9 +191,6 @@ export const affectations = [
     ],
     [
       { name: "Total", formula: ((x, f = 1.0, r = 0.0) => (x[0] + 0.1 * x[1]) * f * (1 - r / 100)) },
-    ],
-    [
-      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
     ]
   ),
   new Affectation(
@@ -242,9 +208,6 @@ export const affectations = [
     [
       { name: "Habitants", formula: ((x, f = 1.0, r = 0.0) => x[0] * f * (1 - r / 100)) },
       { name: "Visiteurs", formula: ((x, f = 1.0, r = 0.0) => x[1] * f * (1 - r / 100)) }
-    ],
-    [
-      { name: "zone", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
     ]
   ),
 ]
@@ -304,6 +267,8 @@ export class Project {
   }
   */
 
+
+
   get hasAffectation() {
     return this.affectations.filter(e => e.active).length > 0 /* && this.affectations.filter(e => e.active).map(e => e.valid).every(Boolean) */
   }
@@ -328,27 +293,6 @@ export class Project {
     if (val !== null) {
 
       this._locationType = val
-      let ranges = this.loctypes.find(el => el.name === val.name).ranges
-
-      // set project ranges
-      // this.ranges.housing = ranges.housing
-      // this.ranges.activity = ranges.activity
-
-      // set ranges for each affectation
-      /*
-      this.affectations.forEach(affectation => {
-
-        switch (affectation.type) {
-          case 'Logement':
-            affectation.range = ranges.housing
-            break
-          case 'Activité':
-            affectation.range = ranges.activity
-            break
-        }
-
-      })
-      */
       console.log(`App.vue | Location type set to: ${val.name}`)
       console.log(this.locationType)
 
