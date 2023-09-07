@@ -73,7 +73,10 @@
 
                                     <tr v-for="(reduction, index) in affectation.variables.filter(e => e.type === 'special reduction')"
                                         :key="index">
-                                        <td>{{ reduction.name }}</td>
+                                        <td>
+                                            <div class="text-weight-bold">{{ reduction.name }}</div>
+                                            <div class="text-caption">blablabla</div>
+                                        </td>
                                         <td>
                                             <q-input dense bg-color="white" outlined type="number" name="reduction.factor"
                                                 v-model.number="reduction.value" :min=reduction.min :max=reduction.max
