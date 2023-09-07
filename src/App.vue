@@ -383,13 +383,6 @@ export default {
 
     },
 
-    selectAffectation() {
-
-      console.log('Select affectation')
-      console.log(this.selected)
-
-    },
-
   }
 
 }
