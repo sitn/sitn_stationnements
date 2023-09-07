@@ -24,14 +24,15 @@
                             <td>{{ affectation.name }}</td>
                             <td class="bg-light-blue-1 text-right">
                                 {{
-                                    affectation.totalOutput.toFixed(2)
+                                    affectation.totalReducedOutput.toFixed(2)
                                 }}</td>
                         </tr>
 
                         <tr>
                             <td class="text-weight-bold">Total (arrondi supérieur)</td>
-                            <td class="bg-light-blue-1 text-right">
-                                Overall total
+                            <td class="bg-light-blue-1 text-weight-bold text-right">
+                                {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                                    x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
                             </td>
                             <!-- {{Math.ceil(this.project.totalNeed.max) }} -->
                         </tr>
