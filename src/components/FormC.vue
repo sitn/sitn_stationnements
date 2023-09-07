@@ -16,9 +16,10 @@
 
             <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in this.factors.values">
 
-                <q-input class="col" bg-color="white" outlined label="" :hint="`${item.min} ≥ x ≤ ${item.max}`"
-                    type="number" name="" v-model.number="item.effective" :min=item.min :max=item.max
+                <q-input class="col" bg-color="white" outlined label="" type="number" name=""
+                    v-model.number="item.effective" :min=item.min :max=item.max
                     :rules="[val => validateRange(val, item.min, item.max)]">
+                    <!-- :hint="`${item.min} ≥ x ≤ ${item.max}`" -->
                     <template v-slot:label>
                         {{ item.label }}
                     </template>
@@ -133,13 +134,18 @@ export default {
             if (isValid === false) {
                 val = null
             }
+
+            if (max === Infinity) {
+                let msg = `Veuillez entrer une valeur supérieure à ${min}`
+            } else {
+                let msg = `Veuillez entrer une valeur entre ${min} et ${max}`
+            }
             return isValid || `Veuillez entrer une valeur entre ${min} et ${max}`
         },
 
     },
     mounted() {
-        console.log(`the component is now mounted.`)
-        console.log(this.project)
+        this.$nextTick(() => { this.$refs.form.validate() })
     }
 }
 </script>
