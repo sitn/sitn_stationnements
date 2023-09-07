@@ -51,7 +51,8 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2"
                         v-for="(item2, key2) in item.variables.filter((x) => x.type === 'measurement')">
                         <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item2.value"
-                            :min=item2.min :max=item2.max :hint="`${item2.min} ≥ x ≤ ${item2.max}`">
+                            :min=item2.min :max=item2.max :rules="[val => validatePositive(val)]">
+                            <!-- :hint="`${item2.min} ≥ x ≤ ${item2.max}`" -->
                             <!-- :rules="[validatePositive]" -->
 
                             <template v-slot:label>
@@ -115,17 +116,22 @@ export default {
     },
     computed: {
     },
-    mounted() {
-
-        console.log('FORM B - Affectations')
-        console.log(this.project.affectations)
-
-        this.$nextTick(() => { this.$refs.form.validate() })
-
-    },
     methods: {
         validatePositive(val) {
             return val !== null && val !== '' && val > 0.0 || "Veuillez entrer une valeur positive"
+        },
+        validateRange(val, min, max) {
+            let isValid = val !== null && val >= min && val <= max
+            if (isValid === false) {
+                val = null
+            }
+
+            if (max === Infinity) {
+                let msg = `Veuillez entrer une valeur ≥ à ${min}`
+            } else {
+                let msg = `Veuillez entrer une valeur entre ${min} et ${max}`
+            }
+            return isValid || msg
         },
         addOption() {
             console.log('Add option')
@@ -157,7 +163,6 @@ export default {
             console.log('Select option')
             console.log(this.model)
 
-
             this.updateProject()
 
         },
@@ -179,6 +184,13 @@ export default {
             this.$nextTick(() => { this.$refs.form.validate() })
             this.$emit('updateProject', this.project);
         }
+    },
+    mounted() {
+
+        console.log('FORM B - Affectations')
+        console.log(this.project.affectations)
+        this.$nextTick(() => { this.$refs.form.validate() })
+
     }
 }
 </script>
