@@ -12,7 +12,7 @@
 
         <!-- <div>{{ this.factors }}</div><br> -->
 
-        <q-form ref="form" greedy v-if="this.project.locationType & this.project.hasAffectation">
+        <q-form ref="form" greedy v-if="this.project.hasAffectation">
 
             <div class="row q-col-gutter-lg q-pa-sm q-my-sm">
                 <div class="col-xs-12 col-sm-6 bg-grey-2 q-pa-md q-my-sm rounded-borders"
@@ -162,7 +162,13 @@ export default {
 
     },
     updated() {
-        this.$nextTick(() => { this.$refs.form.validate() })
+        // console.log('this.$refs')
+        // console.log(this.$refs.form)
+        // console.log(this.$refs.hasOwnProperty('form'))
+        // console.log(this.$refs.hasOwnProperty('didi'))
+        if (this.$refs.hasOwnProperty('form')) {
+            this.$nextTick(() => { this.$refs.form.validate() })
+        }
     }
 }
 </script>
