@@ -24,15 +24,15 @@
                             <td>{{ affectation.name }}</td>
                             <td class="bg-light-blue-1 text-right">
                                 {{
-                                    affectation.totalReducedOutput.toFixed(2)
+                                    Math.ceil(affectation.totalReducedOutput)
                                 }}</td>
                         </tr>
 
                         <tr>
                             <td class="text-weight-bold">Total (arrondi supérieur)</td>
                             <td class="bg-light-blue-1 text-weight-bold text-right">
-                                {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
-                                    x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+                                {{ this.project.affectations.filter(e => e.active).map((x) =>
+                                    Math.ceil(x.totalReducedOutput)).reduce((acc, obj) => { return acc + obj }, 0) }}
                             </td>
                             <!-- {{Math.ceil(this.project.totalNeed.max) }} -->
                         </tr>
@@ -41,7 +41,7 @@
 
                 </div>
                 <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer PDF" @click="printPDF"
-                    class="no-print" />
+                    class="no-print" disable />
             </div>
 
         </div>
