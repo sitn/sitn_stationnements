@@ -9,15 +9,15 @@
                     {
                         "type": "housing",
                         "label": "Logement",
-                        "min": 0.2,
-                        "max": 0.5,
+                        "min": 20.0,
+                        "max": 50.0,
                         "effective": null
                     },
                     {
                         "type": "activity",
                         "label": "Activité",
                         "min": 0.0,
-                        "max": 0.4,
+                        "max": 40,
                         "effective": null
                     }
                 ]
