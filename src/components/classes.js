@@ -330,8 +330,6 @@ export class Project {
   }
   */
 
-
-
   get hasAffectation() {
     return this.affectations.filter(e => e.active).length > 0 /* && this.affectations.filter(e => e.active).map(e => e.valid).every(Boolean) */
   }
@@ -339,7 +337,6 @@ export class Project {
   get isValid() {
     return this.hasAffectation && this._locationType !== null && this.commune !== null
   }
-
 
   get locationType() {
     if (this._locationType !== null) {
@@ -360,7 +357,6 @@ export class Project {
       console.log(this.locationType)
 
     }
-
 
   }
 
