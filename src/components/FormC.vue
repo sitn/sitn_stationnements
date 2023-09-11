@@ -3,33 +3,34 @@
     <div class="q-pa-md">
 
         <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders"
-            v-if="!this.project.hasAffectation">
+            v-if="!this.project.locationType | !this.project.hasAffectation">
             <template v-slot:avatar>
                 <q-icon name="error" color="white" />
             </template>
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-        <div>{{ this.factors }}</div><br>
+        <!-- <div>{{ this.factors }}</div><br> -->
 
-        <q-form ref="form" greedy>
+        <q-form ref="form" greedy v-if="this.project.locationType & this.project.hasAffectation">
 
-            <div class="row q-col-gutter-lg q-pa-md q-my-sm">
+            <div class="row q-col-gutter-lg q-pa-sm q-my-sm">
                 <div class="col-xs-12 col-sm-6 bg-grey-2 q-pa-md q-my-sm rounded-borders"
                     v-for="(item, key) in this.factors.values">
 
                     <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective"
-                        :min=item.min :max=item.max :rules="[val => validateRange(val, item.min, item.max)]">
+                        :min=item.min :max=item.max @update:model-value="check(item)"
+                        :rules="[val => validateRange(val, item.min, item.max)]">
                         <!-- :hint="`${item.min} ≥ x ≤ ${item.max}`" -->
                         <template v-slot:label>
                             {{ item.label }}
                         </template>
                         <!-- 
-                    <template v-slot:hint>
-                        Entrer un pourcentage entre {{ item.min * 100 }} et {{ item.max * 100 }}% (Localisation de type {{
-                            this.factors.zone }})
-                    </template>
-                    -->
+                        <template v-slot:hint>
+                            Entrer un pourcentage entre {{ item.min * 100 }} et {{ item.max * 100 }}% (Localisation de type {{
+                                this.factors.zone }})
+                        </template>
+                        -->
                     </q-input>
 
                 </div>
@@ -45,7 +46,7 @@
 
                             <tr>
                                 <th>{{ item.name }}</th>
-                                <th class="text-right"> x {{ item.ordinaryReduction }}</th>
+                                <th class="text-right"> x {{ item.ordinaryReduction.toFixed(2) }}</th>
                             </tr>
 
                             <tr v-for="(item3, key3) in item.factors">
@@ -144,12 +145,24 @@ export default {
             }
             return isValid || `Veuillez entrer une valeur entre ${min} et ${max}`
         },
+        check(item) {
+            // console.log(item)
+            let isValid = item.effective >= item.min && item.effective <= item.max
+            if (!isValid) {
+                item.effective = null
+            } else {
+                item.effective = item.effective
+            }
+        }
 
     },
     mounted() {
 
-        this.$nextTick(() => { this.$refs.form.validate() })
+        // this.$nextTick(() => { this.$refs.form.validate() })
 
+    },
+    updated() {
+        this.$nextTick(() => { this.$refs.form.validate() })
     }
 }
 </script>
