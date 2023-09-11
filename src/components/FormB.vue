@@ -26,8 +26,8 @@
                         <q-item-section>
                             <q-item-label>{{ scope.opt.name }}</q-item-label>
                             <q-item-label caption>{{ scope.opt.description }}</q-item-label>
-                            <q-item-label caption>Selected: {{ scope.selected }}</q-item-label>
-                            <q-item-label caption>Active: {{ scope.opt.active }}</q-item-label>
+                            <!-- <q-item-label caption>Selected: {{ scope.selected }}</q-item-label> -->
+                            <!-- <q-item-label caption>Active: {{ scope.opt.active }}</q-item-label> -->
                         </q-item-section>
                     </q-item>
                 </template>
@@ -75,7 +75,7 @@
                         <q-input bg-color="light-blue-1" outlined label="" type="number" name="" v-model="item.output[key3]"
                             readonly hint="">
                             <template v-slot:label>
-                                {{ item3.name }} (key: {{ key3 }})
+                                {{ item3.name }} <!-- (key: {{ key3 }}) -->
                                 <!-- 
                                 In: {{ item.variables.map(x => x.value) }} |
                                 Out: {{ item3.formula(item.variables.map(x => x.value), 1.0) }}
