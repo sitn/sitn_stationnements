@@ -12,137 +12,138 @@
         </q-banner>
 
         <!-- LOCATION TYPE INFOBOX  -->
+        <!-- 
         <div>{{ this.project.hasAffectation }}</div>
         <div>Active affectations: {{ this.project.affectations.filter(e => e.active).length }}</div>
         <div>Valid affectations: {{ this.project.affectations.filter(e => e.valid).length }}</div>
         <div>{{ this.project.affectations.filter(e => e.active).map(e => e.valid).every(Boolean) }}</div>
         <div>{{ this.project.affectations[0].variables.map((x) => x.value >= x.min && x.value <= x.max).every(Boolean)
         }}</div>
+        -->
 
+        <div> <!-- v-if="this.project.hasAffectation" -->
+            <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox">
 
-                <div> <!-- v-if="this.project.hasAffectation" -->
-                    <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox">
+                <q-card-section horizontal>
 
-                        <q-card-section horizontal>
+                    <q-card-actions vertical class="justify-around q-pa-xs">
+                        <q-icon name="info" color="orange-5" size="3em" />
+                    </q-card-actions>
 
-                            <q-card-actions vertical class="justify-around q-pa-xs">
-                                <q-icon name="info" color="orange-5" size="3em" />
-                            </q-card-actions>
+                    <q-card-section class="q-pa-xs">
+                        <div class="text-body1 text-weight-bold">Facteurs de réduction</div>
 
-                            <q-card-section class="q-pa-xs">
-                                <div class="text-body1 text-weight-bold">Facteurs de réduction</div>
+                        <div class="text-body1 q-pa-none">
+                            <ul>
+                                <li>Des facteurs de réduction peuvent être appliqués au besoin net,
+                                    par le réquérant ou par la commune (articles 31 à 34 du
+                                    RELConstr.). Les facteurs de réduction sont à porter en déduction
+                                    du besoin net. Le résultat obtenu se nomme le besoin net réduit.</li>
 
-                                <div class="text-body1 q-pa-none">
-                                    <ul>
-                                        <li>Des facteurs de réduction peuvent être appliqués au besoin net,
-                                            par le réquérant ou par la commune (articles 31 à 34 du
-                                            RELConstr.). Les facteurs de réduction sont à porter en déduction
-                                            du besoin net. Le résultat obtenu se nomme le besoin net réduit.</li>
+                                <li>Les facteurs de réduction peuvent intervenir lors de l'examen du
+                                    dossier par la commune ou les services compétents, notamment en ce
+                                    qui concerne la législation sur l'environnement et la sauvegarde
+                                    du patrimoine.</li>
 
-                                        <li>Les facteurs de réduction peuvent intervenir lors de l'examen du
-                                            dossier par la commune ou les services compétents, notamment en ce
-                                            qui concerne la législation sur l'environnement et la sauvegarde
-                                            du patrimoine.</li>
-
-                                        <li>Pour les logements avec encadrements ou étudiants,
-                                            il convient de prendre contact en amont avec la commune pour
-                                            déterminer si un facteur de réduction s'applique.</li>
-                                    </ul>
-                                </div>
-                            </q-card-section>
-
-                        </q-card-section>
-
-                    </q-card>
-
-                    <div class="text-h6">Liste des facteurs de réduction </div>
-                    <div class="row">
-                        <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
-                            v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.variables.filter((x) => x.type === 'special reduction').length > 0)">
-
-                            <!-- e => e.valid && e.reductions.length > 0 -->
-
-                            <div class="bg-white q-pa-md q-my-none rounded-borders">
-
-                                <table>
-
-                                    <tr>
-                                        <th>{{ affectation.name }}</th>
-                                        <th style="white-space: nowrap;">Réduction (%)</th>
-                                    </tr>
-
-                                    <tr v-for="(reduction, index) in affectation.variables.filter(e => e.type === 'special reduction')"
-                                        :key="index">
-                                        <td>
-                                            <div class="text-weight-bold">{{ reduction.name }}</div>
-                                            <div class="text-caption">blablabla</div>
-                                        </td>
-                                        <td>
-                                            <q-input dense bg-color="white" outlined type="number" name="reduction.factor"
-                                                v-model.number="reduction.value" :min=reduction.min :max=reduction.max
-                                                :rules="[val => validateRange(val, reduction.min, reduction.max)]">
-                                                <template v-slot:append>
-                                                    <div class="text-body2">%</div>
-                                                </template>
-                                            </q-input>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="text-weight-bold">Total</td>
-                                        <td class="bg-light-blue-1 text-weight-bold text-right">{{
-                                            (affectation.specialReduction).toFixed(1) }}
-                                            %</td>
-                                    </tr>
-
-                                </table>
-
-                            </div>
-
+                                <li>Pour les logements avec encadrements ou étudiants,
+                                    il convient de prendre contact en amont avec la commune pour
+                                    déterminer si un facteur de réduction s'applique.</li>
+                            </ul>
                         </div>
+                    </q-card-section>
+
+                </q-card-section>
+
+            </q-card>
+
+            <div class="text-h6">Liste des facteurs de réduction </div>
+            <div class="row">
+                <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
+                    v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.variables.filter((x) => x.type === 'special reduction').length > 0)">
+
+                    <!-- e => e.valid && e.reductions.length > 0 -->
+
+                    <div class="bg-white q-pa-md q-my-none rounded-borders">
+
+                        <table>
+
+                            <tr>
+                                <th>{{ affectation.name }}</th>
+                                <th style="white-space: nowrap;">Réduction (%)</th>
+                            </tr>
+
+                            <tr v-for="(reduction, index) in affectation.variables.filter(e => e.type === 'special reduction')"
+                                :key="index">
+                                <td>
+                                    <div class="text-weight-bold">{{ reduction.name }}</div>
+                                    <div class="text-caption">{{ reduction.description }}</div>
+                                </td>
+                                <td>
+                                    <q-input dense bg-color="white" outlined type="number" name="reduction.factor"
+                                        v-model.number="reduction.value" :min=reduction.min :max=reduction.max
+                                        :rules="[val => validateRange(val, reduction.min, reduction.max)]">
+                                        <template v-slot:append>
+                                            <div class="text-body2">%</div>
+                                        </template>
+                                    </q-input>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-weight-bold">Total</td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">{{
+                                    (affectation.specialReduction).toFixed(1) }}
+                                    %</td>
+                            </tr>
+
+                        </table>
 
                     </div>
-
-                    <q-separator class="q-my-md" />
-
-
-                    <div class="text-h6">Besoin net réduit</div>
-                    <div class="row">
-                        <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6"
-                            v-for="(item, key) in this.project.affectations.filter(e => e.active)">
-                            <div class="bg-white q-pa-md q-my-none rounded-borders">
-
-                                <table>
-                                    <tr>
-                                        <th>{{ item.name }}</th>
-                                        <th class="text-right"># Places</th>
-                                    </tr>
-
-                                    <tr v-for="(factor, key2) in item.factors">
-                                        <td> {{ factor.name }}</td>
-                                        <td class="bg-light-blue-1 text-right">
-                                            {{ item.reducedOutput[key2].toFixed(2) }} </td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <td class="text-weight-bold">Besoin net réduit total</td>
-                                        <td class="bg-light-blue-1 text-weight-bold text-right">{{
-                                            item.totalReducedOutput.toFixed(2) }}</td>
-                                    </tr>
-
-
-                                </table>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
 
                 </div>
+
+            </div>
+
+            <q-separator class="q-my-md" />
+
+
+            <div class="text-h6">Besoin net réduit</div>
+            <div class="row">
+                <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6"
+                    v-for="(item, key) in this.project.affectations.filter(e => e.active)">
+                    <div class="bg-white q-pa-md q-my-none rounded-borders">
+
+                        <table>
+                            <tr>
+                                <th>{{ item.name }}</th>
+                                <th class="text-right"># Places</th>
+                            </tr>
+
+                            <tr v-for="(factor, key2) in item.factors">
+                                <td> {{ factor.name }}</td>
+                                <td class="bg-light-blue-1 text-right">
+                                    {{ item.reducedOutput[key2].toFixed(2) }} </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="text-weight-bold">Besoin net réduit total</td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">{{
+                                    item.totalReducedOutput.toFixed(2) }}</td>
+                            </tr>
+
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
         </div>
+    </div>
 </template>
 
 <script>
