@@ -263,6 +263,7 @@ export const affectations = [
     [
       { name: "Nombre de places habitant", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "Nombre de places visiteur", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
+      { name: "Nombre de pièces", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 1.0, value: 1.0 },
       { name: "art. 31", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
       { name: "art. 32", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -270,7 +271,8 @@ export const affectations = [
     ],
     [
       { name: "Habitants", formula: ((x, f = 1.0, r = 0.0) => x[0] * f * (1 - r / 100)) },
-      { name: "Visiteurs", formula: ((x, f = 1.0, r = 0.0) => x[1] * f * (1 - r / 100)) }
+      { name: "Visiteurs", formula: ((x, f = 1.0, r = 0.0) => x[1] * f * (1 - r / 100)) },
+      { name: "Vélos", formula: ((x, f = 1.0, r = 0.0) => x[2]) }
     ]
   ),
 ]
