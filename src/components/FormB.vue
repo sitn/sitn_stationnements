@@ -11,7 +11,7 @@
         </q-banner>
 
 
-        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-if="this.project.locationType">
 
             <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations"
                 option-value="name" option-label="name" @add="addOption()" @remove="removeOption()"
@@ -41,7 +41,7 @@
 
         <q-form ref="form" greedy>
 
-            <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders"
+            <div v-if="this.project.locationType" class="bg-grey-2 q-pa-md q-my-sm rounded-borders"
                 v-for="(item, key) in this.project.affectations.filter(e => e.active)">
 
                 <label class="text-h7 ">{{ item.name }}</label>
@@ -51,7 +51,8 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2"
                         v-for="(item2, key2) in item.variables.filter((x) => x.type === 'measurement')">
                         <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item2.value"
-                            :min=item2.min :max=item2.max :rules="[val => validatePositive(val)]">
+                            :min=item2.min :max=item2.max @update:model-value="check(item2)"
+                            :rules="[val => validatePositive(val)]">
                             <!-- :hint="`${item2.min} ≥ x ≤ ${item2.max}`" -->
                             <!-- :rules="[validatePositive]" -->
 
@@ -72,8 +73,8 @@
 
                     <!-- output fields -->
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 self-end" v-for="(item3, key3) in item.factors">
-                        <q-input bg-color="light-blue-1" outlined label="" type="number" name="" v-model="item.output[key3]"
-                            readonly hint="">
+                        <q-input bg-color="light-blue-1" outlined label="" type="number" name="" @update:model-value=""
+                            v-model="item.output[key3]" readonly hint="">
                             <template v-slot:label>
                                 {{ item3.name }} <!-- (key: {{ key3 }}) -->
                                 <!-- 
@@ -133,11 +134,20 @@ export default {
             }
             return isValid || msg
         },
+        check(item) {
+            // console.log(item)
+            let isValid = item.value >= item.min && item.value <= item.max
+            if (!isValid) {
+                item.value = null
+            } else {
+                item.value = item.value
+            }
+        },
         addOption() {
-            console.log('Add option')
+            // console.log('Add option')
         },
         removeOption() {
-            console.log('Remove option')
+            // console.log('Remove option')
         },
         selectOption() {
 
@@ -186,12 +196,14 @@ export default {
         }
     },
     mounted() {
-
         console.log('FORM B - Affectations')
         console.log(this.project.affectations)
+        // this.$nextTick(() => { this.$refs.form.validate() })
+    },
+    updated() {
         this.$nextTick(() => { this.$refs.form.validate() })
-
     }
+
 }
 </script>
 
