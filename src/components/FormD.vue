@@ -69,7 +69,7 @@
 
                             <tr>
                                 <th>{{ affectation.name }}</th>
-                                <th style="white-space: nowrap;">Réduction (%)</th>
+                                <th style="white-space: nowrap;">Réduction (-x%)</th>
                             </tr>
 
                             <tr v-for="(reduction, index) in affectation.variables.filter(e => e.type === 'special reduction')"
@@ -82,6 +82,9 @@
                                     <q-input dense bg-color="white" outlined type="number" name="reduction.factor"
                                         v-model.number="reduction.value" :min=reduction.min :max=reduction.max
                                         :rules="[val => validateRange(val, reduction.min, reduction.max)]">
+                                        <template v-slot:prepend>
+                                            <div class="text-body2">-</div>
+                                        </template>
                                         <template v-slot:append>
                                             <div class="text-body2">%</div>
                                         </template>
@@ -92,8 +95,7 @@
                             <tr>
                                 <td class="text-weight-bold">Total</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">{{
-                                    (affectation.specialReduction).toFixed(1) }}
-                                    %</td>
+                                    (-affectation.specialReduction).toFixed(1) }}%</td>
                             </tr>
 
                         </table>
@@ -116,7 +118,7 @@
                         <table>
                             <tr>
                                 <th>{{ item.name }}</th>
-                                <th class="text-right"># Places</th>
+                                <th class="text-right">{{ -item.specialReduction }}%</th>
                             </tr>
 
                             <tr v-for="(factor, key2) in item.factors">
