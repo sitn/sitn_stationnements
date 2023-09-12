@@ -15,6 +15,34 @@
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
+                        <thead>
+                            <tr>
+                                <th>Affectation</th>
+                                <th>Sous-affectation</th>
+                                <th class="text-right"># Places</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                <tr v-for="(subitem, iSub) in item.reducedOutput2">
+                                    <td v-if="iSub === 0" :rowspan="item.factors.length" class="">{{ item.name }}</td>
+                                    <td>{{ subitem.name }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td>
+                                </tr>
+                            </template>
+                            <tr>
+                            <td class="text-weight-bold">Total (arrondi supérieur)</td>
+                            <td class="text-weight-bold"></td>
+                            <td class="bg-light-blue-1 text-weight-bold text-right">
+                                {{ this.project.affectations.filter(e => e.active).map((x) =>
+                                Math.ceil(x.totalReducedOutput)).reduce((acc, obj) => { return acc + obj }, 0) }}
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>
+
+                    <!-- 
+                    <table id="summary-table">
                         <tr>
                             <th>Affectation</th>
                             <th class="text-right"># Places</th>
@@ -24,7 +52,7 @@
                             <td>{{ affectation.name }}</td>
                             <td class="bg-light-blue-1 text-right">
                                 {{
-                                    Math.ceil(affectation.totalReducedOutput)
+                                Math.ceil(affectation.totalReducedOutput)
                                 }}</td>
                         </tr>
 
@@ -32,87 +60,12 @@
                             <td class="text-weight-bold">Total (arrondi supérieur)</td>
                             <td class="bg-light-blue-1 text-weight-bold text-right">
                                 {{ this.project.affectations.filter(e => e.active).map((x) =>
-                                    Math.ceil(x.totalReducedOutput)).reduce((acc, obj) => { return acc + obj }, 0) }}
+                                Math.ceil(x.totalReducedOutput)).reduce((acc, obj) => { return acc + obj }, 0) }}
                             </td>
-                            <!-- {{Math.ceil(this.project.totalNeed.max) }} -->
                         </tr>
 
                     </table>
-
-                </div>
-
-                <!-- TEST -->
-                <div class="bg-white q-pa-md q-my-sm rounded-borders">
-
-                    <table id="summary-table">
-                        <tr>
-                            <th>Affectation</th>
-                            <th>Sous-affectation</th>
-                            <th class="text-right"># Places</th>
-                        </tr>
-
-                        <tr v-for="(affectation, index) in this.project.affectations.filter(e => e.active)" :key="index">
-                            <td rowspan="1">{{ affectation.name }}</td>
-
-                            <td></td>
-
-                            <td class="bg-light-blue-1 text-right">
-                                {{
-                                    Math.ceil(affectation.totalReducedOutput)
-                                }}
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-weight-bold">Total (arrondi supérieur)</td>
-                            <td class="text-weight-bold"></td>
-                            <td class="bg-light-blue-1 text-weight-bold text-right">
-                                {{ this.project.affectations.filter(e => e.active).map((x) =>
-                                    Math.ceil(x.totalReducedOutput)).reduce((acc, obj) => { return acc + obj }, 0) }}
-                            </td>
-                            <!-- {{Math.ceil(this.project.totalNeed.max) }} -->
-                        </tr>
-
-                    </table>
-
-                </div>
-
-
-                <!-- TEST -->
-                <div class="bg-white q-pa-md q-my-sm rounded-borders">
-
-                    <table id="summary-table">
-                        <tr>
-                            <th>Affectation</th>
-                            <th>Sous-affectation</th>
-                            <th class="text-right"># Places</th>
-                        </tr>
-
-                        <tr>
-                            <td rowspan="2">Logements standards</td>
-                            <td>Habitants</td>
-                            <td class="bg-light-blue-1 text-right">42</td>
-                        </tr>
-                        <tr>
-                            <td>Visiteurs</td>
-                            <td class="bg-light-blue-1 text-right">12</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="1">Hôtels</td>
-                            <td>Mixte</td>
-                            <td class="bg-light-blue-1 text-right">9</td>
-                        </tr>
-
-                        <tr>
-                            <td class="text-weight-bold">Total (arrondi supérieur)</td>
-                            <td class="text-weight-bold"></td>
-                            <td class="bg-light-blue-1 text-weight-bold text-right">
-                                val
-                            </td>
-                            <!-- {{Math.ceil(this.project.totalNeed.max) }} -->
-                        </tr>
-
-                    </table>
+                    -->
 
                 </div>
 
