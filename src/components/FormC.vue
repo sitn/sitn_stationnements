@@ -25,6 +25,9 @@
                         <template v-slot:label>
                             {{ item.label }}
                         </template>
+                        <template v-slot:append>
+                            <div class="text-body2">%</div>
+                        </template>
                         <!-- 
                         <template v-slot:hint>
                             Entrer un pourcentage entre {{ item.min * 100 }} et {{ item.max * 100 }}% (Localisation de type {{
@@ -46,7 +49,7 @@
 
                             <tr>
                                 <th>{{ item.name }}</th>
-                                <th class="text-right"> x {{ item.ordinaryReduction.toFixed(2) }}</th>
+                                <th class="text-right"> &#215; {{ item.ordinaryReduction.toFixed(0) }}%</th>
                             </tr>
 
                             <tr v-for="(item3, key3) in item.factors">
