@@ -10,7 +10,6 @@
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-
         <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-if="this.project.locationType">
 
             <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations"
@@ -73,8 +72,8 @@
 
                     <!-- output fields -->
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 self-end" v-for="(item3, key3) in item.factors">
-                        <q-input bg-color="light-blue-1" outlined label="" type="number" name="" @update:model-value=""
-                            v-model="item.output[key3]" readonly hint="">
+                        <q-input bg-color="light-blue-1" outlined label="" type="number" step="0.01" name=""
+                            :model-value="(item.output[key3]).toFixed(2)" readonly hint="">
                             <template v-slot:label>
                                 {{ item3.name }} <!-- (key: {{ key3 }}) -->
                                 <!-- 
@@ -83,6 +82,16 @@
                                 -->
                             </template>
                         </q-input>
+
+                        <!-- 
+                        <q-input bg-color="light-blue-1" outlined label="" type="number" step="0.01" name=""
+                            @update:model-value="fix(item)" v-model="item.output[key3]" readonly hint="">
+                            <template v-slot:label>
+                                {{ item3.name }}
+                            </template>
+                        </q-input>
+                        -->
+
                     </div>
 
                     <div>
