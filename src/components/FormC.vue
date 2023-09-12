@@ -49,7 +49,7 @@
 
                             <tr>
                                 <th>{{ item.name }}</th>
-                                <th class="text-right"> &#215; {{ item.ordinaryReduction.toFixed(0) }}%</th>
+                                <th class="text-right"> &#215; {{ item.ordinaryReduction.toFixed(1) }}%</th>
                             </tr>
 
                             <tr v-for="(item3, key3) in item.factors">
