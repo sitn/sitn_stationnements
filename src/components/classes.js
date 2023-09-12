@@ -11,8 +11,8 @@ export class Affectation {
     this.type = type
     this.name = name
     this.description = description
-    this.variables = variables
-    this.factors = factors
+    this.variables = variables // input
+    this.factors = factors // output
     this.active = false
   }
 
@@ -29,9 +29,20 @@ export class Affectation {
     return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, 0.0))
   }
 
+  get netOutput2() {
+    return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => ({ name: x.name, value: x.value })), this.ordinaryReduction, 0.0))
+  }
+
+
   get reducedOutput() {
     return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, this.specialReduction))
   }
+
+
+  get reducedOutput2() {
+    return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => ({ name: x.name, value: x.value })), this.ordinaryReduction, this.specialReduction))
+  }
+
 
   get totalOutput() {
     return this.output.reduce((acc, obj) => { return acc + obj }, 0)
