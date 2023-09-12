@@ -18,7 +18,7 @@
                         <thead>
                             <tr>
                                 <th>Affectation</th>
-                                <th>Sous-affectation</th>
+                                <th>Type de place</th>
                                 <th class="text-right"># Places</th>
                             </tr>
                         </thead>
@@ -31,15 +31,15 @@
                                 </tr>
                             </template>
                             <tr>
-                            <td class="text-weight-bold">Total (arrondi supérieur)</td>
-                            <td class="text-weight-bold"></td>
-                            <td class="bg-light-blue-1 text-weight-bold text-right">
-                                {{ this.project.affectations.filter(e => e.active).map((x) =>
-                                Math.ceil(x.totalReducedOutput)).reduce((acc, obj) => { return acc + obj }, 0) }}
-                            </td>
-                        </tr>
+                                <td class="text-weight-bold">Total</td>
+                                <td class="text-weight-bold"></td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ this.project.affectations.filter(e => e.active).map((x) =>
+                                        Math.ceil(x.totalReducedOutput)).reduce((acc, obj) => { return acc + obj }, 0) }}
+                                </td>
+                            </tr>
                         </tbody>
-                </table>
+                    </table>
 
                     <!-- 
                     <table id="summary-table">
