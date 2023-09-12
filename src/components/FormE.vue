@@ -40,6 +40,79 @@
                     </table>
 
                 </div>
+
+                <!-- TEST -->
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                    <table id="summary-table">
+                        <tr>
+                            <th>Affectation</th>
+                            <th>Sous-affectation</th>
+                            <th class="text-right"># Places</th>
+                        </tr>
+
+                        <tr v-for="(affectation, index) in this.project.affectations.filter(e => e.active)" :key="index">
+                            <td rowspan="1">{{ affectation.name }}</td>
+
+                            <td></td>
+
+                            <td class="bg-light-blue-1 text-right">
+                                {{
+                                    Math.ceil(affectation.totalReducedOutput)
+                                }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-weight-bold">Total (arrondi supérieur)</td>
+                            <td class="text-weight-bold"></td>
+                            <td class="bg-light-blue-1 text-weight-bold text-right">
+                                {{ this.project.affectations.filter(e => e.active).map((x) =>
+                                    Math.ceil(x.totalReducedOutput)).reduce((acc, obj) => { return acc + obj }, 0) }}
+                            </td>
+                            <!-- {{Math.ceil(this.project.totalNeed.max) }} -->
+                        </tr>
+
+                    </table>
+
+                </div>
+
+
+                <!-- TEST -->
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                    <table id="summary-table">
+                        <tr>
+                            <th>Affectation</th>
+                            <th>Sous-affectation</th>
+                            <th class="text-right"># Places</th>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="2">Logements standards</td>
+                            <td>Habitants</td>
+                            <td class="bg-light-blue-1 text-right">42</td>
+                        </tr>
+                        <tr>
+                            <td>Visiteurs</td>
+                            <td class="bg-light-blue-1 text-right">12</td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="text-weight-bold">Total (arrondi supérieur)</td>
+                            <td class="text-weight-bold"></td>
+                            <td class="bg-light-blue-1 text-weight-bold text-right">
+                                val
+                            </td>
+                            <!-- {{Math.ceil(this.project.totalNeed.max) }} -->
+                        </tr>
+
+                    </table>
+
+                </div>
+
+
                 <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer PDF" @click="printPDF"
                     class="no-print" disable />
             </div>
@@ -83,6 +156,10 @@ export default {
     },
     computed: {
 
+    },
+    mounted() {
+        console.log('FORM E - mounted')
+        console.log(this.project.affectations.filter(e => e.active).map(x => ({ name: x.name, value: x.reducedOutput })).flat(1))
     },
     methods: {
         print() {
