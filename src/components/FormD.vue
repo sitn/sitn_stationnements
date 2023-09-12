@@ -21,7 +21,7 @@
         }}</div>
         -->
 
-        <div> <!-- v-if="this.project.hasAffectation" -->
+        <div v-if="this.project.hasAffectation">
             <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox">
 
                 <q-card-section horizontal>
@@ -118,7 +118,7 @@
                         <table>
                             <tr>
                                 <th>{{ item.name }}</th>
-                                <th class="text-right">{{ -item.specialReduction }}%</th>
+                                <th class="text-right">{{ (-item.specialReduction).toFixed(1) }}%</th>
                             </tr>
 
                             <tr v-for="(factor, key2) in item.factors">
