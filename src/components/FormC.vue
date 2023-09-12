@@ -14,9 +14,9 @@
 
         <q-form ref="form" greedy v-if="this.project.hasAffectation">
 
-            <div class="row q-col-gutter-lg q-pa-sm q-my-sm">
-                <div class="col-xs-12 col-sm-6 bg-grey-2 q-pa-md q-my-sm rounded-borders"
-                    v-for="(item, key) in this.factors.values">
+            <div class="row q-col-gutter-none q-pa-sm q-my-sm bg-grey-2 rounded-borders">
+                <!-- <div class="col-xs-12 col-sm-6 bg-grey-2 q-pa-md q-my-sm rounded-borders" -->
+                <div class="col-xs-12 col-sm-6 q-pa-md q-my-sm" v-for="(item, key) in this.factors.values">
 
                     <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective"
                         :min=item.min :max=item.max @update:model-value="check(item)"
