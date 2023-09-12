@@ -48,7 +48,7 @@
                 <div class="row q-col-gutter-sm">
 
                     <!-- input fields -->
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2"
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3"
                         v-for="(item2, key2) in item.variables.filter((x) => x.type === 'measurement')">
                         <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item2.value"
                             :min=item2.min :max=item2.max @update:model-value="check(item2)"
