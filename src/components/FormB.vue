@@ -191,7 +191,9 @@ export default {
 
         },
         updateProject() {
-            this.$nextTick(() => { this.$refs.form.validate() })
+            if (this.$refs.hasOwnProperty('form')) {
+                this.$nextTick(() => { this.$refs.form.validate() })
+            }
             this.$emit('updateProject', this.project);
         }
     },
@@ -201,7 +203,9 @@ export default {
         // this.$nextTick(() => { this.$refs.form.validate() })
     },
     updated() {
-        this.$nextTick(() => { this.$refs.form.validate() })
+        if (this.$refs.hasOwnProperty('form')) {
+            this.$nextTick(() => { this.$refs.form.validate() })
+        }
     }
 
 }
