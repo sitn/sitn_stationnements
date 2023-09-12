@@ -97,7 +97,11 @@
                             <td>Visiteurs</td>
                             <td class="bg-light-blue-1 text-right">12</td>
                         </tr>
-
+                        <tr>
+                            <td rowspan="1">Hôtels</td>
+                            <td>Mixte</td>
+                            <td class="bg-light-blue-1 text-right">9</td>
+                        </tr>
 
                         <tr>
                             <td class="text-weight-bold">Total (arrondi supérieur)</td>
@@ -160,6 +164,32 @@ export default {
     mounted() {
         console.log('FORM E - mounted')
         console.log(this.project.affectations.filter(e => e.active).map(x => ({ name: x.name, value: x.reducedOutput })).flat(1))
+
+        // ...
+        var bibi = this.project.affectations
+            .filter(o => o.active)
+            .map(o => [
+                [
+                    { rowSpan: o.factors.length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
+                    { text: o.name, style: 'tableBody', alignment: 'left' },
+                    { text: `khjkjhkh %`, style: 'tableBody', alignment: 'right', noWrap: true },
+                ],
+                ...o.factors.slice(0).map(
+                    e => [
+                        {},
+                        { text: e.name, style: 'tableBody', alignment: 'left' },
+                        { text: `blblb%`, style: 'tableBody', alignment: 'right', noWrap: true },
+                    ]
+                ),
+            ]
+            )
+            .flat(1)
+
+        console.log('bibi')
+        console.log(bibi)
+
+
+
     },
     methods: {
         print() {
