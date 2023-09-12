@@ -30,7 +30,7 @@ export class Affectation {
   }
 
   get netOutput2() {
-    return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => ({ name: x.name, value: x.value })), this.ordinaryReduction, 0.0))
+    return this.factors.map(o => ({ name: o.name, value: o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, 0.0) }))
   }
 
 
@@ -40,7 +40,7 @@ export class Affectation {
 
 
   get reducedOutput2() {
-    return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => ({ name: x.name, value: x.value })), this.ordinaryReduction, this.specialReduction))
+    return this.factors.map(o => ({ name: o.name, value: o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, this.specialReduction) }))
   }
 
 
@@ -233,7 +233,7 @@ export const affectations = [
       { name: "art. 33", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
-      { name: "Total", formula: ((x, f = 100.0, r = 0.0) => 0.5 * x[0] * (f / 100) * (1 - r / 100)) }
+      { name: "Mixte", formula: ((x, f = 100.0, r = 0.0) => 0.5 * x[0] * (f / 100) * (1 - r / 100)) }
     ]
   ),
   new Affectation(
@@ -248,7 +248,7 @@ export const affectations = [
       { name: "art. 33", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
-      { name: "Total", formula: ((x, f = 100.0, r = 0.0) => 6 * x[0] * (f / 100) * (1 - r / 100)) }
+      { name: "Mixte", formula: ((x, f = 100.0, r = 0.0) => 6 * x[0] * (f / 100) * (1 - r / 100)) }
     ]
   ),
   new Affectation(
@@ -264,7 +264,7 @@ export const affectations = [
       { name: "art. 33", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
-      { name: "Total", formula: ((x, f = 100.0, r = 0.0) => (x[0] + 0.1 * x[1]) * (f / 100) * (1 - r / 100)) }
+      { name: "Mixte", formula: ((x, f = 100.0, r = 0.0) => (x[0] + 0.1 * x[1]) * (f / 100) * (1 - r / 100)) }
     ]
   ),
   new Affectation(
