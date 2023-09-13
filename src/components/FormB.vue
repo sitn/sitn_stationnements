@@ -206,21 +206,23 @@ export default {
 
         },
         updateProject() {
-            if (this.$refs.hasOwnProperty('form')) {
-                this.$nextTick(() => { this.$refs.form.validate() })
-            }
+            this.validateForm()
             this.$emit('updateProject', this.project);
+        },
+        validateForm() {
+            if (this.$refs.hasOwnProperty('form')) {
+                if (this.$refs.form !== null) {
+                    this.$nextTick(() => { this.$refs.form.validate() })
+                }
+            }
         }
     },
     mounted() {
         console.log('FORM B - Affectations')
         console.log(this.project.affectations)
-        // this.$nextTick(() => { this.$refs.form.validate() })
     },
     updated() {
-        if (this.$refs.hasOwnProperty('form')) {
-            this.$nextTick(() => { this.$refs.form.validate() })
-        }
+        this.validateForm()
     }
 
 }
