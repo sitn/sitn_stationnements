@@ -11,6 +11,8 @@
 
         <!-- <div>{{ this.factors }}</div><br> -->
 
+        <div ref="didi"></div>
+
         <q-form ref="form" greedy v-if="this.render">
 
             <div class="row q-col-gutter-none q-pa-sm q-my-sm bg-grey-2 rounded-borders">
@@ -149,6 +151,13 @@ export default {
             }
             this.updateLocationFactors()
 
+        },
+        validateForm() {
+            if (this.$refs.hasOwnProperty('form')) {
+                if (this.$refs.form !== null) {
+                    this.$nextTick(() => { this.$refs.form.validate() })
+                }
+            }
         }
 
     },
@@ -161,14 +170,21 @@ export default {
         console.log('this.$refs')
         console.log(this.$refs)
 
+        console.log(`form !== null:  ${this.$refs.form !== null}`)
+        console.log(`form hasOwnProperty:  ${this.$refs.hasOwnProperty('form')}`)
+
+
         console.log(this.$refs.didi !== null)
         console.log(this.$refs.hasOwnProperty('didi'))
         console.log(this.$refs.didi)
 
         // console.log(this.$refs.hasOwnProperty('form'))
         // console.log(this.$refs.hasOwnProperty('didi'))
+        //if (this.$refs.form !== null) {
         if (this.$refs.hasOwnProperty('form')) {
-            this.$nextTick(() => { this.$refs.form.validate() })
+            if (this.$refs.form !== null) {
+                this.$nextTick(() => { this.$refs.form.validate() })
+            }
         }
     }
 }
