@@ -148,7 +148,7 @@
         <!-- 2. RAW PARKING NEEDS -->
         <FormSection title="2. Calcul du besoin brut (article 27 RELConstr.)">
           <template v-slot:content>
-            <FormB :project="project" @updateProject="updateProject"></FormB>
+            <FormB :project="project" @updateProject="updateProject" @filled="filled"></FormB>
           </template>
         </FormSection>
 
@@ -224,6 +224,7 @@ export default {
   },
   data() {
     return {
+      isfilled: { 'A': false, 'B': false, 'C': false, 'D': false, 'E': false },
       communes: communes,
       project: project,
       geojson: {
@@ -378,8 +379,16 @@ export default {
       this.project = obj
       this.$nextTick(() => { this.$refs.form.validate() })
 
-      console.log('Update project:')
+      console.log('App.vue: updateProject')
       console.log(this.project)
+
+    },
+
+
+    filled(obj) {
+
+      console.log(`App.vue: filled = ${obj}`)
+      console.log(obj)
 
     },
 
