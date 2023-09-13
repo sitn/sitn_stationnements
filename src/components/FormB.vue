@@ -2,15 +2,14 @@
     <!-- 2. RAW PARKING NEEDS -->
     <div class="q-pa-md">
 
-        <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders"
-            v-if="!this.project.locationType">
+        <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders" v-if="!this.render">
             <template v-slot:avatar>
                 <q-icon name="error" color="white" />
             </template>
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-if="this.project.locationType">
+        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-if="this.render">
 
             <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations"
                 option-value="name" option-label="name" @add="addOption()" @remove="removeOption()"
@@ -20,7 +19,6 @@
                     <q-item v-bind="scope.itemProps">
                         <q-item-section side>
                             <q-checkbox :model-value="scope.selected" @update:model-value="scope.toggleOption(scope.opt)" />
-                            <!-- v-model="scope.opt.active"  :model-value="selected" -->
                         </q-item-section>
                         <q-item-section>
                             <q-item-label>{{ scope.opt.name }}</q-item-label>
@@ -40,7 +38,7 @@
 
         <q-form ref="form" greedy>
 
-            <div v-if="this.project.locationType" class="bg-grey-2 q-pa-md q-my-sm rounded-borders"
+            <div v-if="this.render" class="bg-grey-2 q-pa-md q-my-sm rounded-borders"
                 v-for="(item, key) in this.project.affectations.filter(e => e.active)">
 
                 <label class="text-h7 ">{{ item.name }}</label>
@@ -72,7 +70,7 @@
 
                     <!-- output fields -->
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 self-end" v-for="(item3, key3) in item.factors">
-                        <q-input bg-color="light-blue-1" outlined label="" type="number" step="0.01" name=""
+                        <q-input bg-color="light-blue-1" outlined label="" type="number" name=""
                             :model-value="(item.output[key3]).toFixed(2)" readonly hint="">
                             <template v-slot:label>
                                 {{ item3.name }} <!-- (key: {{ key3 }}) -->
@@ -82,15 +80,6 @@
                                 -->
                             </template>
                         </q-input>
-
-                        <!-- 
-                        <q-input bg-color="light-blue-1" outlined label="" type="number" step="0.01" name=""
-                            @update:model-value="fix(item)" v-model="item.output[key3]" readonly hint="">
-                            <template v-slot:label>
-                                {{ item3.name }}
-                            </template>
-                        </q-input>
-                        -->
 
                     </div>
 
@@ -113,7 +102,7 @@ export default {
     name: 'FormB',
     components: {},
     props: { 'project': Object },
-    emits: ['updateProject', 'deleteItem'],
+    emits: ['updateProject', 'deleteItem', 'filled'],
     setup() {
         return {
             // model: ref(null),
@@ -125,6 +114,25 @@ export default {
         }
     },
     computed: {
+        render() {
+            return (this.project.commune !== null) & (this.project.locationType !== null)
+        },
+        filled() {
+
+            console.log('FormB.vue: filled()')
+            console.log(`Has affectations: ${this.project.hasAffectation}`)
+            console.log(`LocationType: ${this.project.locationType !== null}`)
+
+            return this.project.hasAffectation & (this.project.locationType !== null)
+            // this.$emit('filled', this.filled);
+
+        }
+    },
+    watch: {
+        filled(val) {
+            console.log(`FormB.vue: filled = ${val}`)
+            this.$emit('filled', val)
+        }
     },
     methods: {
         validatePositive(val) {
@@ -177,9 +185,7 @@ export default {
                 e.active = true
             })
 
-            // this.model = this.project.affectations.filter(e => e.active === true)
-
-            console.log('Select option')
+            console.log('FromB.vue: select option')
             console.log(this.model)
 
             this.updateProject()
