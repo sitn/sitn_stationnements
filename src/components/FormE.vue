@@ -2,15 +2,14 @@
     <!-- 5. SUMMARY -->
     <div class="q-pa-md">
 
-        <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders"
-            v-if="!this.project.hasAffectation">
+        <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders" v-if="!this.render">
             <template v-slot:avatar>
                 <q-icon name="error" color="white" />
             </template>
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-        <div class="row" v-if="this.project.hasAffectation">
+        <div class="row" v-if="this.render">
             <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
@@ -87,13 +86,8 @@
 // https://www.youtube.com/watch?v=vK0WIrbxxcw
 // https://github.com/bpampuch/pdfmake/issues/1877
 
-
-// import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import pdfFonts from 'pdfmake/build/fonts.js';
 import pdfMake from 'pdfmake/build/pdfmake';
-
-//pdfMake.vfs = pdfFonts;
-
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import { logo } from './logo.js';
@@ -112,6 +106,9 @@ export default {
         }
     },
     computed: {
+        render() {
+            return (this.project.commune !== null) & (this.project.locationType !== null) & this.project.hasAffectation
+        },
 
     },
     mounted() {
@@ -140,7 +137,6 @@ export default {
 
         console.log('bibi')
         console.log(bibi)
-
 
 
     },
