@@ -1,10 +1,8 @@
 <template>
     <!-- 4. REDUCED PARKING NEEDS -->
     <div class="q-pa-md">
-        <!-- <div class="text-h5">4. Calcul du besoin net réduit (article 29 RELConstr.)</div> -->
 
-        <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders"
-            v-if="!this.project.hasAffectation">
+        <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders" v-if="!this.render">
             <template v-slot:avatar>
                 <q-icon name="error" color="white" />
             </template>
@@ -21,7 +19,7 @@
         }}</div>
         -->
 
-        <div v-if="this.project.hasAffectation">
+        <div v-if="this.render">
             <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox">
 
                 <q-card-section horizontal>
@@ -60,7 +58,6 @@
             <div class="row">
                 <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
                     v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.variables.filter((x) => x.type === 'special reduction').length > 0)">
-
                     <!-- e => e.valid && e.reductions.length > 0 -->
 
                     <div class="bg-white q-pa-md q-my-none rounded-borders">
@@ -164,7 +161,9 @@ export default {
         }
     },
     computed: {
-
+        render() {
+            return (this.project.commune !== null) & (this.project.locationType !== null) & this.project.hasAffectation
+        },
     },
     methods: {
 
