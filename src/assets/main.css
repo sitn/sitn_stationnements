@@ -297,5 +297,5 @@ th {
 
 .infobox {
   /* background-color: #ffbd0033; */
-  border-left: 1rem solid #ffa726 !important;
+  border-left: 0.5rem solid #ffa726 !important;
 }
