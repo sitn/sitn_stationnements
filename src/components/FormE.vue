@@ -171,7 +171,7 @@ export default {
                         render: true
                     },
                     {
-                        text: `Date: ${new Date().toLocaleString('fr-CH')} / dossier SATAC: ${this.project.satac} / Commune: ${this.project.commune.comnom} / Biens-fonds no(s): ${this.project.parcels} / Type de localisation ${this.project.locationType.name}`,
+                        text: `Date: ${new Date().toLocaleString('fr-CH')} / dossier SATAC: ${this.project.satac} / Commune: ${this.project.commune.comnom} / Biens-fonds: ${this.project.parcels.join(', ')} / Type de localisation ${this.project.locationType.name}`,
                         style: 'body',
                         margin: [0, 10, 0, 10],
                         render: true
