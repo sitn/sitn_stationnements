@@ -11,8 +11,6 @@
 
         <!-- <div>{{ this.factors }}</div><br> -->
 
-        <div ref="didi"></div>
-
         <!-- INFOBOX  -->
         <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox" v-if="this.render">
 
@@ -131,12 +129,12 @@ export default {
         },
         factors() {
 
-            console.log(`FromC.vue: factors`)
+            // console.log(`FormC.vue: factors`)
 
             if (this.project.commune === null || this.project.locationType === null) {
                 return null // "Commune and/or zone not selected"
             } else {
-                return this.project.commune.factors.find((e) => e.zone === this.project.locationType.name) // locationFactors
+                return this.project.commune.factors.find((e) => e.zone === this.project.locationType.name)
             }
 
         },
@@ -205,20 +203,13 @@ export default {
 
     },
     updated() {
+
         console.log('this.$refs')
         console.log(this.$refs)
 
         console.log(`form !== null:  ${this.$refs.form !== null}`)
         console.log(`form hasOwnProperty:  ${this.$refs.hasOwnProperty('form')}`)
 
-
-        console.log(this.$refs.didi !== null)
-        console.log(this.$refs.hasOwnProperty('didi'))
-        console.log(this.$refs.didi)
-
-        // console.log(this.$refs.hasOwnProperty('form'))
-        // console.log(this.$refs.hasOwnProperty('didi'))
-        //if (this.$refs.form !== null) {
         if (this.$refs.hasOwnProperty('form')) {
             if (this.$refs.form !== null) {
                 this.$nextTick(() => { this.$refs.form.validate() })
