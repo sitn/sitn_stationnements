@@ -187,7 +187,7 @@ export default {
                         style: 'table',
                         table: {
                             headerRows: 1,
-                            dontBreakRows: true,
+                            dontBreakRows: false,
                             widths: ['*', 'auto', 'auto', 'auto', 55, 45, 55, 55, 55],
                             body: [
                                 [
