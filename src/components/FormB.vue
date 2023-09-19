@@ -9,6 +9,46 @@
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
+        <!-- INFOBOX  -->
+        <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox" v-if="this.render">
+
+            <q-card-section horizontal>
+
+                <!-- 
+                    <q-card-actions vertical class="justify-around q-pa-xs">
+                      <q-icon name="info" color="orange-5" size="3em" />
+                    </q-card-actions>
+                    -->
+
+                <q-card-section class="q-pa-xs">
+                    <div class="text-body2 text-weight-bold q-mb-sm">Informations sur le calcul</div>
+
+                    <div class="text-body2">
+                        <ul>
+                            <li>Le besoin brut en places de stationnement est calculé selon les ratios du tableau 1 de
+                                l’annexe 1 du RELConstr.</li>
+
+                            <li>Pour que le calcul soit fait au plus juste des besoins, il est important de préciser toutes
+                                les affectations comprises dans le projet, en particulier pour les projets d’activité.
+                                Ainsi, un projet pour une manufacture horlogère comprendra possiblement des surfaces
+                                affectées à « industrie et artisanat », « entrepôts et dépôts » et « autres services ».</li>
+
+                            <li>Pour les affectations moins fréquentes (en italique dans la liste) les ratios sont à
+                                rechercher dans le tableau 1 de la norme VSS 40 281 (2019). Le nombre de places obtenu est à
+                                indiquer manuellement.</li>
+
+                            <li>La surface brute de plancher (SBP) correspond à la somme des surfaces utiles principales,
+                                des surfaces de dégagement et des surfaces de construction au sens de l’article 16 RELCAT.
+                            </li>
+
+                        </ul>
+                    </div>
+                </q-card-section>
+
+            </q-card-section>
+
+        </q-card>
+
         <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-if="this.render">
 
             <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations"
