@@ -24,28 +24,29 @@
 
                 <q-card-section horizontal>
 
-                    <q-card-actions vertical class="justify-around q-pa-xs">
-                        <q-icon name="info" color="orange-5" size="3em" />
-                    </q-card-actions>
+                    <!-- 
+                        <q-card-actions vertical class="justify-around q-pa-xs">
+                            <q-icon name="info" color="orange-5" size="3em" />
+                        </q-card-actions>
+                    -->
 
                     <q-card-section class="q-pa-xs">
-                        <div class="text-body1 text-weight-bold">Facteurs de réduction</div>
+                        <div class="text-body2 text-weight-bold">Informations sur le calcul</div>
 
-                        <div class="text-body1 q-pa-none">
+                        <div class="text-body2 q-pa-none">
                             <ul>
-                                <li>Des facteurs de réduction peuvent être appliqués au besoin net,
-                                    par le réquérant ou par la commune (articles 31 à 34 du
-                                    RELConstr.). Les facteurs de réduction sont à porter en déduction
-                                    du besoin net. Le résultat obtenu se nomme le besoin net réduit.</li>
+                                <li>Le besoin net réduit est calculé par un ou des facteurs de réduction appliqués au besoin
+                                    net.</li>
 
-                                <li>Les facteurs de réduction peuvent intervenir lors de l'examen du
-                                    dossier par la commune ou les services compétents, notamment en ce
-                                    qui concerne la législation sur l'environnement et la sauvegarde
-                                    du patrimoine.</li>
+                                <li>Si le requérant fait usage d’un facteur de réduction, il joint à la demande de permis de
+                                    construire une demande motivée démontrant la faisabilité du projet.</li>
 
-                                <li>Pour les logements avec encadrements ou étudiants,
-                                    il convient de prendre contact en amont avec la commune pour
-                                    déterminer si un facteur de réduction s'applique.</li>
+                                <li>Un plan de mobilité peut justifier un facteur de réduction.</li>
+
+                                <li>Un contact préalable avec la commune et/ou les services compétents peut être pertinent,
+                                    notamment pour les projets avec des logements avec encadrement ou étudiants ou concernés
+                                    par les thématiques de l’environnement (bruit, air) et de la sauvegarde du patrimoine.
+                                </li>
                             </ul>
                         </div>
                     </q-card-section>
