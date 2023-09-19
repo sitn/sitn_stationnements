@@ -57,7 +57,8 @@
 
                     <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective"
                         :min=item.min :max=item.max @update:model-value="check(item)"
-                        :rules="[val => validateRange(val, item.min, item.max)]">
+                        :rules="[val => validateRange(val, item.min, item.max)]"
+                        :disable="!this.project.affectations.filter((x) => (x.active)).map((x) => (x.type)).includes(item.label)">
                         <template v-slot:label>
                             {{ item.label }}
                         </template>
@@ -227,4 +228,6 @@ export default {
 }
 </script>
 
-<style scoped>@import '../assets/table.css';</style>
+<style scoped>
+@import '../assets/table.css';
+</style>
