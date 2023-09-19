@@ -33,7 +33,7 @@
                                 Ainsi, un projet pour une manufacture horlogère comprendra possiblement des surfaces
                                 affectées à « industrie et artisanat », « entrepôts et dépôts » et « autres services ».</li>
 
-                            <li>Pour les affectations moins fréquentes (en italique dans la liste) les ratios sont à
+                            <li>Pour les affectations moins fréquentes les ratios sont à
                                 rechercher dans le tableau 1 de la norme VSS 40 281 (2019). Le nombre de places obtenu est à
                                 indiquer manuellement.</li>
 
