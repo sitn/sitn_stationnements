@@ -69,8 +69,8 @@
                 </div>
 
 
-                <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer PDF" @click="printPDF"
-                    class="no-print" disable />
+                <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer PDF" @click="printPDF2"
+                    class="no-print" />
             </div>
 
         </div>
@@ -147,6 +147,212 @@ export default {
         mmToPoints(mm) {
             let arr = [mm]
             return arr.flat(1).map(x => 2.834645 * x)
+        },
+        printPDF2() {
+
+            let docDefinition = {
+                pageSize: 'A4',
+                pageOrientation: 'landscape',
+                // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+                pageMargins: this.mmToPoints([12, 12, 12, 12]),
+                header: '',
+                info: {
+                    title: 'Calcul du nombre de places de stationnement',
+                    author: 'Etat de Neuchâtel',
+                    subject: '',
+                    keywords: 'stationnement, neuchâtel',
+                },
+                content: [
+                    {
+                        svg: logo,
+                        width: 90,
+                        // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+                        margin: [0, 0, 0, 10],
+                        render: true
+                    },
+                    {
+                        text: `Date: ${new Date().toLocaleString('fr-CH')} / dossier SATAC: ${this.project.satac} / Commune: ${this.project.commune.comnom} / Biens-fonds no(s): ${this.project.parcels} / Type de localisation ${this.project.locationType.name}`,
+                        style: 'body',
+                        margin: [0, 10, 0, 10],
+                        render: true
+                    },
+                    {
+                        text: `Conformément aux articles 26 à 37d du RELConstr., le calcul du nombre de places de stationnement voiture à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                        style: 'body',
+                        margin: [0, 10, 0, 10],
+                        render: true
+                    },
+                    {
+                        style: 'table',
+                        table: {
+                            headerRows: 1,
+                            dontBreakRows: true,
+                            widths: ['*', 'auto', 'auto', 'auto', 'auto', 'auto'],
+                            body: [
+                                [
+                                    { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Besoin brut', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: 'Besoin net', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: 'Besoin net réduit', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                ],
+                                ...this.project.affectations
+                                    .filter(o => o.active && o.factors.length > 0)
+                                    .map(o => [
+                                        [
+                                            { rowSpan: o.factors.length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
+                                            { text: o.factors[0].name, style: 'tableBody', alignment: 'left' },
+                                            { text: `BB`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: `BN`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: `BNR`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: `TOT`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                        ],
+                                        ...o.factors.slice(1).map(
+                                            e => [
+                                                {},
+                                                { text: e.name, style: 'tableBody', alignment: 'left' },
+                                                { text: `BB`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: `BN`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: `BNR`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: `TOT`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                            ]
+                                        ),
+                                        [
+                                            {},
+                                            { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
+                                            { text: `BB`, style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                            { text: `BN`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: `BNR`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: `TOT`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                        ],
+                                    ]
+                                    )
+                                    .flat(1)
+                            ]
+                        },
+                        layout: 'lightHorizontalLines',
+                        render: true
+                    },
+                    /*
+                    {
+                        style: 'table',
+                        table: {
+                            headerRows: 1,
+                            dontBreakRows: true,
+                            widths: ['*', 'auto', 'auto', 100, 'auto', 'auto', 'auto'],
+                            body: [
+                                [
+                                    { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Variables', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Besoin brut', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: 'Besoin net', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: 'Besoin net réduit', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: '# places', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                ],
+                                ...this.project.affectations
+                                    .filter((obj) => (obj.active === true))
+                                    .map(obj => [
+                                        [
+                                            { rowSpan: obj.factors.length + 1, text: obj.name, style: 'tableBody', alignment: 'left' },
+                                            { rowSpan: obj.factors.length + 1, text: 'xx', style: 'tableBody', alignment: 'left', noWrap: true },
+                                            { text: 'Habitant', style: 'tableBody', alignment: 'left', noWrap: true },
+                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                        ],
+
+                                        ...obj.factors.slice(1).map(
+                                            e => [
+                                                {},
+                                                { text: e.name, style: 'tableBody', alignment: 'left' },
+                                                { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                            ]
+                                        ),
+
+
+
+
+                                        [
+                                            {},
+                                            {},
+                                            { text: 'Visiteur', style: 'tableBody', alignment: 'left', noWrap: true },
+                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                        ],
+                                        [
+                                            {},
+                                            {},
+                                            { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
+                                            { text: 'xx', style: 'tableBody', bold: true, alignment: 'right' },
+                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
+                                        ],
+
+                                    ])
+                                    .flat(1)
+                            ]
+                        },
+                        layout: 'lightHorizontalLines',
+                        render: this.project.affectations.filter(e => e.active).length > 0
+                    },
+                    */
+
+
+                ],
+                styles: {
+                    // margins [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+                    header: {
+                        fontSize: 13,
+                        bold: true,
+                        margin: [0, 0, 0, 5]
+                    },
+                    subheader: {
+                        fontSize: 12,
+                        bold: true,
+                        margin: [0, 10, 0, 5]
+                    },
+                    subsubheader: {
+                        fontSize: 10,
+                        bold: true,
+                        margin: [0, 5, 0, 5],
+                    },
+                    body: {
+                        fontSize: 10,
+                        bold: false,
+                        margin: [0, 5, 0, 5],
+                    },
+                    table: {
+                        fontSize: 10,
+                        margin: [0, 10, 0, 10],
+                    },
+                    tableHeader: {
+                        bold: true,
+                        fontSize: 10,
+                        color: 'black',
+                        fillColor: '#eeeeee',
+                        margin: [2, 5, 2, 5]
+                    },
+                    tableBody: {
+                        fontSize: 10,
+                        margin: [2, 0, 2, 0],
+                    },
+                },
+            }
+
+            // filter content to be rendered
+            docDefinition.content = docDefinition.content.filter(o => o.render)
+
+            pdfMake.createPdf(docDefinition).download('ne_calcul_stationnement.pdf');
+
         },
         printPDF() {
 
