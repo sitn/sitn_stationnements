@@ -772,6 +772,7 @@ export const affectations = [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
     ]
   ),
+  /*
   new Affectation(
     "Activité",
     "Test (calcul manuel)",
@@ -791,6 +792,7 @@ export const affectations = [
       { name: "# places vélos", formula: ((x, f = 100.0) => x[2] * (f / 100)) }
     ]
   ),
+  */
 ]
 
 // Classes
