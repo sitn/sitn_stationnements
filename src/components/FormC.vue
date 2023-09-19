@@ -13,6 +13,43 @@
 
         <div ref="didi"></div>
 
+        <!-- INFOBOX  -->
+        <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox" v-if="this.render">
+
+            <q-card-section horizontal>
+
+                <!-- 
+                    <q-card-actions vertical class="justify-around q-pa-xs">
+                    <q-icon name="info" color="orange-5" size="3em" />
+                    </q-card-actions>
+                -->
+
+                <q-card-section class="q-pa-xs">
+                    <div class="text-body2 text-weight-bold q-mb-sm">Informations sur le calcul</div>
+
+                    <div class="text-body2">
+                        <ul>
+                            <li>Le besoin net en places de stationnement est calculé par l’application au besoin brut des
+                                pourcentages du tableau 2 de l’annexe 1 du RELConstr.</li>
+
+                            <li>Les pourcentages sont à appliquer dans les cases ci-dessous (affectation logement et
+                                affectation activité). Ils sont compris entre un minimum et un maximum.</li>
+
+                            <li>La commune peut définir un pourcentage fixe dans son plan règlement communal, ou le canton
+                                dans un plan d’affectation cantonal.</li>
+
+                            <li>Le pourcentage à appliquer au besoin brut pour les quartiers durables est obligatoirement le
+                                minimum, sauf pour l’affectation logement dans le type de localisation III où il est de 50%
+                                (au lieu de 70%).</li>
+                        </ul>
+                    </div>
+                </q-card-section>
+
+            </q-card-section>
+
+        </q-card>
+
+
         <q-form ref="form" greedy v-if="this.render">
 
             <div class="row q-col-gutter-none q-pa-sm q-my-sm bg-grey-2 rounded-borders">
@@ -190,6 +227,4 @@ export default {
 }
 </script>
 
-<style scoped>
-@import '../assets/table.css';
-</style>
+<style scoped>@import '../assets/table.css';</style>
