@@ -105,24 +105,28 @@
 
                   <q-card-section horizontal>
 
+                    <!-- 
                     <q-card-actions vertical class="justify-around q-pa-xs">
                       <q-icon name="info" color="orange-5" size="3em" />
                     </q-card-actions>
+                    -->
 
                     <q-card-section class="q-pa-xs">
-                      <div class="text-body1 text-weight-bold">Justification du type de localisation</div>
+                      <div class="text-body2 text-weight-bold q-mb-sm">Justification du type de localisation</div>
 
-                      <div class="text-body1">
-                        La ou les parcelles se trouvent sur plusieurs types de localisation. Le choix du type de
-                        localisation
-                        à considérer doit être justifié dans le champs ci-dessous. La justification peut être faite par
-                        rapport
-                        à la surface de la parcelle concernée par les types de localisation (prise en compte du type de
-                        localisation dont la surface recoupe en majorité celle de la parcelle) ou par la localisation du
-                        projet
-                        sur la
-                        parcelle (emplacement du bâtiment, de l'entrée) en fonction du ou des arrêts de transports
-                        publics.
+
+                      <div class="text-body2">
+                        <ul>
+                          <li> La ou les parcelle(s) se trouve(nt) sur plusieurs types de localisation. Un seul type de
+                            localisation doit être choisi. Il faut brièvement justifier le choix dans le champ ci-dessous.
+                          </li>
+
+                          <li> Le choix d’un type de localisation peut notamment être justifié par le fait qu’il recouvre
+                            la majorité de la ou des parcelle(s) concernée(s) ; qu’il recouvre le bâtiment ou
+                            l’emplacement de l’entrée principale du bâtiment.
+                          </li>
+                        </ul>
+
                       </div>
                     </q-card-section>
 
