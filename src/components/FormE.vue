@@ -34,7 +34,7 @@
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ this.project.affectations.filter(e => e.active).map((x) =>
-                                        Math.ceil(x.totalReducedOutput)).reduce((acc, obj) => { return acc + obj }, 0) }}
+                                        x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0) }}
                                 </td>
                             </tr>
                         </tbody>
