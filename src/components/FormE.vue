@@ -155,7 +155,7 @@ export default {
                 pageSize: 'A4',
                 pageOrientation: 'landscape',
                 // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-                pageMargins: this.mmToPoints([12, 12, 12, 12]),
+                pageMargins: this.mmToPoints([12, 12, 12, 20]),
                 header: '',
                 info: {
                     title: 'Calcul du nombre de places de stationnement',
@@ -163,24 +163,89 @@ export default {
                     subject: '',
                     keywords: 'stationnement, neuchâtel',
                 },
+                footer: (currentPage, pageCount) => {
+
+                    return {
+                        columns: [
+                            [
+                                {
+                                    text: ['RUE DE TIVOLI 5, CASE POSTALE, CH-2002 NEUCHÂTEL'],
+                                    width: '*',
+                                    fontSize: 8,
+                                    alignment: 'left',
+
+                                },
+                                {
+                                    text: ['TÉL. 032 889 67 40, FAX 032 722 03 84, SERVICE.AMENAGEMENTTERRITOIRE@NE.CH, WWW.NE.CH'],
+                                    width: '*',
+                                    fontSize: 8,
+                                    alignment: 'left',
+
+                                }
+                            ],
+                            {
+                                text: `${currentPage.toString()} / ${pageCount}`,
+                                width: 'auto',
+                                fontSize: 8,
+                                alignment: 'right',
+                                noWrap: true
+                            }
+                        ],
+                        // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+                        margin: this.mmToPoints([12, 5, 12, 12])
+                    }
+
+                },
+
                 content: [
                     {
-                        svg: logo,
-                        width: 90,
-                        // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-                        margin: [0, 0, 0, 10],
+                        columns: [
+                            {
+                                svg: logo,
+                                width: 95,
+                                alignment: 'left',
+                                margin: [0, 0, 0, 10], // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+                            },
+                            {
+                                // star-sized columns fill the remaining space
+                                // if there's more than one star-column, available width is divided equally
+                                width: '*',
+                                alignment: 'center',
+                                stack: [
+                                    { text: 'Calcul du nombre de places de stationnement voiture', style: 'header' },
+                                    { text: 'Annexe à joindre à la demande de permis', style: 'subheader' },
+                                ],
+                            },
+                            {
+                                // fixed width
+                                width: '140',
+                                alignment: 'right',
+                                stack: [
+                                    { text: `DÉPARTEMENT DU DÉVELOPPEMENT TERRITORIAL ET DE L'ENVIRONNEMENT`, fontSize: 7, bold: true },
+                                    { text: `SERVICE DE L'AMÉNAGEMENT DU TERRITOIRE`, fontSize: 6 },
+                                ],
+                            },
+                        ],
+                        // optional space between columns
+                        columnGap: 10,
                         render: true
                     },
                     {
                         text: `Date: ${new Date().toLocaleString('fr-CH')} / dossier SATAC: ${this.project.satac} / Commune: ${this.project.commune.comnom} / Biens-fonds: ${this.project.parcels.join(', ')} / Type de localisation ${this.project.locationType.name}`,
                         style: 'body',
-                        margin: [0, 10, 0, 10],
+                        margin: [0, 10, 0, 5], // [left, top, right, bottom]
                         render: true
+                    },
+                    {
+                        text: `Jutification du type de localisation: ${this.project.locationTypeJustification}`,
+                        style: 'body',
+                        margin: [0, 5, 0, 5], // [left, top, right, bottom]
+                        render: this.project.locationTypeJustification !== ''
                     },
                     {
                         text: `Conformément aux articles 26 à 37d du RELConstr., le calcul du nombre de places de stationnement voiture à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
                         style: 'body',
-                        margin: [0, 10, 0, 10],
+                        margin: [0, 5, 0, 2], // [left, top, right, bottom]
                         render: true
                     },
                     {
@@ -193,7 +258,7 @@ export default {
                                 [
                                     { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
                                     { text: 'Variable(s)', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'Réduction(s)', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Facteur(s) de réduction', style: 'tableHeader', alignment: 'left' },
                                     { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
                                     { text: 'Besoin brut', style: 'tableHeader', alignment: 'right' },
                                     { text: '% Loc.', style: 'tableHeader', alignment: 'right' },
@@ -207,7 +272,7 @@ export default {
                                         [
                                             { rowSpan: o.factors.length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
                                             { rowSpan: o.factors.length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
-                                            { rowSpan: o.factors.length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value >= 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
+                                            { rowSpan: o.factors.length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
                                             { text: o.factors[0].name, style: 'tableBody', alignment: 'left' },
                                             { text: o.output[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                             { text: o.variables.filter((x) => x.type === 'reduction').map((x) => (`${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
@@ -264,78 +329,6 @@ export default {
                         },
                         render: true
                     },
-                    /*
-                    {
-                        style: 'table',
-                        table: {
-                            headerRows: 1,
-                            dontBreakRows: true,
-                            widths: ['*', 'auto', 'auto', 100, 'auto', 'auto', 'auto'],
-                            body: [
-                                [
-                                    { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'Variables', style: 'tableHeader', alignment: 'right', noWrap: true },
-                                    { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'Besoin brut', style: 'tableHeader', alignment: 'right', noWrap: true },
-                                    { text: 'Besoin net', style: 'tableHeader', alignment: 'right', noWrap: true },
-                                    { text: 'Besoin net réduit', style: 'tableHeader', alignment: 'right', noWrap: true },
-                                    { text: '# places', style: 'tableHeader', alignment: 'right', noWrap: true },
-                                ],
-                                ...this.project.affectations
-                                    .filter((obj) => (obj.active === true))
-                                    .map(obj => [
-                                        [
-                                            { rowSpan: obj.factors.length + 1, text: obj.name, style: 'tableBody', alignment: 'left' },
-                                            { rowSpan: obj.factors.length + 1, text: 'xx', style: 'tableBody', alignment: 'left', noWrap: true },
-                                            { text: 'Habitant', style: 'tableBody', alignment: 'left', noWrap: true },
-                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                        ],
-
-                                        ...obj.factors.slice(1).map(
-                                            e => [
-                                                {},
-                                                { text: e.name, style: 'tableBody', alignment: 'left' },
-                                                { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                                { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                                { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                                { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                            ]
-                                        ),
-
-
-
-
-                                        [
-                                            {},
-                                            {},
-                                            { text: 'Visiteur', style: 'tableBody', alignment: 'left', noWrap: true },
-                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                        ],
-                                        [
-                                            {},
-                                            {},
-                                            { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
-                                            { text: 'xx', style: 'tableBody', bold: true, alignment: 'right' },
-                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: 'xx', style: 'tableBody', alignment: 'right', noWrap: true },
-                                        ],
-
-                                    ])
-                                    .flat(1)
-                            ]
-                        },
-                        layout: 'lightHorizontalLines',
-                        render: this.project.affectations.filter(e => e.active).length > 0
-                    },
-                    */
-
 
                 ],
                 styles: {
@@ -343,43 +336,43 @@ export default {
                     header: {
                         fontSize: 13,
                         bold: true,
-                        margin: [0, 0, 0, 5]
+                        margin: [0, 0, 0, 3] // [left, top, right, bottom]
                     },
                     subheader: {
-                        fontSize: 12,
+                        fontSize: 11,
                         bold: true,
-                        margin: [0, 10, 0, 5]
+                        margin: [0, 3, 0, 3] // [left, top, right, bottom]
                     },
                     subsubheader: {
                         fontSize: 10,
                         bold: true,
-                        margin: [0, 5, 0, 5],
+                        margin: [0, 5, 0, 5] // [left, top, right, bottom]
                     },
                     body: {
                         fontSize: 10,
                         bold: false,
-                        margin: [0, 5, 0, 5],
+                        margin: [0, 5, 0, 5] // [left, top, right, bottom]
                     },
                     table: {
-                        fontSize: 10,
-                        margin: [0, 10, 0, 10],
+                        fontSize: 9,
+                        margin: [0, 10, 0, 10] // [left, top, right, bottom]
                     },
                     tableHeader: {
                         bold: true,
-                        fontSize: 10,
+                        fontSize: 9,
                         color: 'black',
                         fillColor: '#eeeeee',
-                        margin: [2, 5, 2, 5]
+                        margin: [2, 4, 2, 4] // [left, top, right, bottom]
                     },
                     tableBody: {
-                        fontSize: 10,
-                        margin: [2, 0, 2, 0],
+                        fontSize: 9,
+                        margin: [2, 0, 2, 0] // [left, top, right, bottom]
                     },
                 },
             }
 
             // filter content to be rendered
-            docDefinition.content = docDefinition.content.filter(o => o.render)
+            // docDefinition.content = docDefinition.content.filter(o => o.render)
 
             pdfMake.createPdf(docDefinition).download('ne_calcul_stationnement.pdf');
 
