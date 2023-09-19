@@ -102,7 +102,7 @@ export const affectations = [
     "",
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
-      { name: "Nombre de logements", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
+      { name: "# logements", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
       { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 }
     ],
@@ -117,7 +117,7 @@ export const affectations = [
     "",
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
-      { name: "Nombre de logements", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
+      { name: "# logements", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
       { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
       { name: "art. 34 - logements particuliers", description: "Un facteur de réduction peut s'appliquer pour les logements avec encadrement ou étudiants. Contacter la commune.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
