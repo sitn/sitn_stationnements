@@ -91,6 +91,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import { logo } from './logo.js';
+import { MapBrowserEventHandler } from 'ol';
 
 export default {
     name: 'FormE',
@@ -187,51 +188,80 @@ export default {
                         table: {
                             headerRows: 1,
                             dontBreakRows: true,
-                            widths: ['*', 'auto', 'auto', 'auto', 'auto', 'auto'],
+                            widths: ['*', 'auto', 'auto', 'auto', 55, 45, 55, 55, 55],
                             body: [
                                 [
                                     { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Variable(s)', style: 'tableHeader', alignment: 'left' },
+                                    { text: 'Réduction(s)', style: 'tableHeader', alignment: 'left' },
                                     { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
-                                    { text: 'Besoin brut', style: 'tableHeader', alignment: 'right', noWrap: true },
-                                    { text: 'Besoin net', style: 'tableHeader', alignment: 'right', noWrap: true },
-                                    { text: 'Besoin net réduit', style: 'tableHeader', alignment: 'right', noWrap: true },
-                                    { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: 'Besoin brut', style: 'tableHeader', alignment: 'right' },
+                                    { text: '% Loc.', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Besoin net', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Besoin net réduit', style: 'tableHeader', alignment: 'right' },
+                                    { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right' },
                                 ],
                                 ...this.project.affectations
                                     .filter(o => o.active && o.factors.length > 0)
                                     .map(o => [
                                         [
                                             { rowSpan: o.factors.length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
+                                            { rowSpan: o.factors.length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+                                            { rowSpan: o.factors.length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value >= 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
                                             { text: o.factors[0].name, style: 'tableBody', alignment: 'left' },
-                                            { text: `BB`, style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: `BN`, style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: `BNR`, style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: `TOT`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: o.output[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: o.variables.filter((x) => x.type === 'reduction').map((x) => (`${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: o.netOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: Math.ceil(o.reducedOutput[0]), style: 'tableBody', alignment: 'right', noWrap: true },
                                         ],
                                         ...o.factors.slice(1).map(
-                                            e => [
+                                            (el, i) => [
                                                 {},
-                                                { text: e.name, style: 'tableBody', alignment: 'left' },
-                                                { text: `BB`, style: 'tableBody', alignment: 'right', noWrap: true },
-                                                { text: `BN`, style: 'tableBody', alignment: 'right', noWrap: true },
-                                                { text: `BNR`, style: 'tableBody', alignment: 'right', noWrap: true },
-                                                { text: `TOT`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                                {},
+                                                {},
+                                                { text: el.name, style: 'tableBody', alignment: 'left' },
+                                                { text: o.output[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: o.variables.filter((x) => x.type === 'reduction').map((x) => (`${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: o.netOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: o.reducedOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                                { text: Math.ceil(o.reducedOutput[i + 1]), style: 'tableBody', alignment: 'right', noWrap: true },
                                             ]
                                         ),
                                         [
                                             {},
+                                            {},
+                                            {},
                                             { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
-                                            { text: `BB`, style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-                                            { text: `BN`, style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: `BNR`, style: 'tableBody', alignment: 'right', noWrap: true },
-                                            { text: `TOT`, style: 'tableBody', alignment: 'right', noWrap: true },
+                                            { text: o.totalOutput.toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                            {},
+                                            { text: o.totalNetOutput.toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                            { text: o.totalReducedOutput.toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                            { text: o.totalReducedOutputCeil.toFixed(0), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                         ],
                                     ]
                                     )
-                                    .flat(1)
+                                    .flat(1),
+                                [
+                                    { text: 'Total', style: 'tableHeader', bold: true, alignment: 'left' },
+                                    { text: '', style: 'tableHeader', alignment: 'left' },
+                                    { text: '', style: 'tableHeader', alignment: 'left' },
+                                    { text: '', style: 'tableHeader', alignment: 'left' },
+                                    { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: '', style: 'tableHeader', alignment: 'left', noWrap: true },
+                                    { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
+                                    { text: this.project.affectations.filter(o => o.active && o.factors.length > 0).map((x) => x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0), style: 'tableHeader', alignment: 'right', noWrap: true },
+                                ],
                             ]
                         },
-                        layout: 'lightHorizontalLines',
+                        layout: {
+                            //   'lightHorizontalLines'
+                            hLineWidth: function (i, node) {
+                                return (i === 0 || i === node.table.body.length) ? 1 : 1;
+                            },
+                            vLineWidth: (i, node) => ((i === 0 || i === node.table.widths.length) ? 0 : 0),
+                        },
                         render: true
                     },
                     /*
