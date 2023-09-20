@@ -12,7 +12,7 @@
     </q-header>
 
     <q-page-container>
-      <q-page class="q-pa-none">
+      <q-page class="q-px-none q-pb-xs">
         <!-- 1. LOCATION -->
         <FormSection title="1. Localisation du projet">
           <template v-slot:content>
