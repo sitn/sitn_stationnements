@@ -9,7 +9,7 @@
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-        <div>{{ this.factors }}</div><br>
+        <!-- <div>{{ this.factors }}</div><br> -->
 
         <!-- INFOBOX  -->
         <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox" v-if="this.render">
@@ -152,11 +152,10 @@ export default {
         eco() {
 
             // console.log(`Eco: ${this.project.eco}`)
-
             if (this.project.eco) {
 
                 this.factors.values.map((x) => (x.effective = x.min))
-                if (this.factors.zone === "V") {
+                if (this.factors.zone === "III") {
                     this.factors.values.find((x) => (x.type === "housing")).effective = 50
                 }
                 this.updateLocationFactors()
