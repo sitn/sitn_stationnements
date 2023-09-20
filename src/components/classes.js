@@ -3,7 +3,6 @@ import communes_json from '../assets/data/communes.json'
 // sort alphabetically
 export var communes = communes_json.sort((a, b) => a.comnom.toLowerCase().localeCompare(b.comnom.toLowerCase()))
 
-
 export class Affectation {
 
   // constructor
@@ -34,16 +33,13 @@ export class Affectation {
     return this.factors.map(o => ({ name: o.name, value: o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, 0.0) }))
   }
 
-
   get reducedOutput() {
     return this.factors.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, this.specialReduction))
   }
 
-
   get reducedOutput2() {
     return this.factors.map(o => ({ name: o.name, value: o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, this.specialReduction) }))
   }
-
 
   get totalOutput() {
     return this.output.reduce((acc, obj) => { return acc + obj }, 0)
@@ -60,7 +56,6 @@ export class Affectation {
   get totalReducedOutputCeil() {
     return this.reducedOutput.reduce((acc, obj) => { return acc + Math.ceil(obj) }, 0)
   }
-
 
   get ordinaryReduction() {
     return this.variables.filter((x) => x.type === "reduction").reduce((acc, obj) => { return acc + obj.value }, 0)
@@ -824,6 +819,7 @@ export const affectations = [
     "Activité",
     "Test (calcul manuel)",
     "",
+    false,
     [
       { name: "# places habitant", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "# places visiteur", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
@@ -910,11 +906,9 @@ export class Project {
     this._locationType = null
 
     if (val !== null) {
-
       this._locationType = val
-      console.log(`App.vue | Location type set to: ${val.name}`)
-      console.log(this.locationType)
-
+      // console.log(`App.vue | Location type set to: ${val.name}`)
+      // console.log(this.locationType)
     }
 
   }
