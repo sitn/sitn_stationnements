@@ -32,17 +32,13 @@
 
                     <q-card-section class="q-pa-xs">
                         <div class="text-body2 text-weight-bold">Informations sur le calcul</div>
-
                         <div class="text-body2 q-pa-none">
                             <ul>
                                 <li>Le besoin net réduit est calculé par un ou des facteurs de réduction appliqués au besoin
                                     net.</li>
-
                                 <li>Si le requérant fait usage d’un facteur de réduction, il joint à la demande de permis de
                                     construire une demande motivée démontrant la faisabilité du projet.</li>
-
                                 <li>Un plan de mobilité peut justifier un facteur de réduction.</li>
-
                                 <li>Un contact préalable avec la commune et/ou les services compétents peut être pertinent,
                                     notamment pour les projets avec des logements avec encadrement ou étudiants ou concernés
                                     par les thématiques de l’environnement (bruit, air) et de la sauvegarde du patrimoine.
@@ -50,15 +46,12 @@
                             </ul>
                         </div>
                     </q-card-section>
-
                 </q-card-section>
-
             </q-card>
 
             <div class="text-h6">Liste des facteurs de réduction </div>
             <div class="row">
-                <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12"
-                    v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.variables.filter((x) => x.type === 'special reduction').length > 0)">
+                <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12" v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.variables.filter((x) => x.type === 'special reduction').length > 0)">
                     <!-- e => e.valid && e.reductions.length > 0 -->
 
                     <div class="bg-white q-pa-md q-my-none rounded-borders">
@@ -70,16 +63,13 @@
                                 <th style="white-space: nowrap;">Réduction (-x%)</th>
                             </tr>
 
-                            <tr v-for="(reduction, index) in affectation.variables.filter(e => e.type === 'special reduction')"
-                                :key="index">
+                            <tr v-for="(reduction, index) in affectation.variables.filter(e => e.type === 'special reduction')" :key="index">
                                 <td>
                                     <div class="text-weight-bold">{{ reduction.name }}</div>
                                     <div class="text-caption">{{ reduction.description }}</div>
                                 </td>
                                 <td>
-                                    <q-input dense bg-color="white" outlined type="number" name="reduction.factor"
-                                        v-model.number="reduction.value" :min=reduction.min :max=reduction.max
-                                        :rules="[val => validateRange(val, reduction.min, reduction.max)]">
+                                    <q-input dense bg-color="white" outlined type="number" name="reduction.factor" v-model.number="reduction.value" :min=reduction.min :max=reduction.max :rules="[val => validateRange(val, reduction.min, reduction.max)]">
                                         <template v-slot:prepend>
                                             <div class="text-body2">-</div>
                                         </template>
@@ -106,11 +96,9 @@
 
             <q-separator class="q-my-md" />
 
-
             <div class="text-h6">Besoin net réduit</div>
             <div class="row">
-                <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6"
-                    v-for="(item, key) in this.project.affectations.filter(e => e.active)">
+                <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6" v-for="(item, key) in this.project.affectations.filter(e => e.active)">
                     <div class="bg-white q-pa-md q-my-none rounded-borders">
 
                         <table>
@@ -125,13 +113,11 @@
                                     {{ item.reducedOutput[key2].toFixed(2) }} </td>
                             </tr>
 
-
                             <tr>
                                 <td class="text-weight-bold">Besoin net réduit total</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">{{
                                     item.totalReducedOutput.toFixed(2) }}</td>
                             </tr>
-
 
                         </table>
 
@@ -140,7 +126,6 @@
                 </div>
 
             </div>
-
 
         </div>
     </div>
@@ -167,7 +152,6 @@ export default {
         },
     },
     methods: {
-
         validateRange(val, min, max) {
             let isValid = val !== null && val >= min && val <= max
             if (isValid === false) {
@@ -175,7 +159,6 @@ export default {
             }
             return isValid || `Veuillez entrer une valeur entre ${min} et ${max}`
         },
-
     }
 }
 </script>
