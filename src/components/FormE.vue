@@ -372,7 +372,7 @@ export default {
             }
 
             // filter content to be rendered
-            // docDefinition.content = docDefinition.content.filter(o => o.render)
+            docDefinition.content = docDefinition.content.filter(o => o.render)
 
             pdfMake.createPdf(docDefinition).download('ne_calcul_stationnement.pdf');
 
