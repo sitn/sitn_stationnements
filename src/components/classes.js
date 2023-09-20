@@ -7,13 +7,14 @@ export var communes = communes_json.sort((a, b) => a.comnom.toLowerCase().locale
 export class Affectation {
 
   // constructor
-  constructor(type, name, description, variables = [], factors = []) {
+  constructor(type, name, description, automatic = false, variables = [], factors = []) {
     this.type = type
     this.name = name
     this.description = description
     this.variables = variables // input
     this.factors = factors // output
     this.active = false
+    this.automatic = automatic
   }
 
   // getters
@@ -100,6 +101,7 @@ export const affectations = [
     "Logement",
     "Logements standards",
     "",
+    true,
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "# logements", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
@@ -115,6 +117,7 @@ export const affectations = [
     "Logement",
     "Logements avec encadrement ou étudiants",
     "",
+    true,
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "# logements", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
@@ -131,6 +134,7 @@ export const affectations = [
     "Activité",
     "Industrie, artisanat",
     "",
+    true,
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -147,6 +151,7 @@ export const affectations = [
     "Activité",
     "Entrepôts et dépôts",
     "",
+    true,
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -163,6 +168,7 @@ export const affectations = [
     "Activité",
     "Services à nombreuse clientèle",
     "(banque, poste administration publique avec guichets, agence de voyage médecin, dentiste, cabinet de soins, eproduction et copie, nettoyage chimique coiffeur,…)",
+    true,
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -179,6 +185,7 @@ export const affectations = [
     "Activité",
     "Autres services",
     "(administration publique sans guichet, bureau d’ingénieur ou d’architecte, étude d’avocat, assurance, caisse maladie, administration d’industries, fiduciaire, laboratoire, entreprise de transport,…)",
+    true,
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -195,6 +202,7 @@ export const affectations = [
     "Activité",
     "Magasins à nombreuse clientèle",
     "(alimentation, pharmacie, droguerie, grand magasin, kiosque, …)",
+    true,
     [
       { name: "Surface de vente (SV)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -211,6 +219,7 @@ export const affectations = [
     "Activité",
     "Autres magasins",
     "(librairie, ménage, quincaillerie horlogerie, bijouterie, ameublement, magasins spécialisés)",
+    true,
     [
       { name: "Surface de vente (SV)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -227,21 +236,25 @@ export const affectations = [
     "Activité",
     "Hôtel",
     "",
+    false,
     [
-      { name: "# lits", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
+      // { name: "# lits", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
+      { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
       { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
       { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
       { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
-      { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => 0.5 * x[0] * (f / 100) * (1 - r / 100)) }
+      { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      // { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => 0.5 * x[0] * (f / 100) * (1 - r / 100)) }
     ]
   ),
   new Affectation(
     "Activité",
     "Auberge de jeunesse",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -257,6 +270,7 @@ export const affectations = [
     "Activité",
     "Restaurant, café, bar",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -272,6 +286,7 @@ export const affectations = [
     "Activité",
     "Petit hôpital, clinique",
     "",
+    false,
     [
       { name: "# places personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "# places visiteurs", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
@@ -289,6 +304,7 @@ export const affectations = [
     "Activité",
     "Etablissement pour personnes âgées, sanatorium",
     "",
+    false,
     [
       { name: "# places personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "# places visiteurs", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
@@ -306,6 +322,7 @@ export const affectations = [
     "Activité",
     "Cinéma",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -321,6 +338,7 @@ export const affectations = [
     "Activité",
     "Théâtre, opéra, salle de concert",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -336,6 +354,7 @@ export const affectations = [
     "Activité",
     "Musée, espace d’exposition, galerie",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -351,6 +370,7 @@ export const affectations = [
     "Activité",
     "Bibliothèque",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -366,6 +386,7 @@ export const affectations = [
     "Activité",
     "Discothèque",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -381,6 +402,7 @@ export const affectations = [
     "Activité",
     "Eglise, mosquée, synagogue",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -396,6 +418,7 @@ export const affectations = [
     "Activité",
     "Cimetière",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -411,6 +434,7 @@ export const affectations = [
     "Activité",
     "Crèche, jardin d’enfant",
     "",
+    false,
     [
       { name: "# places personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "# places visiteurs", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
@@ -428,6 +452,7 @@ export const affectations = [
     "Activité",
     "École primaire ou secondaire",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -443,6 +468,7 @@ export const affectations = [
     "Activité",
     "Gymnase, lycée",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -458,6 +484,7 @@ export const affectations = [
     "Activité",
     "Conservatoire",
     "",
+    false,
     [
       { name: "# places personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "# places visiteurs", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
@@ -475,6 +502,7 @@ export const affectations = [
     "Activité",
     "École professionnelle",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -490,6 +518,7 @@ export const affectations = [
     "Activité",
     "Haute école, université",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -505,6 +534,7 @@ export const affectations = [
     "Activité",
     "Cours pour adultes",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -520,6 +550,7 @@ export const affectations = [
     "Activité",
     "Salle de réunion ou de conférence",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -535,6 +566,7 @@ export const affectations = [
     "Activité",
     "Patinoire",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -550,6 +582,7 @@ export const affectations = [
     "Activité",
     "Picine couverte",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -566,6 +599,7 @@ export const affectations = [
     "Activité",
     "Plage et piscine en plein air",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -581,6 +615,7 @@ export const affectations = [
     "Activité",
     "Halle de gymnastrique",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -596,6 +631,7 @@ export const affectations = [
     "Activité",
     "Centre de fitness",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -611,6 +647,7 @@ export const affectations = [
     "Activité",
     "Stade d'athlétisme avec terrains de jeu",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -626,6 +663,7 @@ export const affectations = [
     "Activité",
     "Stade (football, hoykey)",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -641,6 +679,7 @@ export const affectations = [
     "Activité",
     "Tennis",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -656,6 +695,7 @@ export const affectations = [
     "Activité",
     "Stand de tir",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -671,6 +711,7 @@ export const affectations = [
     "Activité",
     "Piste en forêt, Parcours Vita",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -686,6 +727,7 @@ export const affectations = [
     "Activité",
     "Salon de jeu, casino, local de club",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -701,6 +743,7 @@ export const affectations = [
     "Activité",
     "Mini-golf",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -716,6 +759,7 @@ export const affectations = [
     "Activité",
     "Salle de billard",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -731,6 +775,7 @@ export const affectations = [
     "Activité",
     "Jeu de quilles ou bowling (sans la restauration)",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -746,6 +791,7 @@ export const affectations = [
     "Activité",
     "Manège, écurie",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
@@ -761,6 +807,7 @@ export const affectations = [
     "Activité",
     "Port de plaisance",
     "",
+    false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
