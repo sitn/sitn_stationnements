@@ -9,7 +9,7 @@
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-        <!-- <div>{{ this.factors }}</div><br> -->
+        <div>{{ this.factors }}</div><br>
 
         <!-- INFOBOX  -->
         <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox" v-if="this.render">
@@ -50,13 +50,23 @@
 
         <q-form ref="form" greedy v-if="this.render">
 
-            <div class="row q-col-gutter-none q-pa-sm q-my-sm bg-grey-2 rounded-borders">
-                <div class="col-xs-12 col-sm-6 q-pa-md q-my-sm" v-for="(item, key) in this.factors.values">
+            <!-- Eco neighbourhoud checkbox field -->
+            <div class="row q-pa-sm q-my-sm bg-grey-2 rounded-borders">
+                <q-item tag="label" v-ripple>
+                    <q-item-section avatar>
+                        <q-checkbox v-model="this.project.eco" @update:model-value="eco()" color="blue" />
+                    </q-item-section>
+                    <q-item-section>
+                        <q-item-label>Quartier durable</q-item-label>
+                        <q-item-label caption>Le pourcentage à appliquer au besoin brut pour les quartiers durables est obligatoirement le minimum, sauf pour l’affectation logement dans le type de localisation III où il est de 50% (au lieu de 70%)</q-item-label>
+                    </q-item-section>
+                </q-item>
+            </div>
 
-                    <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective"
-                        :min=item.min :max=item.max @update:model-value="check(item)"
-                        :rules="[val => validateRange(val, item.min, item.max)]"
-                        :disable="!this.project.affectations.filter((x) => (x.active)).map((x) => (x.type)).includes(item.label)">
+            <!-- Housing and activity ratios input fields -->
+            <div class="row q-col-gutter-none q-pa-sm q-my-sm bg-grey-2 rounded-borders">
+                <div class="col-xs-12 col-sm-6 q-pa-sm q-my-none" v-for="(item, key) in this.factors.values">
+                    <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective" :min=item.min :max=item.max @update:model-value="check(item)" :rules="[val => validateRange(val, item.min, item.max)]" :disable="!this.project.affectations.filter((x) => (x.active)).map((x) => (x.type)).includes(item.label) || this.project.eco">
                         <template v-slot:label>
                             {{ item.label }}
                         </template>
@@ -64,13 +74,12 @@
                             <div class="text-body2">%</div>
                         </template>
                     </q-input>
-
                 </div>
             </div>
 
+            <!-- Net needs tables  -->
             <div class="row">
-                <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6"
-                    v-for="(item, key) in this.project.affectations.filter(e => e.active)">
+                <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6" v-for="(item, key) in this.project.affectations.filter(e => e.active)">
                     <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                         <table>
@@ -130,7 +139,6 @@ export default {
         factors() {
 
             // console.log(`FormC.vue: factors`)
-
             if (this.project.commune === null || this.project.locationType === null) {
                 return null // "Commune and/or zone not selected"
             } else {
@@ -141,7 +149,20 @@ export default {
 
     },
     methods: {
+        eco() {
 
+            // console.log(`Eco: ${this.project.eco}`)
+
+            if (this.project.eco) {
+
+                this.factors.values.map((x) => (x.effective = x.min))
+                if (this.factors.zone === "V") {
+                    this.factors.values.find((x) => (x.type === "housing")).effective = 50
+                }
+                this.updateLocationFactors()
+            }
+
+        },
         updateLocationFactors() {
 
             // update factors in affectations
@@ -178,6 +199,7 @@ export default {
             return isValid || `Veuillez entrer une valeur entre ${min} et ${max}`
         },
         check(item) {
+
             // console.log(item)
             let isValid = item.effective >= item.min && item.effective <= item.max
             if (!isValid) {
@@ -195,7 +217,6 @@ export default {
                 }
             }
         }
-
     },
     mounted() {
 
@@ -204,11 +225,10 @@ export default {
     },
     updated() {
 
-        console.log('this.$refs')
-        console.log(this.$refs)
-
-        console.log(`form !== null:  ${this.$refs.form !== null}`)
-        console.log(`form hasOwnProperty:  ${this.$refs.hasOwnProperty('form')}`)
+        // console.log('this.$refs')
+        // console.log(this.$refs)
+        // console.log(`form !== null:  ${this.$refs.form !== null}`)
+        // console.log(`form hasOwnProperty:  ${this.$refs.hasOwnProperty('form')}`)
 
         if (this.$refs.hasOwnProperty('form')) {
             if (this.$refs.form !== null) {
