@@ -15,10 +15,10 @@
             <q-card-section horizontal>
 
                 <!-- 
-                    <q-card-actions vertical class="justify-around q-pa-xs">
-                      <q-icon name="info" color="orange-5" size="3em" />
-                    </q-card-actions>
-                    -->
+                <q-card-actions vertical class="justify-around q-pa-xs">
+                    <q-icon name="info" color="orange-5" size="3em" />
+                </q-card-actions>
+                -->
 
                 <q-card-section class="q-pa-xs">
                     <div class="text-body2 text-weight-bold q-mb-sm">Informations sur le calcul</div>
@@ -106,7 +106,6 @@
                         <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item2.value" :min=item2.min :max=item2.max @update:model-value="check(item2)" :rules="[val => validatePositive(val)]">
                             <!-- :hint="`${item2.min} ≥ x ≤ ${item2.max}`" -->
                             <!-- :rules="[validatePositive]" -->
-
                             <template v-slot:label>
                                 {{ item2.name }}
                             </template>
@@ -170,9 +169,9 @@ export default {
         },
         filled() {
 
-            console.log('FormB.vue: filled()')
-            console.log(`Has affectations: ${this.project.hasAffectation}`)
-            console.log(`LocationType: ${this.project.locationType !== null}`)
+            // console.log('FormB.vue: filled()')
+            // console.log(`Has affectations: ${this.project.hasAffectation}`)
+            // console.log(`LocationType: ${this.project.locationType !== null}`)
 
             return this.project.hasAffectation & (this.project.locationType !== null)
             // this.$emit('filled', this.filled);
@@ -181,7 +180,7 @@ export default {
     },
     watch: {
         filled(val) {
-            console.log(`FormB.vue: filled = ${val}`)
+            // console.log(`FormB.vue: filled = ${val}`)
             this.$emit('filled', val)
         }
     },
@@ -194,7 +193,6 @@ export default {
             if (isValid === false) {
                 val = null
             }
-
             if (max === Infinity) {
                 let msg = `Veuillez entrer une valeur ≥ à ${min}`
             } else {
@@ -236,15 +234,15 @@ export default {
                 e.active = true
             })
 
-            console.log('FromB.vue: select option')
-            console.log(this.model)
+            // console.log('FromB.vue: select option')
+            // console.log(this.model)
 
             this.updateProject()
 
         },
         deleteItem(item) {
 
-            console.log(`Delete item with id=${item.name}`)
+            // console.log(`Delete item with id=${item.name}`)
             this.model = this.model.filter(e => e !== item)
 
             let index = this.project.affectations.findIndex((obj) => obj.name === item.name)
@@ -269,13 +267,12 @@ export default {
         }
     },
     mounted() {
-        console.log('FORM B - Affectations')
-        console.log(this.project.affectations)
+        // console.log('FORM B - Affectations')
+        // console.log(this.project.affectations)
     },
     updated() {
         this.validateForm()
     }
-
 }
 </script>
 
