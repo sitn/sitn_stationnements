@@ -51,9 +51,7 @@
 
         <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-if="this.render">
 
-            <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations"
-                option-value="name" option-label="name" @add="addOption()" @remove="removeOption()"
-                @update:model-value="selectOption()" multiple label="Affectation(s)">
+            <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations" option-value="name" option-label="name" @add="addOption()" @remove="removeOption()" @update:model-value="selectOption()" multiple label="Affectation(s)">
 
                 <template v-slot:option="scope">
                     <q-item v-bind="scope.itemProps">
@@ -66,6 +64,16 @@
                             <!-- <q-item-label caption>Selected: {{ scope.selected }}</q-item-label> -->
                             <!-- <q-item-label caption>Active: {{ scope.opt.active }}</q-item-label> -->
                         </q-item-section>
+                        <q-item-section side>
+
+                            <q-chip square :color="scope.opt.automatic ? 'blue' : 'orange'" text-color="white" :icon="scope.opt.automatic ? 'calculate' : 'article'">
+                                {{ scope.opt.automatic ? 'AUTO' : 'VSS' }}
+                            </q-chip>
+
+                        </q-item-section>
+                        <q-tooltip>
+                            {{ scope.opt.automatic ? 'Le calcul du besoin brute est automatique pour cette affectation' : 'Le calcul du besoin brute doit être fait manuellement selon les formules du tableau 1 de la norme VSS 40 281 (2019) pour cette affectation' }}
+                        </q-tooltip>
                     </q-item>
                 </template>
 
@@ -78,18 +86,24 @@
 
         <q-form ref="form" greedy>
 
-            <div v-if="this.render" class="bg-grey-2 q-pa-md q-my-sm rounded-borders"
-                v-for="(item, key) in this.project.affectations.filter(e => e.active)">
+            <div v-if="this.render" class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in this.project.affectations.filter(e => e.active)">
 
-                <label class="text-h7 ">{{ item.name }}</label>
-                <div class="row q-col-gutter-sm">
+                <label class="text-h7">
+
+                    <q-chip dense square :color="item.automatic ? 'blue' : 'orange'" text-color="white" :icon="item.automatic ? 'calculate' : 'article'">
+                        {{ item.automatic ? 'AUTO' : 'VSS' }}
+                        <q-tooltip>
+                            {{ item.automatic ? 'Le calcul du besoin brute est automatique pour cette affectation' : 'Le calcul du besoin brute doit être fait manuellement selon les formules du tableau 1 de la norme VSS 40 281 (2019) pour cette affectation' }}
+                        </q-tooltip>
+                    </q-chip>
+                    {{ item.name }}
+                </label>
+
+                <div class="row q-col-gutter-sm q-py-xs">
 
                     <!-- input fields -->
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3"
-                        v-for="(item2, key2) in item.variables.filter((x) => x.type === 'measurement')">
-                        <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item2.value"
-                            :min=item2.min :max=item2.max @update:model-value="check(item2)"
-                            :rules="[val => validatePositive(val)]">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3" v-for="(item2, key2) in item.variables.filter((x) => x.type === 'measurement')">
+                        <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item2.value" :min=item2.min :max=item2.max @update:model-value="check(item2)" :rules="[val => validatePositive(val)]">
                             <!-- :hint="`${item2.min} ≥ x ≤ ${item2.max}`" -->
                             <!-- :rules="[validatePositive]" -->
 
@@ -110,8 +124,7 @@
 
                     <!-- output fields -->
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 self-end" v-for="(item3, key3) in item.factors">
-                        <q-input bg-color="light-blue-1" outlined label="" type="number" name=""
-                            :model-value="(item.output[key3]).toFixed(2)" readonly hint="">
+                        <q-input bg-color="light-blue-1" outlined label="" type="number" name="" :model-value="(item.output[key3]).toFixed(2)" readonly hint="">
                             <template v-slot:label>
                                 {{ item3.name }} <!-- (key: {{ key3 }}) -->
                                 <!-- 
@@ -144,9 +157,7 @@ export default {
     props: { 'project': Object },
     emits: ['updateProject', 'deleteItem', 'filled'],
     setup() {
-        return {
-            // model: ref(null),
-        }
+        return {}
     },
     data() {
         return {
