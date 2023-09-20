@@ -47,7 +47,6 @@
 
         </q-card>
 
-
         <q-form ref="form" greedy v-if="this.render">
 
             <!-- Eco neighbourhoud checkbox field -->
