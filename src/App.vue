@@ -140,7 +140,7 @@
         <!-- 2. RAW PARKING NEEDS -->
         <FormSection title="2. Calcul du besoin brut (article 27 RELConstr.)">
           <template v-slot:content>
-            <FormB :project="project" @updateProject="updateProject" @filled="filled"></FormB>
+            <FormB :project="project" @updateProject="updateProject"></FormB>
           </template>
         </FormSection>
 
@@ -279,34 +279,22 @@ export default {
     }
   },
   methods: {
-
     validateLocalisation(val) {
-
       if (val === null) {
         return 'Veuillez indiquer un type de localisation'
       }
-
     },
-
     validateSatac(str) {
       return new RegExp('^[0-9]+$').test(str) || str.length === 0
     },
-
     resetParcels() {
-
       this.project.parcels = []
       this.geojson.features = []
-
     },
-
     selectOption() {
-
-      console.log(`App.vue | Project location type: ${this.project.locationType.name}`)
-
+      // console.log(`App.vue | Project location type: ${this.project.locationType.name}`)
     },
-
     addRecord(feature) {
-
       var myHeaders = new Headers()
       myHeaders.append("Content-Type", "application/json")
 
@@ -333,59 +321,36 @@ export default {
           this.geojson.features.push(feature)
 
           // update parcels in project
-          // this.project.parcels = this.geojson.features.map(x => ({ parcel: x.properties.idmai.split("_")[1], cadastre: x.properties.cadnom }))
           this.project.parcels = this.geojson.features.map(x => (`n° ${x.properties.idmai.split("_")[1]}, cadastre de ${x.properties.cadnom}`))
         })
         .catch(error => console.log('error', error))
 
-      console.log(`App.vue | Add new record with id=${feature.id}`)
-      console.log(`App.vue | Project location type: ${this.project.locationType}`)
-
+      // console.log(`App.vue | Add new record with id=${feature.id}`)
+      // console.log(`App.vue | Project location type: ${this.project.locationType}`)
     },
-
     deleteRecord(id) {
-
       this.geojson.features = this.geojson.features.filter(function (feature) {
         return feature.id !== id
       })
-
       // update parcels in project
       this.project.parcels = this.geojson.features.map(x => x.properties.idmai)
 
-      console.log(`App.vue | Delete item with id=${id}`)
-      console.log(`App.vue | Project location type: ${this.project.locationType}`)
-      console.log(this.project.locationType)
-      console.log(this.project.loctypes)
-
+      // console.log(`App.vue | Delete item with id=${id}`)
+      // console.log(`App.vue | Project location type: ${this.project.locationType}`)
+      // console.log(this.project.locationType)
+      // console.log(this.project.loctypes)
     },
-
     focusRecord(id) {
-
-      console.log(`App.vue | Focus on item with id=${id}`)
+      // console.log(`App.vue | Focus on item with id=${id}`)
       this.map.zoomTo(id)
-
     },
-
     updateProject(obj) {
-
       this.project = obj
       this.$nextTick(() => { this.$refs.form.validate() })
-
-      console.log('App.vue: updateProject')
-      console.log(this.project)
-
+      // console.log('App.vue: updateProject')
+      // console.log(this.project)
     },
-
-
-    filled(obj) {
-
-      console.log(`App.vue: filled = ${obj}`)
-      console.log(obj)
-
-    },
-
   }
-
 }
 </script>
 
