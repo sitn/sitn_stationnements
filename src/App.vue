@@ -6,14 +6,13 @@
 
         <q-toolbar-title class="text-center">CALCUL DU NOMBRE DE PLACES DE STATIONNEMENT VOITURE</q-toolbar-title>
 
-        <a href="https://www.ne.ch/autorites/DDTE/SCAT/Pages/accueil.aspx" target="_blank"><img
-            src="./assets/img/logo_right.svg" alt="Neuchâtel" /></a>
+        <a href="https://www.ne.ch/autorites/DDTE/SCAT/Pages/accueil.aspx" target="_blank"><img src="./assets/img/logo_right.svg" alt="Neuchâtel" /></a>
 
       </q-toolbar>
     </q-header>
 
     <q-page-container>
-      <q-page class="q-pa-md">
+      <q-page class="q-pa-none">
         <!-- 1. LOCATION -->
         <FormSection title="1. Localisation du projet">
           <template v-slot:content>
@@ -24,9 +23,7 @@
 
                 <!-- N° SATAC -->
                 <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-                  <q-input class="col" bg-color="white" outlined label="N° SATAC du projet (si disponible)" type="text"
-                    name="project.satac" v-model="project.satac"
-                    :rules="[(val) => validateSatac(val) || 'Seuls les chiffres sans espaces sont admis']">
+                  <q-input class="col" bg-color="white" outlined label="N° SATAC du projet (si disponible)" type="text" name="project.satac" v-model="project.satac" :rules="[(val) => validateSatac(val) || 'Seuls les chiffres sans espaces sont admis']">
                     <template v-slot:hint>
                       Entrer le n° SATAC avec des chiffres seulement et sans espaces
                     </template>
@@ -35,9 +32,7 @@
 
                 <!-- COMMUNE -->
                 <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-                  <q-select outlined bottom-slots bg-color="white" v-model="project.commune" :options="communes"
-                    option-value="comnom" option-label="comnom" @update:model-value="resetParcels()" label="Commune"
-                    :rules="[(val) => val !== null || 'Veuillez choisir la commune']">
+                  <q-select outlined bottom-slots bg-color="white" v-model="project.commune" :options="communes" option-value="comnom" option-label="comnom" @update:model-value="resetParcels()" label="Commune" :rules="[(val) => val !== null || 'Veuillez choisir la commune']">
 
                     <template v-slot:option="scope">
                       <q-item v-bind="scope.itemProps">
@@ -77,10 +72,7 @@
                 <!-- LOCATION TYPE -->
                 <div class="bg-grey-2 q-pa-md q-my-md rounded-borders">
 
-                  <q-select outlined bottom-slots bg-color="white" v-model="project.locationType"
-                    :options="project.loctypes.filter(e => e.active)" option-value="name" option-label="name"
-                    @update:model-value="selectOption()" label="Type de localisation du projet"
-                    :rules="[validateLocalisation]">
+                  <q-select outlined bottom-slots bg-color="white" v-model="project.locationType" :options="project.loctypes.filter(e => e.active)" option-value="name" option-label="name" @update:model-value="selectOption()" label="Type de localisation du projet" :rules="[validateLocalisation]">
 
                     <template v-slot:option="scope">
                       <q-item v-bind="scope.itemProps">
@@ -100,8 +92,7 @@
                 </div>
 
                 <!-- LOCATION TYPE INFOBOX  -->
-                <q-card v-if="this.project.loctypes.filter(e => e.active).length > 1" flat
-                  class="bg-grey-1 q-pa-md q-my-md infobox">
+                <q-card v-if="this.project.loctypes.filter(e => e.active).length > 1" flat class="bg-grey-1 q-pa-md q-my-md infobox">
 
                   <q-card-section horizontal>
 
@@ -135,11 +126,8 @@
                 </q-card>
 
                 <!-- LOCATION TYPE JUSTIFICATION  -->
-                <div v-if="this.project.loctypes.filter(e => e.active).length > 1"
-                  class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-                  <q-input v-model="project.locationTypeJustification" outlined bg-color="white" type="textarea"
-                    maxlength="500" counter label="Justification du type de localisation du projet"
-                    :rules="[(val) => val.length > 3 || 'Veuillez justifier le choix du type de localisation']" />
+                <div v-if="this.project.loctypes.filter(e => e.active).length > 1" class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+                  <q-input v-model="project.locationTypeJustification" outlined bg-color="white" type="textarea" maxlength="500" counter label="Justification du type de localisation du projet" :rules="[(val) => val.length > 3 || 'Veuillez justifier le choix du type de localisation']" />
                 </div>
 
               </q-form>
