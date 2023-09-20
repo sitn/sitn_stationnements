@@ -883,20 +883,11 @@ export class Project {
     this.loctypes = loctypes
     this.affectations = affectations
     this._locationType = null // Location type is set manually by the user with a dropdown list
-    // this.locationFactors = null
     this.locationTypeJustification = '' // Location type justification
     this.satac = '' // N° SATAC
     this.commune = null // Commune
+    this.eco = false // Ecoquartier
   }
-
-  /*
-  get reductions() {
-    return this.affectations
-      .filter(e => e.valid)
-      .map(e => e.reductions.map((o) => ({ ...o, affectationName: e.name })))
-      .flat(1)
-  }
-  */
 
   get hasAffectation() {
     return this.affectations.filter(e => e.active).length > 0 /* && this.affectations.filter(e => e.active).map(e => e.valid).every(Boolean) */
