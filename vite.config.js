@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/web/stationnement/',
+  base: '/web/stationnement/', // For test use: '/web/stationnement/', for production use '/stationnement/'
   plugins: [vue()],
   resolve: {
     alias: {
