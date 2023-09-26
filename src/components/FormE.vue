@@ -41,7 +41,7 @@
                     </table>
                 </div>
 
-                <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer PDF" @click="printPDF2" class="no-print" />
+                <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer PDF" @click="printPDF" class="no-print" />
             </div>
 
         </div>
@@ -95,7 +95,7 @@ export default {
             let arr = [mm]
             return arr.flat(1).map(x => 2.834645 * x)
         },
-        printPDF2() {
+        printPDF() {
 
             let docDefinition = {
                 pageSize: 'A4',
@@ -173,7 +173,7 @@ export default {
                         render: true
                     },
                     {
-                        text: `Date: ${new Date().toLocaleString('fr-CH')} / dossier SATAC: ${this.project.satac} / Commune: ${this.project.commune.comnom} / Biens-fonds: ${this.project.parcels.join(', ')} / Type de localisation ${this.project.locationType.name}`,
+                        text: `Date: ${new Date().toLocaleString('fr-CH')} / dossier SATAC: ${this.project.satac} / Commune: ${this.project.commune.comnom} / Biens-fonds: ${this.project.parcels.join(', ')} / Type de localisation ${this.project.locationType.name} ${this.project.eco === true ? '/ Projet de quartier durable' : ''}`,
                         style: 'body',
                         margin: [0, 10, 0, 5], // [left, top, right, bottom]
                         render: true
