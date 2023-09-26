@@ -68,8 +68,8 @@
                                     <div class="text-weight-bold">{{ reduction.name }}</div>
                                     <div class="text-caption">{{ reduction.description }}</div>
                                 </td>
-                                <td>
-                                    <q-input dense bg-color="white" outlined type="number" name="reduction.factor" v-model.number="reduction.value" :min=reduction.min :max=reduction.max :rules="[val => validateRange(val, reduction.min, reduction.max)]">
+                                <td width="20%">
+                                    <q-input dense bg-color="white" outlined type="number" name="reduction.factor" v-model.number="reduction.value" :min=reduction.min :max=reduction.max @update:model-value="check(reduction)" reactive-rules :rules="[val => validateRange(val, reduction.min, reduction.max)]">
                                         <template v-slot:prepend>
                                             <div class="text-body2">-</div>
                                         </template>
@@ -152,6 +152,16 @@ export default {
         },
     },
     methods: {
+        check(item) {
+
+            let isValid = item.value >= item.min && item.value <= item.max
+            if (!isValid) {
+                item.value = null
+            } else {
+                item.value = item.value
+            }
+
+        },
         validateRange(val, min, max) {
             let isValid = val !== null && val >= min && val <= max
             if (isValid === false) {
