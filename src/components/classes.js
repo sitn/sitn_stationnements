@@ -101,7 +101,7 @@ export const affectations = [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "# logements", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 }
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 }
     ],
     [
       { name: "# places habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * (f / 100) * (1 - r / 100)) },
@@ -117,8 +117,8 @@ export const affectations = [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "# logements", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 34 - logements particuliers", description: "Un facteur de réduction peut s'appliquer pour les logements avec encadrement ou étudiants. Contacter la commune.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Logements avec encadrement ou étudiants", description: "Un facteur de réduction (maximum 50%) peut s'appliquer pour les logements avec encadrement dédiés aux bénéficiaires AVS/AI ou étudiants. Référez-vous à l’article 34 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 50.0, value: 0.0 },
     ],
     [
       { name: "# places habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * (f / 100) * (1 - r / 100)) },
@@ -133,9 +133,9 @@ export const affectations = [
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => 0.01 * x[0] * (f / 100) * (1 - r / 100)) },
@@ -150,9 +150,9 @@ export const affectations = [
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => 0.015 * x[0] * (f / 100) * (1 - r / 100)) },
@@ -167,9 +167,9 @@ export const affectations = [
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.02 * x[0]) * (f / 100) * (1 - r / 100)) },
@@ -184,9 +184,9 @@ export const affectations = [
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.02 * x[0]) * (f / 100) * (1 - r / 100)) },
@@ -201,9 +201,9 @@ export const affectations = [
     [
       { name: "Surface de vente (SV)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.02 * x[0]) * (f / 100) * (1 - r / 100)) },
@@ -218,9 +218,9 @@ export const affectations = [
     [
       { name: "Surface de vente (SV)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.015 * x[0]) * (f / 100) * (1 - r / 100)) },
@@ -236,9 +236,9 @@ export const affectations = [
       // { name: "# lits", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -253,9 +253,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -269,9 +269,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -286,9 +286,9 @@ export const affectations = [
       { name: "# places personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "# places visiteurs", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -304,9 +304,9 @@ export const affectations = [
       { name: "# places personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "# places visiteurs", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -321,9 +321,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -337,9 +337,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -353,9 +353,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -369,9 +369,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -385,9 +385,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -395,15 +395,15 @@ export const affectations = [
   ),
   new Affectation(
     "Activité",
-    "Eglise, mosquée, synagogue",
+    "Église, mosquée, synagogue",
     "",
     false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -417,9 +417,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -434,9 +434,9 @@ export const affectations = [
       { name: "# places personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "# places visiteurs", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -451,9 +451,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -467,9 +467,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -484,9 +484,9 @@ export const affectations = [
       { name: "# places personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "# places visiteurs", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -501,9 +501,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -517,9 +517,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -533,9 +533,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -549,9 +549,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -565,9 +565,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -575,15 +575,15 @@ export const affectations = [
   ),
   new Affectation(
     "Activité",
-    "Picine couverte",
+    "Piscine couverte",
     "",
     false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -598,9 +598,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -608,15 +608,15 @@ export const affectations = [
   ),
   new Affectation(
     "Activité",
-    "Halle de gymnastrique",
+    "Halle de gymnastique",
     "",
     false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -630,9 +630,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -646,9 +646,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -656,15 +656,15 @@ export const affectations = [
   ),
   new Affectation(
     "Activité",
-    "Stade (football, hoykey)",
+    "Stade (football, hockey)",
     "",
     false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -678,9 +678,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -694,9 +694,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -710,9 +710,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -720,15 +720,15 @@ export const affectations = [
   ),
   new Affectation(
     "Activité",
-    "Salon de jeu, casino, local de club",
+    "Salon de jeux, casino, local de club",
     "",
     false,
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -742,9 +742,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -758,9 +758,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -774,9 +774,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -790,9 +790,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -806,9 +806,9 @@ export const affectations = [
     [
       { name: "# places mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
@@ -825,9 +825,9 @@ export const affectations = [
       { name: "# places visiteur", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "# pièces", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 31 - plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 32 - utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
-      { name: "art. 33 - protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Contacter la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
+      { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
       { name: "# places habitants", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
