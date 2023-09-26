@@ -56,8 +56,8 @@
                         <q-checkbox v-model="this.project.eco" @update:model-value="eco()" color="blue" />
                     </q-item-section>
                     <q-item-section>
-                        <q-item-label>Quartier durable</q-item-label>
-                        <q-item-label caption>Le pourcentage à appliquer au besoin brut pour les quartiers durables est obligatoirement le minimum, sauf pour l’affectation logement dans le type de localisation III où il est de 50% (au lieu de 70%)</q-item-label>
+                        <q-item-label>Le projet est un quartier durable au sens de l’article 48 de la loi cantonale sur l’aménagement du territoire.</q-item-label>
+                        <q-item-label caption>Le pourcentage à appliquer au besoin brut pour les quartiers durables est obligatoirement le minimum, sauf pour l’affectation logement dans le type de localisation III où il est de 50% (au lieu de 70%).</q-item-label>
                     </q-item-section>
                 </q-item>
             </div>
@@ -65,9 +65,9 @@
             <!-- Housing and activity ratios input fields -->
             <div class="row q-col-gutter-none q-pa-sm q-my-sm bg-grey-2 rounded-borders">
                 <div class="col-xs-12 col-sm-6 q-pa-sm q-my-none" v-for="(item, key) in this.factors.values">
-                    <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective" :min=item.min :max=item.max @update:model-value="check(item)" :rules="[val => validateRange(val, item.min, item.max)]" :disable="!this.project.affectations.filter((x) => (x.active)).map((x) => (x.type)).includes(item.label) || this.project.eco">
+                    <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective" :min=item.min :max=item.max @update:model-value="check(item)" reactive-rules :rules="[val => validateRange(val, item.min, item.max)]" :disable="!this.project.affectations.filter((x) => (x.active)).map((x) => (x.type)).includes(item.label) || this.project.eco">
                         <template v-slot:label>
-                            {{ item.label }}
+                            {{ item.label }} {{ this.project.eco === true ? `` : `(${item.min}% à ${item.max}% selon votre projet)` }}
                         </template>
                         <template v-slot:append>
                             <div class="text-body2">%</div>
@@ -194,7 +194,7 @@ export default {
             } else {
                 let msg = `Veuillez entrer une valeur entre ${min} et ${max}`
             }
-            return isValid || `Veuillez entrer une valeur entre ${min} et ${max}`
+            return isValid || `Veuillez entrer une valeur entre ${min} et ${max} selon votre projet`
         },
         check(item) {
 
