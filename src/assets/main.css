@@ -191,6 +191,7 @@ body {
 }
 
 /* PROTOYPE BANNER */
+/*
 body:after {
   content: "Prototype";
   position: fixed;
@@ -209,6 +210,7 @@ body:after {
   transform: rotate(-45deg);
   z-index: 9999;
 }
+*/
 
 #q-app {
   width: 100%;
