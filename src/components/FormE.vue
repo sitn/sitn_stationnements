@@ -57,12 +57,18 @@
 // https://www.youtube.com/watch?v=vK0WIrbxxcw
 // https://github.com/bpampuch/pdfmake/issues/1877
 
-import pdfFonts from 'pdfmake/build/fonts.js';
 import pdfMake from 'pdfmake/build/pdfmake';
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
+// pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import { logo } from './logo.js';
-import { MapBrowserEventHandler } from 'ol';
+
+pdfMake.fonts = {
+    Roboto: {
+        normal: `${window.location.href}/fonts/Roboto-Regular.ttf`, // ${window.location.origin},  ${window.location.href}
+        bold: `${window.location.href}/fonts/Roboto-Medium.ttf`,
+        italics: `${window.location.href}/fonts/Roboto-Italic.ttf`,
+        bolditalics: `${window.location.href}fonts/Roboto-MediumItalic.ttf`,
+    }
+}
 
 export default {
     name: 'FormE',
@@ -96,6 +102,9 @@ export default {
             return arr.flat(1).map(x => 2.834645 * x)
         },
         printPDF() {
+
+            console.log(`window.location.origin: ${window.location.origin}`)
+            console.log(`window.location.href: ${window.location.href}`)
 
             let docDefinition = {
                 pageSize: 'A4',
