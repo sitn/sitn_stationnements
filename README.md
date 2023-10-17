@@ -23,4 +23,3 @@ Run the app locally (on localhost) with:
 ```
 vite
 ```
-
