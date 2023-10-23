@@ -1,6 +1,12 @@
 import pdfMake from 'pdfmake/build/pdfmake'
 import { logo } from './logo.js';
 
+// https://github.com/vitejs/vite/issues/1041
+// https://github.com/bpampuch/pdfmake/issues/1459
+// https://github.com/bpampuch/pdfmake/issues/2486
+// https://www.youtube.com/watch?v=vK0WIrbxxcw
+// https://github.com/bpampuch/pdfmake/issues/1877
+
 /*
 fetch("/img/logo.svg")
     .then(response => response.text())
