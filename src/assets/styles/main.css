@@ -4,7 +4,7 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url('./fonts/material-icons-v140-latin-regular.woff2') format('woff2');
+  src: url('../fonts/material-icons-v140-latin-regular.woff2') format('woff2');
   /* src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2'); */
 }
 
@@ -24,13 +24,12 @@
   -webkit-font-smoothing: antialiased;
 }
 
-
 /* fallback */
 @font-face {
   font-family: 'Material Icons Outlined';
   font-style: normal;
   font-weight: 400;
-  src: url(./fonts/material-icons-outlined-v109-latin-regular.woff2) format('woff2');
+  src: url('../fonts/material-icons-outlined-v109-latin-regular.woff2') format('woff2');
   /* src: url(https://fonts.gstatic.com/s/materialiconsoutlined/v109/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2) format('woff2'); */
 }
 
@@ -57,7 +56,7 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 100;
-  src: url('./fonts/roboto-v30-latin-100.woff2') format('woff2');
+  src: url('../fonts/roboto-v30-latin-100.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -68,7 +67,7 @@
   font-family: 'Roboto';
   font-style: italic;
   font-weight: 100;
-  src: url('./fonts/roboto-v30-latin-100italic.woff2') format('woff2');
+  src: url('../fonts/roboto-v30-latin-100italic.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -79,7 +78,7 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 300;
-  src: url('./fonts/roboto-v30-latin-300.woff2') format('woff2');
+  src: url('../fonts/roboto-v30-latin-300.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -90,7 +89,7 @@
   font-family: 'Roboto';
   font-style: italic;
   font-weight: 300;
-  src: url('./fonts/roboto-v30-latin-300italic.woff2') format('woff2');
+  src: url('../fonts/roboto-v30-latin-300italic.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -101,7 +100,7 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: url('./fonts/roboto-v30-latin-regular.woff2') format('woff2');
+  src: url('../fonts/roboto-v30-latin-regular.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -112,7 +111,7 @@
   font-family: 'Roboto';
   font-style: italic;
   font-weight: 400;
-  src: url('./fonts/roboto-v30-latin-italic.woff2') format('woff2');
+  src: url('../fonts/roboto-v30-latin-italic.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -123,7 +122,7 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  src: url('./fonts/roboto-v30-latin-500.woff2') format('woff2');
+  src: url('../fonts/roboto-v30-latin-500.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -134,7 +133,7 @@
   font-family: 'Roboto';
   font-style: italic;
   font-weight: 500;
-  src: url('./fonts/roboto-v30-latin-500italic.woff2') format('woff2');
+  src: url('../fonts/roboto-v30-latin-500italic.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -145,7 +144,7 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
-  src: url('./fonts/roboto-v30-latin-700.woff2') format('woff2');
+  src: url('../fonts/roboto-v30-latin-700.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -156,7 +155,7 @@
   font-family: 'Roboto';
   font-style: italic;
   font-weight: 700;
-  src: url('./fonts/roboto-v30-latin-700italic.woff2') format('woff2');
+  src: url('../fonts/roboto-v30-latin-700italic.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -167,7 +166,7 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 900;
-  src: url('./fonts/roboto-v30-latin-900.woff2') format('woff2');
+  src: url('../fonts/roboto-v30-latin-900.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
@@ -178,7 +177,7 @@
   font-family: 'Roboto';
   font-style: italic;
   font-weight: 900;
-  src: url('./fonts/roboto-v30-latin-900italic.woff2') format('woff2');
+  src: url('../fonts/roboto-v30-latin-900italic.woff2') format('woff2');
   /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
