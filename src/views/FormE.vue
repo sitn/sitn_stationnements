@@ -51,27 +51,8 @@
 
 <script>
 
-// https://github.com/vitejs/vite/issues/1041
-// https://github.com/bpampuch/pdfmake/issues/1459
-// https://github.com/bpampuch/pdfmake/issues/2486
-// https://www.youtube.com/watch?v=vK0WIrbxxcw
-// https://github.com/bpampuch/pdfmake/issues/1877
-
-import pdfMake from 'pdfmake/build/pdfmake';
-import { logo } from '../helpers/logo.js';
-import { print } from '../helpers/print.js';
 import { store } from '../store/store.js'
-
-// load TTF fonts (instead of Virtual File System), see issue https://github.com/bpampuch/pdfmake/issues/1877
-// pdfMake.vfs = pdfFonts.pdfMake.vfs;
-pdfMake.fonts = {
-    Roboto: {
-        normal: `${window.location.href}/fonts/Roboto-Regular.ttf`,
-        bold: `${window.location.href}/fonts/Roboto-Medium.ttf`,
-        italics: `${window.location.href}/fonts/Roboto-Italic.ttf`,
-        bolditalics: `${window.location.href}fonts/Roboto-MediumItalic.ttf`,
-    }
-}
+import { print } from '../helpers/print.js';
 
 export default {
     name: 'FormE',
