@@ -23,3 +23,23 @@ Run the app locally (on localhost) with:
 ```
 vite
 ```
+
+## Docker deployment
+
+To just build locally:
+```
+docker build -t sitn-stationnement . 
+```
+
+To build and run locally:
+```
+docker compose up -d --build 
+```
+
+To build and run on remote server:
+
+Set the **DOCKER_HOST** environment variable and launch the build/run :
+```
+$env:DOCKER_HOST="<PATH_TO_REMOTE_HOST>"
+docker compose up -d --build
+```
