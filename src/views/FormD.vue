@@ -132,11 +132,12 @@
 </template>
 
 <script>
+import { store } from '../store/store.js'
 
 export default {
     name: 'FormD',
     components: {},
-    props: { 'project': Object },
+    props: {}, // { 'project': Object },
     emits: [],
     setup() {
         return {
@@ -144,6 +145,8 @@ export default {
     },
     data() {
         return {
+            store,
+            project: store.project,
         }
     },
     computed: {

@@ -75,7 +75,7 @@
             </div>
 
             <!-- LOCATION TYPE INFOBOX  -->
-            <q-card v-if="this.project.loctypes.filter(e => e.active).length > 1" flat class="bg-grey-1 q-pa-md q-my-md infobox">
+            <q-card v-if="store.project.loctypes.filter(e => e.active).length > 1" flat class="bg-grey-1 q-pa-md q-my-md infobox">
 
                 <q-card-section horizontal>
 
@@ -103,7 +103,7 @@
             </q-card>
 
             <!-- LOCATION TYPE JUSTIFICATION  -->
-            <div v-if="this.project.loctypes.filter(e => e.active).length > 1" class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+            <div v-if="store.project.loctypes.filter(e => e.active).length > 1" class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
                 <q-input v-model="project.locationTypeJustification" outlined bg-color="white" type="textarea" maxlength="500" counter label="Justification du type de localisation du projet" :rules="[(val) => val.length > 3 || 'Veuillez justifier le choix du type de localisation']" />
             </div>
 
@@ -113,6 +113,8 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import { store } from '../store/store.js'
 import communes from '../assets/data/communes.json'
 import { Project, LocationTypes, Mob20, affectations } from "../helpers/classes.js"
 import Search from "../components/Search.vue"
@@ -129,13 +131,16 @@ export default {
     props: {},
     emits: [],
     setup() {
-        return {}
+        return {
+            map: ref()
+        }
     },
     data() {
         return {
+            store,
             isfilled: { 'A': false, 'B': false, 'C': false, 'D': false, 'E': false },
             communes: communes,
-            project: project,
+            project: store.project,
             geojson: {
                 'type': 'FeatureCollection',
                 'features': []
@@ -143,12 +148,108 @@ export default {
         }
     },
     computed: {
+        count() {
+            return this.geojson.features.length
+        }
     },
     watch: {
+        count() {
+
+            // reset areas to 0
+            store.project.locationType = null
+            store.project.loctypes.forEach(location => {
+                location.area = 0.0
+                location.ratio = 0.0
+            })
+
+            let totalArea = 0.0
+
+            if (this.geojson.features.length > 0) {
+
+                this.geojson.features.forEach(feature => {
+                    feature.properties.locations.forEach(location => {
+                        let index = store.project.loctypes.findIndex(item => item.name === location.type)
+                        store.project.loctypes[index].area += location.area
+                        totalArea += location.area
+                    })
+                })
+
+                // compute relative area for each type
+                store.project.loctypes.forEach(item => {
+                    item.ratio = item.area / totalArea
+                })
+
+                // if there is only one location type, select it by default
+                console.log(store.project.loctypes.find(e => e.active))
+                if (store.project.loctypes.filter(e => e.active).length === 1) {
+                    store.project.locationType = store.project.loctypes.find(e => e.active)
+                }
+
+                store.project.loctypes.sort((a, b) => b.area - a.area)
+                this.$nextTick(() => { this.$refs.form.validate() })
+
+            }
+
+        }
     },
     methods: {
+        validateLocalisation(val) {
+            if (val === null) {
+                return 'Veuillez indiquer un type de localisation'
+            }
+        },
+        validateSatac(str) {
+            return new RegExp('^[0-9]+$').test(str) || str.length === 0
+        },
+        resetParcels() {
+            store.project.parcels = []
+            this.geojson.features = []
+        },
+        addRecord(feature) {
+            var headers = new Headers()
+            headers.append("Content-Type", "application/json")
+
+            var requestOptions = {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ "type": "FeatureCollection", "features": [feature] }),
+                redirect: 'follow'
+            }
+
+            fetch("https://sitn.ne.ch/apps/stationnement/", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+
+                    feature.properties.locations = []
+                    result.features.forEach(item => {
+                        feature.properties.locations.push(new Mob20(item.properties.type_localisation, item.properties.intersection_area))
+                    })
+
+                    // add feature to geojson
+                    this.geojson.features.push(feature)
+
+                    // update parcels in project
+                    store.project.parcels = this.geojson.features.map(x => (`n° ${x.properties.idmai.split("_")[1]}, cadastre de ${x.properties.cadnom}`))
+                })
+                .catch(error => console.log('error', error))
+        },
+        deleteRecord(id) {
+            this.geojson.features = this.geojson.features.filter((x) => (x.id !== id))
+
+            // update parcels in project
+            store.project.parcels = this.geojson.features.map((x) => x.properties.idmai)
+            // console.log(`App.vue | Delete item with id=${id}`)
+        },
+        focusRecord(id) {
+            this.map.zoomTo(id)
+        },
+        updateProject(obj) {
+            store.project = obj
+            this.$nextTick(() => { this.$refs.form.validate() })
+        },
     },
     mounted() {
+        this.$nextTick(() => { this.$refs.form.validate() })
     },
     updated() {
     }

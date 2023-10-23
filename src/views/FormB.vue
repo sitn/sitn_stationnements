@@ -149,17 +149,20 @@
 </template>
 
 <script>
+import { store } from '../store/store.js'
 
 export default {
     name: 'FormB',
     components: {},
-    props: { 'project': Object },
+    props: {}, // { 'project': Object },
     emits: ['updateProject', 'deleteItem', 'filled'],
     setup() {
         return {}
     },
     data() {
         return {
+            store,
+            project: store.project,
             model: null,
         }
     },

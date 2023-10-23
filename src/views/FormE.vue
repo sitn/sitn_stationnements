@@ -41,7 +41,7 @@
                     </table>
                 </div>
 
-                <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer PDF" @click="print" class="no-print" />
+                <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer PDF" @click="print(project)" class="no-print" />
             </div>
 
         </div>
@@ -59,6 +59,8 @@
 
 import pdfMake from 'pdfmake/build/pdfmake';
 import { logo } from '../helpers/logo.js';
+import { print } from '../helpers/print.js';
+import { store } from '../store/store.js'
 
 // load TTF fonts (instead of Virtual File System), see issue https://github.com/bpampuch/pdfmake/issues/1877
 // pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -74,7 +76,7 @@ pdfMake.fonts = {
 export default {
     name: 'FormE',
     components: {},
-    props: { 'project': Object },
+    props: {}, // { 'project': Object },
     emits: [],
     setup() {
         return {
@@ -82,6 +84,8 @@ export default {
     },
     data() {
         return {
+            store,
+            project: store.project,
         }
     },
     computed: {
@@ -91,10 +95,15 @@ export default {
 
     },
     mounted() {
+        fetch("/img/logo.svg")
+            .then(response => response.text())
+            .then(svg => { console.log(svg) })
+
         // console.log('FORM E - mounted')
         // console.log(this.project.affectations.filter(e => e.active).map(x => ({ name: x.name, value: x.reducedOutput })).flat(1))
     },
     methods: {
+        print,
         mmToPoints(mm) {
             let arr = [mm]
             return arr.flat(1).map(x => 2.834645 * x)
@@ -175,7 +184,6 @@ export default {
                                 ],
                             },
                         ],
-                        // optional space between columns
                         columnGap: 10,
                         render: true
                     },
@@ -319,7 +327,7 @@ export default {
 
             // filter content to be rendered
             docDefinition.content = docDefinition.content.filter(o => o.render)
-            pdfMake.createPdf(docDefinition).download('ne_calcul_stationnement.pdf');
+            pdfMake.createPdf(docDefinition).download('ne_calcul_stationnement.pdf')
 
         },
     }
