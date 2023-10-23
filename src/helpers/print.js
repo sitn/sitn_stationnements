@@ -187,7 +187,7 @@ export const print = (project) => {
                                     {},
                                     { text: o.totalNetOutput.toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                     { text: o.totalReducedOutput.toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-                                    { text: o.totalReducedOutput.toFixed(0), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.totalReducedOutput.toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                     /* { text: o.totalReducedOutputCeil.toFixed(0), style: 'tableBody', bold: true, alignment: 'right', noWrap: true }, */
                                 ],
                             ]
