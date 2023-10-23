@@ -72,7 +72,7 @@
                 <!-- LOCATION TYPE -->
                 <div class="bg-grey-2 q-pa-md q-my-md rounded-borders">
 
-                  <q-select outlined bottom-slots bg-color="white" v-model="project.locationType" :options="project.loctypes.filter(e => e.active)" option-value="name" option-label="name" @update:model-value="selectOption()" label="Type de localisation du projet" :rules="[validateLocalisation]">
+                  <q-select outlined bottom-slots bg-color="white" v-model="project.locationType" :options="project.loctypes.filter(e => e.active)" option-value="name" option-label="name" @update:model-value="" label="Type de localisation du projet" :rules="[validateLocalisation]">
 
                     <template v-slot:option="scope">
                       <q-item v-bind="scope.itemProps">
@@ -95,12 +95,6 @@
                 <q-card v-if="this.project.loctypes.filter(e => e.active).length > 1" flat class="bg-grey-1 q-pa-md q-my-md infobox">
 
                   <q-card-section horizontal>
-
-                    <!-- 
-                    <q-card-actions vertical class="justify-around q-pa-xs">
-                      <q-icon name="info" color="orange-5" size="3em" />
-                    </q-card-actions>
-                    -->
 
                     <q-card-section class="q-pa-xs">
                       <div class="text-body2 text-weight-bold q-mb-sm">Justification du type de localisation</div>
@@ -158,7 +152,6 @@
           </template>
         </FormSection>
 
-
         <!-- 5. SUMMARY -->
         <FormSection title="5. Nombre de places de stationnement à réaliser (article 30 RELConstr.)">
           <template v-slot:content>
@@ -173,15 +166,16 @@
 
 <script>
 import communes from './assets/data/communes.json'
-import { Project, Affectation, LocationTypes, Mob20, affectations } from "./components/classes.js"
+import { Project, LocationTypes, Mob20, affectations } from "./helpers/classes.js"
 import FormSection from "./components/FormSection.vue"
 import Search from "./components/Search.vue"
 import Map from "./components/Map.vue"
 import LocationTable from "./components/LocationTable.vue"
-import FormB from "./components/FormB.vue"
-import FormC from "./components/FormC.vue"
-import FormD from "./components/FormD.vue"
-import FormE from "./components/FormE.vue"
+import FormA from "./views/FormA.vue"
+import FormB from "./views/FormB.vue"
+import FormC from "./views/FormC.vue"
+import FormD from "./views/FormD.vue"
+import FormE from "./views/FormE.vue"
 import { ref } from 'vue'
 
 const project = new Project(
@@ -236,9 +230,6 @@ export default {
   watch: {
     count() {
 
-      // console.log('project.loctypes')
-      // console.log(project.loctypes)
-
       // reset areas to 0
       this.project.locationType = null
       this.project.loctypes.forEach(location => {
@@ -270,8 +261,6 @@ export default {
         }
 
         this.project.loctypes.sort((a, b) => b.area - a.area)
-        // return this.project.loctypes[0]
-
         this.$nextTick(() => { this.$refs.form.validate() })
 
       }
@@ -290,9 +279,6 @@ export default {
     resetParcels() {
       this.project.parcels = []
       this.geojson.features = []
-    },
-    selectOption() {
-      // console.log(`App.vue | Project location type: ${this.project.locationType.name}`)
     },
     addRecord(feature) {
       var myHeaders = new Headers()
@@ -355,8 +341,7 @@ export default {
 </script>
 
 <style>
-@import './assets/main.css';
-@import './assets/print.css';
-/* @import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons|Material+Icons+Outlined|Material+Icons+Round'; */
-@import './assets/quasar.prod.css';
+@import './assets/styles/main.css';
+@import './assets/styles/print.css';
+@import './assets/styles/quasar.prod.css';
 </style>
