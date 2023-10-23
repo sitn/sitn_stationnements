@@ -218,7 +218,7 @@ export default {
 
 <style>
 /* @import './../../node_modules/ol/ol.css'; */
-@import '../assets/ol.css';
+@import '../assets/styles/ol.css';
 
 #map {
     top: 0;
