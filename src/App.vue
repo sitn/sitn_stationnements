@@ -92,11 +92,12 @@ export default {
   watch: {
   },
   methods: {
-
+    /*
     updateProject(obj) {
-      // this.project = obj
-      // this.$nextTick(() => { this.$refs.form.validate() })
+      this.project = obj
+      this.$nextTick(() => { this.$refs.form.validate() })
     }
+    */
   }
 }
 </script>
