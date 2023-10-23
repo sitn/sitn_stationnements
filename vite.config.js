@@ -18,19 +18,5 @@ export default defineConfig({
       '@public/*': path.resolve(__dirname, 'public/*')
       */
     }
-  },
-  /*
-  rollup: {
-    external: ['pdfmake/build/pdfmake', 'pdfmake/build/vfs_fonts'],
-  },
-  */
-  /*
-  optimizeDeps: {
-    include: ['pdfmake/build/vfs_fonts'],
-  },
-  */
-  // optimizeDeps: { include: ['pdfmake/build/pdfmake', 'pdfmake/build/vfs_fonts'] },
-  // commonjsOptions: { exclude: ['pdfmake/build/pdfmake', 'pdfmake/build/vfs_fonts'] },
-  // commonjsOptions: { }, // Edit: 
-
+  }
 })
