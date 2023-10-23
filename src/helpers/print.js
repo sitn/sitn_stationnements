@@ -161,7 +161,8 @@ export const print = (project) => {
                                     { text: o.variables.filter((x) => x.type === 'reduction').map((x) => (`${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
                                     { text: o.netOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                     { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    { text: Math.ceil(o.reducedOutput[0]), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.reducedOutput[0], style: 'tableBody', alignment: 'right', noWrap: true },
+                                    /* { text: Math.ceil(o.reducedOutput[0]), style: 'tableBody', alignment: 'right', noWrap: true }, */
                                 ],
                                 ...o.factors.slice(1).map(
                                     (el, i) => [
@@ -173,7 +174,8 @@ export const print = (project) => {
                                         { text: o.variables.filter((x) => x.type === 'reduction').map((x) => (`${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
                                         { text: o.netOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                         { text: o.reducedOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                        { text: Math.ceil(o.reducedOutput[i + 1]), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.reducedOutput[i + 1], style: 'tableBody', alignment: 'right', noWrap: true },
+                                        /* { text: Math.ceil(o.reducedOutput[i + 1]), style: 'tableBody', alignment: 'right', noWrap: true }, */
                                     ]
                                 ),
                                 [
