@@ -17,14 +17,14 @@
         <!-- 1. LOCATION -->
         <FormSection title="1. Localisation du projet">
           <template v-slot:content>
-            <FormA :project="project" @updateProject="updateProject"></FormA>
+            <FormA :project="project" @updateProject=""></FormA>
           </template>
         </FormSection>
 
         <!-- 2. RAW PARKING NEEDS -->
         <FormSection title="2. Calcul du besoin brut (article 27 RELConstr.)">
           <template v-slot:content>
-            <FormB :project="project" @updateProject="updateProject"></FormB>
+            <FormB :project="project" @updateProject=""></FormB>
           </template>
         </FormSection>
 
