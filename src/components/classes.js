@@ -155,8 +155,8 @@ export const affectations = [
       { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0 },
     ],
     [
-      { name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => 0.015 * x[0] * (f / 100) * (1 - r / 100)) },
-      { name: "# places clients", formula: ((x, f = 100.0, r = 0.0) => 0.035 * x[0] * (f / 100) * (1 - r / 100)) }
+      { name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x[0] * (f / 100) * (1 - r / 100)) },
+      { name: "# places clients", formula: ((x, f = 100.0, r = 0.0) => 0.0001 * x[0] * (f / 100) * (1 - r / 100)) }
     ]
   ),
   new Affectation(
