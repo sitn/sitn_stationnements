@@ -180,7 +180,7 @@ export default {
                 })
 
                 // if there is only one location type, select it by default
-                console.log(store.project.loctypes.find(e => e.active))
+                // console.log(store.project.loctypes.find(e => e.active))
                 if (store.project.loctypes.filter(e => e.active).length === 1) {
                     store.project.locationType = store.project.loctypes.find(e => e.active)
                 }
