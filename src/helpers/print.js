@@ -185,7 +185,8 @@ export const print = (project) => {
                                     {},
                                     { text: o.totalNetOutput.toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                     { text: o.totalReducedOutput.toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-                                    { text: o.totalReducedOutputCeil.toFixed(0), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.totalReducedOutput.toFixed(0), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    /* { text: o.totalReducedOutputCeil.toFixed(0), style: 'tableBody', bold: true, alignment: 'right', noWrap: true }, */
                                 ],
                             ]
                             )
@@ -199,7 +200,8 @@ export const print = (project) => {
                             { text: '', style: 'tableHeader', alignment: 'left', noWrap: true },
                             { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
                             { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
-                            { text: project.affectations.filter(o => o.active && o.factors.length > 0).map((x) => x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0), style: 'tableHeader', alignment: 'right', noWrap: true },
+                            { text: Math.ceil(project.affectations.filter(o => o.active && o.factors.length > 0).map((x) => x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
+                            /*                             { text: project.affectations.filter(o => o.active && o.factors.length > 0).map((x) => x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0), style: 'tableHeader', alignment: 'right', noWrap: true }, */
                         ],
                     ]
                 },
