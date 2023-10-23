@@ -26,15 +26,16 @@
                                 <tr v-for="(subitem, iSub) in item.reducedOutput2">
                                     <td v-if="iSub === 0" :rowspan="item.factors.length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
+                                    <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
                             </template>
                             <tr>
-                                <td class="text-weight-bold">Total</td>
+                                <td class="text-weight-bold">Total (arrondi sup.)</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ this.project.affectations.filter(e => e.active).map((x) =>
-                                        x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0) }}
+                                    {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                                        x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
                                 </td>
                             </tr>
                         </tbody>
