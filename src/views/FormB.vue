@@ -175,7 +175,6 @@ export default {
             // console.log('FormB.vue: filled()')
             // console.log(`Has affectations: ${this.project.hasAffectation}`)
             // console.log(`LocationType: ${this.project.locationType !== null}`)
-
             return this.project.hasAffectation & (this.project.locationType !== null)
             // this.$emit('filled', this.filled);
 
@@ -236,9 +235,6 @@ export default {
             this.model.forEach(function (e) {
                 e.active = true
             })
-
-            // console.log('FromB.vue: select option')
-            // console.log(this.model)
 
             this.updateProject()
 
