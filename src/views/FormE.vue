@@ -95,10 +95,6 @@ export default {
 
     },
     mounted() {
-        fetch("/img/logo.svg")
-            .then(response => response.text())
-            .then(svg => { console.log(svg) })
-
         // console.log('FORM E - mounted')
         // console.log(this.project.affectations.filter(e => e.active).map(x => ({ name: x.name, value: x.reducedOutput })).flat(1))
     },
@@ -109,9 +105,6 @@ export default {
             return arr.flat(1).map(x => 2.834645 * x)
         },
         print() {
-
-            console.log(`window.location.origin: ${window.location.origin}`)
-            console.log(`window.location.href: ${window.location.href}`)
 
             let docDefinition = {
                 pageSize: 'A4',
