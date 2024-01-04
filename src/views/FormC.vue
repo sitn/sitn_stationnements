@@ -9,7 +9,7 @@
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-        <!-- <div>{{ this.factors }}</div><br> -->
+        <!-- <div>{{ this.outputs }}</div><br> -->
 
         <!-- INFOBOX  -->
         <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox" v-if="this.render">
@@ -64,7 +64,7 @@
 
             <!-- Housing and activity ratios input fields -->
             <div class="row q-col-gutter-none q-pa-sm q-my-sm bg-grey-2 rounded-borders">
-                <div class="col-xs-12 col-sm-6 q-pa-sm q-my-none" v-for="(item, key) in this.factors.values">
+                <div class="col-xs-12 col-sm-6 q-pa-sm q-my-none" v-for="(item, key) in this.outputs.values">
                     <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective" :min=item.min :max=item.max @update:model-value="check(item)" reactive-rules :rules="[val => validateRange(val, item.min, item.max)]" :disable="!this.project.affectations.filter((x) => (x.active)).map((x) => (x.type)).includes(item.label) || this.project.eco">
                         <template v-slot:label>
                             {{ item.label }} {{ this.project.eco === true ? `` : `(${item.min}% à ${item.max}% selon votre projet)` }}
@@ -82,25 +82,27 @@
                     <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                         <table>
+                            <thead>
+                                <tr>
+                                    <th>{{ item.name }}</th>
+                                    <th class="text-right"> &#215; {{ item.ordinaryReduction.toFixed(1) }}%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(output, key3) in item.outputs">
+                                    <td> {{ output.name }}</td>
+                                    <td class="bg-light-blue-1 text-right">
+                                        {{ item.netOutput[key3].toFixed(2) }}</td>
+                                </tr>
 
-                            <tr>
-                                <th>{{ item.name }}</th>
-                                <th class="text-right"> &#215; {{ item.ordinaryReduction.toFixed(1) }}%</th>
-                            </tr>
+                                <tr>
+                                    <td class="text-weight-bold">Besoin net total</td>
+                                    <td class="bg-light-blue-1 text-weight-bold text-right">
+                                        {{ item.totalNetOutput.toFixed(2) }}
+                                    </td>
 
-                            <tr v-for="(item3, key3) in item.factors">
-                                <td> {{ item3.name }}</td>
-                                <td class="bg-light-blue-1 text-right">
-                                    {{ item.netOutput[key3].toFixed(2) }}</td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-weight-bold">Besoin net total</td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ item.totalNetOutput.toFixed(2) }}
-                                </td>
-
-                            </tr>
+                                </tr>
+                            </tbody>
 
                         </table>
 
@@ -138,13 +140,13 @@ export default {
         render() {
             return (this.project.commune !== null) & (this.project.locationType !== null) & this.project.hasAffectation
         },
-        factors() {
+        outputs() {
 
-            // console.log(`FormC.vue: factors`)
+            // console.log(`FormC.vue: outputs`)
             if (this.project.commune === null || this.project.locationType === null) {
                 return null // "Commune and/or zone not selected"
             } else {
-                return this.project.commune.factors.find((e) => e.zone === this.project.locationType.name)
+                return this.project.commune.outputs.find((e) => e.zone === this.project.locationType.name)
             }
 
         },
@@ -156,9 +158,9 @@ export default {
             // console.log(`Eco: ${this.project.eco}`)
             if (this.project.eco) {
 
-                this.factors.values.map((x) => (x.effective = x.min))
-                if (this.factors.zone === "III") {
-                    this.factors.values.find((x) => (x.type === "housing")).effective = 50
+                this.outputs.values.map((x) => (x.effective = x.min))
+                if (this.outputs.zone === "III") {
+                    this.outputs.values.find((x) => (x.type === "housing")).effective = 50
                 }
                 this.updateLocationFactors()
             }
@@ -166,20 +168,20 @@ export default {
         },
         updateLocationFactors() {
 
-            // update factors in affectations
+            // update outputs in affectations
             this.project.affectations.forEach((e) => {
 
                 let item = e.variables.find((x) => x.type === 'reduction')
 
                 if (e.type === "Logement") {
 
-                    item.value = this.factors.values.find((x) => x.type === "housing").effective
+                    item.value = this.outputs.values.find((x) => x.type === "housing").effective
 
                 }
 
                 if (e.type === "Activité") {
 
-                    item.value = this.factors.values.find((x) => x.type === "activity").effective
+                    item.value = this.outputs.values.find((x) => x.type === "activity").effective
 
                 }
 
