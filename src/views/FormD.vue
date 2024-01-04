@@ -57,35 +57,36 @@
                     <div class="bg-white q-pa-md q-my-none rounded-borders">
 
                         <table>
+                            <thead>
+                                <tr>
+                                    <th>{{ affectation.name }}</th>
+                                    <th style="white-space: nowrap;">Réduction (-x%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(reduction, index) in affectation.variables.filter(e => e.type === 'special reduction')" :key="index">
+                                    <td>
+                                        <div class="text-weight-bold">{{ reduction.name }}</div>
+                                        <div class="text-caption">{{ reduction.description }}</div>
+                                    </td>
+                                    <td width="20%">
+                                        <q-input dense bg-color="white" outlined type="number" name="reduction.factor" v-model.number="reduction.value" :min=reduction.min :max=reduction.max @update:model-value="check(reduction)" reactive-rules :rules="[val => validateRange(val, reduction.min, reduction.max)]">
+                                            <template v-slot:prepend>
+                                                <div class="text-body2">-</div>
+                                            </template>
+                                            <template v-slot:append>
+                                                <div class="text-body2">%</div>
+                                            </template>
+                                        </q-input>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <th>{{ affectation.name }}</th>
-                                <th style="white-space: nowrap;">Réduction (-x%)</th>
-                            </tr>
-
-                            <tr v-for="(reduction, index) in affectation.variables.filter(e => e.type === 'special reduction')" :key="index">
-                                <td>
-                                    <div class="text-weight-bold">{{ reduction.name }}</div>
-                                    <div class="text-caption">{{ reduction.description }}</div>
-                                </td>
-                                <td width="20%">
-                                    <q-input dense bg-color="white" outlined type="number" name="reduction.factor" v-model.number="reduction.value" :min=reduction.min :max=reduction.max @update:model-value="check(reduction)" reactive-rules :rules="[val => validateRange(val, reduction.min, reduction.max)]">
-                                        <template v-slot:prepend>
-                                            <div class="text-body2">-</div>
-                                        </template>
-                                        <template v-slot:append>
-                                            <div class="text-body2">%</div>
-                                        </template>
-                                    </q-input>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-weight-bold">Total</td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">{{
-                                    (-affectation.specialReduction).toFixed(1) }}%</td>
-                            </tr>
-
+                                <tr>
+                                    <td class="text-weight-bold">Total</td>
+                                    <td class="bg-light-blue-1 text-weight-bold text-right">{{
+                                        (-affectation.specialReduction).toFixed(1) }}%</td>
+                                </tr>
+                            </tbody>
                         </table>
 
                     </div>
@@ -102,23 +103,25 @@
                     <div class="bg-white q-pa-md q-my-none rounded-borders">
 
                         <table>
-                            <tr>
-                                <th>{{ item.name }}</th>
-                                <th class="text-right">{{ (-item.specialReduction).toFixed(1) }}%</th>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th>{{ item.name }}</th>
+                                    <th class="text-right">{{ (-item.specialReduction).toFixed(1) }}%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(factor, key2) in item.outputs">
+                                    <td> {{ factor.name }}</td>
+                                    <td class="bg-light-blue-1 text-right">
+                                        {{ item.reducedOutput[key2].toFixed(2) }} </td>
+                                </tr>
 
-                            <tr v-for="(factor, key2) in item.factors">
-                                <td> {{ factor.name }}</td>
-                                <td class="bg-light-blue-1 text-right">
-                                    {{ item.reducedOutput[key2].toFixed(2) }} </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-weight-bold">Besoin net réduit total</td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">{{
-                                    item.totalReducedOutput.toFixed(2) }}</td>
-                            </tr>
-
+                                <tr>
+                                    <td class="text-weight-bold">Besoin net réduit total</td>
+                                    <td class="bg-light-blue-1 text-weight-bold text-right">{{
+                                        item.totalReducedOutput.toFixed(2) }}</td>
+                                </tr>
+                            </tbody>
                         </table>
 
                     </div>
