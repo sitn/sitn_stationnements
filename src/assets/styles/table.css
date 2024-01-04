@@ -3,26 +3,43 @@ table {
     border: none;
 }
 
+thead tr {
+    border-bottom: 2px solid black;
+}
+
+tbody tr {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+tbody tr:first-child {
+    border-top: none;
+    border-bottom: 1px solid black;
+}
+
+tbody tr:last-child {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+th {
+    border: none;
+    background-color: white;
+    /* background-color: rgb(238, 238, 238); */
+    color: black;
+}
+
+/*
 th {
     border: none;
     background-color: #455a64;
     color: white
 }
-
-tr {
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-}
-
-tr:last-child {
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-}
+*/
 
 td {
     border: none !important;
 }
-
 
 .blue-table {
     border-collapse: collapse;
