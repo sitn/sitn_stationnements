@@ -150,13 +150,13 @@ export const print = (project) => {
                             { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right' },
                         ],
                         ...project.affectations
-                            .filter(o => o.active && o.factors.length > 0)
+                            .filter(o => o.active && o.outputs.length > 0)
                             .map(o => [
                                 [
-                                    { rowSpan: o.factors.length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
-                                    { rowSpan: o.factors.length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
-                                    { rowSpan: o.factors.length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
-                                    { text: o.factors[0].name, style: 'tableBody', alignment: 'left' },
+                                    { rowSpan: o.outputs.length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
+                                    { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+                                    { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
+                                    { text: o.outputs[0].name, style: 'tableBody', alignment: 'left' },
                                     { text: o.output[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                     { text: o.variables.filter((x) => x.type === 'reduction').map((x) => (`${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
                                     { text: o.netOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
@@ -164,7 +164,7 @@ export const print = (project) => {
                                     { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                     /* { text: Math.ceil(o.reducedOutput[0]), style: 'tableBody', alignment: 'right', noWrap: true }, */
                                 ],
-                                ...o.factors.slice(1).map(
+                                ...o.outputs.slice(1).map(
                                     (el, i) => [
                                         {},
                                         {},
@@ -202,8 +202,8 @@ export const print = (project) => {
                             { text: '', style: 'tableHeader', alignment: 'left', noWrap: true },
                             { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
                             { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
-                            { text: Math.ceil(project.affectations.filter(o => o.active && o.factors.length > 0).map((x) => x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
-                            /*                             { text: project.affectations.filter(o => o.active && o.factors.length > 0).map((x) => x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0), style: 'tableHeader', alignment: 'right', noWrap: true }, */
+                            { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
+                            /*                             { text: project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0), style: 'tableHeader', alignment: 'right', noWrap: true }, */
                         ],
                     ]
                 },
