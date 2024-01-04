@@ -251,8 +251,6 @@ export default {
     mounted() {
         this.$nextTick(() => { this.$refs.form.validate() })
     },
-    updated() {
-    }
 }
 </script>
 
