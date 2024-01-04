@@ -84,28 +84,35 @@
 
         </div>
 
-        <q-form ref="form" greedy>
+        <!-- FORM -->
+        <q-form ref="form" greedy no-error-focus no-reset-focus>
 
             <div v-if="this.render" class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in this.project.affectations.filter(e => e.active)">
 
-                <label class="text-h7">
+                <div class="row q-col-gutter-sm q-py-xs">
+                    <label class="text-h7">
+                        <!-- {{ item.name }} -->
+                        <q-chip square color="black" text-color="white">
+                            {{ item.name }}
+                            <q-tooltip>
+                                {{ item.name }}
+                            </q-tooltip>
+                        </q-chip>
+                        <q-chip square :color="item.automatic ? 'blue' : 'orange'" text-color="white" :icon="item.automatic ? 'calculate' : 'article'">
+                            {{ item.automatic ? 'CALCUL AUTOMATIQUE' : 'CALCUL MANUEL CF. NORME VSS' }}
+                            <q-tooltip>
+                                {{ item.automatic ? 'Le calcul du besoin brute est automatique pour cette affectation' : 'Le calcul du besoin brute doit être fait manuellement selon les formules du tableau 1 de la norme VSS 40 281 (2019) pour cette affectation' }}
+                            </q-tooltip>
+                        </q-chip>
 
-                    <q-chip dense square :color="item.automatic ? 'blue' : 'orange'" text-color="white" :icon="item.automatic ? 'calculate' : 'article'">
-                        {{ item.automatic ? 'AUTO' : 'VSS' }}
-                        <q-tooltip>
-                            {{ item.automatic ? 'Le calcul du besoin brute est automatique pour cette affectation' : 'Le calcul du besoin brute doit être fait manuellement selon les formules du tableau 1 de la norme VSS 40 281 (2019) pour cette affectation' }}
-                        </q-tooltip>
-                    </q-chip>
-                    {{ item.name }}
-                </label>
+                    </label>
+                </div>
 
                 <div class="row q-col-gutter-sm q-py-xs">
 
-                    <!-- input fields -->
+                    <!-- INPUT FIELDS -->
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3" v-for="(item2, key2) in item.variables.filter((x) => x.type === 'measurement')">
                         <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item2.value" :min=item2.min :max=item2.max @update:model-value="check(item2)" :rules="[val => validatePositive(val)]">
-                            <!-- :hint="`${item2.min} ≥ x ≤ ${item2.max}`" -->
-                            <!-- :rules="[validatePositive]" -->
                             <template v-slot:label>
                                 {{ item2.name }}
                             </template>
@@ -122,21 +129,21 @@
                     </div>
 
                     <!-- output fields -->
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 self-end" v-for="(item3, key3) in item.factors">
+                    <!-- 
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 self-end" v-for="(output, key3) in item.outputs">
                         <q-input bg-color="light-blue-1" outlined label="" type="number" name="" :model-value="(item.output[key3]).toFixed(2)" readonly hint="">
                             <template v-slot:label>
-                                {{ item3.name }} <!-- (key: {{ key3 }}) -->
-                                <!-- 
-                                In: {{ item.variables.map(x => x.value) }} |
-                                Out: {{ item3.formula(item.variables.map(x => x.value), 1.0) }}
-                                -->
+                                {{ output.name }}
+                            </template>
+                            <template v-slot:prepend>
+                                <q-icon :name=output.icon />
                             </template>
                         </q-input>
-
                     </div>
+                    -->
 
-                    <div>
-                        <q-btn round flat color="grey" name="delete" @click="deleteItem(item)" icon="delete"></q-btn>
+                    <div class="col">
+                        <q-btn round flat color="grey" name="delete" @click="deleteItem(item)" icon="delete" class="float-right"></q-btn>
                     </div>
 
                 </div>
@@ -144,6 +151,89 @@
             </div>
 
         </q-form>
+
+        <!-- SUMMARY TABLES -->
+        <div class="row" v-if="this.render">
+
+            <!-- CAR PARKINGS SUMMARY TABLE -->
+            <div id="summary-container-1" class="col-xs-12 col-sm-12 col-md-6">
+
+
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                    <table id="summary-table">
+                        <caption class="text-subtitle1">Stationnements voitures</caption>
+                        <thead>
+                            <tr>
+                                <th>Affectation</th>
+                                <th>Type de place</th>
+                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_car" /></th>
+                                <!-- <th class="text-right"><q-icon name="directions_car" size="sm" /></th> -->
+                                <!-- <th class="text-right"># Places</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                <tr v-for="(subitem, iSub) in item.rawOutput.filter(e => e.group === 'car')">
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'car').length" class="">{{ item.name }}</td>
+                                    <td>{{ subitem.name }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
+                                </tr>
+                            </template>
+                            <tr>
+                                <td class="text-weight-bold">Total</td>
+                                <td class="text-weight-bold"></td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    <!-- {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                                        x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }} -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- BICYCLE PARKINGS SUMMARY TABLE -->
+            <div id="summary-container-2" class="col-xs-12 col-sm-12 col-md-6">
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                    <table id="summary-table">
+                        <caption class="text-subtitle1">Stationnements vélos</caption>
+                        <thead>
+                            <tr>
+                                <th>Affectation</th>
+                                <th>Type de place</th>
+                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_bike" /></th>
+                                <!-- <th class="text-right"><q-icon name="directions_bike" size="sm" /></th> -->
+                                <!-- <th class="text-right"># Places</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                <tr v-for="(subitem, iSub) in item.rawOutput.filter(e => e.group === 'bicycle')">
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">{{ item.name }}</td>
+                                    <td>{{ subitem.name }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
+                                </tr>
+                            </template>
+
+                            <tr>
+                                <td class="text-weight-bold">Total</td>
+                                <td class="text-weight-bold"></td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    <!-- {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                                        x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }} -->
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 </template>
@@ -171,18 +261,11 @@ export default {
             return (this.project.commune !== null) & (this.project.locationType !== null)
         },
         filled() {
-
-            // console.log('FormB.vue: filled()')
-            // console.log(`Has affectations: ${this.project.hasAffectation}`)
-            // console.log(`LocationType: ${this.project.locationType !== null}`)
             return this.project.hasAffectation & (this.project.locationType !== null)
-            // this.$emit('filled', this.filled);
-
         }
     },
     watch: {
         filled(val) {
-            // console.log(`FormB.vue: filled = ${val}`)
             this.$emit('filled', val)
         }
     },
@@ -264,10 +347,6 @@ export default {
                 }
             }
         }
-    },
-    mounted() {
-        // console.log('FORM B - Affectations')
-        // console.log(this.project.affectations)
     },
     updated() {
         this.validateForm()
