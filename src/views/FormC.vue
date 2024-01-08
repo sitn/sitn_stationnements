@@ -11,7 +11,7 @@
 
         <!-- <div>{{ this.outputs }}</div><br> -->
 
-        <!-- INFOBOX  -->
+        <!-- INFOBOX -->
         <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox" v-if="this.render">
 
             <q-card-section horizontal>
@@ -47,7 +47,8 @@
 
         </q-card>
 
-        <q-form ref="form" greedy v-if="this.render">
+        <!-- FORM -->
+        <q-form ref="form" greedy no-error-focus no-reset-focus v-if="this.render">
 
             <!-- Eco neighbourhoud checkbox field -->
             <div class="row q-pa-sm q-my-sm bg-grey-2 rounded-borders">
@@ -62,8 +63,11 @@
                 </q-item>
             </div>
 
+            <!-- <div>{{ this.project.commune }}</div> -->
+
             <!-- Housing and activity ratios input fields -->
             <div class="row q-col-gutter-none q-pa-sm q-my-sm bg-grey-2 rounded-borders">
+
                 <div class="col-xs-12 col-sm-6 q-pa-sm q-my-none" v-for="(item, key) in this.outputs.values">
                     <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective" :min=item.min :max=item.max @update:model-value="check(item)" reactive-rules :rules="[val => validateRange(val, item.min, item.max)]" :disable="!this.project.affectations.filter((x) => (x.active)).map((x) => (x.type)).includes(item.label) || this.project.eco">
                         <template v-slot:label>
@@ -74,45 +78,228 @@
                         </template>
                     </q-input>
                 </div>
+
             </div>
 
-            <!-- Net needs tables  -->
-            <div class="row">
-                <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6" v-for="(item, key) in this.project.affectations.filter(e => e.active)">
-                    <div class="bg-white q-pa-md q-my-sm rounded-borders">
+        </q-form>
 
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>{{ item.name }}</th>
-                                    <th class="text-right"> &#215; {{ item.ordinaryReduction.toFixed(1) }}%</th>
+        <!-- COMPUTATION SUMMARY TABLES -->
+        <div class="row" v-if="this.render">
+
+            <!-- CAR PARKINGS SUMMARY TABLE -->
+            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                    <table id="summary-table">
+                        <caption class="text-subtitle1">Stationnements voitures</caption>
+                        <thead>
+                            <tr>
+                                <th>Affectation</th>
+                                <th>Facteur</th>
+                                <th>Type de place</th>
+                                <!-- <th class="text-right"><q-icon name="directions_car" size="sm" /></th> -->
+                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_car" /></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                <tr v-for="(subitem, iSub) in item.netOutput2.filter(e => e.group === 'car')">
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'car').length" class="">{{ item.name }}</td>
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'car').length" class="">&#215; {{ item.ordinaryReduction.toFixed(1) }}% </td>
+                                    <td>{{ subitem.name }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                    <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(output, key3) in item.outputs">
-                                    <td> {{ output.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">
-                                        {{ item.netOutput[key3].toFixed(2) }}</td>
+                            </template>
+                            <tr>
+                                <td class="text-weight-bold">Besoin net total</td>
+                                <td class="text-weight-bold"></td>
+                                <td class="text-weight-bold"></td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ this.project.getNetNeeds('car').toFixed(3) }}
+                                    <!-- 
+            {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+            -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- BICYCLE PARKINGS SUMMARY TABLE -->
+            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                    <table id="summary-table">
+                        <caption class="text-subtitle1">Stationnements vélos (y.c. électriques &lt; 1kW)</caption>
+                        <thead>
+                            <tr>
+                                <th>Affectation</th>
+                                <th>Facteur</th>
+                                <th>Type de place</th>
+                                <!-- <th class="text-right"><q-icon name="directions_car" size="sm" /></th> -->
+                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_bike" /></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                <tr v-for="(subitem, iSub) in item.netOutput2.filter(e => e.group === 'bicycle')">
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">{{ item.name }}</td>
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">Aucun</td> <!--&#215; {{ 100.0 }}%  -->
+                                    <td>{{ subitem.name }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                    <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
+                            </template>
+                            <tr>
+                                <td class="text-weight-bold">Besoin net total</td>
+                                <td class="text-weight-bold"></td>
+                                <td class="text-weight-bold"></td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ this.project.getNetNeeds('bicycle').toFixed(3) }}
 
-                                <tr>
-                                    <td class="text-weight-bold">Besoin net total</td>
-                                    <td class="bg-light-blue-1 text-weight-bold text-right">
-                                        {{ item.totalNetOutput.toFixed(2) }}
-                                    </td>
+                                    <!-- 
+            {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+            -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
+            </div>
+
+
+            <!-- MOTORCYCLE PARKINGS SUMMARY TABLE -->
+            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                    <table id="summary-table">
+                        <caption class="text-subtitle1">Stationnements deux-roues motorisés</caption>
+                        <thead>
+                            <tr>
+                                <th>Affectation</th>
+                                <th>Facteur</th>
+                                <th>Type de place</th>
+                                <!-- <th class="text-right"><q-icon name="directions_car" size="sm" /></th> -->
+                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="motorcycle" /></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                <tr v-for="(subitem, iSub) in item.netOutput2.filter(e => e.group === 'motorcycle')">
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'motorcycle').length" class="">{{ item.name }}</td>
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'motorcycle').length" class="">&#215; {{ item.ordinaryReduction.toFixed(1) }}%</td>
+                                    <td>{{ subitem.name }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                    <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
-                            </tbody>
+                            </template>
+                            <tr>
+                                <td class="text-weight-bold">Besoin net total</td>
+                                <td class="text-weight-bold"></td>
+                                <td class="text-weight-bold"></td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ this.project.getNetNeeds('motorcycle').toFixed(3) }}
+                                    <!-- 
+            {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+            -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                        </table>
+            </div>
 
-                    </div>
+
+            <!-- CHARGING STATIONS SUMMARY TABLE -->
+            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                    <table id="summary-table">
+                        <caption class="text-subtitle1">Équipements pour véhicules électriques</caption>
+                        <thead>
+                            <tr>
+                                <th>Affectation</th>
+                                <th>Facteur</th>
+                                <th>Type d'équipement</th>
+                                <!-- <th class="text-right"><q-icon name="directions_car" size="sm" /></th> -->
+                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="ev_station" /></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                <tr v-for="(subitem, iSub) in item.netOutput2.filter(e => e.group === 'station')">
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">{{ item.name }}</td>
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">&#215; {{ item.ordinaryReduction.toFixed(1) }}%</td>
+                                    <td>{{ subitem.name }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                    <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
+                                </tr>
+                            </template>
+                            <tr>
+                                <td class="text-weight-bold">Besoin net total</td>
+                                <td class="text-weight-bold"></td>
+                                <td class="text-weight-bold"></td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ this.project.getNetNeeds('station').toFixed(3) }}
+                                    <!-- 
+                                    {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                                        x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+                                    -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Net needs tables  -->
+        <!--
+        <div class="row">
+            <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6" v-for="(item, key) in this.project.affectations.filter(e => e.active)">
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>{{ item.name }}</th>
+                                <th class="text-right"> &#215; {{ item.ordinaryReduction.toFixed(1) }}%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(output, key3) in item.outputs">
+                                <td> {{ output.name }}</td>
+                                <td class="bg-light-blue-1 text-right">
+                                    {{ item.netOutput[key3].toFixed(2) }}</td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-weight-bold">Besoin net total</td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ item.totalNetOutput.toFixed(2) }}
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
 
                 </div>
 
             </div>
 
-        </q-form>
+        </div>
+        -->
 
     </div>
 </template>
@@ -143,10 +330,11 @@ export default {
         outputs() {
 
             // console.log(`FormC.vue: outputs`)
+
             if (this.project.commune === null || this.project.locationType === null) {
                 return null // "Commune and/or zone not selected"
             } else {
-                return this.project.commune.outputs.find((e) => e.zone === this.project.locationType.name)
+                return this.project.commune.factors.find((e) => e.zone === this.project.locationType.name)
             }
 
         },
