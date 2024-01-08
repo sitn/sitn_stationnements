@@ -2,7 +2,7 @@
   <!-- HEADER -->
   <q-layout view="hHh lpR fFf" class="shadow-2 rounded-borders">
     <q-header>
-      <q-toolbar class="bg-white text-black">
+      <q-toolbar class="bg-white text-black custom-header">
 
         <q-toolbar-title class="text-center">CALCUL DES STATIONNEMENTS ET ÉQUIPEMENTS</q-toolbar-title>
 
