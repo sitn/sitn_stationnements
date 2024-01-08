@@ -152,7 +152,7 @@
 
         </q-form>
 
-        <!-- SUMMARY TABLES -->
+        <!-- COMPUTATION SUMMARY TABLES -->
         <div class="row" v-if="this.render">
 
             <!-- CAR PARKINGS SUMMARY TABLE -->
@@ -177,13 +177,15 @@
                                 <tr v-for="(subitem, iSub) in item.rawOutput.filter(e => e.group === 'car')">
                                     <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'car').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                 </tr>
                             </template>
                             <tr>
-                                <td class="text-weight-bold">Total</td>
+                                <td class="text-weight-bold">Besoin brut total</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ this.project.getRawNeeds('car').toFixed(3) }}
+
                                     <!-- {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
                                         x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }} -->
                                 </td>
@@ -199,7 +201,7 @@
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
-                        <caption class="text-subtitle1">Stationnements vélos</caption>
+                        <caption class="text-subtitle1">Stationnements vélos (y.c. électriques &lt; 1kW)</caption>
                         <thead>
                             <tr>
                                 <th>Affectation</th>
@@ -214,16 +216,91 @@
                                 <tr v-for="(subitem, iSub) in item.rawOutput.filter(e => e.group === 'bicycle')">
                                     <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                 </tr>
                             </template>
 
                             <tr>
-                                <td class="text-weight-bold">Total</td>
+                                <td class="text-weight-bold">Besoin brut total</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    <!-- {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
-                                        x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }} -->
+                                    {{ this.project.getRawNeeds('bicycle').toFixed(3) }}
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+            <!-- MOTORCYCLE PARKINGS SUMMARY TABLE -->
+            <div id="summary-container-2" class="col-xs-12 col-sm-12 col-md-6">
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                    <table id="summary-table">
+                        <caption class="text-subtitle1">Stationnements deux-roues motorisés</caption>
+                        <thead>
+                            <tr>
+                                <th>Affectation</th>
+                                <th>Type de place</th>
+                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="motorcycle" /></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                <tr v-for="(subitem, iSub) in item.rawOutput.filter(e => e.group === 'motorcycle')">
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'motorcycle').length" class="">{{ item.name }}</td>
+                                    <td>{{ subitem.name }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                </tr>
+                            </template>
+
+                            <tr>
+                                <td class="text-weight-bold">Besoin brut total</td>
+                                <td class="text-weight-bold"></td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ this.project.getRawNeeds('motorcycle').toFixed(3) }}
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+            <!-- CHARGING STATIONS SUMMARY TABLE -->
+            <div id="summary-container-2" class="col-xs-12 col-sm-12 col-md-6">
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                    <table id="summary-table">
+                        <caption class="text-subtitle1">Équipements pour véhicules électriques</caption>
+                        <thead>
+                            <tr>
+                                <th>Affectation</th>
+                                <th>Type d'équipement</th>
+                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="ev_station" /></th>
+                                <!-- <th class="text-right"><q-icon name="directions_bike" size="sm" /></th> -->
+                                <!-- <th class="text-right"># Places</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                <tr v-for="(subitem, iSub) in item.rawOutput.filter(e => e.group === 'station')">
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">{{ item.name }}</td>
+                                    <td>{{ subitem.name }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                </tr>
+                            </template>
+
+                            <tr>
+                                <td class="text-weight-bold">Besoin brut total</td>
+                                <td class="text-weight-bold"></td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ this.project.getRawNeeds('station').toFixed(3) }}
                                 </td>
                             </tr>
 
