@@ -190,7 +190,6 @@ body {
 }
 
 /* PROTOYPE BANNER */
-/*
 body:after {
   content: "Prototype";
   position: fixed;
@@ -209,7 +208,7 @@ body:after {
   transform: rotate(-45deg);
   z-index: 9999;
 }
-*/
+
 
 #q-app {
   width: 100%;
@@ -278,6 +277,11 @@ body:after {
   background: rgb(0 151 118) !important;
 }
 
+
+/* APP HEADER */
+.custom-header {
+  border-bottom: 1px solid black;
+}
 
 /* TABLES */
 
