@@ -20,6 +20,8 @@
         -->
 
         <div v-if="this.render">
+
+            <!-- INFOBOX  -->
             <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox">
 
                 <q-card-section horizontal>
@@ -98,6 +100,188 @@
             <q-separator class="q-my-md" />
 
             <div class="text-h6">Besoin net réduit</div>
+
+
+
+            <!-- COMPUTATION SUMMARY TABLES -->
+            <div class="row" v-if="this.render">
+
+                <!-- CAR PARKINGS SUMMARY TABLE -->
+                <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                        <table id="summary-table">
+                            <caption class="text-subtitle1">Stationnements voitures</caption>
+                            <thead>
+                                <tr>
+                                    <th>Affectation</th>
+                                    <th>Réduction</th>
+                                    <th>Type de place</th>
+                                    <!-- <th class="text-right"><q-icon name="directions_car" size="sm" /></th> -->
+                                    <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_car" /></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                    <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'car')">
+                                        <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'car').length" class="">{{ item.name }}</td>
+                                        <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'car').length" class="">{{ (-item.specialReduction).toFixed(1) }}% </td>
+                                        <td>{{ subitem.name }}</td>
+                                        <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                        <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
+                                    </tr>
+                                </template>
+                                <tr>
+                                    <td class="text-weight-bold">Besoin net réduit total</td>
+                                    <td class="text-weight-bold"></td>
+                                    <td class="text-weight-bold"></td>
+                                    <td class="bg-light-blue-1 text-weight-bold text-right">
+                                        {{ this.project.getReducedNeeds('car').toFixed(3) }}
+                                        <!-- 
+                                        {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                                            x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+                                        -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- BICYCLE PARKINGS SUMMARY TABLE -->
+                <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                        <table id="summary-table">
+                            <caption class="text-subtitle1">Stationnements vélos (y.c. électriques &lt; 1kW)</caption>
+                            <thead>
+                                <tr>
+                                    <th>Affectation</th>
+                                    <th>Réduction</th>
+                                    <th>Type de place</th>
+                                    <!-- <th class="text-right"><q-icon name="directions_car" size="sm" /></th> -->
+                                    <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_bike" /></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                    <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'bicycle')">
+                                        <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">{{ item.name }}</td>
+                                        <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">Aucune</td> <!-- {{ (-item.specialReduction).toFixed(1) }}%  -->
+                                        <td>{{ subitem.name }}</td>
+                                        <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                        <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
+                                    </tr>
+                                </template>
+                                <tr>
+                                    <td class="text-weight-bold">Besoin net réduit total</td>
+                                    <td class="text-weight-bold"></td>
+                                    <td class="text-weight-bold"></td>
+                                    <td class="bg-light-blue-1 text-weight-bold text-right">
+                                        {{ this.project.getReducedNeeds('bicycle').toFixed(3) }}
+                                        <!-- 
+{{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+    x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+-->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <!-- MOTORCYCLE PARKINGS SUMMARY TABLE -->
+                <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                        <table id="summary-table">
+                            <caption class="text-subtitle1">Stationnements deux-roues motorisés</caption>
+                            <thead>
+                                <tr>
+                                    <th>Affectation</th>
+                                    <th>Réduction</th>
+                                    <th>Type de place</th>
+                                    <!-- <th class="text-right"><q-icon name="directions_car" size="sm" /></th> -->
+                                    <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="motorcycle" /></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                    <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'motorcycle')">
+                                        <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'motorcycle').length" class="">{{ item.name }}</td>
+                                        <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'motorcycle').length" class="">{{ (-item.specialReduction).toFixed(1) }}%</td>
+                                        <td>{{ subitem.name }}</td>
+                                        <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                        <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
+                                    </tr>
+                                </template>
+                                <tr>
+                                    <td class="text-weight-bold">Besoin net réduit total</td>
+                                    <td class="text-weight-bold"></td>
+                                    <td class="text-weight-bold"></td>
+                                    <td class="bg-light-blue-1 text-weight-bold text-right">
+                                        {{ this.project.getReducedNeeds('motorcycle').toFixed(3) }}
+                                        <!-- 
+                                        {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                                            x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+                                        -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- CHARGING STATIONS SUMMARY TABLE -->
+                <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                        <table id="summary-table">
+                            <caption class="text-subtitle1">Équipements pour véhicules électriques</caption>
+                            <thead>
+                                <tr>
+                                    <th>Affectation</th>
+                                    <th>Réduction</th>
+                                    <th>Type d'équipement</th>
+                                    <!-- <th class="text-right"><q-icon name="directions_car" size="sm" /></th> -->
+                                    <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="ev_station" /></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                    <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'station')">
+                                        <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">{{ item.name }}</td>
+                                        <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">{{ (-item.specialReduction).toFixed(1) }}%</td>
+                                        <td>{{ subitem.name }}</td>
+                                        <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                        <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
+                                    </tr>
+                                </template>
+                                <tr>
+                                    <td class="text-weight-bold">Besoin net réduit total</td>
+                                    <td class="text-weight-bold"></td>
+                                    <td class="text-weight-bold"></td>
+                                    <td class="bg-light-blue-1 text-weight-bold text-right">
+                                        {{ this.project.getReducedNeeds('station').toFixed(3) }}
+                                        <!-- 
+                                        {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                                            x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+                                        -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!--
             <div class="row">
                 <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6" v-for="(item, key) in this.project.affectations.filter(e => e.active)">
                     <div class="bg-white q-pa-md q-my-none rounded-borders">
@@ -129,6 +313,8 @@
                 </div>
 
             </div>
+        -->
+
 
         </div>
     </div>
