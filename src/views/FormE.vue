@@ -36,7 +36,7 @@
                                 <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'car')">
                                     <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'car').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                     <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
                             </template>
@@ -44,8 +44,11 @@
                                 <td class="text-weight-bold">Total (arrondi sup.)</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ Math.ceil(this.project.getReducedNeeds('car')) }}
+                                    <!-- 
                                     {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
                                         x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+                                    -->
                                 </td>
                             </tr>
                         </tbody>
@@ -75,7 +78,7 @@
                                 <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'bicycle')">
                                     <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                     <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
                             </template>
@@ -83,8 +86,11 @@
                                 <td class="text-weight-bold">Total (arrondi sup.)</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ Math.ceil(this.project.getReducedNeeds('bicycle')) }}
+                                    <!-- 
                                     {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
                                         x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+                                    -->
                                 </td>
                             </tr>
                         </tbody>
@@ -113,7 +119,7 @@
                                 <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'motorcycle')">
                                     <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'motorcycle').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                     <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
                             </template>
@@ -121,8 +127,11 @@
                                 <td class="text-weight-bold">Total (arrondi sup.)</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ Math.ceil(this.project.getReducedNeeds('motorcycle')) }}
+                                    <!-- 
                                     {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
                                         x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+                                    -->
                                 </td>
                             </tr>
                         </tbody>
@@ -137,7 +146,7 @@
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
-                        <caption class="text-subtitle1">Equipements pour véhicules électriques</caption>
+                        <caption class="text-subtitle1">Équipements pour véhicules électriques</caption>
                         <thead>
                             <tr>
                                 <th>Affectation</th>
@@ -151,7 +160,7 @@
                                 <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'station')">
                                     <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                     <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
                             </template>
@@ -159,8 +168,11 @@
                                 <td class="text-weight-bold">Total (arrondi sup.)</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ Math.floor(this.project.getReducedNeeds('station')) }}
+                                    <!-- 
                                     {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
                                         x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+                                    -->
                                 </td>
                             </tr>
                         </tbody>
