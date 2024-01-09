@@ -168,7 +168,7 @@
                                 <template v-for="item in this.project.affectations.filter(e => e.active)">
                                     <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'bicycle')">
                                         <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">{{ item.name }}</td>
-                                        <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">Aucune</td> <!-- {{ (-item.specialReduction).toFixed(1) }}%  -->
+                                        <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">Non applicable</td> <!-- {{ (-item.specialReduction).toFixed(1) }}%  -->
                                         <td>{{ subitem.name }}</td>
                                         <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                         <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
