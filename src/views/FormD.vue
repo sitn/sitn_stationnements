@@ -54,7 +54,6 @@
             <div class="text-h6">Liste des facteurs de réduction </div>
             <div class="row">
                 <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12" v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.variables.filter((x) => x.type === 'special reduction').length > 0)">
-                    <!-- e => e.valid && e.reductions.length > 0 -->
 
                     <div class="bg-white q-pa-md q-my-none rounded-borders">
 
@@ -102,12 +101,11 @@
             <div class="text-h6">Besoin net réduit</div>
 
 
-
             <!-- COMPUTATION SUMMARY TABLES -->
             <div class="row" v-if="this.render">
 
                 <!-- CAR PARKINGS SUMMARY TABLE -->
-                <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+                <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                     <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                         <table id="summary-table">
@@ -150,7 +148,7 @@
                 </div>
 
                 <!-- BICYCLE PARKINGS SUMMARY TABLE -->
-                <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+                <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                     <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                         <table id="summary-table">
@@ -181,9 +179,9 @@
                                     <td class="bg-light-blue-1 text-weight-bold text-right">
                                         {{ this.project.getReducedNeeds('bicycle').toFixed(3) }}
                                         <!-- 
-{{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
-    x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
--->
+                                        {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                                            x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+                                        -->
                                     </td>
                                 </tr>
                             </tbody>
@@ -194,7 +192,7 @@
 
 
                 <!-- MOTORCYCLE PARKINGS SUMMARY TABLE -->
-                <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+                <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                     <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                         <table id="summary-table">
@@ -237,7 +235,7 @@
                 </div>
 
                 <!-- CHARGING STATIONS SUMMARY TABLE -->
-                <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+                <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                     <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                         <table id="summary-table">
@@ -280,41 +278,6 @@
                 </div>
 
             </div>
-
-            <!--
-            <div class="row">
-                <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6" v-for="(item, key) in this.project.affectations.filter(e => e.active)">
-                    <div class="bg-white q-pa-md q-my-none rounded-borders">
-
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>{{ item.name }}</th>
-                                    <th class="text-right">{{ (-item.specialReduction).toFixed(1) }}%</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(factor, key2) in item.outputs">
-                                    <td> {{ factor.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">
-                                        {{ item.reducedOutput[key2].toFixed(2) }} </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-weight-bold">Besoin net réduit total</td>
-                                    <td class="bg-light-blue-1 text-weight-bold text-right">{{
-                                        item.totalReducedOutput.toFixed(2) }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                </div>
-
-            </div>
-        -->
-
 
         </div>
     </div>
