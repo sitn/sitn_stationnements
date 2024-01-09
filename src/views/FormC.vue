@@ -87,7 +87,7 @@
         <div class="row" v-if="this.render">
 
             <!-- CAR PARKINGS SUMMARY TABLE -->
-            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
@@ -118,9 +118,9 @@
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ this.project.getNetNeeds('car').toFixed(3) }}
                                     <!-- 
-            {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
-                x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
-            -->
+                                    {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
+                                        x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
+                                    -->
                                 </td>
                             </tr>
                         </tbody>
@@ -130,7 +130,7 @@
             </div>
 
             <!-- BICYCLE PARKINGS SUMMARY TABLE -->
-            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
@@ -175,7 +175,7 @@
 
 
             <!-- MOTORCYCLE PARKINGS SUMMARY TABLE -->
-            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
@@ -219,7 +219,7 @@
 
 
             <!-- CHARGING STATIONS SUMMARY TABLE -->
-            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
@@ -262,44 +262,6 @@
             </div>
 
         </div>
-
-
-        <!-- Net needs tables  -->
-        <!--
-        <div class="row">
-            <div class="q-pa-md q-ma-none col-xs-12 col-sm-6 col-md-6" v-for="(item, key) in this.project.affectations.filter(e => e.active)">
-                <div class="bg-white q-pa-md q-my-sm rounded-borders">
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>{{ item.name }}</th>
-                                <th class="text-right"> &#215; {{ item.ordinaryReduction.toFixed(1) }}%</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(output, key3) in item.outputs">
-                                <td> {{ output.name }}</td>
-                                <td class="bg-light-blue-1 text-right">
-                                    {{ item.netOutput[key3].toFixed(2) }}</td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-weight-bold">Besoin net total</td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ item.totalNetOutput.toFixed(2) }}
-                                </td>
-                            </tr>
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-        </div>
-        -->
 
     </div>
 </template>
@@ -377,15 +339,15 @@ export default {
 
         },
         validateRange(val, min, max) {
-            let isValid = val !== null && val >= min && val <= max
+            let isValid = val !== null && val !== '' && val >= min && val <= max
             if (isValid === false) {
                 val = null
             }
-
+            let msg
             if (max === Infinity) {
-                let msg = `Veuillez entrer une valeur supérieure à ${min}`
+                msg = `Veuillez entrer une valeur supérieure à ${min}`
             } else {
-                let msg = `Veuillez entrer une valeur entre ${min} et ${max}`
+                msg = `Veuillez entrer une valeur entre ${min} et ${max}`
             }
             return isValid || `Veuillez entrer une valeur entre ${min} et ${max} selon votre projet`
         },
