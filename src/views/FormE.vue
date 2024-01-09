@@ -18,7 +18,7 @@
         <div class="row" v-if="this.render">
 
             <!-- CAR PARKINGS SUMMARY TABLE -->
-            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
@@ -60,7 +60,7 @@
 
 
             <!-- BICYCLE PARKINGS SUMMARY TABLE -->
-            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
@@ -101,7 +101,7 @@
 
 
             <!-- MOTORCYCLE PARKINGS SUMMARY TABLE -->
-            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
@@ -142,7 +142,7 @@
 
 
             <!-- CHARGING STATIONS SUMMARY TABLE -->
-            <div id="summary-container" class="col-xs-12 col-sm-6 col-md-6">
+            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
@@ -165,7 +165,7 @@
                                 </tr>
                             </template>
                             <tr>
-                                <td class="text-weight-bold">Total (arrondi sup.)</td>
+                                <td class="text-weight-bold">Total (arrondi inf.)</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ Math.floor(this.project.getReducedNeeds('station')) }}
