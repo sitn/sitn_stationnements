@@ -1,8 +1,5 @@
 <template>
-    <q-select outlined bg-color="white" v-model="model" autofocus use-input hide-selected input-debounce="0"
-        :options="options" option-label="features.properties.label" option-value="features.id"
-        @update:model-value="selectOption()" @filter="fetchSources" label="N° de parcelle ou EGRID"
-        hint="Ajouter une ou plusieurs parcelles à la liste" :disable="!this.project.commune">
+    <q-select outlined bg-color="white" v-model="model" autofocus use-input hide-selected input-debounce="0" :options="options" option-label="features.properties.label" option-value="features.id" @update:model-value="selectOption()" @filter="fetchSources" label="N° de parcelle ou EGRID" hint="Ajouter une ou plusieurs parcelles à la liste" :disable="!this.project.commune">
         <template v-slot:prepend>
             <q-icon name="search" @click.stop.prevent></q-icon>
         </template>
@@ -57,7 +54,7 @@ export default {
             if (this.model !== null) {
 
                 // add item
-                console.log(`Search.vue | Option selected: ${this.model.properties.label}`);
+                // console.log(`Search.vue | Option selected: ${this.model.properties.label}`);
 
                 // check if value is already in list
                 this.$emit('addOption', this.model);
