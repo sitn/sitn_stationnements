@@ -101,7 +101,7 @@ export default {
     methods: {
         zoomTo(id) {
 
-            console.log(`Map.vue | Focus on item with id=${id}`)
+            // console.log(`Map.vue | Focus on item with id=${id}`)
             const view = this.olMap.getView()
             const source = this.vectorLayer.getSource()
             const features = toRaw(source.getFeatures())
