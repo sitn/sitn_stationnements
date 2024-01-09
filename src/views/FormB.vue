@@ -111,14 +111,14 @@
                 <div class="row q-col-gutter-sm q-py-xs">
 
                     <!-- INPUT FIELDS -->
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3" v-for="(item2, key2) in item.variables.filter((x) => x.type === 'measurement')">
-                        <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item2.value" :min=item2.min :max=item2.max @update:model-value="check(item2)" :rules="[val => validatePositive(val)]">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3" v-for="(variable, key2) in item.variables.filter((x) => x.type === 'measurement')">
+                        <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="variable.value" :min=variable.min :max=variable.max @update:model-value="check(variable)" :rules="[val => validateRange(val, variable.min, variable.max)]" :hint=variable.hint> <!-- :rules="[val => validatePositive(val)]" [val => validateRange(val, variable.min, variable.max)]-->
                             <template v-slot:label>
-                                {{ item2.name }}
+                                {{ variable.name }}
                             </template>
 
                             <template v-slot:append>
-                                <div class="text-body2" v-html="item2.unit"></div>
+                                <div class="text-body2" v-html="variable.unit"></div>
                             </template>
 
                             <template v-slot:hint>
@@ -351,14 +351,15 @@ export default {
             return val !== null && val !== '' && val > 0.0 || "Veuillez entrer une valeur positive"
         },
         validateRange(val, min, max) {
-            let isValid = val !== null && val >= min && val <= max
+            let isValid = val !== null && val !== '' && val >= min && val <= max
             if (isValid === false) {
                 val = null
             }
+            let msg
             if (max === Infinity) {
-                let msg = `Veuillez entrer une valeur ≥ à ${min}`
+                msg = `Veuillez entrer une valeur ≥ à ${min}`
             } else {
-                let msg = `Veuillez entrer une valeur entre ${min} et ${max}`
+                msg = `Veuillez entrer une valeur entre ${min} et ${max}`
             }
             return isValid || msg
         },
