@@ -94,12 +94,12 @@ export default {
     },
     methods: {
         deleteItem(item) {
-            console.log(item)
-            console.log(`Delete item with id=${item.id}`)
+            // console.log(item)
+            // console.log(`Delete item with id=${item.id}`)
             this.$emit('deleteItem', item.id);
         },
         focusItem(item) {
-            console.log(`Table.vue | Focus on item with id=${item.id}`)
+            // console.log(`Table.vue | Focus on item with id=${item.id}`)
             this.$emit('focusItem', item.id);
             this.$emit('action', { type: "focus", id: item.id });
         }
