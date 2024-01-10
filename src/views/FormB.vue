@@ -161,7 +161,7 @@
 
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
-                    <table id="summary-table">
+                    <table class="total-row">
                         <caption class="text-subtitle1">Stationnements voitures</caption>
                         <thead>
                             <tr>
@@ -197,6 +197,7 @@
             </div>
 
             <!-- BICYCLE PARKINGS SUMMARY TABLE -->
+            <!--
             <div id="summary-container-2" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
@@ -207,8 +208,6 @@
                                 <th>Affectation</th>
                                 <th>Type de place</th>
                                 <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_bike" /></th>
-                                <!-- <th class="text-right"><q-icon name="directions_bike" size="sm" /></th> -->
-                                <!-- <th class="text-right"># Places</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -233,9 +232,11 @@
                 </div>
 
             </div>
+            -->
 
 
             <!-- MOTORCYCLE PARKINGS SUMMARY TABLE -->
+            <!-- 
             <div id="summary-container-2" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
@@ -270,9 +271,11 @@
                 </div>
 
             </div>
+            -->
 
 
             <!-- CHARGING STATIONS SUMMARY TABLE -->
+            <!-- 
             <div id="summary-container-2" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
@@ -283,8 +286,6 @@
                                 <th>Affectation</th>
                                 <th>Type d'équipement</th>
                                 <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="ev_station" /></th>
-                                <!-- <th class="text-right"><q-icon name="directions_bike" size="sm" /></th> -->
-                                <!-- <th class="text-right"># Places</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -309,6 +310,7 @@
                 </div>
 
             </div>
+            -->
 
         </div>
 
