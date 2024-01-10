@@ -43,7 +43,7 @@
         </FormSection>
 
         <!-- 5. SUMMARY -->
-        <FormSection title="5. Résumé des stationnements et équipements à réaliser (article 30 RELConstr.)">
+        <FormSection title="5. Résumé des stationnements et équipements à réaliser">
           <template v-slot:content>
             <FormE :project="project"></FormE>
           </template>
