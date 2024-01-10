@@ -17,7 +17,7 @@ tbody tr:first-child {
     border-bottom: 1px solid black;
 }
 
-tbody tr:last-child {
+.total-row tbody tr:last-child {
     border-top: 2px solid black;
     border-bottom: 2px solid black;
 }
