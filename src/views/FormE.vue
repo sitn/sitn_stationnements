@@ -11,9 +11,43 @@
 
         <!-- 
         <div>
-            {{ this.project.affectations[0].outputGroups }}
+            <div>
+                {{ this.project.getStations("Logement") }}
+              
+                {{
+                    Math.max(Math.min(Math.round(this.project.affectations
+                        .filter(x => (x.category === "Logement" & x.active))
+                        .map((x) => x.reducedOutput2.filter(e => e.group === "car"))
+                        .flat()
+                        .reduce((acc, obj) => { return acc + obj.value }, 0) / 3), 50.0), 1.0)
+
+                }}
+            </div>
+
+            <div>
+                {{
+                    Math.max(Math.min(Math.round(this.project.affectations
+                        .filter(x => (x.category === "Activité" & x.active))
+                        .map((x) => x.reducedOutput2.filter(e => e.group === "car"))
+                        .flat()
+                        .reduce((acc, obj) => { return acc + obj.value }, 0) / 3), 50.0), 1.0)
+
+                }}
+            </div>
+
+            <div>
+                {{
+                    Math.round(this.project.affectations
+                        .filter(x => (x.category === "Pas concerné" & x.active))
+                        .map((x) => x.reducedOutput2.filter(e => e.group === "car"))
+                        .flat()
+                        .reduce((acc, obj) => { return acc + obj.value }, 0))
+
+                }}
+            </div>
         </div>
         -->
+
 
         <div class="row" v-if="this.render">
 
@@ -21,8 +55,8 @@
             <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
-                    <table id="summary-table">
-                        <caption class="text-subtitle1">Stationnements voitures</caption>
+                    <table class="total-row">
+                        <caption class="text-subtitle1">Stationnements voitures (art. 30 RELConstr.)</caption>
                         <thead>
                             <tr>
                                 <th>Affectation</th>
@@ -55,44 +89,84 @@
                     </table>
                 </div>
 
-
             </div>
 
-
-            <!-- BICYCLE PARKINGS SUMMARY TABLE -->
+            <!-- CHARGING STATIONS SUMMARY TABLE -->
             <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
-                    <table id="summary-table">
-                        <caption class="text-subtitle1">Stationnements vélos (y.c. électriques &lt; 1kW)</caption>
+                    <table>
+                        <caption class="text-subtitle1">Équipements pour véhicules électriques (art. 34 RELCEn.)</caption>
                         <thead>
                             <tr>
-                                <th>Affectation</th>
-                                <th>Type de place</th>
-                                <!-- <th class="text-right"><q-icon name="directions_bike" size="sm" /></th> -->
-                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_bike" /></th>
+                                <th>Catégorie</th>
+                                <th>Type d'équipement</th>
+                                <!-- <th class="text-right"><q-icon name="ev_station" size="sm" /></th> -->
+                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="ev_station" /></th>
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <td rowspan="2">Logements</td>
+                                <td># niveau D (bornes)</td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ this.project.getStations("Logement") }}
+                                    <!-- {{ Math.floor(this.project.getReducedNeeds('station')) }} -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td># niveau B</td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">Solde</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">Activités</td>
+                                <td># niveau C2</td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ this.project.getStations("Activité") }}
+                                    <!-- {{ Math.floor(this.project.getReducedNeeds('station')) }} -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td># niveau B</td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">Solde</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="1">Pas concerné</td>
+                                <td>Aucun</td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ this.project.getStations("Pas concerné") }}
+                                    <!--  {{ Math.floor(this.project.getReducedNeeds('station')) }} -->
+                                </td>
+                            </tr>
+
+                            <!-- 
+                            <tr>
+                                <td>Total</td>
+                                <td></td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ Math.floor(this.project.getReducedNeeds('station')) }}
+                                </td>
+                            </tr>
+                            -->
+
+                            <!-- 
                             <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'bicycle')">
-                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">{{ item.name }}</td>
+                                <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'station')">
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
-                                    <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
                             </template>
                             <tr>
-                                <td class="text-weight-bold">Total (arrondi sup.)</td>
+                                <td class="text-weight-bold">Total (arrondi inf.)</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ Math.ceil(this.project.getReducedNeeds('bicycle')) }}
-                                    <!-- 
-                                    {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
-                                        x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
-                                    -->
+                                    {{ Math.floor(this.project.getReducedNeeds('station')) }}
                                 </td>
                             </tr>
+                            -->
+
+
                         </tbody>
                     </table>
                 </div>
@@ -100,12 +174,57 @@
             </div>
 
 
-            <!-- MOTORCYCLE PARKINGS SUMMARY TABLE -->
+            <!-- CHARGING STATIONS SUMMARY TABLE -->
+            <!--
             <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table id="summary-table">
-                        <caption class="text-subtitle1">Stationnements deux-roues motorisés</caption>
+                        <caption class="text-subtitle1">Équipements pour véhicules électriques (art. 34 RELCEn)</caption>
+                        <thead>
+                            <tr>
+                                <th>Affectation</th>
+                                <th>Type d'équipement</th>
+                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="ev_station" /></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                                <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'station')">
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">{{ item.name }}</td>
+                                    <td>{{ subitem.name }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                </tr>
+                            </template>
+                            <tr>
+                                <td class="text-weight-bold">Total (arrondi inf.)</td>
+                                <td class="text-weight-bold"></td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ Math.floor(this.project.getReducedNeeds('station')) }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            -->
+
+
+            <!-- MOTORCYCLE PARKINGS SUMMARY TABLE -->
+            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                    <table class="total-row">
+                        <caption class="text-subtitle1">
+                            Stationnements deux-roues motorisés > 45km/h (art. 37c RELConstr.)
+                        </caption>
+                        <!-- 
+                        <caption class="text-subtitle1">
+                            <div>Stationnements deux-roues motorisés > 45km/h</div>
+                            <div>(art. 37c RELConstr.)</div>
+                        </caption>
+                        -->
                         <thead>
                             <tr>
                                 <th>Affectation</th>
@@ -141,34 +260,41 @@
             </div>
 
 
-            <!-- CHARGING STATIONS SUMMARY TABLE -->
+            <!-- BICYCLE PARKINGS SUMMARY TABLE -->
             <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
-                    <table id="summary-table">
-                        <caption class="text-subtitle1">Équipements pour véhicules électriques</caption>
+                    <table class="total-row">
+                        <caption class="text-subtitle1">Stationnements vélos, y.c. électriques &lt; 1kW (art. 37b RELConstr.)</caption>
+                        <!-- 
+                        <caption class="text-subtitle1">
+                            <div>Stationnements vélos, y.c. électriques &lt; 1kW</div>
+                            <div>(art. 37b RELConstr.)</div>
+                        </caption>
+                        -->
+
                         <thead>
                             <tr>
                                 <th>Affectation</th>
-                                <th>Type d'équipement</th>
-                                <!-- <th class="text-right"><q-icon name="ev_station" size="sm" /></th> -->
-                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="ev_station" /></th>
+                                <th>Type de place</th>
+                                <!-- <th class="text-right"><q-icon name="directions_bike" size="sm" /></th> -->
+                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_bike" /></th>
                             </tr>
                         </thead>
                         <tbody>
                             <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'station')">
-                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">{{ item.name }}</td>
+                                <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'bicycle')">
+                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                     <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
                             </template>
                             <tr>
-                                <td class="text-weight-bold">Total (arrondi inf.)</td>
+                                <td class="text-weight-bold">Total (arrondi sup.)</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ Math.floor(this.project.getReducedNeeds('station')) }}
+                                    {{ Math.ceil(this.project.getReducedNeeds('bicycle')) }}
                                     <!-- 
                                     {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
                                         x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
