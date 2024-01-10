@@ -6,8 +6,9 @@ export var communes = communes_json.sort((a, b) => a.comnom.toLowerCase().locale
 export class Affectation {
 
   // constructor
-  constructor(type, name, description, automatic = false, variables = [], outputs = []) {
-    this.type = type
+  constructor(type, category, name, description, automatic = false, variables = [], outputs = []) {
+    this.type = type // used for parking
+    this.category = category // used for EV stations
     this.name = name
     this.description = description
     this.variables = variables // input
@@ -120,6 +121,7 @@ export class Affectation {
 export const affectations = [
   new Affectation(
     "Logement",
+    "Logement",
     "Logements standards",
     "",
     true,
@@ -135,12 +137,13 @@ export const affectations = [
       { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x[1] > 2) * 0.15 * (Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x[2])) },
       { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x[1] > 2) * Math.max(Math.min((Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Logement",
     "Logement",
     "Logements avec encadrement",
     "",
@@ -148,7 +151,7 @@ export const affectations = [
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 1.0, max: Infinity, value: null, hint: "" },
       { name: "# logements", description: "", type: "measurement", unit: "", min: 1.0, max: Infinity, value: null, hint: "" },
-      { name: "# pièces (total)", description: "", type: "measurement", unit: "", min: 1.0, max: Infinity, value: null, hint: "" },
+      // { name: "# pièces (total)", description: "", type: "measurement", unit: "", min: 1.0, max: Infinity, value: null, hint: "" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Logements avec encadrement ou étudiants", description: "Un facteur de réduction (maximum 50%) peut s'appliquer pour les logements avec encadrement dédiés aux bénéficiaires AVS/AI ou étudiants. Référez-vous à l’article 34 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 50.0, value: 0.0, hint: "" },
@@ -156,12 +159,13 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x[0] * (f / 100) * (1 - r / 100)) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x[2])) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x[1] > 2) * 0.15 * (Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x[1])) },
       { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x[1] > 2) * Math.max(Math.min((Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Logement",
     "Logement",
     "Logements pour étudiants",
     "",
@@ -177,18 +181,20 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x[0] * (f / 100) * (1 - r / 100)) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x[1] > 2) * 0.15 * (Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x[2])) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => (x[1] > 2) * Math.max(Math.min((Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
     "Activité",
+    "Activité",
     "Industrie, artisanat",
     "",
     true,
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 1.0, max: Infinity, value: null, hint: "" },
+      { name: "# postes de travail", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, indiquer 0 si inconnu" },
       { name: "# places pour véhicules d’entreprise", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -198,20 +204,22 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => 0.01 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures clients", formula: ((x, f = 100.0, r = 0.0) => 0.002 * x[0] * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x[1] * 1.0) },
+      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x[2] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.01 * x[0] + 0.002 * x[0]) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.ceil(0.004 * x[0])) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.ceil(0.001 * x[0])) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.max(Math.ceil(0.004 * x[0]), Math.ceil(0.2 * x[1]))) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.max(Math.ceil(0.001 * x[0]), Math.ceil(0.05 * x[1]))) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.01 * x[0] + 0.002 * x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Entrepôts et dépôts",
     "",
     true,
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 1.0, max: Infinity, value: null, hint: "" },
+      { name: "# postes de travail", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, indiquer 0 si inconnu" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -227,6 +235,7 @@ export const affectations = [
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Services à nombreuse clientèle",
     "(banque, poste administration publique avec guichets, agence de voyage médecin, dentiste, cabinet de soins, eproduction et copie, nettoyage chimique coiffeur,…)",
@@ -249,6 +258,7 @@ export const affectations = [
   ),
   new Affectation(
     "Activité",
+    "Activité",
     "Autres services",
     "(administration publique sans guichet, bureau d’ingénieur ou d’architecte, étude d’avocat, assurance, caisse maladie, administration d’industries, fiduciaire, laboratoire, entreprise de transport,…)",
     true,
@@ -269,6 +279,7 @@ export const affectations = [
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Magasins à nombreuse clientèle",
     "(alimentation, pharmacie, droguerie, grand magasin, kiosque, …)",
@@ -291,6 +302,7 @@ export const affectations = [
   ),
   new Affectation(
     "Activité",
+    "Activité",
     "Autres magasins",
     "(librairie, ménage, quincaillerie horlogerie, bijouterie, ameublement, magasins spécialisés)",
     true,
@@ -312,6 +324,7 @@ export const affectations = [
   ),
   new Affectation(
     "Activité",
+    "Logement",
     "Hôtel",
     "",
     false,
@@ -320,7 +333,6 @@ export const affectations = [
       { name: "# places voitures mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
       { name: "# places vélos personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
       { name: "# places vélos clients", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
-      { name: "# logements", description: "", type: "measurement", unit: "", min: 1.0, max: Infinity, value: null, hint: "" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -328,14 +340,16 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[1] * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x[2] * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x[3] > 2) * Math.max(Math.min(x[0] * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min(x[0] * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
       // { name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => 0.5 * x[0] * (f / 100) * (1 - r / 100)) }
     ]
   ),
   new Affectation(
     "Activité",
+    "Logement",
     "Auberge de jeunesse",
     "",
     false,
@@ -343,7 +357,6 @@ export const affectations = [
       { name: "# places voitures mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
       { name: "# places vélos personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
       { name: "# places vélos clients", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
-      { name: "# logements", description: "", type: "measurement", unit: "", min: 1.0, max: Infinity, value: null, hint: "" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -351,12 +364,14 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[1] * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x[2] * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x[3] > 2) * Math.max(Math.min(x[0] * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min(x[0] * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Restaurant, café, bar",
     "",
@@ -372,6 +387,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[1] * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x[2] * 1.0) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min(x[0] * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
@@ -379,12 +395,15 @@ export const affectations = [
   ),
   new Affectation(
     "Activité",
+    "Activité",
     "Petit hôpital, clinique",
     "",
     false,
     [
       { name: "# places voitures personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
       { name: "# places voitures visiteurs", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
+      { name: "# places vélos personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
+      { name: "# places vélos clients", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -393,10 +412,14 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x[1] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x[0] + x[1]) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[2] * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x[3] * 1.0) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0] + x[1]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Etablissement pour personnes âgées, sanatorium",
     "",
@@ -404,6 +427,8 @@ export const affectations = [
     [
       { name: "# places voitures personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
       { name: "# places voitures visiteurs", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
+      { name: "# places vélos personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
+      { name: "# places vélos clients", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -412,16 +437,22 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x[1] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x[0] + x[1]) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[2] * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x[3] * 1.0) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0] + x[1]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Cinéma",
     "",
     false,
     [
       { name: "# places voitures mixtes", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
+      { name: "# places vélos personnel", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
+      { name: "# places vélos clients", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: null, hint: "" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Plan de mobilité", description: "Un facteur de réduction peut s'appliquer en lien avec un plan de mobilité. Référez-vous à l’article 31 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
       { name: "Utilisation multiple", description: "Un facteur de réduction peut s'appliquer en lien avec une utilisation multiple. Référez-vous à l’article 32 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -429,10 +460,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Théâtre, opéra, salle de concert",
     "",
@@ -446,10 +479,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Musée, espace d’exposition, galerie",
     "",
@@ -463,10 +498,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Bibliothèque",
     "",
@@ -480,10 +517,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Discothèque",
     "",
@@ -497,9 +536,11 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Église, mosquée, synagogue",
     "",
@@ -513,11 +554,13 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
     "Activité",
+    "Pas concerné",
     "Cimetière",
     "",
     false,
@@ -530,10 +573,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Crèche, jardin d’enfant",
     "",
@@ -554,6 +599,7 @@ export const affectations = [
   ),
   new Affectation(
     "Activité",
+    "Activité",
     "École primaire ou secondaire",
     "",
     false,
@@ -566,10 +612,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Gymnase, lycée",
     "",
@@ -583,10 +631,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Conservatoire",
     "",
@@ -602,10 +652,12 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x[1] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x[0] + x[1]) * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0] + x[1]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "École professionnelle",
     "",
@@ -619,10 +671,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Haute école, université",
     "",
@@ -636,10 +690,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Cours pour adultes",
     "",
@@ -653,10 +709,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Salle de réunion ou de conférence",
     "",
@@ -670,10 +728,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Patinoire",
     "",
@@ -687,10 +747,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Piscine couverte",
     "",
@@ -704,12 +766,14 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
 
   new Affectation(
     "Activité",
+    "Pas concerné",
     "Plage et piscine en plein air",
     "",
     false,
@@ -722,10 +786,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Halle de gymnastique",
     "",
@@ -739,10 +805,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Centre de fitness",
     "",
@@ -756,11 +824,13 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
     "Activité",
+    "Pas concerné",
     "Stade d'athlétisme avec terrains de jeu",
     "",
     false,
@@ -773,11 +843,13 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
   ),
   new Affectation(
     "Activité",
+    "Pas concerné",
     "Stade (football, hockey)",
     "",
     false,
@@ -790,11 +862,13 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
   ),
   new Affectation(
     "Activité",
+    "Pas concerné",
     "Tennis",
     "",
     false,
@@ -807,11 +881,13 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
   ),
   new Affectation(
     "Activité",
+    "Pas concerné",
     "Stand de tir",
     "",
     false,
@@ -824,11 +900,13 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
   ),
   new Affectation(
     "Activité",
+    "Pas concerné",
     "Piste en forêt, Parcours Vita",
     "",
     false,
@@ -841,10 +919,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Salon de jeux, casino, local de club",
     "",
@@ -858,11 +938,13 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
     "Activité",
+    "Pas concerné",
     "Mini-golf",
     "",
     false,
@@ -875,10 +957,12 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
   ),
   new Affectation(
+    "Activité",
     "Activité",
     "Salle de billard",
     "",
@@ -892,11 +976,13 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
   new Affectation(
     "Activité",
+    "Pas concerné",
     "Jeu de quilles ou bowling (sans la restauration)",
     "",
     false,
@@ -909,11 +995,13 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
   ),
   new Affectation(
     "Activité",
+    "Pas concerné",
     "Manège, écurie",
     "",
     false,
@@ -926,11 +1014,13 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
   ),
   new Affectation(
     "Activité",
+    "Pas concerné",
     "Port de plaisance",
     "",
     false,
@@ -943,6 +1033,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures mixtes", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
   ),
@@ -1072,6 +1163,36 @@ export class Project {
       .map((x) => x.reducedOutput2.filter(e => e.group === group))
       .flat()
       .reduce((acc, obj) => { return acc + obj.value }, 0)
+  }
+
+  getStations(category) {
+
+    let n_parkings = this.affectations
+      .filter(x => (x.category === category & x.active))
+      .map((x) => x.reducedOutput2.filter(e => e.group === "car"))
+      .flat()
+      .reduce((acc, obj) => { return acc + obj.value }, 0)
+
+    let n_stations
+    if (category === "Pas concerné") {
+      n_stations = Math.round(n_parkings)
+    } else {
+      n_stations = Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 1.0)
+    }
+
+    return n_stations
+
+    /*
+    switch (category) {
+      case "afshin": case "saeed":
+        n_stations = Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 1.0)
+        break
+      case "Pas concerné":
+        n_stations = Math.round(n_parkings)
+        break
+    }
+    */
+
   }
 
 }
