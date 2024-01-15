@@ -95,19 +95,19 @@
             <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
-                    <table>
+                    <table class="total-row">
                         <caption class="text-subtitle1">Équipements pour véhicules électriques (art. 34 RELCEn.)</caption>
                         <thead>
                             <tr>
-                                <th>Catégorie</th>
-                                <th>Type d'équipement</th>
+                                <th>Catégorie (affectations)</th>
+                                <th>Type d'équipement (selon SIA 2060)</th>
                                 <!-- <th class="text-right"><q-icon name="ev_station" size="sm" /></th> -->
                                 <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="ev_station" /></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td rowspan="2">Logements</td>
+                                <td rowspan="1">Logements<br>({{ this.project.getAffectationNames('Logement').join(', ') }})</td>
                                 <td># niveau D (bornes)</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ this.project.getStations("Logement") }}
@@ -115,11 +115,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td># niveau B</td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">Solde</td>
-                            </tr>
-                            <tr>
-                                <td rowspan="2">Activités</td>
+                                <td rowspan="1">Activités<br>({{ this.project.getAffectationNames('Activité').join(';') }})</td>
                                 <td># niveau C2</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ this.project.getStations("Activité") }}
@@ -127,27 +123,28 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td rowspan="1">Logements et activités<br>(cf. affectations ci-dessus)</td>
                                 <td># niveau B</td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">Solde</td>
+                                <td class="bg-light-blue-1 text-weight-bold text-right">
+                                    {{ Math.ceil(this.project.getReducedNeeds('car')) - this.project.getStations("Logement") - this.project.getStations("Activité") - this.project.getStations("Pas concerné") }}
+                                </td>
                             </tr>
                             <tr>
-                                <td rowspan="1">Pas concerné</td>
+                                <td rowspan="1">Pas concerné<br>({{ this.project.getAffectationNames('Pas concerné').join(', ') }})</td>
                                 <td>Aucun</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ this.project.getStations("Pas concerné") }}
                                     <!--  {{ Math.floor(this.project.getReducedNeeds('station')) }} -->
                                 </td>
                             </tr>
-
-                            <!-- 
                             <tr>
-                                <td>Total</td>
-                                <td></td>
+                                <td class="text-weight-bold">Total</td>
+                                <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ Math.floor(this.project.getReducedNeeds('station')) }}
+                                    {{ Math.ceil(this.project.getReducedNeeds('car')) }}
                                 </td>
                             </tr>
-                            -->
+
 
                             <!-- 
                             <template v-for="item in this.project.affectations.filter(e => e.active)">
