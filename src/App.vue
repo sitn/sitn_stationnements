@@ -14,38 +14,45 @@
     <q-page-container>
       <q-page class="q-px-none q-pb-xs">
 
-        <!-- 1. LOCATION -->
+        <!-- 1. PROJECT LOCATION -->
         <FormSection title="1. Localisation du projet">
           <template v-slot:content>
             <FormA :project="project" @updateProject=""></FormA>
           </template>
         </FormSection>
 
-        <!-- 2. RAW PARKING NEEDS -->
-        <FormSection title="2. Calcul du besoin brut (article 27 RELConstr.)">
+        <!-- 3.  PROPERTIES -->
+        <FormSection title="2. Spécificités du projet">
           <template v-slot:content>
             <FormB :project="project" @updateProject=""></FormB>
           </template>
         </FormSection>
 
-        <!-- 3. NET PARKING NEEDS -->
-        <FormSection title="3. Calcul du besoin net (article 28 RELConstr.)">
+        <!-- 3. RAW PARKING NEEDS -->
+        <FormSection title="3. Calcul du besoin brut (article 27 RELConstr.)">
           <template v-slot:content>
-            <FormC :project="project"></FormC>
+            <FormC :project="project" @updateProject=""></FormC>
           </template>
         </FormSection>
 
-        <!-- 4. REDUCED NET PARKING NEEDS -->
-        <FormSection title="4. Calcul du besoin net réduit (article 29 RELConstr.)">
+        <!-- 4. NET PARKING NEEDS -->
+        <FormSection title="4. Calcul du besoin net (article 28 RELConstr.)">
           <template v-slot:content>
             <FormD :project="project"></FormD>
           </template>
         </FormSection>
 
-        <!-- 5. SUMMARY -->
-        <FormSection title="5. Résumé des stationnements et équipements à réaliser">
+        <!-- 4. REDUCED NET PARKING NEEDS -->
+        <FormSection title="5. Calcul du besoin net réduit (article 29 RELConstr.)">
           <template v-slot:content>
             <FormE :project="project"></FormE>
+          </template>
+        </FormSection>
+
+        <!-- 5. SUMMARY -->
+        <FormSection title="6. Résumé des stationnements et équipements à réaliser">
+          <template v-slot:content>
+            <FormF :project="project"></FormF>
           </template>
         </FormSection>
 
@@ -63,6 +70,7 @@ import FormB from "./views/FormB.vue"
 import FormC from "./views/FormC.vue"
 import FormD from "./views/FormD.vue"
 import FormE from "./views/FormE.vue"
+import FormF from "./views/FormF.vue"
 
 export default {
   name: 'App',
@@ -72,7 +80,8 @@ export default {
     FormB,
     FormC,
     FormD,
-    FormE
+    FormE,
+    FormF,
   },
   setup() {
     return {
