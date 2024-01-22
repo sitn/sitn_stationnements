@@ -160,6 +160,7 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[2] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x[1] > 2) * 0.15 * (Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x[1])) },
       { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x[1] > 2) * Math.max(Math.min((Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
@@ -183,6 +184,7 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x[0], x[1]) * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x[1] > 2) * 0.15 * (Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x[2])) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => (x[1] > 2) * Math.max(Math.min((Math.max(0.01 * x[0], x[1]) + 0.001 * x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
@@ -196,7 +198,7 @@ export const affectations = [
     true,
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 1.0, max: Infinity, value: null, hint: "" },
-      { name: "# postes de travail", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, indiquer 0 si inconnu" },
+      { name: "# postes de travail", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, à remplir si vous souhaitez l'utiliser pour le calcul des places vélos, sinon indiquer 0" },
       { name: "# places pour véhicules d’entreprise", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "# places pour autopartage", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -208,9 +210,12 @@ export const affectations = [
       { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => 0.01 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures clients", formula: ((x, f = 100.0, r = 0.0) => 0.002 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x[2] * 1.0) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.01 * x[0] + 0.002 * x[0]) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.max(Math.ceil(0.004 * x[0]), Math.ceil(0.2 * x[1]))) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.max(Math.ceil(0.001 * x[0]), Math.ceil(0.05 * x[1]))) },
+      // { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.max(Math.ceil(0.004 * x[0]), Math.ceil(0.2 * x[1]))) },
+      // { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.max(Math.ceil(0.001 * x[0]), Math.ceil(0.05 * x[1]))) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[1] > 0 ? Math.ceil(0.2 * x[1]) : Math.ceil(0.004 * x[0])) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x[1] > 0 ? Math.ceil(0.05 * x[1]) : Math.ceil(0.001 * x[0])) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.01 * x[0] + 0.002 * x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
@@ -222,7 +227,7 @@ export const affectations = [
     true,
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 1.0, max: Infinity, value: null, hint: "" },
-      { name: "# postes de travail", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, indiquer 0 si inconnu" },
+      { name: "# postes de travail", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, à remplir si vous souhaitez l'utiliser pour le calcul des places vélos, sinon indiquer 0" },
       { name: "# places pour véhicules d’entreprise", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "# places pour autopartage", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -233,9 +238,13 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures clients", formula: ((x, f = 100.0, r = 0.0) => 0.0001 * x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x[2] * 1.0) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.001 * x[0] + 0.0001 * x[0]) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.ceil(0.004 * x[0])) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.ceil(0.001 * x[0])) },
+      // { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.ceil(0.004 * x[0])) },
+      // { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.ceil(0.001 * x[0])) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[1] > 0 ? Math.ceil(0.2 * x[1]) : Math.ceil(0.004 * x[0])) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x[1] > 0 ? Math.ceil(0.05 * x[1]) : Math.ceil(0.001 * x[0])) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.001 * x[0] + 0.0001 * x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
@@ -247,6 +256,7 @@ export const affectations = [
     true,
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 1.0, max: Infinity, value: null, hint: "" },
+      { name: "# postes de travail", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, à remplir si vous souhaitez l'utiliser pour le calcul des places vélos, sinon indiquer 0" },
       { name: "# places pour véhicules d’entreprise", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "# places pour autopartage", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -257,9 +267,13 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.02 * x[0]) * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places clients", formula: ((x, f = 100.0, r = 0.0) => (0.01 * x[0]) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x[2] * 1.0) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.02 * x[0] + 0.01 * x[0]) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.ceil(0.01 * x[0])) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.ceil(0.015 * x[0])) },
+      // { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.ceil(0.01 * x[0])) },
+      // { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.ceil(0.015 * x[0])) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[1] > 0 ? Math.ceil(0.2 * x[1]) : Math.ceil(0.01 * x[0])) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x[1] > 0 ? Math.ceil(0.3 * x[1]) : Math.ceil(0.015 * x[0])) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.02 * x[0] + 0.01 * x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
@@ -271,6 +285,7 @@ export const affectations = [
     true,
     [
       { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 1.0, max: Infinity, value: null, hint: "" },
+      { name: "# postes de travail", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, à remplir si vous souhaitez l'utiliser pour le calcul des places vélos, sinon indiquer 0" },
       { name: "# places pour véhicules d’entreprise", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "# places pour autopartage", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -281,9 +296,13 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.02 * x[0]) * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places clients", formula: ((x, f = 100.0, r = 0.0) => (0.005 * x[0]) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x[2] * 1.0) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.02 * x[0] + 0.005 * x[0]) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.ceil(0.01 * x[0])) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.ceil(0.0025 * x[0])) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[1] > 0 ? Math.ceil(0.2 * x[1]) : Math.ceil(0.01 * x[0])) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x[1] > 0 ? Math.ceil(0.05 * x[1]) : Math.ceil(0.0025 * x[0])) },
+      // { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.ceil(0.01 * x[0])) },
+      // { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.ceil(0.0025 * x[0])) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.02 * x[0] + 0.005 * x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
@@ -295,6 +314,7 @@ export const affectations = [
     true,
     [
       { name: "Surface de vente (SV)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 1.0, max: Infinity, value: null, hint: "" },
+      { name: "# postes de travail", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, à remplir si vous souhaitez l'utiliser pour le calcul des places vélos, sinon indiquer 0" },
       { name: "# places pour véhicules d’entreprise", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "# places pour autopartage", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -305,9 +325,13 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.02 * x[0]) * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places clients", formula: ((x, f = 100.0, r = 0.0) => (0.08 * x[0]) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x[2] * 1.0) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.02 * x[0] + 0.08 * x[0]) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.ceil(0.01 * x[0])) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.ceil(0.015 * x[0])) },
+      // { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.ceil(0.01 * x[0])) },
+      // { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.ceil(0.015 * x[0])) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[1] > 0 ? Math.ceil(0.2 * x[1]) : Math.ceil(0.01 * x[0])) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x[1] > 0 ? Math.ceil(0.25 * x[1]) : Math.ceil(0.015 * x[0])) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.02 * x[0] + 0.08 * x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
@@ -319,6 +343,7 @@ export const affectations = [
     true,
     [
       { name: "Surface de vente (SV)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 1.0, max: Infinity, value: null, hint: "" },
+      { name: "# postes de travail", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, à remplir si vous souhaitez l'utiliser pour le calcul des places vélos, sinon indiquer 0" },
       { name: "# places pour véhicules d’entreprise", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "# places pour autopartage", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
       { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
@@ -329,9 +354,13 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.015 * x[0]) * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places clients", formula: ((x, f = 100.0, r = 0.0) => (0.035 * x[0]) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x[2] * 1.0) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.015 * x[0] + 0.035 * x[0]) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.ceil(0.01 * x[0])) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.ceil(0.015 * x[0])) },
+      // { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => Math.ceil(0.01 * x[0])) },
+      // { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => Math.ceil(0.015 * x[0])) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[1] > 0 ? Math.ceil(0.2 * x[1]) : Math.ceil(0.01 * x[0])) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x[1] > 0 ? Math.ceil(1.0 * x[1]) : Math.ceil(0.015 * x[0])) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.015 * x[0] + 0.035 * x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
@@ -354,6 +383,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[1] * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x[2] * 1.0) },
@@ -379,6 +409,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[2] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[1] * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x[2] * 1.0) },
@@ -403,6 +434,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[2] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[1] * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x[2] * 1.0) },
@@ -429,6 +461,7 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x[1] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[4] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x[0] + x[1]) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[2] * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x[3] * 1.0) },
@@ -455,6 +488,7 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x[1] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[4] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x[0] + x[1]) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x[2] * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x[3] * 1.0) },
@@ -479,6 +513,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -501,6 +536,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -523,6 +559,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -545,6 +582,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -567,6 +605,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
     ]
   ),
@@ -588,6 +627,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -610,6 +650,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
@@ -634,6 +675,7 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x[1] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[4] * 1.0) },
       { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0] + x[1]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   ),
@@ -659,6 +701,7 @@ export const affectations = [
       // { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x[1] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[4] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -685,6 +728,7 @@ export const affectations = [
       // { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x[1] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[4] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -709,6 +753,7 @@ export const affectations = [
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x[1] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[4] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x[0] + x[1]) * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0] + x[1]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -731,6 +776,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -753,6 +799,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -775,6 +822,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -797,6 +845,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -819,6 +868,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -841,6 +891,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -864,6 +915,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
@@ -886,6 +938,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -908,6 +961,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -930,6 +984,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
@@ -952,6 +1007,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
@@ -974,6 +1030,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
@@ -996,6 +1053,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
@@ -1018,6 +1076,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
@@ -1040,6 +1099,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -1062,6 +1122,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
@@ -1084,6 +1145,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x[0]) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
@@ -1106,6 +1168,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
@@ -1128,6 +1191,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
@@ -1150,6 +1214,7 @@ export const affectations = [
     ],
     [
       { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x[0] * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x[3] * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x[0] * (f / 100) * (1 - r / 100)) },
       // NO EV STATIONS
     ]
