@@ -156,7 +156,7 @@
         <div class="row" v-if="this.render">
 
             <!-- CAR PARKINGS SUMMARY TABLE -->
-            <div id="summary-container-1" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <div id="summary-container-1" class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
 
 
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
