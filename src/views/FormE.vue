@@ -107,7 +107,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td rowspan="1">Logements<br>({{ this.project.getAffectationNames('Logement').join(', ') }})</td>
+                                <td rowspan="1">Logements<br>{{ this.project.getAffectationNames('Logement').length > 0 ? ` (${this.project.getAffectationNames('Logement').join('; ')})` : '' }}</td>
                                 <td># niveau D (bornes)</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ this.project.getStations("Logement") }}
@@ -115,7 +115,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td rowspan="1">Activités<br>({{ this.project.getAffectationNames('Activité').join(';') }})</td>
+                                <td rowspan="1">Activités<br>{{ this.project.getAffectationNames('Activité').length > 0 ? ` (${this.project.getAffectationNames('Activité').join('; ')})` : '' }}</td>
                                 <td># niveau C2</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ this.project.getStations("Activité") }}
@@ -130,7 +130,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td rowspan="1">Pas concerné<br>({{ this.project.getAffectationNames('Pas concerné').join(', ') }})</td>
+                                <td rowspan="1">Pas concerné<br>{{ this.project.getAffectationNames('Pas concerné').length > 0 ? ` (${this.project.getAffectationNames('Pas concerné').join('; ')})` : '' }}</td>
                                 <td>Aucun</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ this.project.getStations("Pas concerné") }}
@@ -214,6 +214,7 @@
 
                     <table class="total-row">
                         <caption class="text-subtitle1">
+                            <!-- Stationnements deux-roues motorisés > 45km/h (art. 37c RELConstr.) -->
                             Stationnements deux-roues motorisés > 45km/h (art. 37c RELConstr.)
                         </caption>
                         <!-- 
@@ -262,7 +263,8 @@
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table class="total-row">
-                        <caption class="text-subtitle1">Stationnements vélos, y.c. électriques &lt; 1kW (art. 37b RELConstr.)</caption>
+                        <!-- <caption class="text-subtitle1">Stationnements vélos, y.c. électriques &lt; 1kW (art. 37b RELConstr.)</caption>-->
+                        <caption class="text-subtitle1">Stationnements vélos, y.c. électriques (art. 37b RELConstr.)</caption>
                         <!-- 
                         <caption class="text-subtitle1">
                             <div>Stationnements vélos, y.c. électriques &lt; 1kW</div>
