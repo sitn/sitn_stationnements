@@ -29,25 +29,31 @@
         </FormSection>
 
         <!-- 4. NET PARKING NEEDS -->
+        <!-- 
         <FormSection title="3. Calcul du besoin net (article 28 RELConstr.)">
           <template v-slot:content>
             <FormC :project="project"></FormC>
           </template>
         </FormSection>
+        -->
 
         <!-- 4. REDUCED NET PARKING NEEDS -->
+        <!-- 
         <FormSection title="4. Calcul du besoin net réduit (article 29 RELConstr.)">
           <template v-slot:content>
             <FormD :project="project"></FormD>
           </template>
         </FormSection>
+        -->
 
         <!-- 5. SUMMARY -->
+        <!-- 
         <FormSection title="5. Résumé des stationnements et équipements à réaliser">
           <template v-slot:content>
             <FormE :project="project"></FormE>
           </template>
         </FormSection>
+        -->
 
       </q-page>
     </q-page-container>
