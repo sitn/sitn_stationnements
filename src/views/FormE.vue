@@ -264,7 +264,7 @@
 
                     <table class="total-row">
                         <!-- <caption class="text-subtitle1">Stationnements vélos, y.c. électriques &lt; 1kW (art. 37b RELConstr.)</caption>-->
-                        <caption class="text-subtitle1">Stationnements vélos, y.c. électriques (art. 37b RELConstr.)</caption>
+                        <caption class="text-subtitle1">Stationnements vélos, y.c. électriques et spéciaux (art. 37b RELConstr.)</caption>
                         <!-- 
                         <caption class="text-subtitle1">
                             <div>Stationnements vélos, y.c. électriques &lt; 1kW</div>
