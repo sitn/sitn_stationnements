@@ -62,31 +62,37 @@ export class Affectation {
     this.category = category // used for EV stations
     this.name = name
     this.description = description
-    this._variables = variables // input
-    this._outputs = outputs // output
+    this.variables = variables // input
+    this.outputs = outputs // output
     this.active = active
     this.automatic = automatic
   }
 
+
+  get variableMap() {
+    return new Map(this.variables.map(x => [x.id, x.value]))
+    // return new Map(this.variables.filter((x) => x.type === "measurement").map(x => [x.id, x.value]))
+  }
+
   // getters
+  /*   get variables() {
+      return Object.values(this._variables)
+    }
+  
+    set variables(x) {
+      this._variables = x;
+    } */
+
+  /*   get outputs() {
+      return Object.values(this._outputs)
+    }
+  
+    set outputs(x) {
+      this._outputs = x;
+    } */
+
   get valid() {
     return this.variables.map((x) => x.value >= x.min && x.value <= x.max).every(Boolean)
-  }
-
-  get variables() {
-    return Object.values(this._variables)
-  }
-
-  set variables(x) {
-    this._variables = x;
-  }
-
-  get outputs() {
-    return Object.values(this._outputs)
-  }
-
-  set outputs(x) {
-    this._outputs = x;
   }
 
   // RETURNS SET OF UNIQUE OUTPUT GROUPS (CAR, MOTORCYCLE, BICYCLE, STATION, ETC) 
@@ -100,26 +106,31 @@ export class Affectation {
 
   // RETURNS RAW OUTPUT ("BESOIN BRUT")
   get rawOutput() {
-    return this.ouputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), 100.0, 0.0) }))
+    return this.outputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variableMap, 100.0, 0.0) }))
+
+    /* o.formula(this.variableMap, 100.0, 0.0) */
+
+    // return this.ouputs.map(o => ({ name: o.name, group: o.group, value: o.formula(new Map(this.variables.filter((x) => x.type === "measurement").map(x => [x.id, x.value])), 100.0, 0.0) }))
+    // return this.ouputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), 100.0, 0.0) }))
     // return this.outputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), 100.0, 0.0) }))
   }
 
   // RETURNS NET OUTPUT ("BESOIN NET")
   get netOutput() {
-    return this.outputs.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, 0.0))
+    return this.outputs.map(o => o.formula(this.variableMap, this.ordinaryReduction, 0.0))
   }
 
   get netOutput2() {
-    return this.outputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, 0.0) }))
+    return this.outputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variableMap, this.ordinaryReduction, 0.0) }))
   }
 
   // RETURNS REDUCED OUTPUT ("BESOIN NET REDUIT")
   get reducedOutput() {
-    return this.outputs.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, this.specialReduction))
+    return this.outputs.map(o => o.formula(this.variableMap, this.ordinaryReduction, this.specialReduction))
   }
 
   get reducedOutput2() {
-    return this.outputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), this.ordinaryReduction, this.specialReduction) }))
+    return this.outputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variableMap, this.ordinaryReduction, this.specialReduction) }))
   }
 
   get totalOutput() {
@@ -213,7 +224,7 @@ export const affectations = [
     ])
   }),
   */
-
+  /*
   new Affectation({
     type: "Logement",
     category: "Logement",
@@ -229,13 +240,38 @@ export const affectations = [
       env_reduction: { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" }
     },
     outputs: {
-      n_parks_1: { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x.floor_area, x.n_housings) * (f / 100) * (1 - r / 100)) },
-      n_parks_2: { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.floor_area * (f / 100) * (1 - r / 100)) },
-      n_parks_3: { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.n_shared * 1.0) },
-      n_parks_4: { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.n_housings > 2) * 0.15 * (Math.max(0.01 * x.floor_area, x.n_housings) + 0.001 * x.floor_area) * (f / 100) * (1 - r / 100)) },
-      n_parks_5: { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x.n_rooms)) },
-      n_parks_6: { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.n_housings > 2) * Math.max(Math.min((Math.max(0.01 * x.floor_area, x.n_housings) + 0.001 * x.floor_area) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      n_parks_1: { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x.floor_area.value, x.n_housings.value,) * (f / 100) * (1 - r / 100)) },
+      n_parks_2: { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.floor_area.value * (f / 100) * (1 - r / 100)) },
+      n_parks_3: { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.n_shared.value * 1.0) },
+      n_parks_4: { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.n_housings.value > 2) * 0.15 * (Math.max(0.01 * x.floor_area.value, x.n_housings.value) + 0.001 * x.floor_area.value) * (f / 100) * (1 - r / 100)) },
+      n_parks_5: { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x.n_rooms.value,)) },
+      n_parks_6: { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.n_housings.value > 2) * Math.max(Math.min((Math.max(0.01 * x.floor_area.value, x.n_housings.value) + 0.001 * x.floor_area.value) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     }
+  }),
+  */
+
+  new Affectation({
+    type: "Logement",
+    category: "Logement",
+    name: "Logements standards",
+    description: "",
+    automatic: true,
+    variables: [
+      { id: "floor_area", name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 1.0, max: Infinity, value: null, hint: "" },
+      { id: "n_housings", name: "# logements", description: "", type: "measurement", unit: "", min: 1.0, max: Infinity, value: null, hint: "" },
+      { id: "n_rooms", name: "# pièces (total)", description: "", type: "measurement", unit: "", min: 1.0, max: Infinity, value: null, hint: "" },
+      { id: "n_shared", name: "# places pour autopartage", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, 0 par défaut" },
+      { id: "zone_reduction", name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
+      { id: "env_reduction", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" }
+    ],
+    outputs: [
+      { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_shared') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 2) * 0.15 * (Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x.get('n_rooms'))) },
+      { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 2) * Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+    ]
   }),
 
 
