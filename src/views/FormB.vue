@@ -154,13 +154,14 @@
 
 
         <!-- TODO REMOVE -->
+        <!-- 
         <div class="row" v-if="this.render">
             <div>{{ this.project.affectations[0].variables }}</div>
             <div>{{ this.project.affectations[0].outputs }}</div>
             <div>{{ this.project.affectations[0].variableMap }}</div>
             <div>{{ this.project.affectations[0].rawOutput }}</div>
-
         </div>
+        -->
 
 
         <!-- COMPUTATION SUMMARY TABLES -->
@@ -179,8 +180,6 @@
                                 <th>Affectation</th>
                                 <th>Type de place</th>
                                 <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_car" /></th>
-                                <!-- <th class="text-right"><q-icon name="directions_car" size="sm" /></th> -->
-                                <!-- <th class="text-right"># Places</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -197,10 +196,7 @@
                                 <td class="text-weight-bold">Besoin brut total</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    <!-- {{ this.project.getRawNeeds('car').toFixed(3) }} -->
-
-                                    <!-- {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
-                                        x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }} -->
+                                    {{ this.project.getRawNeeds('car').toFixed(3) }}
                                 </td>
                             </tr>
                         </tbody>
