@@ -152,6 +152,17 @@
 
         </q-form>
 
+
+        <!-- TODO REMOVE -->
+        <div class="row" v-if="this.render">
+            <div>{{ this.project.affectations[0].variables }}</div>
+            <div>{{ this.project.affectations[0].outputs }}</div>
+            <div>{{ this.project.affectations[0].variableMap }}</div>
+            <div>{{ this.project.affectations[0].rawOutput }}</div>
+
+        </div>
+
+
         <!-- COMPUTATION SUMMARY TABLES -->
         <div class="row" v-if="this.render">
 
@@ -174,17 +185,19 @@
                         </thead>
                         <tbody>
                             <template v-for="item in this.project.affectations.filter(e => e.active)">
+
                                 <tr v-for="(subitem, iSub) in item.rawOutput.filter(e => e.group === 'car')">
                                     <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'car').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                 </tr>
+
                             </template>
                             <tr>
                                 <td class="text-weight-bold">Besoin brut total</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ this.project.getRawNeeds('car').toFixed(3) }}
+                                    <!-- {{ this.project.getRawNeeds('car').toFixed(3) }} -->
 
                                     <!-- {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
                                         x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }} -->
