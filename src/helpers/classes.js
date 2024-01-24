@@ -188,57 +188,6 @@ export class Affectation {
 
 export const affectations = [
 
-  /*
-  new Affectation({
-    type: "Logement",
-    category: "Logement",
-    name: "Logements standards - MAP TEST",
-    description: "",
-    automatic: true,
-    variables: new Map([
-      ["floor_area", { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 1.0, max: Infinity, value: null, hint: "" }],
-      ["n_housings", { name: "# logements", description: "", type: "measurement", unit: "", min: 1.0, max: Infinity, value: null, hint: "" }],
-      ["n_rooms", { name: "# pièces (total)", description: "", type: "measurement", unit: "", min: 1.0, max: Infinity, value: null, hint: "" }],
-      ["n_shared", { name: "# places pour autopartage", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, à justifier si des places sont demandées, sinon indiquer 0" }],
-      ["zone_rdn", { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" }],
-      ["env_reduction", { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" }]
-    ]),
-    outputs: new Map([
-      ["n_parks_1", { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) * (f / 100) * (1 - r / 100)) }],
-      ["n_parks_2", { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) }],
-      ["n_parks_3", { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_shared') * 1.0) }],
-      ["n_parks_4", { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 3) * 0.15 * (Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) }],
-      ["n_parks_5", { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x.get('n_rooms'))) }],
-      ["n_parks_6", { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 2) * Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) }],
-    ])
-  }),
-  */
-  /*
-  new Affectation({
-    type: "Logement",
-    category: "Logement",
-    name: "Logements standards - OBJECT TEST",
-    description: "",
-    automatic: true,
-    variables: {
-      floor_area: { name: "Surface brute de plancher (SBP)", description: "", type: "measurement", unit: "m<sup>2</sup>", min: 1.0, max: Infinity, value: null, hint: "" },
-      n_housings: { name: "# logements", description: "", type: "measurement", unit: "", min: 1.0, max: Infinity, value: null, hint: "" },
-      n_rooms: { name: "# pièces (total)", description: "", type: "measurement", unit: "", min: 1.0, max: Infinity, value: null, hint: "" },
-      n_shared: { name: "# places pour autopartage", description: "", type: "measurement", unit: "", min: 0.0, max: Infinity, value: 0.0, hint: "Facultatif, à justifier si des places sont demandées, sinon indiquer 0" },
-      zone_rdn: { name: "zone", description: "", type: "reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
-      env_reduction: { name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" }
-    },
-    outputs: {
-      n_parks_1: { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x.floor_area.value, x.n_housings.value,) * (f / 100) * (1 - r / 100)) },
-      n_parks_2: { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.floor_area.value * (f / 100) * (1 - r / 100)) },
-      n_parks_3: { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.n_shared.value * 1.0) },
-      n_parks_4: { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.n_housings.value > 3) * 0.15 * (Math.max(0.01 * x.floor_area.value, x.n_housings.value) + 0.001 * x.floor_area.value) * (f / 100) * (1 - r / 100)) },
-      n_parks_5: { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x.n_rooms.value,)) },
-      n_parks_6: { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.n_housings.value > 2) * Math.max(Math.min((Math.max(0.01 * x.floor_area.value, x.n_housings.value) + 0.001 * x.floor_area.value) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
-    }
-  }),
-  */
-
   new Affectation({
     type: "Logement",
     category: "Logement",
@@ -254,18 +203,18 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" }
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 3) * 0.15 * (Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x.get('n_rooms'))) },
+      { group: "car", icon: "directions_car", name: "places habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 3) * 0.15 * (Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places habitants/visiteurs", formula: ((x) => Math.floor(x.get('n_rooms'))) },
 
 
-      { group: "station", icon: "ev_station", name: "# équipements niv. B", formula: ((x, f = 100.0, r = 0.0) => (Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) * (x.get('n_housings') > 2.0 ? 2 / 3 : 1.0)), 50), 1)) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => 0.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. B", formula: ((x, f = 100.0, r = 0.0) => (Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) * (x.get('n_housings') > 2.0 ? 2 / 3 : 1.0)), 50), 1)) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => 0.0) },
       // { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 2.0) * Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((x.get('n_housings') > 2.0) * 1 / 3 * ((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk'))) },
-      { group: "station", icon: "ev_station", name: "# pas concerné", formula: ((x, f = 100.0, r = 0.0) => 0.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((x.get('n_housings') > 2.0) * 1 / 3 * ((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk'))) },
+      { group: "station", icon: "ev_station", name: "pas concerné", formula: ((x, f = 100.0, r = 0.0) => 0.0) },
     ]
   }),
   new Affectation({
@@ -284,12 +233,12 @@ export const affectations = [
       { id: "lowincome_reduction", name: "Logements avec encadrement ou étudiants", description: "Un facteur de réduction (maximum 50%) peut s'appliquer pour les logements avec encadrement dédiés aux bénéficiaires AVS/AI ou étudiants. Référez-vous à l’article 34 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 50.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 3) * 0.15 * (Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places minimales vélos habitants/visiteurs", formula: ((x) => Math.floor(x.get('n_housings'))) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 2) * Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 3) * 0.15 * (Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places habitants/visiteurs", formula: ((x) => Math.floor(x.get('n_housings'))) },
+      { group: "station", icon: "ev_station", name: "équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 2) * Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
 
@@ -309,12 +258,12 @@ export const affectations = [
       { id: "lowincome_reduction", name: "Logements avec encadrement ou étudiants", description: "Un facteur de réduction (maximum 50%) peut s'appliquer pour les logements avec encadrement dédiés aux bénéficiaires AVS/AI ou étudiants. Référez-vous à l’article 34 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 50.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 3) * 0.15 * (Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos habitants/visiteurs", formula: ((x) => Math.floor(x.get('n_rooms'))) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 2) * Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 3) * 0.15 * (Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places habitants/visiteurs", formula: ((x) => Math.floor(x.get('n_rooms'))) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 2) * Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -334,14 +283,14 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => 0.01 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places voitures clients", formula: ((x, f = 100.0, r = 0.0) => 0.002 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x.get('n_car_cmp_prk') * 1.0) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.01 * x.get('floor_area') + 0.002 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.004 * x.get('floor_area'))) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.05 * x.get('n_staff')) : Math.ceil(0.001 * x.get('floor_area'))) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.01 * x.get('floor_area') + 0.002 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel", formula: ((x, f = 100.0, r = 0.0) => 0.01 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places clients", formula: ((x, f = 100.0, r = 0.0) => 0.002 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour véhicules d’entreprise", formula: ((x) => x.get('n_car_cmp_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.01 * x.get('floor_area') + 0.002 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.004 * x.get('floor_area'))) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.05 * x.get('n_staff')) : Math.ceil(0.001 * x.get('floor_area'))) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.01 * x.get('floor_area') + 0.002 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
 
@@ -362,14 +311,14 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places voitures clients", formula: ((x, f = 100.0, r = 0.0) => 0.0001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x.get('n_car_cmp_prk') * 1.0) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.001 * x.get('floor_area') + 0.0001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.004 * x.get('floor_area'))) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.05 * x.get('n_staff')) : Math.ceil(0.001 * x.get('floor_area'))) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.001 * x.get('floor_area') + 0.0001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places clients", formula: ((x, f = 100.0, r = 0.0) => 0.0001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour véhicules d’entreprise", formula: ((x) => x.get('n_car_cmp_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.001 * x.get('floor_area') + 0.0001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.004 * x.get('floor_area'))) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.05 * x.get('n_staff')) : Math.ceil(0.001 * x.get('floor_area'))) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.001 * x.get('floor_area') + 0.0001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -389,14 +338,14 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.02 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.02 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "# places clients", formula: ((x, f = 100.0, r = 0.0) => (0.01 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x.get('n_car_cmp_prk') * 1.0) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.02 * x.get('floor_area') + 0.01 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.01 * x.get('floor_area'))) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.3 * x.get('n_staff')) : Math.ceil(0.015 * x.get('floor_area'))) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.02 * x.get('floor_area') + 0.01 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places pour véhicules d’entreprise", formula: ((x) => x.get('n_car_cmp_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.02 * x.get('floor_area') + 0.01 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.01 * x.get('floor_area'))) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.3 * x.get('n_staff')) : Math.ceil(0.015 * x.get('floor_area'))) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.02 * x.get('floor_area') + 0.01 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
 
@@ -417,14 +366,14 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.02 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places clients", formula: ((x, f = 100.0, r = 0.0) => (0.005 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x.get('n_car_cmp_prk') * 1.0) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.02 * x.get('floor_area') + 0.005 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.01 * x.get('floor_area'))) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.05 * x.get('n_staff')) : Math.ceil(0.0025 * x.get('floor_area'))) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.02 * x.get('floor_area') + 0.005 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.02 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places clients", formula: ((x, f = 100.0, r = 0.0) => (0.005 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour véhicules d’entreprise", formula: ((x) => x.get('n_car_cmp_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.02 * x.get('floor_area') + 0.005 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.01 * x.get('floor_area'))) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.05 * x.get('n_staff')) : Math.ceil(0.0025 * x.get('floor_area'))) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.02 * x.get('floor_area') + 0.005 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
 
@@ -445,14 +394,14 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.02 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places clients", formula: ((x, f = 100.0, r = 0.0) => (0.08 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x.get('n_car_cmp_prk') * 1.0) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.02 * x.get('floor_area') + 0.08 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.01 * x.get('floor_area'))) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.25 * x.get('n_staff')) : Math.ceil(0.015 * x.get('floor_area'))) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.02 * x.get('floor_area') + 0.08 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.02 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places clients", formula: ((x, f = 100.0, r = 0.0) => (0.08 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour véhicules d’entreprise", formula: ((x) => x.get('n_car_cmp_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.02 * x.get('floor_area') + 0.08 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.01 * x.get('floor_area'))) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.25 * x.get('n_staff')) : Math.ceil(0.015 * x.get('floor_area'))) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.02 * x.get('floor_area') + 0.08 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -472,14 +421,14 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.015 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places clients", formula: ((x, f = 100.0, r = 0.0) => (0.035 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour véhicules d’entreprise", formula: ((x) => x.get('n_car_cmp_prk') * 1.0) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.015 * x.get('floor_area') + 0.035 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.01 * x.get('floor_area'))) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(1.0 * x.get('n_staff')) : Math.ceil(0.015 * x.get('floor_area'))) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.015 * x.get('floor_area') + 0.035 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel", formula: ((x, f = 100.0, r = 0.0) => (0.015 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places clients", formula: ((x, f = 100.0, r = 0.0) => (0.035 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour véhicules d’entreprise", formula: ((x) => x.get('n_car_cmp_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.015 * x.get('floor_area') + 0.035 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.01 * x.get('floor_area'))) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(1.0 * x.get('n_staff')) : Math.ceil(0.015 * x.get('floor_area'))) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.015 * x.get('floor_area') + 0.035 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -499,12 +448,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min(x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min(x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -524,12 +473,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min(x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min(x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -549,12 +498,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min(x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min(x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -575,13 +524,13 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_emp_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_vis_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_emp_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_vis_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -602,13 +551,13 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_emp_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_vis_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_emp_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_vis_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -628,12 +577,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -653,12 +602,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -678,12 +627,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -703,12 +652,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -728,11 +677,11 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
     ]
   }),
   new Affectation({
@@ -752,12 +701,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -777,11 +726,11 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
     ]
   }),
   new Affectation({
@@ -802,13 +751,13 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_emp_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places voitures clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_vis_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_emp_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_vis_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -829,13 +778,13 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_emp_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_vis_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_emp_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_vis_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -856,13 +805,13 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_emp_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_vis_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_emp_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_vis_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -883,13 +832,13 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_emp_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places voitures visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_vis_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_emp_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_vis_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -909,12 +858,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -934,12 +883,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -959,12 +908,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -984,12 +933,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -1009,12 +958,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -1034,12 +983,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -1059,11 +1008,11 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
     ]
   }),
   new Affectation({
@@ -1083,12 +1032,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -1108,12 +1057,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -1133,11 +1082,11 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
     ]
   }),
   new Affectation({
@@ -1157,11 +1106,11 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
     ]
   }),
   new Affectation({
@@ -1181,11 +1130,11 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
     ]
   }),
   new Affectation({
@@ -1205,11 +1154,11 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "#places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
     ]
   }),
   new Affectation({
@@ -1229,11 +1178,11 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
     ]
   }),
   new Affectation({
@@ -1253,12 +1202,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -1278,11 +1227,11 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
     ]
   }),
   new Affectation({
@@ -1302,12 +1251,12 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "# équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
     ]
   }),
   new Affectation({
@@ -1327,11 +1276,11 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
     ]
   }),
   new Affectation({
@@ -1351,11 +1300,11 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
     ]
   }),
   new Affectation({
@@ -1375,11 +1324,11 @@ export const affectations = [
       { id: "env_rdn", name: "Protection de l’environnement et sauvegarde du patrimoine", description: "Un facteur de réduction peut s'appliquer en lien avec la législation sur l'environnement (notamment OPB ou Opair) ou la sauvegarde du patrimoine (notamment mise sous protection ou ISOS). Référez-vous à l’article 33 du RELConstr. et, si besoin, contactez la commune ou les services compétents.", type: "special reduction", unit: "%", min: 0.0, max: 100.0, value: 0.0, hint: "" },
     ],
     outputs: [
-      { group: "car", icon: "directions_car", name: "# places voitures personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "# places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
-      { group: "bicycle", icon: "directions_bike", name: "# places vélos visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "motorcycle", icon: "motorcycle", name: "# places motos personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
+      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
+      { group: "bicycle", icon: "directions_bike", name: "places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "motorcycle", icon: "motorcycle", name: "places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
     ]
   }),
 
