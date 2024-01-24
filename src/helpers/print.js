@@ -130,7 +130,7 @@ export const print = (project) => {
 
             // SECTION STATIONNEMENTS VOITURES
             {
-                text: `Conformément à l'art. 30 du RELConstr., le calcul du nombre de places de stationnement pour voitures à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                text: `Conformément à l'art. 30 du RELConstr., le nombre de places de stationnement pour voitures à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
                 style: 'body',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
                 render: true
@@ -276,7 +276,7 @@ export const print = (project) => {
             // SECTION EQUIPEMENTS DE RECHARGE POUR VEHICULES ELECTRIQUES
             {
                 pageBreak: "before",
-                text: `Conformément à l'art. 34 du RELCEn., le calcul du nombre d'équipements pour véhicules électriques à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                text: `Conformément à l'art. 34 du RELCEn., le nombre d'équipements pour véhicules électriques à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
                 style: 'body',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
                 render: true
@@ -339,7 +339,7 @@ export const print = (project) => {
             // SECTION STATIONNEMENTS DEUX-ROUES MOTORISES
             {
                 pageBreak: "before",
-                text: `Conformément à l'art. 37c RELConstr., le calcul du nombre de places de stationnements pour deux-roues motorisés à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                text: `Conformément à l'art. 37c RELConstr., le nombre de places de stationnements pour deux-roues motorisés à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
                 style: 'body',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
                 render: true
@@ -475,7 +475,7 @@ export const print = (project) => {
             // SECTION STATIONNEMENTS VELOS
             {
                 pageBreak: "before",
-                text: `Conformément à l'art. 37b du RELConstr., le calcul du nombre de places de stationnements pour vélos (y.c. électriques et spéciaux) à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                text: `Conformément à l'art. 37b du RELConstr., le nombre de places de stationnements pour vélos (y.c. électriques et spéciaux) à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
                 style: 'body',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
                 render: true
