@@ -146,7 +146,7 @@ export const print = (project) => {
                             { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
                             { text: 'Variable(s)', style: 'tableHeader', alignment: 'left' },
                             { text: 'Facteur(s) de réduction', style: 'tableHeader', alignment: 'left' },
-                            { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
+                            { text: 'Type de place', style: 'tableHeader', alignment: 'left' },
                             { text: 'Besoin brut', style: 'tableHeader', alignment: 'right' },
                             { text: '% Loc.', style: 'tableHeader', alignment: 'right' },
                             { text: 'Besoin net', style: 'tableHeader', alignment: 'right' },
@@ -286,7 +286,7 @@ export const print = (project) => {
                 table: {
                     headerRows: 1,
                     dontBreakRows: false,
-                    widths: ['*', 'auto', 'auto', 55],
+                    widths: ['auto', 'auto', 'auto', 55],
                     body: [
                         [
                             { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
@@ -349,16 +349,12 @@ export const print = (project) => {
                 table: {
                     headerRows: 1,
                     dontBreakRows: false,
-                    widths: ['*', 'auto', 'auto', 'auto', 55, 55, 55, 55],
+                    widths: ['auto', 'auto', 'auto', 55],
                     body: [
                         [
                             { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
                             { text: 'Variable(s)', style: 'tableHeader', alignment: 'left' },
-                            { text: 'Facteur(s) de réduction', style: 'tableHeader', alignment: 'left' },
-                            { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
-                            { text: 'Besoin brut', style: 'tableHeader', alignment: 'right' },
-                            { text: 'Besoin net', style: 'tableHeader', alignment: 'right' },
-                            { text: 'Besoin net réduit', style: 'tableHeader', alignment: 'right' },
+                            { text: 'Type de place', style: 'tableHeader', alignment: 'left' },
                             { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right' },
                         ],
                         ...project.affectations.filter(o => o.active && o.outputs.length > 0)
@@ -370,33 +366,14 @@ export const print = (project) => {
                                     { rowSpan: o.outputs.filter(e => e.group === 'motorcycle').length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
 
                                     // Variable(s)
-                                    // { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
                                     { rowSpan: o.outputs.filter(e => e.group === 'motorcycle').length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
-
-                                    // Facteur(s) de réduction
-                                    { rowSpan: o.outputs.filter(e => e.group === 'motorcycle').length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
-                                    // { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
 
                                     // Catégorie
                                     { text: o.outputs.filter(e => e.group === 'motorcycle')[0].name, style: 'tableBody', alignment: 'left' },
-                                    // { text: o.outputs[0].name, style: 'tableBody', alignment: 'left' },
-
-                                    // Besoin brut
-                                    // { text: o.output[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    { text: o.rawOutput.filter(e => e.group === 'motorcycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                                    // Besoin net
-                                    // { text: o.netOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    { text: o.netOutput2.filter(e => e.group === 'motorcycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                                    // Besoin net réduit
-                                    // { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    { text: o.reducedOutput2.filter(e => e.group === 'motorcycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     // Places à réaliser
-                                    // { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                     { text: o.reducedOutput2.filter(e => e.group === 'motorcycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    // { text: Math.ceil(o.reducedOutput[0]), style: 'tableBody', alignment: 'right', noWrap: true },
+
                                 ],
 
                                 // TABLE BODY ROWS (ROW 2 -> LAST)
@@ -404,21 +381,9 @@ export const print = (project) => {
                                     (el, i) => [
                                         {},
                                         {},
-                                        {},
 
                                         // Catégorie
                                         { text: el.name, style: 'tableBody', alignment: 'left' },
-
-                                        // Besoin brut
-                                        { text: o.rawOutput.filter(e => e.group === 'motorcycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                        // { text: o.output[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                                        // Besoin net
-                                        // { text: o.netOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                        { text: o.netOutput2.filter(e => e.group === 'motorcycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                                        // Besoin net réduit
-                                        { text: o.reducedOutput2.filter(e => e.group === 'motorcycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                         // Places à réaliser
                                         { text: o.reducedOutput2.filter(e => e.group === 'motorcycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
@@ -429,19 +394,9 @@ export const print = (project) => {
                                 [
                                     {},
                                     {},
-                                    {},
 
                                     // Sous-total
                                     { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
-
-                                    // Besoin brut (sous-total)
-                                    { text: o.totalOutput2("motorcycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-
-                                    // Besoin net (sous-total)
-                                    { text: o.totalNetOutput2("motorcycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-
-                                    // Besoin net réduit (sous-total)
-                                    { text: o.totalReducedOutput2("motorcycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
 
                                     // Places à réaliser (sous-total)
                                     { text: o.totalReducedOutput2("motorcycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
@@ -454,12 +409,7 @@ export const print = (project) => {
                             { text: 'Total', style: 'tableHeader', bold: true, alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
-                            { text: '', style: 'tableHeader', alignment: 'left' },
-                            { text: '', style: 'tableHeader', alignment: 'left', noWrap: true },
-                            { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
-                            { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
                             { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutput2("motorcycle")).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
-                            /* { text: project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0), style: 'tableHeader', alignment: 'right', noWrap: true }, */
                         ],
                     ]
                 },
@@ -485,16 +435,12 @@ export const print = (project) => {
                 table: {
                     headerRows: 1,
                     dontBreakRows: false,
-                    widths: ['*', 'auto', 'auto', 'auto', 55, 55, 55, 55],
+                    widths: ['auto', 'auto', 'auto', 55],
                     body: [
                         [
                             { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
                             { text: 'Variable(s)', style: 'tableHeader', alignment: 'left' },
-                            { text: 'Facteur(s) de réduction', style: 'tableHeader', alignment: 'left' },
-                            { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
-                            { text: 'Besoin brut', style: 'tableHeader', alignment: 'right' },
-                            { text: 'Besoin net', style: 'tableHeader', alignment: 'right' },
-                            { text: 'Besoin net réduit', style: 'tableHeader', alignment: 'right' },
+                            { text: 'Type de place', style: 'tableHeader', alignment: 'left' },
                             { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right' },
                         ],
                         ...project.affectations.filter(o => o.active && o.outputs.length > 0)
@@ -506,33 +452,14 @@ export const print = (project) => {
                                     { rowSpan: o.outputs.filter(e => e.group === 'bicycle').length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
 
                                     // Variable(s)
-                                    // { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
                                     { rowSpan: o.outputs.filter(e => e.group === 'bicycle').length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
-
-                                    // Facteur(s) de réduction
-                                    { rowSpan: o.outputs.filter(e => e.group === 'bicycle').length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
-                                    // { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
 
                                     // Catégorie
                                     { text: o.outputs.filter(e => e.group === 'bicycle')[0].name, style: 'tableBody', alignment: 'left' },
-                                    // { text: o.outputs[0].name, style: 'tableBody', alignment: 'left' },
-
-                                    // Besoin brut
-                                    // { text: o.output[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    { text: o.rawOutput.filter(e => e.group === 'bicycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                                    // Besoin net
-                                    // { text: o.netOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    { text: o.netOutput2.filter(e => e.group === 'bicycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                                    // Besoin net réduit
-                                    // { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    { text: o.reducedOutput2.filter(e => e.group === 'bicycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     // Places à réaliser
-                                    // { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                     { text: o.reducedOutput2.filter(e => e.group === 'bicycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    // { text: Math.ceil(o.reducedOutput[0]), style: 'tableBody', alignment: 'right', noWrap: true },
+
                                 ],
 
                                 // TABLE BODY ROWS (ROW 2 -> LAST)
@@ -540,21 +467,9 @@ export const print = (project) => {
                                     (el, i) => [
                                         {},
                                         {},
-                                        {},
 
                                         // Catégorie
                                         { text: el.name, style: 'tableBody', alignment: 'left' },
-
-                                        // Besoin brut
-                                        { text: o.rawOutput.filter(e => e.group === 'bicycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                        // { text: o.output[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                                        // Besoin net
-                                        // { text: o.netOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                        { text: o.netOutput2.filter(e => e.group === 'bicycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                                        // Besoin net réduit
-                                        { text: o.reducedOutput2.filter(e => e.group === 'bicycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                         // Places à réaliser
                                         { text: o.reducedOutput2.filter(e => e.group === 'bicycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
@@ -565,19 +480,9 @@ export const print = (project) => {
                                 [
                                     {},
                                     {},
-                                    {},
 
                                     // Sous-total
                                     { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
-
-                                    // Besoin brut (sous-total)
-                                    { text: o.totalOutput2("bicycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-
-                                    // Besoin net (sous-total)
-                                    { text: o.totalNetOutput2("bicycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-
-                                    // Besoin net réduit (sous-total)
-                                    { text: o.totalReducedOutput2("bicycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
 
                                     // Places à réaliser (sous-total)
                                     { text: o.totalReducedOutput2("bicycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
@@ -590,12 +495,8 @@ export const print = (project) => {
                             { text: 'Total', style: 'tableHeader', bold: true, alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
-                            { text: '', style: 'tableHeader', alignment: 'left' },
-                            { text: '', style: 'tableHeader', alignment: 'left', noWrap: true },
-                            { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
-                            { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
                             { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutput2("bicycle")).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
-                            /* { text: project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0), style: 'tableHeader', alignment: 'right', noWrap: true }, */
+
                         ],
                     ]
                 },
