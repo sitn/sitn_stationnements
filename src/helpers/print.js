@@ -292,7 +292,7 @@ export const print = (project) => {
                             { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
                             { text: 'Affectation(s)', style: 'tableHeader', alignment: 'left' },
                             { text: "Type d'équipement (selon SIA 2060)", style: 'tableHeader', alignment: 'left' },
-                            { text: 'Nombre à réaliser', style: 'tableHeader', alignment: 'right' },
+                            { text: 'Équip. à réaliser', style: 'tableHeader', alignment: 'right' },
                         ],
                         [
                             { text: 'Logements', style: 'tableBody', alignment: 'left' },
