@@ -24,12 +24,14 @@ pdfMake.fonts = {
         italics: `${url}/fonts/Roboto-Italic.ttf`,
         bolditalics: `${url}fonts/Roboto-MediumItalic.ttf`,
     },
+    /*
     Montserrat: {
         normal: `${url}/fonts/Montserrat-Regular.ttf`,
         bold: `${url}/fonts/Montserrat-Bold.ttf`,
         italics: `${url}/fonts/Montserrat-Italic.ttf`,
         bolditalics: `${url}/fonts/Montserrat-BoldItalic.ttf`,
     }
+    */
 }
 
 const mmToPoints = (mm) => {
@@ -96,7 +98,7 @@ export const print = (project) => {
                         width: '*',
                         alignment: 'center',
                         stack: [
-                            { text: 'Calcul du nombre de places de stationnement voiture', style: 'header' },
+                            { text: 'Calcul des stationnements et équipements', style: 'header' },
                             { text: 'Annexe à joindre à la demande de permis', style: 'subheader' },
                         ],
                     },
@@ -125,8 +127,10 @@ export const print = (project) => {
                 margin: [0, 5, 0, 5], // [left, top, right, bottom]
                 render: project.locationTypeJustification !== ''
             },
+
+            // SECTION STATIONNEMENTS VOITURES
             {
-                text: `Conformément aux articles 26 à 37d du RELConstr., le calcul du nombre de places de stationnement voiture à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                text: `Conformément à l'art. 30 du RELConstr., le calcul du nombre de places de stationnement pour voitures à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
                 style: 'body',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
                 render: true
@@ -149,47 +153,100 @@ export const print = (project) => {
                             { text: 'Besoin net réduit', style: 'tableHeader', alignment: 'right' },
                             { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right' },
                         ],
-                        ...project.affectations
-                            .filter(o => o.active && o.outputs.length > 0)
+                        ...project.affectations.filter(o => o.active && o.outputs.length > 0)
                             .map(o => [
+
+                                // TABLE FIRST ROW
                                 [
-                                    { rowSpan: o.outputs.length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
-                                    { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
-                                    { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
-                                    { text: o.outputs[0].name, style: 'tableBody', alignment: 'left' },
-                                    { text: o.output[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    // Affectation
+                                    { rowSpan: o.outputs.filter(e => e.group === 'car').length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
+
+                                    // Variable(s)
+                                    // { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+                                    { rowSpan: o.outputs.filter(e => e.group === 'car').length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+
+                                    // Facteur(s) de réduction
+                                    { rowSpan: o.outputs.filter(e => e.group === 'car').length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
+                                    // { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
+
+                                    // Catégorie
+                                    { text: o.outputs.filter(e => e.group === 'car')[0].name, style: 'tableBody', alignment: 'left' },
+                                    // { text: o.outputs[0].name, style: 'tableBody', alignment: 'left' },
+
+                                    // Besoin brut
+                                    // { text: o.output[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.rawOutput.filter(e => e.group === 'car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                    // % Loc.
                                     { text: o.variables.filter((x) => x.type === 'reduction').map((x) => (`${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    { text: o.netOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                    /* { text: Math.ceil(o.reducedOutput[0]), style: 'tableBody', alignment: 'right', noWrap: true }, */
+
+                                    // Besoin net
+                                    // { text: o.netOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.netOutput2.filter(e => e.group === 'car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                    // Besoin net réduit
+                                    // { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.reducedOutput2.filter(e => e.group === 'car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                    // Places à réaliser
+                                    // { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.reducedOutput2.filter(e => e.group === 'car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    // { text: Math.ceil(o.reducedOutput[0]), style: 'tableBody', alignment: 'right', noWrap: true },
                                 ],
-                                ...o.outputs.slice(1).map(
+
+                                // TABLE BODY ROWS (ROW 2 -> LAST)
+                                ...o.outputs.filter(e => e.group === 'car').slice(1).map(
                                     (el, i) => [
                                         {},
                                         {},
                                         {},
+
+                                        // Catégorie
                                         { text: el.name, style: 'tableBody', alignment: 'left' },
-                                        { text: o.output[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                        // Besoin brut
+                                        { text: o.rawOutput.filter(e => e.group === 'car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        // { text: o.output[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                        // % Loc.
                                         { text: o.variables.filter((x) => x.type === 'reduction').map((x) => (`${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
-                                        { text: o.netOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                        { text: o.reducedOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                        { text: o.reducedOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                        /* { text: Math.ceil(o.reducedOutput[i + 1]), style: 'tableBody', alignment: 'right', noWrap: true }, */
+
+                                        // Besoin net
+                                        // { text: o.netOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.netOutput2.filter(e => e.group === 'car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                        // Besoin net réduit
+                                        { text: o.reducedOutput2.filter(e => e.group === 'car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                        // Places à réaliser
+                                        { text: o.reducedOutput2.filter(e => e.group === 'car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
                                     ]
                                 ),
+
                                 [
                                     {},
                                     {},
                                     {},
+
+                                    // Sous-total
                                     { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
-                                    { text: o.totalOutput.toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+
+                                    // Besoin brut (sous-total)
+                                    { text: o.totalOutput2("car").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+
                                     {},
-                                    { text: o.totalNetOutput.toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-                                    { text: o.totalReducedOutput.toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-                                    { text: o.totalReducedOutput.toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-                                    /* { text: o.totalReducedOutputCeil.toFixed(0), style: 'tableBody', bold: true, alignment: 'right', noWrap: true }, */
+
+                                    // Besoin net (sous-total)
+                                    { text: o.totalNetOutput2("car").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+
+                                    // Besoin net réduit (sous-total)
+                                    { text: o.totalReducedOutput2("car").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+
+                                    // Places à réaliser (sous-total)
+                                    { text: o.totalReducedOutput2("car").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                 ],
+
                             ]
                             )
                             .flat(1),
@@ -202,8 +259,8 @@ export const print = (project) => {
                             { text: '', style: 'tableHeader', alignment: 'left', noWrap: true },
                             { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
                             { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
-                            { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
-                            /*                             { text: project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0), style: 'tableHeader', alignment: 'right', noWrap: true }, */
+                            { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutput2("car")).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
+                            /* { text: project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0), style: 'tableHeader', alignment: 'right', noWrap: true }, */
                         ],
                     ]
                 },
@@ -215,6 +272,343 @@ export const print = (project) => {
                 },
                 render: true
             },
+
+            // SECTION EQUIPEMENTS DE RECHARGE POUR VEHICULES ELECTRIQUES
+            {
+                pageBreak: "before",
+                text: `Conformément à l'art. 34 du RELCEn., le calcul du nombre d'équipements pour véhicules électriques à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                style: 'body',
+                margin: [0, 5, 0, 2], // [left, top, right, bottom]
+                render: true
+            },
+            {
+                style: 'table',
+                table: {
+                    headerRows: 1,
+                    dontBreakRows: false,
+                    widths: ['*', 'auto', 'auto', 55],
+                    body: [
+                        [
+                            { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
+                            { text: 'Affectation(s)', style: 'tableHeader', alignment: 'left' },
+                            { text: "Type d'équipement (selon SIA 2060)", style: 'tableHeader', alignment: 'left' },
+                            { text: 'Nombre à réaliser', style: 'tableHeader', alignment: 'right' },
+                        ],
+                        [
+                            { text: 'Logements', style: 'tableBody', alignment: 'left' },
+                            { text: project.getAffectationNames('Logement').join('; '), style: 'tableBody', alignment: 'left' },
+                            { text: "Niveau D (bornes)", style: 'tableBody', alignment: 'left' },
+                            { text: project.getStations("Logement"), style: 'tableBody', alignment: 'right' },
+                        ],
+                        [
+                            { text: 'Activités', style: 'tableBody', alignment: 'left' },
+                            { text: project.getAffectationNames('Activité').join('; '), style: 'tableBody', alignment: 'left' },
+                            { text: "Niveau C2", style: 'tableBody', alignment: 'left' },
+                            { text: project.getStations("Activité"), style: 'tableBody', alignment: 'right' },
+                        ],
+                        [
+                            { text: 'Logements et activités', style: 'tableBody', alignment: 'left' },
+                            { text: 'Cf. affectations ci-dessus', style: 'tableBody', alignment: 'left' },
+                            { text: "Niveau B", style: 'tableBody', alignment: 'left' },
+                            { text: Math.ceil(project.getReducedNeeds('car')) - project.getStations("Logement") - project.getStations("Activité") - project.getStations("Pas concerné"), style: 'tableBody', alignment: 'right' },
+                        ],
+                        [
+                            { text: 'Pas concerné', style: 'tableBody', alignment: 'left' },
+                            { text: project.getAffectationNames('Pas concerné').join('; '), style: 'tableBody', alignment: 'left' },
+                            { text: "Aucun", style: 'tableBody', alignment: 'left' },
+                            { text: project.getStations("Pas concerné"), style: 'tableBody', alignment: 'right' },
+                        ],
+                        [
+                            { text: 'Total', style: 'tableHeader', alignment: 'left' },
+                            { text: '', style: 'tableHeader', alignment: 'left' },
+                            { text: '', style: 'tableHeader', alignment: 'left' },
+                            { text: Math.ceil(project.getReducedNeeds('car')), style: 'tableHeader', alignment: 'right' },
+                        ],
+                    ]
+                },
+                layout: {
+                    hLineWidth: function (i, node) {
+                        return (i === 0 || i === node.table.body.length) ? 1 : 1;
+                    },
+                    vLineWidth: (i, node) => ((i === 0 || i === node.table.widths.length) ? 0 : 0),
+                },
+                render: true
+            },
+
+
+            // SECTION STATIONNEMENTS DEUX-ROUES MOTORISES
+            {
+                pageBreak: "before",
+                text: `Conformément à l'art. 37c RELConstr., le calcul du nombre de places de stationnements pour deux-roues motorisés à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                style: 'body',
+                margin: [0, 5, 0, 2], // [left, top, right, bottom]
+                render: true
+            },
+            {
+                style: 'table',
+                table: {
+                    headerRows: 1,
+                    dontBreakRows: false,
+                    widths: ['*', 'auto', 'auto', 'auto', 55, 55, 55, 55],
+                    body: [
+                        [
+                            { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
+                            { text: 'Variable(s)', style: 'tableHeader', alignment: 'left' },
+                            { text: 'Facteur(s) de réduction', style: 'tableHeader', alignment: 'left' },
+                            { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
+                            { text: 'Besoin brut', style: 'tableHeader', alignment: 'right' },
+                            { text: 'Besoin net', style: 'tableHeader', alignment: 'right' },
+                            { text: 'Besoin net réduit', style: 'tableHeader', alignment: 'right' },
+                            { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right' },
+                        ],
+                        ...project.affectations.filter(o => o.active && o.outputs.length > 0)
+                            .map(o => [
+
+                                // TABLE FIRST ROW
+                                [
+                                    // Affectation
+                                    { rowSpan: o.outputs.filter(e => e.group === 'motorcycle').length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
+
+                                    // Variable(s)
+                                    // { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+                                    { rowSpan: o.outputs.filter(e => e.group === 'motorcycle').length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+
+                                    // Facteur(s) de réduction
+                                    { rowSpan: o.outputs.filter(e => e.group === 'motorcycle').length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
+                                    // { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
+
+                                    // Catégorie
+                                    { text: o.outputs.filter(e => e.group === 'motorcycle')[0].name, style: 'tableBody', alignment: 'left' },
+                                    // { text: o.outputs[0].name, style: 'tableBody', alignment: 'left' },
+
+                                    // Besoin brut
+                                    // { text: o.output[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.rawOutput.filter(e => e.group === 'motorcycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                    // Besoin net
+                                    // { text: o.netOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.netOutput2.filter(e => e.group === 'motorcycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                    // Besoin net réduit
+                                    // { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.reducedOutput2.filter(e => e.group === 'motorcycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                    // Places à réaliser
+                                    // { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.reducedOutput2.filter(e => e.group === 'motorcycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    // { text: Math.ceil(o.reducedOutput[0]), style: 'tableBody', alignment: 'right', noWrap: true },
+                                ],
+
+                                // TABLE BODY ROWS (ROW 2 -> LAST)
+                                ...o.outputs.filter(e => e.group === 'motorcycle').slice(1).map(
+                                    (el, i) => [
+                                        {},
+                                        {},
+                                        {},
+
+                                        // Catégorie
+                                        { text: el.name, style: 'tableBody', alignment: 'left' },
+
+                                        // Besoin brut
+                                        { text: o.rawOutput.filter(e => e.group === 'motorcycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        // { text: o.output[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                        // Besoin net
+                                        // { text: o.netOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.netOutput2.filter(e => e.group === 'motorcycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                        // Besoin net réduit
+                                        { text: o.reducedOutput2.filter(e => e.group === 'motorcycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                        // Places à réaliser
+                                        { text: o.reducedOutput2.filter(e => e.group === 'motorcycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                    ]
+                                ),
+
+                                [
+                                    {},
+                                    {},
+                                    {},
+
+                                    // Sous-total
+                                    { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
+
+                                    // Besoin brut (sous-total)
+                                    { text: o.totalOutput2("motorcycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+
+                                    // Besoin net (sous-total)
+                                    { text: o.totalNetOutput2("motorcycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+
+                                    // Besoin net réduit (sous-total)
+                                    { text: o.totalReducedOutput2("motorcycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+
+                                    // Places à réaliser (sous-total)
+                                    { text: o.totalReducedOutput2("motorcycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                ],
+
+                            ]
+                            )
+                            .flat(1),
+                        [
+                            { text: 'Total', style: 'tableHeader', bold: true, alignment: 'left' },
+                            { text: '', style: 'tableHeader', alignment: 'left' },
+                            { text: '', style: 'tableHeader', alignment: 'left' },
+                            { text: '', style: 'tableHeader', alignment: 'left' },
+                            { text: '', style: 'tableHeader', alignment: 'left', noWrap: true },
+                            { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
+                            { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
+                            { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutput2("motorcycle")).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
+                            /* { text: project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0), style: 'tableHeader', alignment: 'right', noWrap: true }, */
+                        ],
+                    ]
+                },
+                layout: {
+                    hLineWidth: function (i, node) {
+                        return (i === 0 || i === node.table.body.length) ? 1 : 1;
+                    },
+                    vLineWidth: (i, node) => ((i === 0 || i === node.table.widths.length) ? 0 : 0),
+                },
+                render: true
+            },
+
+            // SECTION STATIONNEMENTS VELOS
+            {
+                pageBreak: "before",
+                text: `Conformément à l'art. 37b du RELConstr., le calcul du nombre de places de stationnements pour vélos (y.c. électriques et spéciaux) à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                style: 'body',
+                margin: [0, 5, 0, 2], // [left, top, right, bottom]
+                render: true
+            },
+            {
+                style: 'table',
+                table: {
+                    headerRows: 1,
+                    dontBreakRows: false,
+                    widths: ['*', 'auto', 'auto', 'auto', 55, 55, 55, 55],
+                    body: [
+                        [
+                            { text: 'Affectation', style: 'tableHeader', alignment: 'left' },
+                            { text: 'Variable(s)', style: 'tableHeader', alignment: 'left' },
+                            { text: 'Facteur(s) de réduction', style: 'tableHeader', alignment: 'left' },
+                            { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
+                            { text: 'Besoin brut', style: 'tableHeader', alignment: 'right' },
+                            { text: 'Besoin net', style: 'tableHeader', alignment: 'right' },
+                            { text: 'Besoin net réduit', style: 'tableHeader', alignment: 'right' },
+                            { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right' },
+                        ],
+                        ...project.affectations.filter(o => o.active && o.outputs.length > 0)
+                            .map(o => [
+
+                                // TABLE FIRST ROW
+                                [
+                                    // Affectation
+                                    { rowSpan: o.outputs.filter(e => e.group === 'bicycle').length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
+
+                                    // Variable(s)
+                                    // { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+                                    { rowSpan: o.outputs.filter(e => e.group === 'bicycle').length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+
+                                    // Facteur(s) de réduction
+                                    { rowSpan: o.outputs.filter(e => e.group === 'bicycle').length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
+                                    // { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
+
+                                    // Catégorie
+                                    { text: o.outputs.filter(e => e.group === 'bicycle')[0].name, style: 'tableBody', alignment: 'left' },
+                                    // { text: o.outputs[0].name, style: 'tableBody', alignment: 'left' },
+
+                                    // Besoin brut
+                                    // { text: o.output[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.rawOutput.filter(e => e.group === 'bicycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                    // Besoin net
+                                    // { text: o.netOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.netOutput2.filter(e => e.group === 'bicycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                    // Besoin net réduit
+                                    // { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.reducedOutput2.filter(e => e.group === 'bicycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                    // Places à réaliser
+                                    // { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.reducedOutput2.filter(e => e.group === 'bicycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    // { text: Math.ceil(o.reducedOutput[0]), style: 'tableBody', alignment: 'right', noWrap: true },
+                                ],
+
+                                // TABLE BODY ROWS (ROW 2 -> LAST)
+                                ...o.outputs.filter(e => e.group === 'bicycle').slice(1).map(
+                                    (el, i) => [
+                                        {},
+                                        {},
+                                        {},
+
+                                        // Catégorie
+                                        { text: el.name, style: 'tableBody', alignment: 'left' },
+
+                                        // Besoin brut
+                                        { text: o.rawOutput.filter(e => e.group === 'bicycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        // { text: o.output[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                        // Besoin net
+                                        // { text: o.netOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.netOutput2.filter(e => e.group === 'bicycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                        // Besoin net réduit
+                                        { text: o.reducedOutput2.filter(e => e.group === 'bicycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                        // Places à réaliser
+                                        { text: o.reducedOutput2.filter(e => e.group === 'bicycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+
+                                    ]
+                                ),
+
+                                [
+                                    {},
+                                    {},
+                                    {},
+
+                                    // Sous-total
+                                    { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
+
+                                    // Besoin brut (sous-total)
+                                    { text: o.totalOutput2("bicycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+
+                                    // Besoin net (sous-total)
+                                    { text: o.totalNetOutput2("bicycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+
+                                    // Besoin net réduit (sous-total)
+                                    { text: o.totalReducedOutput2("bicycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+
+                                    // Places à réaliser (sous-total)
+                                    { text: o.totalReducedOutput2("bicycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                ],
+
+                            ]
+                            )
+                            .flat(1),
+                        [
+                            { text: 'Total', style: 'tableHeader', bold: true, alignment: 'left' },
+                            { text: '', style: 'tableHeader', alignment: 'left' },
+                            { text: '', style: 'tableHeader', alignment: 'left' },
+                            { text: '', style: 'tableHeader', alignment: 'left' },
+                            { text: '', style: 'tableHeader', alignment: 'left', noWrap: true },
+                            { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
+                            { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
+                            { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutput2("bicycle")).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
+                            /* { text: project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutputCeil).reduce((acc, obj) => { return acc + obj }, 0), style: 'tableHeader', alignment: 'right', noWrap: true }, */
+                        ],
+                    ]
+                },
+                layout: {
+                    hLineWidth: function (i, node) {
+                        return (i === 0 || i === node.table.body.length) ? 1 : 1;
+                    },
+                    vLineWidth: (i, node) => ((i === 0 || i === node.table.widths.length) ? 0 : 0),
+                },
+                render: true
+            },
+
+
         ],
         styles: {
             header: {
