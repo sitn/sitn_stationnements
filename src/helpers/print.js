@@ -147,7 +147,7 @@ export const print = (project) => {
                             { text: 'Besoin net réduit', style: 'tableHeader', alignment: 'right' },
                             { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right' },
                         ],
-                        ...project.affectations.filter(x => x.active && x.outputs.length > 0)
+                        ...project.getAffectations()
                             .map(o => [
 
                                 // TABLE FIRST ROW
@@ -156,28 +156,28 @@ export const print = (project) => {
                                     { rowSpan: o.getOutputs(['car', 'special']).length + 2, text: o.name, style: 'tableBody', alignment: 'left' },
 
                                     // Variable(s)
-                                    { rowSpan: o.getOutputs(['car', 'special']).length + 2, ul: o.getVariables('measurement').map((e) => (`${e.name} = ${e.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+                                    { rowSpan: o.getOutputs(['car', 'special']).length + 2, ul: o.getVariables(['measurement']).map((e) => (`${e.name} = ${e.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
 
                                     // Facteur(s) de réduction
-                                    { rowSpan: o.getOutputs(['car', 'special']).length + 2, ul: o.getVariables('special reduction').filter((e) => (e.value > 0)).map((e) => (`${e.name} = ${e.value} ${e.unit}`)), style: 'tableBody', alignment: 'left' },
+                                    { rowSpan: o.getOutputs(['car', 'special']).length + 2, ul: o.getVariables(['special reduction']).filter((e) => (e.value > 0)).map((e) => (`${e.name} = ${e.value} ${e.unit}`)), style: 'tableBody', alignment: 'left' },
 
                                     // Catégorie
-                                    { text: o.getOutputs('car')[0].name, style: 'tableBody', alignment: 'left' },
+                                    { text: o.getOutputs(['car'])[0].name, style: 'tableBody', alignment: 'left' },
 
                                     // Besoin brut
-                                    { text: o.getRawOutputs('car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.getRawOutputs(['car'])[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     // % Loc.
-                                    { text: o.getVariables('reduction').map((e) => (`${e.value} ${e.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.getVariables(['reduction']).map((e) => (`${e.value} ${e.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     // Besoin net
-                                    { text: o.getNetOutputs('car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.getNetOutputs(['car'])[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     // Besoin net réduit
-                                    { text: o.getReducedOutputs('car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.getReducedOutputs(['car'])[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     // Places à réaliser
-                                    { text: o.getReducedOutputs('car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.getReducedOutputs(['car'])[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                 ],
 
@@ -192,19 +192,19 @@ export const print = (project) => {
                                         { text: el.name, style: 'tableBody', alignment: 'left' },
 
                                         // Besoin brut
-                                        { text: o.getRawOutputs('car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.getRawOutputs(['car'])[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                         // % Loc.
-                                        { text: o.getVariables('reduction').map((e) => (`${e.value} ${e.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.getVariables(['reduction']).map((e) => (`${e.value} ${e.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                         // Besoin net
-                                        { text: o.getNetOutputs('car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.getNetOutputs(['car'])[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                         // Besoin net réduit
-                                        { text: o.getReducedOutputs('car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.getReducedOutputs(['car'])[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                         // Places à réaliser
-                                        { text: o.getReducedOutputs('car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.getReducedOutputs(['car'])[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     ]
                                 ),
@@ -218,18 +218,18 @@ export const print = (project) => {
                                     { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
 
                                     // Besoin brut (sous-total)
-                                    { text: o.getTotalOutput('car').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalOutput(['car']).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
 
                                     {},
 
                                     // Besoin net (sous-total)
-                                    { text: o.getTotalNetOutput('car').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalNetOutput(['car']).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
 
                                     // Besoin net réduit (sous-total)
-                                    { text: o.getTotalReducedOutput('car').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalReducedOutput(['car']).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
 
                                     // Places à réaliser (sous-total)
-                                    { text: o.getTotalReducedOutput('car').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalReducedOutput(['car']).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                 ],
 
                                 // TABLE BODY DATA ROWS - SPECIAL CARS
@@ -255,7 +255,7 @@ export const print = (project) => {
                                         { text: '-', style: 'tableBody', alignment: 'right', noWrap: true },
 
                                         // Places à réaliser
-                                        { text: o.getReducedOutputs('special')[i].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.getReducedOutputs(['special'])[i].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     ]
                                 ),
@@ -281,7 +281,7 @@ export const print = (project) => {
                                     { text: '-', style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
 
                                     // Places à réaliser (sous-total)
-                                    { text: o.getTotalReducedOutput('special').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalReducedOutput(['special']).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                 ],
 
                             ]
@@ -299,7 +299,7 @@ export const print = (project) => {
                             { text: '', style: 'tableHeader', alignment: 'left', noWrap: true },
                             { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
                             { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
-                            { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.getTotalReducedOutput(['car', 'special'])).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
+                            { text: Math.ceil(project.getAffectations().map((x) => x.getTotalReducedOutput(['car', 'special'])).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
                         ],
                     ]
                 },
@@ -396,27 +396,27 @@ export const print = (project) => {
                             { text: 'Type de place', style: 'tableHeader', alignment: 'left' },
                             { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right' },
                         ],
-                        ...project.affectations.filter(x => x.active && x.outputs.length > 0)
+                        ...project.getAffectations()
                             .map(o => [
 
                                 // TABLE FIRST ROW
                                 [
                                     // Affectation
-                                    { rowSpan: o.getOutputs('motorcycle').length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
+                                    { rowSpan: o.getOutputs(['motorcycle']).length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
 
                                     // Variable(s)
-                                    { rowSpan: o.getOutputs('motorcycle').length + 1, ul: o.getVariables('measurement').map((e) => (`${e.name} = ${e.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+                                    { rowSpan: o.getOutputs(['motorcycle']).length + 1, ul: o.getVariables(['measurement']).map((e) => (`${e.name} = ${e.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
 
                                     // Catégorie
-                                    { text: o.getOutputs('motorcycle')[0].name, style: 'tableBody', alignment: 'left' },
+                                    { text: o.getOutputs(['motorcycle'])[0].name, style: 'tableBody', alignment: 'left' },
 
                                     // Places à réaliser
-                                    { text: o.getReducedOutputs('motorcycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.getReducedOutputs(['motorcycle'])[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                 ],
 
                                 // TABLE BODY ROWS (ROW 2 -> LAST)
-                                ...o.getOutputs('motorcycle').slice(1).map(
+                                ...o.getOutputs(['motorcycle']).slice(1).map(
                                     (el, i) => [
                                         {},
                                         {},
@@ -425,7 +425,7 @@ export const print = (project) => {
                                         { text: el.name, style: 'tableBody', alignment: 'left' },
 
                                         // Places à réaliser
-                                        { text: o.getReducedOutputs('motorcycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.getReducedOutputs(['motorcycle'])[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     ]
                                 ),
@@ -438,7 +438,7 @@ export const print = (project) => {
                                     { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
 
                                     // Places à réaliser (sous-total)
-                                    { text: o.getTotalReducedOutput('motorcycle').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalReducedOutput(['motorcycle']).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                 ],
 
                             ]
@@ -448,7 +448,7 @@ export const print = (project) => {
                             { text: 'Total (arrondi sup.)', style: 'tableHeader', bold: true, alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
-                            { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.getTotalReducedOutput('motorcycle')).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
+                            { text: Math.ceil(project.getAffectations().map((x) => x.getTotalReducedOutput(['motorcycle'])).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
                         ],
                     ]
                 },
@@ -482,27 +482,27 @@ export const print = (project) => {
                             { text: 'Type de place', style: 'tableHeader', alignment: 'left' },
                             { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right' },
                         ],
-                        ...project.affectations.filter(x => x.active && x.outputs.length > 0)
+                        ...project.getAffectations()
                             .map(o => [
 
                                 // TABLE FIRST ROW
                                 [
                                     // Affectation
-                                    { rowSpan: o.getOutputs('bicycle').length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
+                                    { rowSpan: o.getOutputs(['bicycle']).length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
 
                                     // Variable(s)
-                                    { rowSpan: o.getOutputs('bicycle').length + 1, ul: o.getVariables('measurement').map((e) => (`${e.name} = ${e.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+                                    { rowSpan: o.getOutputs(['bicycle']).length + 1, ul: o.getVariables(['measurement']).map((e) => (`${e.name} = ${e.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
 
                                     // Catégorie
-                                    { text: o.getOutputs('bicycle')[0].name, style: 'tableBody', alignment: 'left' },
+                                    { text: o.getOutputs(['bicycle'])[0].name, style: 'tableBody', alignment: 'left' },
 
                                     // Places à réaliser
-                                    { text: o.getReducedOutputs('bicycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.getReducedOutputs(['bicycle'])[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                 ],
 
                                 // TABLE BODY ROWS (ROW 2 -> LAST)
-                                ...o.getOutputs('bicycle').slice(1).map(
+                                ...o.getOutputs(['bicycle']).slice(1).map(
                                     (el, i) => [
                                         {},
                                         {},
@@ -511,7 +511,7 @@ export const print = (project) => {
                                         { text: el.name, style: 'tableBody', alignment: 'left' },
 
                                         // Places à réaliser
-                                        { text: o.getReducedOutputs('bicycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.getReducedOutputs(['bicycle'])[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     ]
                                 ),
@@ -524,7 +524,7 @@ export const print = (project) => {
                                     { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
 
                                     // Places à réaliser (sous-total)
-                                    { text: o.getTotalReducedOutput('bicycle').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalReducedOutput(['bicycle']).toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                 ],
 
                             ]
@@ -534,7 +534,7 @@ export const print = (project) => {
                             { text: 'Total (arrondi sup.)', style: 'tableHeader', bold: true, alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
-                            { text: Math.ceil(project.affectations.filter((e) => (e.active && e.outputs.length > 0)).map((e) => e.getTotalReducedOutput('bicycle')).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
+                            { text: Math.ceil(project.getAffectations().map((e) => e.getTotalReducedOutput(['bicycle'])).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
 
                         ],
                     ]
