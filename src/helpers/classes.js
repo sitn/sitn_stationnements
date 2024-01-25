@@ -1325,7 +1325,7 @@ export class Project {
   }
 
   get hasAffectation() {
-    return this.getAffectations().length > 0 /* && this.affectations.filter(e => e.active).map(e => e.valid).every(Boolean) */
+    return this.getAffectations().length > 0
   }
 
   get hasZoneFactors() {
@@ -1335,6 +1335,16 @@ export class Project {
     }
 
     return this.getAffectations().map(x => x.variableMap.get('zone_rdn')).every(x => x !== null)
+  }
+
+  get hasReductions() {
+
+    if (!this.hasAffectation) {
+      return false
+    }
+
+    return this.getAffectations().filter(e.variables.filter((x) => x.type === 'special reduction').length > 0)
+
   }
 
   get isValid() {
@@ -1361,12 +1371,8 @@ export class Project {
 
   }
 
-  get activeAffectations() {
-    return this.affectations.filter(e => e.active)
-  }
-
   getAffectations() {
-    return this.affectations.filter(e => e.active)
+    return this.affectations.filter(e => e.active && e.outputs.length > 0)
   }
 
   getLocationType(name) {
@@ -1399,8 +1405,8 @@ export class Project {
 
   getAffectationNames(category) {
 
-    let names = this.affectations
-      .filter(x => (x.category === category & x.active))
+    let names = this.getAffectations()
+      .filter(x => (x.category === category))
       .map(x => x.name)
 
     return names
@@ -1419,8 +1425,8 @@ export class Project {
 
   getStations(category) {
 
-    let n_parkings = this.affectations
-      .filter(x => (x.category === category & x.active))
+    let n_parkings = this.getAffectations()
+      .filter(x => (x.category === category))
       .map(x => x.getReducedOutputs(['car', 'special']))
       .flat()
       .reduce((acc, obj) => { return acc + obj.value }, 0)
