@@ -98,7 +98,6 @@
                                     <th>Affectation</th>
                                     <th>Réduction</th>
                                     <th>Type de place</th>
-                                    <!-- <th class="text-right"><q-icon name="directions_car" size="sm" /></th> -->
                                     <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_car" /></th>
                                 </tr>
                             </thead>
