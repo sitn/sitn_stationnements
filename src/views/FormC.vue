@@ -59,7 +59,7 @@
             <div class="row q-col-gutter-none q-pa-sm q-my-sm bg-grey-2 rounded-borders">
 
                 <div class="col-xs-12 col-sm-6 q-pa-sm q-my-none" v-for="(item, key) in this.outputs.values">
-                    <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective" :min=item.min :max=item.max @update:model-value="check(item)" reactive-rules :rules="[val => validateRange(val, item.min, item.max)]" :disable="!this.project.affectations.filter((x) => (x.active)).map((x) => (x.type)).includes(item.label) || this.project.eco">
+                    <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective" :min=item.min :max=item.max @update:model-value="check(item)" reactive-rules :rules="[val => validateRange(val, item.min, item.max)]" :disable="!this.project.getAffectations().map((x) => (x.type)).includes(item.label) || this.project.eco">
                         <template v-slot:label>
                             {{ item.label }} {{ this.project.eco === true ? `` : `(${item.min}% à ${item.max}% selon votre projet)` }}
                         </template>
@@ -91,10 +91,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                <tr v-for="(subitem, iSub) in item.getNetOutputs('car')">
-                                    <td v-if="iSub === 0" :rowspan="item.getOutputs('car').length" class="">{{ item.name }}</td>
-                                    <td v-if="iSub === 0" :rowspan="item.getOutputs('car').length" class="">&#215; {{ item.ordinaryReduction.toFixed(1) }}% </td>
+                            <template v-for="item in this.project.getAffectations()">
+                                <tr v-for="(subitem, iSub) in item.getNetOutputs(['car'])">
+                                    <td v-if="iSub === 0" :rowspan="item.getOutputs(['car']).length" class="">{{ item.name }}</td>
+                                    <td v-if="iSub === 0" :rowspan="item.getOutputs(['car']).length" class="">&#215; {{ item.ordinaryReduction.toFixed(1) }}% </td>
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                 </tr>
@@ -104,7 +104,7 @@
                                 <td class="text-weight-bold"></td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ this.project.getNetNeeds('car').toFixed(3) }}
+                                    {{ this.project.getNetNeeds(['car']).toFixed(3) }}
                                 </td>
                             </tr>
                         </tbody>
