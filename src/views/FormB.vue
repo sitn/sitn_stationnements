@@ -152,18 +152,6 @@
 
         </q-form>
 
-
-        <!-- TODO REMOVE -->
-        <!-- 
-        <div class="row" v-if="this.render">
-            <div>{{ this.project.affectations[0].variables }}</div>
-            <div>{{ this.project.affectations[0].outputs }}</div>
-            <div>{{ this.project.affectations[0].variableMap }}</div>
-            <div>{{ this.project.affectations[0].rawOutput }}</div>
-        </div>
-        -->
-
-
         <!-- COMPUTATION SUMMARY TABLES -->
         <div class="row" v-if="this.render">
 
@@ -185,8 +173,8 @@
                         <tbody>
                             <template v-for="item in this.project.affectations.filter(e => e.active)">
 
-                                <tr v-for="(subitem, iSub) in item.rawOutput.filter(e => e.group === 'car')">
-                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'car').length" class="">{{ item.name }}</td>
+                                <tr v-for="(subitem, iSub) in item.getRawOutputs('car')">
+                                    <td v-if="iSub === 0" :rowspan="item.getOutputs('car').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                 </tr>
@@ -205,122 +193,6 @@
 
             </div>
 
-            <!-- BICYCLE PARKINGS SUMMARY TABLE -->
-            <!--
-            <div id="summary-container-2" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                <div class="bg-white q-pa-md q-my-sm rounded-borders">
-
-                    <table id="summary-table">
-                        <caption class="text-subtitle1">Stationnements vélos (y.c. électriques &lt; 1kW)</caption>
-                        <thead>
-                            <tr>
-                                <th>Affectation</th>
-                                <th>Type de place</th>
-                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_bike" /></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                <tr v-for="(subitem, iSub) in item.rawOutput.filter(e => e.group === 'bicycle')">
-                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">{{ item.name }}</td>
-                                    <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
-                                </tr>
-                            </template>
-
-                            <tr>
-                                <td class="text-weight-bold">Besoin brut total</td>
-                                <td class="text-weight-bold"></td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ this.project.getRawNeeds('bicycle').toFixed(3) }}
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-            -->
-
-
-            <!-- MOTORCYCLE PARKINGS SUMMARY TABLE -->
-            <!-- 
-            <div id="summary-container-2" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                <div class="bg-white q-pa-md q-my-sm rounded-borders">
-
-                    <table id="summary-table">
-                        <caption class="text-subtitle1">Stationnements deux-roues motorisés</caption>
-                        <thead>
-                            <tr>
-                                <th>Affectation</th>
-                                <th>Type de place</th>
-                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="motorcycle" /></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                <tr v-for="(subitem, iSub) in item.rawOutput.filter(e => e.group === 'motorcycle')">
-                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'motorcycle').length" class="">{{ item.name }}</td>
-                                    <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
-                                </tr>
-                            </template>
-
-                            <tr>
-                                <td class="text-weight-bold">Besoin brut total</td>
-                                <td class="text-weight-bold"></td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ this.project.getRawNeeds('motorcycle').toFixed(3) }}
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-            -->
-
-
-            <!-- CHARGING STATIONS SUMMARY TABLE -->
-            <!-- 
-            <div id="summary-container-2" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                <div class="bg-white q-pa-md q-my-sm rounded-borders">
-
-                    <table id="summary-table">
-                        <caption class="text-subtitle1">Équipements pour véhicules électriques</caption>
-                        <thead>
-                            <tr>
-                                <th>Affectation</th>
-                                <th>Type d'équipement</th>
-                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="ev_station" /></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                <tr v-for="(subitem, iSub) in item.rawOutput.filter(e => e.group === 'station')">
-                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">{{ item.name }}</td>
-                                    <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
-                                </tr>
-                            </template>
-
-                            <tr>
-                                <td class="text-weight-bold">Besoin brut total</td>
-                                <td class="text-weight-bold"></td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ this.project.getRawNeeds('station').toFixed(3) }}
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-            -->
-
         </div>
 
     </div>
@@ -332,7 +204,7 @@ import { store } from '../store/store.js'
 export default {
     name: 'FormB',
     components: {},
-    props: {}, // { 'project': Object },
+    props: {},
     emits: ['updateProject', 'deleteItem', 'filled'],
     setup() {
         return {}
