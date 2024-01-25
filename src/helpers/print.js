@@ -116,7 +116,7 @@ export const print = (project) => {
                 render: true
             },
             {
-                text: `Jutification du type de localisation: ${project.locationTypeJustification}`,
+                text: `Justification du type de localisation: ${project.locationTypeJustification}`,
                 style: 'body',
                 margin: [0, 5, 0, 5], // [left, top, right, bottom]
                 render: project.locationTypeJustification !== ''
@@ -153,13 +153,13 @@ export const print = (project) => {
                                 // TABLE FIRST ROW
                                 [
                                     // Affectation
-                                    { rowSpan: o.getOutputs(['car', 'special']).length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
+                                    { rowSpan: o.getOutputs(['car', 'special']).length + 2, text: o.name, style: 'tableBody', alignment: 'left' },
 
                                     // Variable(s)
-                                    { rowSpan: o.getOutputs(['car', 'special']).length + 1, ul: o.getVariables('measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+                                    { rowSpan: o.getOutputs(['car', 'special']).length + 2, ul: o.getVariables('measurement').map((e) => (`${e.name} = ${e.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
 
                                     // Facteur(s) de réduction
-                                    { rowSpan: o.getOutputs(['car', 'special']).length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
+                                    { rowSpan: o.getOutputs(['car', 'special']).length + 2, ul: o.getVariables('special reduction').filter((e) => (e.value > 0)).map((e) => (`${e.name} = ${e.value} ${e.unit}`)), style: 'tableBody', alignment: 'left' },
 
                                     // Catégorie
                                     { text: o.getOutputs('car')[0].name, style: 'tableBody', alignment: 'left' },
@@ -168,7 +168,7 @@ export const print = (project) => {
                                     { text: o.getRawOutputs('car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     // % Loc.
-                                    { text: o.getVariables('reduction').map((x) => (`${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.getVariables('reduction').map((e) => (`${e.value} ${e.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     // Besoin net
                                     { text: o.getNetOutputs('car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
@@ -193,13 +193,11 @@ export const print = (project) => {
 
                                         // Besoin brut
                                         { text: o.getRawOutputs('car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                        // { text: o.output[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                         // % Loc.
-                                        { text: o.getVariables('reduction').map((x) => (`${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.getVariables('reduction').map((e) => (`${e.value} ${e.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                         // Besoin net
-                                        // { text: o.netOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
                                         { text: o.getNetOutputs('car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                         // Besoin net réduit
@@ -220,18 +218,18 @@ export const print = (project) => {
                                     { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
 
                                     // Besoin brut (sous-total)
-                                    { text: o.getTotalOutput("car").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalOutput('car').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
 
                                     {},
 
                                     // Besoin net (sous-total)
-                                    { text: o.getTotalNetOutput("car").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalNetOutput('car').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
 
                                     // Besoin net réduit (sous-total)
-                                    { text: o.getTotalReducedOutput("car").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalReducedOutput('car').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
 
                                     // Places à réaliser (sous-total)
-                                    { text: o.getTotalReducedOutput("car").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalReducedOutput('car').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                 ],
 
                                 // TABLE BODY DATA ROWS - SPECIAL CARS
@@ -283,7 +281,7 @@ export const print = (project) => {
                                     { text: '-', style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
 
                                     // Places à réaliser (sous-total)
-                                    { text: o.getTotalReducedOutput("special").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalReducedOutput('special').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                 ],
 
                             ]
@@ -301,7 +299,7 @@ export const print = (project) => {
                             { text: '', style: 'tableHeader', alignment: 'left', noWrap: true },
                             { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
                             { text: '', style: 'tableHeader', alignment: 'right', noWrap: true },
-                            { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.getTotalReducedOutput(["car", "special"])).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
+                            { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.getTotalReducedOutput(['car', 'special'])).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
                         ],
                     ]
                 },
@@ -316,7 +314,7 @@ export const print = (project) => {
 
             // SECTION EQUIPEMENTS DE RECHARGE POUR VEHICULES ELECTRIQUES
             {
-                pageBreak: "before",
+                pageBreak: 'before',
                 text: `Conformément à l'art. 34 du RELCEn., le nombre d'équipements pour véhicules électriques à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
                 style: 'body',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
@@ -332,32 +330,32 @@ export const print = (project) => {
                         [
                             { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
                             { text: 'Affectation(s)', style: 'tableHeader', alignment: 'left' },
-                            { text: "Type d'équipement (selon SIA 2060)", style: 'tableHeader', alignment: 'left' },
+                            { text: 'Type d’équipement (selon SIA 2060)', style: 'tableHeader', alignment: 'left' },
                             { text: 'Équipements à réaliser', style: 'tableHeader', alignment: 'right' },
                         ],
                         [
                             { text: 'Logements', style: 'tableBody', alignment: 'left' },
                             { text: project.getAffectationNames('Logement').join('; '), style: 'tableBody', alignment: 'left' },
-                            { text: "Niveau D (bornes)", style: 'tableBody', alignment: 'left' },
-                            { text: project.getStations("Logement"), style: 'tableBody', alignment: 'right' },
+                            { text: 'Niveau D (bornes)', style: 'tableBody', alignment: 'left' },
+                            { text: project.getStations('Logement'), style: 'tableBody', alignment: 'right' },
                         ],
                         [
                             { text: 'Activités', style: 'tableBody', alignment: 'left' },
                             { text: project.getAffectationNames('Activité').join('; '), style: 'tableBody', alignment: 'left' },
-                            { text: "Niveau C2", style: 'tableBody', alignment: 'left' },
-                            { text: project.getStations("Activité"), style: 'tableBody', alignment: 'right' },
+                            { text: 'Niveau C2', style: 'tableBody', alignment: 'left' },
+                            { text: project.getStations('Activité'), style: 'tableBody', alignment: 'right' },
                         ],
                         [
                             { text: 'Logements et activités', style: 'tableBody', alignment: 'left' },
                             { text: 'Cf. affectations ci-dessus', style: 'tableBody', alignment: 'left' },
-                            { text: "Niveau B", style: 'tableBody', alignment: 'left' },
-                            { text: Math.ceil(project.getReducedNeeds('car')) - project.getStations("Logement") - project.getStations("Activité") - project.getStations("Pas concerné"), style: 'tableBody', alignment: 'right' },
+                            { text: 'Niveau B', style: 'tableBody', alignment: 'left' },
+                            { text: Math.ceil(project.getReducedNeeds('car')) - project.getStations('Logement') - project.getStations('Activité') - project.getStations('Pas concerné'), style: 'tableBody', alignment: 'right' },
                         ],
                         [
                             { text: 'Pas concerné', style: 'tableBody', alignment: 'left' },
                             { text: project.getAffectationNames('Pas concerné').join('; '), style: 'tableBody', alignment: 'left' },
-                            { text: "Aucun", style: 'tableBody', alignment: 'left' },
-                            { text: project.getStations("Pas concerné"), style: 'tableBody', alignment: 'right' },
+                            { text: 'Aucun', style: 'tableBody', alignment: 'left' },
+                            { text: project.getStations('Pas concerné'), style: 'tableBody', alignment: 'right' },
                         ],
                         [
                             { text: 'Total', style: 'tableHeader', alignment: 'left' },
@@ -379,7 +377,7 @@ export const print = (project) => {
 
             // SECTION STATIONNEMENTS DEUX-ROUES MOTORISES
             {
-                pageBreak: "before",
+                pageBreak: 'before',
                 text: `Conformément à l'art. 37c RELConstr., le nombre de places de stationnements pour deux-roues motorisés à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
                 style: 'body',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
@@ -398,27 +396,27 @@ export const print = (project) => {
                             { text: 'Type de place', style: 'tableHeader', alignment: 'left' },
                             { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right' },
                         ],
-                        ...project.affectations.filter(o => o.active && o.outputs.length > 0)
+                        ...project.affectations.filter(x => x.active && x.outputs.length > 0)
                             .map(o => [
 
                                 // TABLE FIRST ROW
                                 [
                                     // Affectation
-                                    { rowSpan: o.outputs.filter(e => e.group === 'motorcycle').length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
+                                    { rowSpan: o.getOutputs('motorcycle').length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
 
                                     // Variable(s)
-                                    { rowSpan: o.outputs.filter(e => e.group === 'motorcycle').length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+                                    { rowSpan: o.getOutputs('motorcycle').length + 1, ul: o.getVariables('measurement').map((e) => (`${e.name} = ${e.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
 
                                     // Catégorie
-                                    { text: o.outputs.filter(e => e.group === 'motorcycle')[0].name, style: 'tableBody', alignment: 'left' },
+                                    { text: o.getOutputs('motorcycle')[0].name, style: 'tableBody', alignment: 'left' },
 
                                     // Places à réaliser
-                                    { text: o.reducedOutput2.filter(e => e.group === 'motorcycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.getReducedOutputs('motorcycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                 ],
 
                                 // TABLE BODY ROWS (ROW 2 -> LAST)
-                                ...o.outputs.filter(e => e.group === 'motorcycle').slice(1).map(
+                                ...o.getOutputs('motorcycle').slice(1).map(
                                     (el, i) => [
                                         {},
                                         {},
@@ -427,7 +425,7 @@ export const print = (project) => {
                                         { text: el.name, style: 'tableBody', alignment: 'left' },
 
                                         // Places à réaliser
-                                        { text: o.reducedOutput2.filter(e => e.group === 'motorcycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.getReducedOutputs('motorcycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     ]
                                 ),
@@ -440,7 +438,7 @@ export const print = (project) => {
                                     { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
 
                                     // Places à réaliser (sous-total)
-                                    { text: o.totalReducedOutput2("motorcycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalReducedOutput('motorcycle').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                 ],
 
                             ]
@@ -450,7 +448,7 @@ export const print = (project) => {
                             { text: 'Total (arrondi sup.)', style: 'tableHeader', bold: true, alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
-                            { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutput2("motorcycle")).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
+                            { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.getTotalReducedOutput('motorcycle')).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
                         ],
                     ]
                 },
@@ -465,7 +463,7 @@ export const print = (project) => {
 
             // SECTION STATIONNEMENTS VELOS
             {
-                pageBreak: "before",
+                pageBreak: 'before',
                 text: `Conformément à l'art. 37b du RELConstr., le nombre de places de stationnements pour vélos (y.c. électriques et spéciaux) à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
                 style: 'body',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
@@ -484,27 +482,27 @@ export const print = (project) => {
                             { text: 'Type de place', style: 'tableHeader', alignment: 'left' },
                             { text: 'Places à réaliser', style: 'tableHeader', alignment: 'right' },
                         ],
-                        ...project.affectations.filter(o => o.active && o.outputs.length > 0)
+                        ...project.affectations.filter(x => x.active && x.outputs.length > 0)
                             .map(o => [
 
                                 // TABLE FIRST ROW
                                 [
                                     // Affectation
-                                    { rowSpan: o.outputs.filter(e => e.group === 'bicycle').length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
+                                    { rowSpan: o.getOutputs('bicycle').length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
 
                                     // Variable(s)
-                                    { rowSpan: o.outputs.filter(e => e.group === 'bicycle').length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
+                                    { rowSpan: o.getOutputs('bicycle').length + 1, ul: o.getVariables('measurement').map((e) => (`${e.name} = ${e.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
 
                                     // Catégorie
-                                    { text: o.outputs.filter(e => e.group === 'bicycle')[0].name, style: 'tableBody', alignment: 'left' },
+                                    { text: o.getOutputs('bicycle')[0].name, style: 'tableBody', alignment: 'left' },
 
                                     // Places à réaliser
-                                    { text: o.reducedOutput2.filter(e => e.group === 'bicycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                    { text: o.getReducedOutputs('bicycle')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                 ],
 
                                 // TABLE BODY ROWS (ROW 2 -> LAST)
-                                ...o.outputs.filter(e => e.group === 'bicycle').slice(1).map(
+                                ...o.getOutputs('bicycle').slice(1).map(
                                     (el, i) => [
                                         {},
                                         {},
@@ -513,7 +511,7 @@ export const print = (project) => {
                                         { text: el.name, style: 'tableBody', alignment: 'left' },
 
                                         // Places à réaliser
-                                        { text: o.reducedOutput2.filter(e => e.group === 'bicycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
+                                        { text: o.getReducedOutputs('bicycle')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
 
                                     ]
                                 ),
@@ -526,7 +524,7 @@ export const print = (project) => {
                                     { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
 
                                     // Places à réaliser (sous-total)
-                                    { text: o.totalReducedOutput2("bicycle").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
+                                    { text: o.getTotalReducedOutput('bicycle').toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
                                 ],
 
                             ]
@@ -536,7 +534,7 @@ export const print = (project) => {
                             { text: 'Total (arrondi sup.)', style: 'tableHeader', bold: true, alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
-                            { text: Math.ceil(project.affectations.filter(o => o.active && o.outputs.length > 0).map((x) => x.totalReducedOutput2("bicycle")).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
+                            { text: Math.ceil(project.affectations.filter((e) => (e.active && e.outputs.length > 0)).map((e) => e.getTotalReducedOutput('bicycle')).reduce((acc, obj) => { return acc + obj }, 0)), style: 'tableHeader', alignment: 'right', noWrap: true },
 
                         ],
                     ]
