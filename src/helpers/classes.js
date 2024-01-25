@@ -3,47 +3,6 @@ import communes_json from '../assets/data/communes.json'
 // sort alphabetically
 export var communes = communes_json.sort((a, b) => a.comnom.toLowerCase().localeCompare(b.comnom.toLowerCase()))
 
-export class Variable {
-
-  // constructor
-  constructor({
-    name,
-    description = "",
-    type,
-    hint = "",
-    unit,
-    min = null,
-    max = null,
-    value = null,
-  } = {}) {
-    this.name = name
-    this.description = description
-    this.type = type
-    this.hint = hint
-    this.unit = unit
-    this.min = min
-    this.max = max
-    this.value = value
-  }
-}
-
-let didi = new Variable({
-  name: "Surface brute de plancher (SBP)",
-  description: "",
-  type: "measurement",
-  hint: "",
-  unit: "m<sup>2</sup>",
-  min: 1.0,
-  max: Infinity,
-  value: null,
-})
-
-export class Output {
-
-
-}
-
-
 export class Affectation {
 
   // constructor
@@ -98,6 +57,19 @@ export class Affectation {
     return new Set(this.outputs.map(o => o.group))
   }
 
+
+  getVariables(types) {
+
+    return this.variables.filter(o => types.includes(o.type))
+
+  }
+
+  getOutputs(groups) {
+
+    return this.outputs.filter(o => groups.includes(o.group))
+
+  }
+
   get output() {
     // return this.outputs.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), 100.0, 0.0))
     return this.outputs.map(o => o.formula(this.variableMap, 100.0, 0.0))
@@ -114,6 +86,12 @@ export class Affectation {
     // return this.outputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), 100.0, 0.0) }))
   }
 
+  getRawOutputs(groups) {
+
+    return this.getOutputs(groups).map(o => ({ name: o.name, group: o.group, value: o.formula(this.variableMap, 100.0, 0.0) }))
+
+  }
+
   // RETURNS NET OUTPUT ("BESOIN NET")
   get netOutput() {
     return this.outputs.map(o => o.formula(this.variableMap, this.ordinaryReduction, 0.0))
@@ -126,6 +104,12 @@ export class Affectation {
   netOutput3(group) {
     let xx = new Map(this.variables.filter((x) => x.group === group).map(x => [x.id, x.value]))
     return this.outputs.map(o => (o.formula(xx, this.ordinaryReduction, 0.0)))
+  }
+
+  getNetOutputs(groups) {
+
+    return this.getOutputs(groups).map(o => ({ name: o.name, group: o.group, value: o.formula(this.variableMap, this.ordinaryReduction, 0.0) }))
+
   }
 
   // RETURNS REDUCED OUTPUT ("BESOIN NET REDUIT")
@@ -142,12 +126,24 @@ export class Affectation {
     return this.outputs.map(o => (o.formula(this.variableMap, this.ordinaryReduction, this.specialReduction)))
   }
 
+  getReducedOutputs(groups) {
+
+    return this.getOutputs(groups).map(o => ({ name: o.name, group: o.group, value: o.formula(this.variableMap, this.ordinaryReduction, this.specialReduction) }))
+
+  }
+
   get totalOutput() {
     return this.output.reduce((acc, obj) => { return acc + obj }, 0)
   }
 
   totalOutput2(group) {
     return this.rawOutput.filter(x => (x.group === group)).reduce((acc, obj) => { return acc + obj.value }, 0)
+  }
+
+  getTotalOutput(groups) {
+
+    return this.getRawOutputs(groups).reduce((acc, obj) => { return acc + obj.value }, 0)
+
   }
 
   get totalNetOutput() {
@@ -158,6 +154,12 @@ export class Affectation {
     return this.netOutput2.filter(x => (x.group === group)).reduce((acc, obj) => { return acc + obj.value }, 0)
   }
 
+  getTotalNetOutput(groups) {
+
+    return this.getNetOutputs(groups).reduce((acc, obj) => { return acc + obj.value }, 0)
+
+  }
+
   get totalReducedOutput() {
     return this.reducedOutput.reduce((acc, obj) => { return acc + obj }, 0)
   }
@@ -166,12 +168,25 @@ export class Affectation {
     return this.reducedOutput2.filter(x => (x.group === group)).reduce((acc, obj) => { return acc + obj.value }, 0)
   }
 
+  getTotalReducedOutput(groups) {
+
+    return this.getReducedOutputs(groups).reduce((acc, obj) => { return acc + obj.value }, 0)
+
+  }
+
+
   get totalReducedOutputCeil() {
     return this.reducedOutput.reduce((acc, obj) => { return acc + Math.ceil(obj) }, 0)
   }
 
   totalReducedOutputCeil2(group) {
     return this.reducedOutput2.filter(x => (x.group === group)).reduce((acc, obj) => { return acc + Math.ceil(obj.value) }, 0)
+  }
+
+  getTotalReducedOutputCeil(groups) {
+
+    return this.getReducedOutputs(groups).reduce((acc, obj) => { return acc + Math.ceil(obj.value) }, 0)
+
   }
 
 
@@ -205,7 +220,7 @@ export const affectations = [
     outputs: [
       { group: "car", icon: "directions_car", name: "places habitants", formula: ((x, f = 100.0, r = 0.0) => Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) * (f / 100) * (1 - r / 100)) },
       { group: "car", icon: "directions_car", name: "places visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.001 * x.get('floor_area') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "special", icon: "directions_car", name: "places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "places habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 3) * 0.15 * (Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "places habitants/visiteurs", formula: ((x) => Math.floor(x.get('n_rooms'))) },
 
@@ -1439,27 +1454,45 @@ export class Project {
     return this.loctypes.find(obj => obj.name === name)
   }
 
-  getRawNeeds(group) {
+  getRawNeeds(groups) {
     return this.affectations.filter(e => e.active)
-      .map((x) => x.rawOutput.filter(e => e.group === group))
+      .map((x) => x.getRawOutputs(groups))
+      // .map((x) => x.rawOutput.filter(e => e.group === group))
       .flat()
       .reduce((acc, obj) => { return acc + obj.value }, 0)
   }
 
-  getNetNeeds(group) {
+  /*   getNetNeeds(group) {
+      return this.affectations.filter(e => e.active)
+        .map((x) => x.netOutput2.filter(e => e.group === group))
+        .flat()
+        .reduce((acc, obj) => { return acc + obj.value }, 0)
+    } */
+
+  getNetNeeds(groups) {
     return this.affectations.filter(e => e.active)
-      .map((x) => x.netOutput2.filter(e => e.group === group))
+      .map((x) => x.getNetOutputs(groups))
+      // .map((x) => x.netOutput2.filter(e => groups.includes(e.group)))
       .flat()
       .reduce((acc, obj) => { return acc + obj.value }, 0)
   }
 
-  getReducedNeeds(group) {
+
+  getReducedNeeds(groups) {
     return this.affectations.filter(e => e.active)
-      .map((x) => x.reducedOutput2.filter(e => e.group === group))
+      .map((x) => x.getReducedOutputs(groups))
+      // .map((x) => x.reducedOutput2.filter(e => groups.includes(e.group)))
       .flat()
       .reduce((acc, obj) => { return acc + obj.value }, 0)
   }
 
+  /*   getReducedNeeds(group) {
+      return this.affectations
+        .filter(e => e.active)
+        .map((x) => x.reducedOutput2.filter(e => e.group === group))
+        .flat()
+        .reduce((acc, obj) => { return acc + obj.value }, 0)
+    } */
 
   getAffectationNames(category) {
 
