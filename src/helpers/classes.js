@@ -1457,22 +1457,13 @@ export class Project {
   getRawNeeds(groups) {
     return this.affectations.filter(e => e.active)
       .map((x) => x.getRawOutputs(groups))
-      // .map((x) => x.rawOutput.filter(e => e.group === group))
       .flat()
       .reduce((acc, obj) => { return acc + obj.value }, 0)
   }
 
-  /*   getNetNeeds(group) {
-      return this.affectations.filter(e => e.active)
-        .map((x) => x.netOutput2.filter(e => e.group === group))
-        .flat()
-        .reduce((acc, obj) => { return acc + obj.value }, 0)
-    } */
-
   getNetNeeds(groups) {
     return this.affectations.filter(e => e.active)
       .map((x) => x.getNetOutputs(groups))
-      // .map((x) => x.netOutput2.filter(e => groups.includes(e.group)))
       .flat()
       .reduce((acc, obj) => { return acc + obj.value }, 0)
   }
@@ -1481,24 +1472,15 @@ export class Project {
   getReducedNeeds(groups) {
     return this.affectations.filter(e => e.active)
       .map((x) => x.getReducedOutputs(groups))
-      // .map((x) => x.reducedOutput2.filter(e => groups.includes(e.group)))
       .flat()
       .reduce((acc, obj) => { return acc + obj.value }, 0)
   }
-
-  /*   getReducedNeeds(group) {
-      return this.affectations
-        .filter(e => e.active)
-        .map((x) => x.reducedOutput2.filter(e => e.group === group))
-        .flat()
-        .reduce((acc, obj) => { return acc + obj.value }, 0)
-    } */
 
   getAffectationNames(category) {
 
     let names = this.affectations
       .filter(x => (x.category === category & x.active))
-      .map((x) => x.name)
+      .map(x => x.name)
 
     return names
 
@@ -1507,7 +1489,7 @@ export class Project {
   getHousingCount() {
     let n_housings = this.affectations
       .filter(x => (x.active))
-      .map((x) => x.variables)
+      .map(x => x.variables)
       .flat()
       .filter(x => (x.id === "n_housings"))
       .reduce((acc, obj) => { return acc + obj.value }, 0)
@@ -1519,20 +1501,9 @@ export class Project {
 
     let n_parkings = this.affectations
       .filter(x => (x.category === category & x.active))
-      .map((x) => x.reducedOutput2.filter(e => e.group === "car"))
+      .map(x => x.getReducedOutputs(['car', 'special']))
       .flat()
       .reduce((acc, obj) => { return acc + obj.value }, 0)
-
-    /*     
-    if (category === "Pas concerné") {
-          n_stations = Math.round(n_parkings)
-        } else {
-          // n_stations = Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 1.0)
-          n_stations = Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 0.0)
-        } 
-    */
-
-    //return n_stations
 
     let n_housings = this.getHousingCount()
     let n_stations
