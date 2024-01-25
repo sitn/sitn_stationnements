@@ -151,6 +151,8 @@ export default {
                 return this.project.commune.factors.find((e) => e.zone === this.project.locationType.name)
             }
 
+
+
         },
 
     },
