@@ -330,7 +330,7 @@ export const print = (project) => {
                         [
                             { text: 'Catégorie', style: 'tableHeader', alignment: 'left' },
                             { text: 'Affectation(s)', style: 'tableHeader', alignment: 'left' },
-                            { text: 'Type d’équipement (selon SIA 2060)', style: 'tableHeader', alignment: 'left' },
+                            { text: 'Type d’équipement\n(selon SIA 2060)', style: 'tableHeader', alignment: 'left' },
                             { text: 'Équipements à réaliser', style: 'tableHeader', alignment: 'right' },
                         ],
                         [
