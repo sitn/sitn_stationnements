@@ -22,20 +22,6 @@
         -->
 
         <div class="row" v-if="this.render">
-            {{ this.project.affectations
-                .filter(x => (x.active))[0]
-                .getOutputs(['car', 'bicycle'])
-            }}
-        </div>
-
-        <div class="row" v-if="this.render">
-            {{ this.project.affectations
-                .filter(x => (x.active))[0]
-                .getReducedOutputs(['car', 'bicycle'])
-            }}
-        </div>
-
-        <div class="row" v-if="this.render">
 
             <!-- CAR PARKINGS SUMMARY TABLE -->
             <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
@@ -47,19 +33,15 @@
                             <tr>
                                 <th>Affectation</th>
                                 <th>Type de place</th>
-                                <!-- <th class="text-right"><q-icon name="directions_car" size="sm" /></th> -->
                                 <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_car" /></th>
                             </tr>
                         </thead>
                         <tbody>
                             <template v-for="item in this.project.affectations.filter(e => e.active)">
                                 <tr v-for="(subitem, iSub) in item.getReducedOutputs(['car', 'special'])">
-                                    <!-- <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'car')"> -->
                                     <td v-if="iSub === 0" :rowspan="item.getOutputs(['car', 'special']).length" class="">{{ item.name }}</td>
-                                    <!-- <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'car').length" class="">{{ item.name }}</td> -->
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
-                                    <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
                             </template>
                             <tr>
@@ -183,17 +165,10 @@
                             <!-- Stationnements deux-roues motorisés > 45km/h (art. 37c RELConstr.) -->
                             Stationnements deux-roues motorisés > 45km/h (art. 37c RELConstr.)
                         </caption>
-                        <!-- 
-                        <caption class="text-subtitle1">
-                            <div>Stationnements deux-roues motorisés > 45km/h</div>
-                            <div>(art. 37c RELConstr.)</div>
-                        </caption>
-                        -->
                         <thead>
                             <tr>
                                 <th>Affectation</th>
                                 <th>Type de place</th>
-                                <!-- <th class="text-right"><q-icon name="motorcycle" size="sm" /></th>  -->
                                 <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="motorcycle" /></th>
                             </tr>
                         </thead>
@@ -203,7 +178,6 @@
                                     <td v-if="iSub === 0" :rowspan="item.getOutputs('motorcycle').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
-                                    <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
                             </template>
                             <tr>
@@ -229,20 +203,13 @@
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table class="total-row">
-                        <!-- <caption class="text-subtitle1">Stationnements vélos, y.c. électriques &lt; 1kW (art. 37b RELConstr.)</caption>-->
+
                         <caption class="text-subtitle1">Stationnements vélos, y.c. électriques et spéciaux (art. 37b RELConstr.)</caption>
-                        <!-- 
-                        <caption class="text-subtitle1">
-                            <div>Stationnements vélos, y.c. électriques &lt; 1kW</div>
-                            <div>(art. 37b RELConstr.)</div>
-                        </caption>
-                        -->
 
                         <thead>
                             <tr>
                                 <th>Affectation</th>
                                 <th>Type de place</th>
-                                <!-- <th class="text-right"><q-icon name="directions_bike" size="sm" /></th> -->
                                 <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_bike" /></th>
                             </tr>
                         </thead>
@@ -252,7 +219,6 @@
                                     <td v-if="iSub === 0" :rowspan="item.getOutputs('bicycle').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
-                                    <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
                                 </tr>
                             </template>
                             <tr>
@@ -278,110 +244,6 @@
             <q-btn id="print-btn" color="white" text-color="black" icon="print" label="Imprimer PDF" @click="print(project)" class="no-print" />
         </div>
 
-        <!-- 
-        <div class="row" v-if="this.render">
-            {{
-                this.project.affectations.filter(o => o.active && o.outputs.length > 0)
-                    .map(o => [
-
-                        // TABLE FIRST ROW
-                        [
-                            // Affectation
-                            { rowSpan: o.outputs.filter(e => e.group === 'car').length + 1, text: o.name, style: 'tableBody', alignment: 'left' },
-
-                            // Variable(s)
-                            // { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
-                            { rowSpan: o.outputs.filter(e => e.group === 'car').length + 1, ul: o.variables.filter((x) => x.type === 'measurement').map((x) => (`${x.name} = ${x.value}`)), style: 'tableBody', alignment: 'left', noWrap: false },
-
-                            // Facteur(s) de réduction
-                            { rowSpan: o.outputs.filter(e => e.group === 'car').length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
-                            // { rowSpan: o.outputs.length + 1, ul: o.variables.filter((x) => (x.type === 'special reduction') & (x.value > 0)).map((x) => (`${x.name} = ${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'left' },
-
-                            // Catégorie
-                            { text: o.outputs.filter(e => e.group === 'car')[0].name, style: 'tableBody', alignment: 'left' },
-                            // { text: o.outputs[0].name, style: 'tableBody', alignment: 'left' },
-
-                            // Besoin brut
-                            // { text: o.output[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                            { text: o.rawOutput.filter(e => e.group === 'car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                            // % Loc.
-                            { text: o.variables.filter((x) => x.type === 'reduction').map((x) => (`${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                            // Besoin net
-                            // { text: o.netOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                            { text: o.netOutput2.filter(e => e.group === 'car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                            // Besoin net réduit
-                            // { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                            { text: o.reducedOutput2.filter(e => e.group === 'car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                            // Places à réaliser
-                            // { text: o.reducedOutput[0].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                            { text: o.reducedOutput2.filter(e => e.group === 'car')[0].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                            // { text: Math.ceil(o.reducedOutput[0]), style: 'tableBody', alignment: 'right', noWrap: true },
-                        ],
-
-                        // TABLE BODY ROWS (ROW 2 -> LAST)
-                        ...o.outputs.filter(e => e.group === 'car').slice(1).map(
-                            (el, i) => [
-                                {},
-                                {},
-                                {},
-
-                                // Catégorie
-                                { text: el.name, style: 'tableBody', alignment: 'left' },
-
-                                // Besoin brut
-                                { text: o.rawOutput.filter(e => e.group === 'car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                // { text: o.output[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                                // Facteur(s) de réduction
-                                { text: o.variables.filter((x) => x.type === 'reduction').map((x) => (`${x.value} ${x.unit}`)), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                                // Besoin net
-                                // { text: o.netOutput[i + 1].toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-                                { text: o.netOutput2.filter(e => e.group === 'car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                                // Besoin net réduit
-                                { text: o.reducedOutput2.filter(e => e.group === 'car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                                // Places à réaliser
-                                { text: o.reducedOutput2.filter(e => e.group === 'car')[i + 1].value.toFixed(1), style: 'tableBody', alignment: 'right', noWrap: true },
-
-                            ]
-                        ),
-
-                        [
-                            {},
-                            {},
-                            {},
-
-                            // Sous-total
-                            { text: 'Sous-total', style: 'tableBody', bold: true, alignment: 'left', noWrap: true },
-
-                            // Besoin brut (sous-total)
-                            { text: o.totalOutput2("car").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-
-                            {},
-
-                            // Besoin net (sous-total)
-                            { text: o.totalNetOutput2("car").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-
-                            // Besoin net réduit (sous-total)
-                            { text: o.totalReducedOutput2("car").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-
-                            // Places à réaliser (sous-total)
-                            { text: o.totalReducedOutput2("car").toFixed(1), style: 'tableBody', bold: true, alignment: 'right', noWrap: true },
-                        ],
-
-                    ]
-                    )
-                    .flat(1)
-            }}
-        </div>
-        -->
-
     </div>
 </template>
 
@@ -393,7 +255,7 @@ import { print } from '../helpers/print.js';
 export default {
     name: 'FormE',
     components: {},
-    props: {}, // { 'project': Object },
+    props: {},
     emits: [],
     setup() {
         return {
