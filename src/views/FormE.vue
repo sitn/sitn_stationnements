@@ -49,10 +49,6 @@
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ Math.ceil(this.project.getReducedNeeds(['car', 'special'])) }}
-                                    <!-- 
-                                    {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
-                                        x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
-                                    -->
                                 </td>
                             </tr>
                         </tbody>
@@ -155,14 +151,12 @@
             </div>
         -->
 
-
             <!-- MOTORCYCLE PARKINGS SUMMARY TABLE -->
             <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table class="total-row">
                         <caption class="text-subtitle1">
-                            <!-- Stationnements deux-roues motorisés > 45km/h (art. 37c RELConstr.) -->
                             Stationnements deux-roues motorisés > 45km/h (art. 37c RELConstr.)
                         </caption>
                         <thead>
@@ -185,10 +179,6 @@
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ Math.ceil(this.project.getReducedNeeds('motorcycle')) }}
-                                    <!-- 
-                                    {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
-                                        x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
-                                    -->
                                 </td>
                             </tr>
                         </tbody>
@@ -196,7 +186,6 @@
                 </div>
 
             </div>
-
 
             <!-- BICYCLE PARKINGS SUMMARY TABLE -->
             <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
@@ -226,10 +215,6 @@
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ Math.ceil(this.project.getReducedNeeds('bicycle')) }}
-                                    <!-- 
-                                    {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
-                                        x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
-                                    -->
                                 </td>
                             </tr>
                         </tbody>
@@ -272,10 +257,6 @@ export default {
             return (this.project.commune !== null) & (this.project.locationType !== null) & this.project.hasAffectation
         },
 
-    },
-    mounted() {
-        // console.log('FORM E - mounted')
-        // console.log(this.project.affectations.filter(e => e.active).map(x => ({ name: x.name, value: x.reducedOutput })).flat(1))
     },
     methods: {
         print,
