@@ -21,7 +21,6 @@
                         <q-item v-bind="scope.itemProps">
                             <q-item-section>
                                 <q-item-label>{{ scope.opt.comnom }}</q-item-label>
-                                <!-- <q-item-label caption>n° {{ scope.opt.numcom }}</q-item-label> -->
                             </q-item-section>
                         </q-item>
                     </template>
@@ -43,7 +42,6 @@
                 <q-card class="bg-blue-grey-8 text-white">
                     <q-card-section>
                         <div class="text-h6">{{ this.geojson.features.length }} parcelle(s) sélectionnée(s)</div>
-                        <!-- <div class="text-subtitle2">{{ locinfo }}</div> -->
                     </q-card-section>
                 </q-card>
             </div>
@@ -116,7 +114,7 @@
 import { ref } from 'vue'
 import { store } from '../store/store.js'
 import communes from '../assets/data/communes.json'
-import { Project, LocationTypes, Mob20, affectations } from "../helpers/classes.js"
+import { Mob20 } from "../helpers/classes.js"
 import Search from "../components/Search.vue"
 import Map from "../components/Map.vue"
 import LocationTable from "../components/LocationTable.vue"
