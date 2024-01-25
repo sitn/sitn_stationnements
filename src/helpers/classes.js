@@ -971,7 +971,7 @@ export const affectations = [
     ],
     outputs: [
       { group: "car", icon: "directions_car", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
-      { group: "car", icon: "directions_car", name: "places autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
+      { group: "special", icon: "directions_car", name: "Places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
