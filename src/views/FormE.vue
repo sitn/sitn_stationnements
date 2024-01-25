@@ -9,18 +9,6 @@
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-        <!-- 
-        <div class="row" v-if="this.render">
-            {{ this.project.getHousingCount() }}
-            {{ this.project.affectations
-                .filter(x => (x.active))
-                .map((x) => x.variables)
-                .flat()
-                .filter(x => (x.id === "n_housings"))
-                .reduce((acc, obj) => { return acc + obj.value }, 0) }}
-        </div>
-        -->
-
         <div class="row" v-if="this.render">
 
             <!-- CAR PARKINGS SUMMARY TABLE -->
@@ -37,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                            <template v-for="item in this.project.getAffectations()">
                                 <tr v-for="(subitem, iSub) in item.getReducedOutputs(['car', 'special'])">
                                     <td v-if="iSub === 0" :rowspan="item.getOutputs(['car', 'special']).length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
@@ -129,7 +117,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                            <template v-for="item in this.project.getAffectations()">
                                 <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'station')">
                                     <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
@@ -167,9 +155,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                <tr v-for="(subitem, iSub) in item.getReducedOutputs('motorcycle')">
-                                    <td v-if="iSub === 0" :rowspan="item.getOutputs('motorcycle').length" class="">{{ item.name }}</td>
+                            <template v-for="item in this.project.getAffectations()">
+                                <tr v-for="(subitem, iSub) in item.getReducedOutputs(['motorcycle'])">
+                                    <td v-if="iSub === 0" :rowspan="item.getOutputs(['motorcycle']).length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                 </tr>
@@ -178,7 +166,7 @@
                                 <td class="text-weight-bold">Total (arrondi sup.)</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ Math.ceil(this.project.getReducedNeeds('motorcycle')) }}
+                                    {{ Math.ceil(this.project.getReducedNeeds(['motorcycle'])) }}
                                 </td>
                             </tr>
                         </tbody>
@@ -203,9 +191,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                <tr v-for="(subitem, iSub) in item.getReducedOutputs('bicycle')">
-                                    <td v-if="iSub === 0" :rowspan="item.getOutputs('bicycle').length" class="">{{ item.name }}</td>
+                            <template v-for="item in this.project.getAffectations()">
+                                <tr v-for="(subitem, iSub) in item.getReducedOutputs(['bicycle'])">
+                                    <td v-if="iSub === 0" :rowspan="item.getOutputs(['bicycle']).length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                 </tr>
@@ -214,7 +202,7 @@
                                 <td class="text-weight-bold">Total (arrondi sup.)</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ Math.ceil(this.project.getReducedNeeds('bicycle')) }}
+                                    {{ Math.ceil(this.project.getReducedNeeds(['bicycle'])) }}
                                 </td>
                             </tr>
                         </tbody>
