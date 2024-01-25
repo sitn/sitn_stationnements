@@ -22,6 +22,20 @@
         -->
 
         <div class="row" v-if="this.render">
+            {{ this.project.affectations
+                .filter(x => (x.active))[0]
+                .getOutputs(['car', 'bicycle'])
+            }}
+        </div>
+
+        <div class="row" v-if="this.render">
+            {{ this.project.affectations
+                .filter(x => (x.active))[0]
+                .getReducedOutputs(['car', 'bicycle'])
+            }}
+        </div>
+
+        <div class="row" v-if="this.render">
 
             <!-- CAR PARKINGS SUMMARY TABLE -->
             <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
@@ -39,8 +53,10 @@
                         </thead>
                         <tbody>
                             <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'car')">
-                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'car').length" class="">{{ item.name }}</td>
+                                <tr v-for="(subitem, iSub) in item.getReducedOutputs(['car', 'special'])">
+                                    <!-- <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'car')"> -->
+                                    <td v-if="iSub === 0" :rowspan="item.getOutputs(['car', 'special']).length" class="">{{ item.name }}</td>
+                                    <!-- <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'car').length" class="">{{ item.name }}</td> -->
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                     <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
@@ -50,7 +66,7 @@
                                 <td class="text-weight-bold">Total (arrondi sup.)</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ Math.ceil(this.project.getReducedNeeds('car')) }}
+                                    {{ Math.ceil(this.project.getReducedNeeds(['car', 'special'])) }}
                                     <!-- 
                                     {{ Math.ceil(this.project.affectations.filter(e => e.active).map((x) =>
                                         x.totalReducedOutput).reduce((acc, obj) => { return acc + obj }, 0)) }}
@@ -73,32 +89,29 @@
                             <tr>
                                 <th>Catégorie (affectations)</th>
                                 <th>Type d'équipement (selon SIA 2060)</th>
-                                <!-- <th class="text-right"><q-icon name="ev_station" size="sm" /></th> -->
                                 <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="ev_station" /></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td rowspan="1">Logements<br>{{ this.project.getAffectationNames('Logement').length > 0 ? ` (${this.project.getAffectationNames('Logement').join('; ')})` : '' }}</td>
-                                <td># niveau D (bornes)</td>
+                                <td>Niveau D (bornes)</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ this.project.getStations("Logement") }}
-                                    <!-- {{ Math.floor(this.project.getReducedNeeds('station')) }} -->
                                 </td>
                             </tr>
                             <tr>
                                 <td rowspan="1">Activités<br>{{ this.project.getAffectationNames('Activité').length > 0 ? ` (${this.project.getAffectationNames('Activité').join('; ')})` : '' }}</td>
-                                <td># niveau C2</td>
+                                <td>Niveau C2</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ this.project.getStations("Activité") }}
-                                    <!-- {{ Math.floor(this.project.getReducedNeeds('station')) }} -->
                                 </td>
                             </tr>
                             <tr>
                                 <td rowspan="1">Logements et activités<br>(cf. affectations ci-dessus)</td>
-                                <td># niveau B</td>
+                                <td>Niveau B</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ Math.ceil(this.project.getReducedNeeds('car')) - this.project.getStations("Logement") - this.project.getStations("Activité") - this.project.getStations("Pas concerné") }}
+                                    {{ Math.ceil(this.project.getReducedNeeds(['car', 'special'])) - this.project.getStations("Logement") - this.project.getStations("Activité") - this.project.getStations("Pas concerné") }}
                                 </td>
                             </tr>
                             <tr>
@@ -106,35 +119,15 @@
                                 <td>Aucun</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ this.project.getStations("Pas concerné") }}
-                                    <!--  {{ Math.floor(this.project.getReducedNeeds('station')) }} -->
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-weight-bold">Total</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ Math.ceil(this.project.getReducedNeeds('car')) }}
+                                    {{ Math.ceil(this.project.getReducedNeeds(['car', 'special'])) }}
                                 </td>
                             </tr>
-
-
-                            <!-- 
-                            <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'station')">
-                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">{{ item.name }}</td>
-                                    <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
-                                </tr>
-                            </template>
-                            <tr>
-                                <td class="text-weight-bold">Total (arrondi inf.)</td>
-                                <td class="text-weight-bold"></td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ Math.floor(this.project.getReducedNeeds('station')) }}
-                                </td>
-                            </tr>
-                            -->
-
 
                         </tbody>
                     </table>
@@ -206,8 +199,8 @@
                         </thead>
                         <tbody>
                             <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'motorcycle')">
-                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'motorcycle').length" class="">{{ item.name }}</td>
+                                <tr v-for="(subitem, iSub) in item.getReducedOutputs('motorcycle')">
+                                    <td v-if="iSub === 0" :rowspan="item.getOutputs('motorcycle').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                     <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
@@ -255,8 +248,8 @@
                         </thead>
                         <tbody>
                             <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'bicycle')">
-                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'bicycle').length" class="">{{ item.name }}</td>
+                                <tr v-for="(subitem, iSub) in item.getReducedOutputs('bicycle')">
+                                    <td v-if="iSub === 0" :rowspan="item.getOutputs('bicycle').length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                     <!-- <td class="bg-light-blue-1 text-right">{{ Math.ceil(subitem.value) }}</td> -->
