@@ -14,12 +14,6 @@
 
             <q-card-section horizontal>
 
-                <!-- 
-                <q-card-actions vertical class="justify-around q-pa-xs">
-                    <q-icon name="info" color="orange-5" size="3em" />
-                </q-card-actions>
-                -->
-
                 <q-card-section class="q-pa-xs">
                     <div class="text-body2 text-weight-bold q-mb-sm">Informations sur le calcul</div>
 
@@ -61,8 +55,6 @@
                         <q-item-section>
                             <q-item-label>{{ scope.opt.name }}</q-item-label>
                             <q-item-label caption>{{ scope.opt.description }}</q-item-label>
-                            <!-- <q-item-label caption>Selected: {{ scope.selected }}</q-item-label> -->
-                            <!-- <q-item-label caption>Active: {{ scope.opt.active }}</q-item-label> -->
                         </q-item-section>
                         <q-item-section side>
 
@@ -91,7 +83,6 @@
 
                 <div class="row q-col-gutter-sm q-py-xs">
                     <label class="text-h7">
-                        <!-- {{ item.name }} -->
                         <q-chip square color="black" text-color="white">
                             {{ item.name }}
                             <q-tooltip>
@@ -127,20 +118,6 @@
 
                         </q-input>
                     </div>
-
-                    <!-- output fields -->
-                    <!-- 
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 self-end" v-for="(output, key3) in item.outputs">
-                        <q-input bg-color="light-blue-1" outlined label="" type="number" name="" :model-value="(item.output[key3]).toFixed(2)" readonly hint="">
-                            <template v-slot:label>
-                                {{ output.name }}
-                            </template>
-                            <template v-slot:prepend>
-                                <q-icon :name=output.icon />
-                            </template>
-                        </q-input>
-                    </div>
-                    -->
 
                     <div class="col">
                         <q-btn round flat color="grey" name="delete" @click="deleteItem(item)" icon="delete" class="float-right"></q-btn>
