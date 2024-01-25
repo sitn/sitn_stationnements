@@ -32,60 +32,33 @@ export class Affectation {
   }
 
   // getters
-  /*   get variables() {
-      return Object.values(this._variables)
-    }
-  
-    set variables(x) {
-      this._variables = x;
-    } */
-
-  /*   get outputs() {
-      return Object.values(this._outputs)
-    }
-  
-    set outputs(x) {
-      this._outputs = x;
-    } */
-
   get valid() {
     return this.variables.map((x) => x.value >= x.min && x.value <= x.max).every(Boolean)
   }
 
   // RETURNS SET OF UNIQUE OUTPUT GROUPS (CAR, MOTORCYCLE, BICYCLE, STATION, ETC) 
-  get outputGroups() {
+/*   get outputGroups() {
     return new Set(this.outputs.map(o => o.group))
-  }
+  } */
 
 
   getVariables(types) {
-
     return this.variables.filter(o => types.includes(o.type))
-
   }
 
   getOutputs(groups) {
-
     return this.outputs.filter(o => groups.includes(o.group))
-
   }
 
-  get output() {
-    // return this.outputs.map(o => o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), 100.0, 0.0))
+/*   get output() {
     return this.outputs.map(o => o.formula(this.variableMap, 100.0, 0.0))
-  }
+  } */
 
   // RETURNS RAW OUTPUT ("BESOIN BRUT")
-  get rawOutput() {
+/*   get rawOutput() {
     return this.outputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variableMap, 100.0, 0.0) }))
-
-    /* o.formula(this.variableMap, 100.0, 0.0) */
-
-    // return this.ouputs.map(o => ({ name: o.name, group: o.group, value: o.formula(new Map(this.variables.filter((x) => x.type === "measurement").map(x => [x.id, x.value])), 100.0, 0.0) }))
-    // return this.ouputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), 100.0, 0.0) }))
-    // return this.outputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variables.filter((x) => x.type === "measurement").map(x => x.value), 100.0, 0.0) }))
   }
-
+ */
   getRawOutputs(groups) {
 
     return this.getOutputs(groups).map(o => ({ name: o.name, group: o.group, value: o.formula(this.variableMap, 100.0, 0.0) }))
@@ -93,18 +66,18 @@ export class Affectation {
   }
 
   // RETURNS NET OUTPUT ("BESOIN NET")
-  get netOutput() {
+/*   get netOutput() {
     return this.outputs.map(o => o.formula(this.variableMap, this.ordinaryReduction, 0.0))
-  }
+  } */
 
-  get netOutput2() {
+/*   get netOutput2() {
     return this.outputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variableMap, this.ordinaryReduction, 0.0) }))
-  }
+  } */
 
-  netOutput3(group) {
+/*   netOutput3(group) {
     let xx = new Map(this.variables.filter((x) => x.group === group).map(x => [x.id, x.value]))
     return this.outputs.map(o => (o.formula(xx, this.ordinaryReduction, 0.0)))
-  }
+  } */
 
   getNetOutputs(groups) {
 
@@ -113,18 +86,18 @@ export class Affectation {
   }
 
   // RETURNS REDUCED OUTPUT ("BESOIN NET REDUIT")
-  get reducedOutput() {
+/*   get reducedOutput() {
     return this.outputs.map(o => o.formula(this.variableMap, this.ordinaryReduction, this.specialReduction))
-  }
+  } */
 
-  get reducedOutput2() {
+/*   get reducedOutput2() {
     return this.outputs.map(o => ({ name: o.name, group: o.group, value: o.formula(this.variableMap, this.ordinaryReduction, this.specialReduction) }))
-  }
+  } */
 
-  reducedOutput3(group) {
+/*   reducedOutput3(group) {
     let xx = new Map(this.variables.filter((x) => x.group === group).map(x => [x.id, x.value]))
     return this.outputs.map(o => (o.formula(this.variableMap, this.ordinaryReduction, this.specialReduction)))
-  }
+  } */
 
   getReducedOutputs(groups) {
 
@@ -132,13 +105,13 @@ export class Affectation {
 
   }
 
-  get totalOutput() {
+/*   get totalOutput() {
     return this.output.reduce((acc, obj) => { return acc + obj }, 0)
-  }
+  } */
 
-  totalOutput2(group) {
+/*   totalOutput2(group) {
     return this.rawOutput.filter(x => (x.group === group)).reduce((acc, obj) => { return acc + obj.value }, 0)
-  }
+  } */
 
   getTotalOutput(groups) {
 
@@ -146,13 +119,13 @@ export class Affectation {
 
   }
 
-  get totalNetOutput() {
+/*   get totalNetOutput() {
     return this.netOutput.reduce((acc, obj) => { return acc + obj }, 0)
-  }
+  } */
 
-  totalNetOutput2(group) {
+/*   totalNetOutput2(group) {
     return this.netOutput2.filter(x => (x.group === group)).reduce((acc, obj) => { return acc + obj.value }, 0)
-  }
+  } */
 
   getTotalNetOutput(groups) {
 
@@ -160,14 +133,14 @@ export class Affectation {
 
   }
 
-  get totalReducedOutput() {
+/*   get totalReducedOutput() {
     return this.reducedOutput.reduce((acc, obj) => { return acc + obj }, 0)
-  }
+  } */
 
-  totalReducedOutput2(group) {
+/*   totalReducedOutput2(group) {
     return this.reducedOutput2.filter(x => (x.group === group)).reduce((acc, obj) => { return acc + obj.value }, 0)
   }
-
+ */
   getTotalReducedOutput(groups) {
 
     return this.getReducedOutputs(groups).reduce((acc, obj) => { return acc + obj.value }, 0)
@@ -175,13 +148,13 @@ export class Affectation {
   }
 
 
-  get totalReducedOutputCeil() {
+/*   get totalReducedOutputCeil() {
     return this.reducedOutput.reduce((acc, obj) => { return acc + Math.ceil(obj) }, 0)
   }
-
-  totalReducedOutputCeil2(group) {
+ */
+/*   totalReducedOutputCeil2(group) {
     return this.reducedOutput2.filter(x => (x.group === group)).reduce((acc, obj) => { return acc + Math.ceil(obj.value) }, 0)
-  }
+  } */
 
   getTotalReducedOutputCeil(groups) {
 
