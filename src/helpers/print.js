@@ -349,7 +349,7 @@ export const print = (project) => {
                             { text: 'Logements et activités', style: 'tableBody', alignment: 'left' },
                             { text: 'Cf. affectations ci-dessus', style: 'tableBody', alignment: 'left' },
                             { text: 'Niveau B', style: 'tableBody', alignment: 'left' },
-                            { text: Math.ceil(project.getReducedNeeds('car')) - project.getStations('Logement') - project.getStations('Activité') - project.getStations('Pas concerné'), style: 'tableBody', alignment: 'right' },
+                            { text: Math.ceil(project.getReducedNeeds(['car', 'special'])) - project.getStations('Logement') - project.getStations('Activité') - project.getStations('Pas concerné'), style: 'tableBody', alignment: 'right' },
                         ],
                         [
                             { text: 'Pas concerné', style: 'tableBody', alignment: 'left' },
@@ -361,7 +361,7 @@ export const print = (project) => {
                             { text: 'Total', style: 'tableHeader', alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
-                            { text: Math.ceil(project.getReducedNeeds('car')), style: 'tableHeader', alignment: 'right' },
+                            { text: Math.ceil(project.getReducedNeeds(['car', 'special'])), style: 'tableHeader', alignment: 'right' },
                         ],
                     ]
                 },
