@@ -37,7 +37,7 @@
 
             <div class="text-h6">Liste des facteurs de réduction </div>
             <div class="row">
-                <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12" v-for="(affectation, key) in this.project.affectations.filter(e => e.active && e.variables.filter((x) => x.type === 'special reduction').length > 0)">
+                <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12" v-for="(affectation, key) in this.project.getAffectations()">
 
                     <div class="bg-white q-pa-md q-my-none rounded-borders">
 
@@ -49,7 +49,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(reduction, index) in affectation.variables.filter(e => e.type === 'special reduction')" :key="index">
+                                <tr v-for="(reduction, index) in affectation.getVariables(['special reduction'])" :key="index">
+
                                     <td>
                                         <div class="text-weight-bold">{{ reduction.name }}</div>
                                         <div class="text-caption">{{ reduction.description }}</div>
@@ -102,10 +103,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <template v-for="item in this.project.affectations.filter(e => e.active)">
-                                    <tr v-for="(subitem, iSub) in item.getReducedOutputs('car')">
-                                        <td v-if="iSub === 0" :rowspan="item.getOutputs('car').length" class="">{{ item.name }}</td>
-                                        <td v-if="iSub === 0" :rowspan="item.getOutputs('car').length" class="">{{ (-item.specialReduction).toFixed(1) }}% </td>
+                                <template v-for="item in this.project.getAffectations()">
+                                    <tr v-for="(subitem, iSub) in item.getReducedOutputs(['car'])">
+                                        <td v-if="iSub === 0" :rowspan="item.getOutputs(['car']).length" class="">{{ item.name }}</td>
+                                        <td v-if="iSub === 0" :rowspan="item.getOutputs(['car']).length" class="">{{ (-item.specialReduction).toFixed(1) }}% </td>
                                         <td>{{ subitem.name }}</td>
                                         <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                     </tr>
@@ -115,7 +116,7 @@
                                     <td class="text-weight-bold"></td>
                                     <td class="text-weight-bold"></td>
                                     <td class="bg-light-blue-1 text-weight-bold text-right">
-                                        {{ this.project.getReducedNeeds('car').toFixed(3) }}
+                                        {{ this.project.getReducedNeeds(['car']).toFixed(3) }}
                                     </td>
                                 </tr>
                             </tbody>
