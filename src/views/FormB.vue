@@ -79,7 +79,7 @@
         <!-- FORM -->
         <q-form ref="form" greedy no-error-focus no-reset-focus>
 
-            <div v-if="this.render" class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in this.project.affectations.filter(e => e.active)">
+            <div v-if="this.render" class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in this.project.getAffectations()">
 
                 <div class="row q-col-gutter-sm q-py-xs">
                     <label class="text-h7">
@@ -148,10 +148,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <template v-for="item in this.project.affectations.filter(e => e.active)">
+                            <template v-for="item in this.project.getAffectations()">
 
-                                <tr v-for="(subitem, iSub) in item.getRawOutputs('car')">
-                                    <td v-if="iSub === 0" :rowspan="item.getOutputs('car').length" class="">{{ item.name }}</td>
+                                <tr v-for="(subitem, iSub) in item.getRawOutputs(['car'])">
+                                    <td v-if="iSub === 0" :rowspan="item.getOutputs(['car']).length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
                                     <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
                                 </tr>
@@ -161,7 +161,7 @@
                                 <td class="text-weight-bold">Besoin brut total</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ this.project.getRawNeeds('car').toFixed(3) }}
+                                    {{ this.project.getRawNeeds(['car']).toFixed(3) }}
                                 </td>
                             </tr>
                         </tbody>
