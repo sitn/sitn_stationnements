@@ -254,7 +254,7 @@ export default {
     },
     computed: {
         render() {
-            return (this.project.commune !== null) & (this.project.locationType !== null) & this.project.hasAffectation
+            return this.project.hasCommune & this.project.hasLocationType & this.project.hasAffectation & this.project.hasZoneFactors
         },
 
     },
