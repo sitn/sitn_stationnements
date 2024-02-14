@@ -14,8 +14,8 @@
     <q-page-container>
       <q-page class="q-px-none q-pb-xs">
 
-        <!-- 1. PROJECT LOCATION -->
-        <FormSection title="1. Localisation du projet">
+        <!-- 1. PROJECT CHARACTERISTICS AND LOCATION -->
+        <FormSection title="1. Caractéristiques et localisation du projet">
           <template v-slot:content>
             <FormA :project="project" @updateProject=""></FormA>
           </template>
@@ -34,7 +34,6 @@
             <FormC :project="project"></FormC>
           </template>
         </FormSection>
-
 
         <!-- 4. REDUCED NET PARKING NEEDS -->
         <FormSection title="4. Calcul du besoin net réduit (article 29 RELConstr.)">
