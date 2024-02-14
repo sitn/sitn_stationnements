@@ -300,7 +300,18 @@ th {
 
 /* INFO BOXES */
 
+/*
 .infobox {
-  /* background-color: #ffbd0033; */
+  
   border-left: 0.5rem solid #ffa726 !important;
+}
+*/
+/* background-color: #ffbd0033; */
+
+.infobox {
+  border-top: 1px solid black !important;
+  border-bottom: 1px solid black !important;
+  border-left: none !important;
+  border-right: none !important;
+
 }
