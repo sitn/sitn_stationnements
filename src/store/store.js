@@ -16,5 +16,5 @@ const project = new Project(
 
 export const store = reactive({
   project: project,
-  isfilled: { 'A': false, 'B': false, 'C': false, 'D': false, 'E': false },
+  validity: { 'A': false, 'B': false, 'C': false, 'D': false, 'E': true },
 })
