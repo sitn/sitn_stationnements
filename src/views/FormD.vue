@@ -1,6 +1,6 @@
 <template>
     <!-- 4. REDUCED PARKING NEEDS -->
-    <div class="q-pa-md">
+    <div class="q-px-md">
 
         <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders" v-if="!this.render">
             <template v-slot:avatar>
@@ -11,75 +11,99 @@
 
         <div v-if="this.render">
 
-            <!-- INFOBOX  -->
-            <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox">
+            <!-- INFOBOX -->
+            <q-list class="q-my-md">
+                <q-expansion-item class="bg-grey-1">
+                    <template v-slot:header>
+                        <q-item-section avatar>
+                            <q-icon name="help" color="orange-7" size="2rem" />
+                        </q-item-section>
 
-                <q-card-section horizontal>
+                        <q-item-section>
+                            <div class="text-body2 text-weight-bold">Informations et aide sur le calcul</div>
+                            <div class="text-caption">Cliquer pour ouvrir/fermer</div>
+                        </q-item-section>
 
-                    <q-card-section class="q-pa-xs">
-                        <div class="text-body2 text-weight-bold">Informations sur le calcul</div>
-                        <div class="text-body2 q-pa-none">
-                            <ul>
-                                <li>Le besoin net réduit est calculé par un ou des facteurs de réduction appliqués au besoin
-                                    net.</li>
-                                <li>Si le requérant fait usage d’un facteur de réduction, il joint à la demande de permis de
-                                    construire une demande motivée démontrant la faisabilité du projet.</li>
-                                <li>Un plan de mobilité peut justifier un facteur de réduction.</li>
-                                <li>Un contact préalable avec la commune et/ou les services compétents peut être pertinent,
-                                    notamment pour les projets avec des logements avec encadrement ou étudiants ou concernés
-                                    par les thématiques de l’environnement (bruit, air) et de la sauvegarde du patrimoine.
-                                </li>
-                            </ul>
-                        </div>
-                    </q-card-section>
-                </q-card-section>
-            </q-card>
+                        <q-item-section side>
+
+                        </q-item-section>
+                    </template>
+
+                    <q-card flat class="q-pa-none">
+
+                        <q-card-section class="">
+
+                            <div class="text-body2">
+                                <ul>
+                                    <li>Le besoin net réduit est calculé par un ou des facteurs de réduction appliqués au besoin
+                                        net.</li>
+                                    <li>Si le requérant fait usage d’un facteur de réduction, il joint à la demande de permis de
+                                        construire une demande motivée démontrant la faisabilité du projet.</li>
+                                    <li>Un plan de mobilité peut justifier un facteur de réduction.</li>
+                                    <li>Un contact préalable avec la commune et/ou les services compétents peut être pertinent,
+                                        notamment pour les projets avec des logements avec encadrement ou étudiants ou concernés
+                                        par les thématiques de l’environnement (bruit, air) et de la sauvegarde du patrimoine.
+                                    </li>
+                                </ul>
+                            </div>
+                        </q-card-section>
+
+                    </q-card>
+
+                </q-expansion-item>
+            </q-list>
 
             <div class="text-h6">Liste des facteurs de réduction </div>
-            <div class="row">
-                <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12" v-for="(affectation, key) in this.project.getAffectations()">
 
-                    <div class="bg-white q-pa-md q-my-none rounded-borders">
+            <!-- FORM -->
+            <q-form ref="formD" greedy no-error-focus no-reset-focus @validation-success="validationSuccess" @validation-error="validationError">
 
-                        <table class="total-row">
-                            <thead>
-                                <tr>
-                                    <th>{{ affectation.name }}</th>
-                                    <th style="white-space: nowrap;">Réduction (-x%)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(reduction, index) in affectation.getVariables(['special reduction'])" :key="index">
+                <div class="row">
 
-                                    <td>
-                                        <div class="text-weight-bold">{{ reduction.name }}</div>
-                                        <div class="text-caption">{{ reduction.description }}</div>
-                                    </td>
-                                    <td width="20%">
-                                        <q-input dense bg-color="white" outlined type="number" name="reduction.factor" v-model.number="reduction.value" :min=reduction.min :max=reduction.max @update:model-value="check(reduction)" reactive-rules :rules="[val => validateRange(val, reduction.min, reduction.max)]">
-                                            <template v-slot:prepend>
-                                                <div class="text-body2">-</div>
-                                            </template>
-                                            <template v-slot:append>
-                                                <div class="text-body2">%</div>
-                                            </template>
-                                        </q-input>
-                                    </td>
-                                </tr>
+                    <div class="q-py-sm q-ma-none col-xs-12 col-sm-12 col-md-12" v-for="(affectation, key) in this.project.getAffectations()">
 
-                                <tr>
-                                    <td class="text-weight-bold">Total</td>
-                                    <td class="bg-light-blue-1 text-weight-bold text-right">{{
-                                        (-affectation.specialReduction).toFixed(1) }}%</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="bg-white q-pa-md q-my-none rounded-borders">
+
+                            <table class="total-row">
+                                <thead>
+                                    <tr>
+                                        <th>{{ affectation.name }}</th>
+                                        <th style="white-space: nowrap;">Réduction (-x%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(reduction, index) in affectation.getVariables(['special reduction'])" :key="index">
+
+                                        <td>
+                                            <div class="text-weight-bold">{{ reduction.name }}</div>
+                                            <div class="text-caption">{{ reduction.description }}</div>
+                                        </td>
+                                        <td width="20%">
+                                            <q-input dense bg-color="white" outlined type="number" name="reduction.factor" v-model.number="reduction.value" :min=reduction.min :max=reduction.max @update:model-value="check(reduction)" reactive-rules :rules="[val => validateRange(val, reduction.min, reduction.max)]">
+                                                <template v-slot:prepend>
+                                                    <div class="text-body2">-</div>
+                                                </template>
+                                                <template v-slot:append>
+                                                    <div class="text-body2">%</div>
+                                                </template>
+                                            </q-input>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="text-weight-bold">Total</td>
+                                        <td class="bg-light-blue-1 text-weight-bold text-right">{{
+                                            (-affectation.specialReduction).toFixed(1) }}%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
 
                     </div>
 
                 </div>
-
-            </div>
+            </q-form>
 
             <q-separator class="q-my-md" />
 
@@ -108,7 +132,7 @@
                                         <td v-if="iSub === 0" :rowspan="item.getOutputs(['car']).length" class="">{{ item.name }}</td>
                                         <td v-if="iSub === 0" :rowspan="item.getOutputs(['car']).length" class="">{{ (-item.specialReduction).toFixed(1) }}% </td>
                                         <td>{{ subitem.name }}</td>
-                                        <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                        <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
                                     </tr>
                                 </template>
                                 <tr>
@@ -116,7 +140,7 @@
                                     <td class="text-weight-bold"></td>
                                     <td class="text-weight-bold"></td>
                                     <td class="bg-light-blue-1 text-weight-bold text-right">
-                                        {{ this.project.getReducedNeeds(['car']).toFixed(3) }}
+                                        {{ this.project.getReducedNeeds(['car']).toFixed(2) }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -151,7 +175,8 @@ export default {
     },
     computed: {
         render() {
-            return (this.project.commune !== null) & (this.project.locationType !== null) & this.project.hasAffectation & this.project.hasZoneFactors
+            return store.validity.A & store.validity.B & store.validity.C
+            // return (this.project.commune !== null) & (this.project.locationType !== null) & this.project.hasAffectation & this.project.hasZoneFactors & this.store.validity.A & this.store.validity.B & this.store.validity.C
         },
     },
     methods: {
@@ -166,12 +191,34 @@ export default {
 
         },
         validateRange(val, min, max) {
-            let isValid = val !== null && val >= min && val <= max
+            let isValid = val !== null && val !== '' && val >= min && val <= max
             if (isValid === false) {
                 val = null
             }
             return isValid || `Veuillez entrer une valeur entre ${min} et ${max}`
         },
+        validateForm() {
+            if (this.$refs.hasOwnProperty('formD')) {
+                if (this.$refs.formD !== null) {
+                    this.$nextTick(() => { this.$refs.formD.validate() })
+                }
+            }
+        },
+        validationSuccess() {
+            // console.log(`${this.$options.name} | validationSuccess()`)
+            this.store.validity.D = true
+            // console.log(this.store.validity)
+        },
+        validationError() {
+            // console.log(`${this.$options.name} | validationError()`)
+            this.store.validity.D = false
+            // console.log(this.store.validity)
+        },
+
+    },
+    updated() {
+
+        this.validateForm()
     }
 }
 </script>
