@@ -1,20 +1,102 @@
 <template>
     <!-- 1. LOCATION -->
-    <div class="q-pa-md">
+    <div class="q-px-md">
 
-        <q-form ref="form" greedy>
+        <!-- <button @click="validateForm">VALIDATE FORM</button> -->
 
-            <!-- N° SATAC -->
-            <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
-                <q-input class="col" bg-color="white" outlined label="N° SATAC du projet (si disponible)" type="text" name="project.satac" v-model="project.satac" :rules="[(val) => validateSatac(val) || 'Seuls les chiffres sans espaces sont admis']">
+        <!-- FORM -->
+        <q-form ref="formA" greedy no-error-focus no-reset-focus @validation-success="validationSuccess" @validation-error="validationError">
+
+            <!-- PROJECT N° SATAC -->
+            <div class="bg-grey-1 q-pa-md q-my-md rounded-borders">
+                <q-input class="col" bg-color="white" outlined label="N° SATAC du projet (si disponible)" type="text" name="project.satac" v-model="project.satac" @update:model-value="validateForm" :rules="[(val) => validateSatac(val) || 'Seuls les chiffres sans espaces sont admis']">
                     <template v-slot:hint>
                         Entrer le n° SATAC avec des chiffres seulement et sans espaces
                     </template>
                 </q-input>
             </div>
 
+            <!-- PROJECT TYPE TYPE INFOBOX  -->
+            <q-list class="q-my-lg rounded-borders">
+                <q-expansion-item rounded-borders class="bg-grey-1">
+                    <template v-slot:header>
+                        <q-item-section avatar>
+                            <q-icon name="help" color="orange-7" text-color="black" size="2rem" />
+                        </q-item-section>
+
+                        <q-item-section>
+                            <div class="text-body2 text-weight-bold">Information et aide sur la nature du projet</div>
+                            <div class="text-caption">Cliquer pour ouvrir/fermer</div>
+                        </q-item-section>
+
+                        <q-item-section side>
+                        </q-item-section>
+                    </template>
+
+                    <q-card flat class="q-pa-none">
+
+                        <q-card-section class="q-pa-sm">
+
+                            <div class="text-body2">
+                                <ul>
+                                    <li>Voir document d'aide à l'application</li>
+                                </ul>
+
+                            </div>
+                        </q-card-section>
+
+                    </q-card>
+
+                </q-expansion-item>
+            </q-list>
+
+
+            <!-- PROJECT TYPE -->
+            <div class="bg-grey-1 q-pa-md q-my-md rounded-borders">
+                <q-select clearable outlined bottom-slots bg-color="white" v-model="project.type" :options="project_types" option-value="name" option-label="name" @update:model-value="validateForm" label="Nature du projet" :rules="[(val) => val !== null || 'Veuillez choisir le type de projet']">
+
+                    <template v-slot:option="scope">
+                        <q-item v-bind="scope.itemProps">
+
+                            <q-item-section>
+                                <q-item-label>{{ scope.opt.name }}</q-item-label>
+                                <q-item-label caption>{{ scope.opt.description }}</q-item-label>
+                            </q-item-section>
+
+                            <q-item-section side>
+
+                                <q-avatar rounded size="md" font-size="22px" color="blue-10" text-color="white">
+                                    <img height="50%" width="50%" :src="scope.opt.icon">
+                                </q-avatar>
+
+                                <!-- 
+                                <q-chip color="blue-10" text-color="white" square>
+                                    <q-avatar>
+                                        <img height="50%" width="50%" :src="scope.opt.icon">
+                                    </q-avatar>
+                                    {{ scope.opt.equipement ? 'CALCUL ÉQUIP. ÉLEC. REQUIS' : 'CALCUL ÉQUIP. ÉLEC. NON REQUIS' }}
+                                </q-chip>
+                                -->
+
+                            </q-item-section>
+
+                            <q-tooltip>
+                                {{ scope.opt.equipement ? 'Nécessite le calcul d’équipement de recharge pour véhicules électriques' : 'Ne nécessite pas de calcul d’équipement de recharge pour véhicules électriques' }}
+                            </q-tooltip>
+
+                        </q-item>
+                    </template>
+
+                    <template v-slot:hint>
+                        Choisir la nature du projet
+                    </template>
+
+                </q-select>
+            </div>
+
+
             <!-- COMMUNE -->
-            <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+            <div class="bg-grey-1 q-pa-md q-my-md rounded-borders">
                 <q-select outlined bottom-slots bg-color="white" v-model="project.commune" :options="communes" option-value="comnom" option-label="comnom" @update:model-value="resetParcels()" label="Commune" :rules="[(val) => val !== null || 'Veuillez choisir la commune']">
 
                     <template v-slot:option="scope">
@@ -32,7 +114,7 @@
             </div>
 
             <!-- PARCEL SEARCH -->
-            <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+            <div class="bg-grey-1 q-pa-md q-my-md rounded-borders">
                 <Search :geojson="geojson" :project="project" @addOption="addRecord"></Search>
             </div>
 
@@ -51,9 +133,9 @@
             </LocationTable>
 
             <!-- LOCATION TYPE -->
-            <div class="bg-grey-2 q-pa-md q-my-md rounded-borders">
+            <div class="bg-grey-1 q-pa-md q-my-md rounded-borders">
 
-                <q-select outlined bottom-slots bg-color="white" v-model="project.locationType" :options="project.loctypes.filter(e => e.active)" option-value="name" option-label="name" @update:model-value="" label="Type de localisation du projet" :rules="[validateLocalisation]">
+                <q-select outlined bottom-slots bg-color="white" v-model="project.locationType" :options="project.loctypes.filter(e => e.active)" option-value="name" option-label="name" @update:model-value="validateForm" label="Type de localisation du projet" :rules="[validateLocalisation]">
 
                     <template v-slot:option="scope">
                         <q-item v-bind="scope.itemProps">
@@ -73,37 +155,63 @@
             </div>
 
             <!-- LOCATION TYPE INFOBOX  -->
-            <q-card v-if="store.project.loctypes.filter(e => e.active).length > 1" flat class="bg-grey-1 q-pa-md q-my-md infobox">
+            <q-list class="q-my-lg rounded-borders" v-if="store.project.loctypes.filter(e => e.active).length > 1">
+                <q-expansion-item rounded-borders class="bg-grey-1">
+                    <!-- <q-expansion-item icon="help" label="Informations et aide sur le calcul" caption="Cliquer pour ouvrir l'aide" class="bg-grey-1"> -->
+                    <template v-slot:header>
+                        <q-item-section avatar>
+                            <q-icon name="help" color="orange-7" text-color="black" size="2rem" /> <!-- #f78a15 -->
 
-                <q-card-section horizontal>
+                        </q-item-section>
 
-                    <q-card-section class="q-pa-xs">
-                        <div class="text-body2 text-weight-bold q-mb-sm">Justification du type de localisation</div>
+                        <q-item-section>
+                            <div class="text-body2 text-weight-bold">Information et aide sur le type de localisation</div>
+                            <div class="text-caption">Cliquer pour ouvrir/fermer</div>
+                        </q-item-section>
+
+                        <q-item-section side>
+
+                        </q-item-section>
+                    </template>
+
+                    <!-- <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox" v-if="this.render"> -->
+                    <q-card flat class="q-pa-none">
+
+                        <!-- <q-card v-if="store.project.loctypes.filter(e => e.active).length > 1" flat class="bg-grey-1 q-pa-md q-my-md infobox"> -->
+
+                        <!-- <q-card-section horizontal> -->
+
+                        <q-card-section class="q-pa-sm">
+                            <!-- <div class="text-body2 text-weight-bold q-mb-sm">Justification du type de localisation</div> -->
 
 
-                        <div class="text-body2">
-                            <ul>
-                                <li> La ou les parcelle(s) se trouve(nt) sur plusieurs types de localisation. Un seul type de
-                                    localisation doit être choisi. Il faut brièvement justifier le choix dans le champ ci-dessous.
-                                </li>
+                            <div class="text-body2">
+                                <ul>
+                                    <li>La ou les parcelle(s) se trouve(nt) sur plusieurs types de localisation. Un seul type de
+                                        localisation doit être choisi. Il faut brièvement justifier le choix dans le champ ci-dessous.
+                                    </li>
 
-                                <li> Le choix d’un type de localisation peut notamment être justifié par le fait qu’il recouvre
-                                    la majorité de la ou des parcelle(s) concernée(s) ; qu’il recouvre le bâtiment ou
-                                    l’emplacement de l’entrée principale du bâtiment.
-                                </li>
-                            </ul>
+                                    <li>Le choix d’un type de localisation peut notamment être justifié par le fait qu’il recouvre
+                                        la majorité de la ou des parcelle(s) concernée(s) ; qu’il recouvre le bâtiment ou
+                                        l’emplacement de l’entrée principale du bâtiment.
+                                    </li>
+                                </ul>
 
-                        </div>
-                    </q-card-section>
+                            </div>
+                        </q-card-section>
 
-                </q-card-section>
+                        <!-- </q-card-section> -->
 
-            </q-card>
+                    </q-card>
+
+                </q-expansion-item>
+            </q-list>
 
             <!-- LOCATION TYPE JUSTIFICATION  -->
-            <div v-if="store.project.loctypes.filter(e => e.active).length > 1" class="bg-grey-2 q-pa-md q-my-sm rounded-borders">
+            <div v-if="store.project.loctypes.filter(e => e.active).length > 1" class="bg-grey-1 q-pa-md q-my-sm rounded-borders">
                 <q-input v-model="project.locationTypeJustification" outlined bg-color="white" type="textarea" maxlength="500" counter label="Justification du type de localisation du projet" :rules="[(val) => val.length > 3 || 'Veuillez justifier le choix du type de localisation']" />
             </div>
+
 
         </q-form>
 
@@ -111,10 +219,10 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+// import { ref } from 'vue'
 import { store } from '../store/store.js'
 import communes from '../assets/data/communes.json'
-import { Mob20 } from "../helpers/classes.js"
+import { Mob20, project_types } from "../helpers/classes.js"
 import Search from "../components/Search.vue"
 import Map from "../components/Map.vue"
 import LocationTable from "../components/LocationTable.vue"
@@ -129,15 +237,17 @@ export default {
     props: {},
     emits: [],
     setup() {
+
         return {
-            map: ref()
+            // map: ref()
         }
     },
     data() {
         return {
             store,
-            isfilled: { 'A': false, 'B': false, 'C': false, 'D': false, 'E': false },
+            // validity: { 'A': false, 'B': false, 'C': false, 'D': false, 'E': false },
             communes: communes,
+            project_types: project_types,
             project: store.project,
             geojson: {
                 'type': 'FeatureCollection',
@@ -184,7 +294,7 @@ export default {
                 }
 
                 store.project.loctypes.sort((a, b) => b.area - a.area)
-                this.$nextTick(() => { this.$refs.form.validate() })
+                this.validateForm()
 
             }
 
@@ -202,6 +312,7 @@ export default {
         resetParcels() {
             store.project.parcels = []
             this.geojson.features = []
+            this.validateForm()
         },
         addRecord(feature) {
             var headers = new Headers()
@@ -243,12 +354,54 @@ export default {
         },
         updateProject(obj) {
             store.project = obj
-            this.$nextTick(() => { this.$refs.form.validate() })
+            this.validateForm()
+        },
+        validateForm() {
+            // console.log(`${this.$options.name} | validateForm()`)
+            if (this.$refs.hasOwnProperty('formA')) {
+                if (this.$refs.formA !== null) {
+                    // this.$refs.formA.validate()
+                    this.$nextTick(() => { this.$refs.formA.validate() })
+                    // console.log(this.store.validity)
+                }
+            }
+        },
+        validationSuccess() {
+            // console.log(`${this.$options.name} | validationSuccess()`)
+            this.store.validity.A = true
+            //console.log(this.store.validity)
+            //this.valid = true
+            //this.model.valid = true
+            //store.valid = true
+            //this.$emit('validationEvent', true)
+        },
+        validationError() {
+            // console.log(`${this.$options.name} | validationError()`)
+            this.store.validity.A = false
+            //console.log(this.store.validity)
+            //this.valid = false
+            //this.model.valid = false
+            //store.valid = false
+            //this.$emit('validationEvent', false)
         },
     },
+
     mounted() {
-        this.$nextTick(() => { this.$refs.form.validate() })
+        this.validateForm()
+        console.log(this.project)
+        /*
+        console.log(this.$refs)
+        console.log(this.$refs.formA)
+        let didi = this.$refs.formA.validate()
+        console.log(didi)
+        */
     },
+    updated() {
+        this.validateForm()
+        console.log(`${this.$options.name} | updated()`)
+        console.log(this.project)
+
+    }
 }
 </script>
 
