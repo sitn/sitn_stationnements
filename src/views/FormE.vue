@@ -29,7 +29,7 @@
                                 <tr v-for="(subitem, iSub) in item.getReducedOutputs(['car', 'special'])">
                                     <td v-if="iSub === 0" :rowspan="item.getOutputs(['car', 'special']).length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
                                 </tr>
                             </template>
                             <tr>
@@ -46,7 +46,7 @@
             </div>
 
             <!-- CHARGING STATIONS SUMMARY TABLE -->
-            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6" v-if="this.project.type.equipement">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
                     <table class="total-row">
@@ -145,7 +145,7 @@
 
                     <table class="total-row">
                         <caption class="text-subtitle1">
-                            Stationnements deux-roues motorisés > 45km/h (art. 37c RELConstr.)
+                            Stationnements deux-roues motorisés (art. 37c RELConstr.)
                         </caption>
                         <thead>
                             <tr>
@@ -159,7 +159,7 @@
                                 <tr v-for="(subitem, iSub) in item.getReducedOutputs(['motorcycle'])">
                                     <td v-if="iSub === 0" :rowspan="item.getOutputs(['motorcycle']).length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
                                 </tr>
                             </template>
                             <tr>
@@ -195,7 +195,7 @@
                                 <tr v-for="(subitem, iSub) in item.getReducedOutputs(['bicycle'])">
                                     <td v-if="iSub === 0" :rowspan="item.getOutputs(['bicycle']).length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
                                 </tr>
                             </template>
                             <tr>
@@ -242,7 +242,8 @@ export default {
     },
     computed: {
         render() {
-            return this.project.hasCommune & this.project.hasLocationType & this.project.hasAffectation & this.project.hasZoneFactors
+            return store.validity.A & store.validity.B & store.validity.C & store.validity.D
+            // return this.project.hasCommune & this.project.hasLocationType & this.project.hasAffectation & this.project.hasZoneFactors
         },
 
     },
