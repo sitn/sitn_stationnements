@@ -1,6 +1,6 @@
 <template>
     <!-- 3. NET PARKING NEEDS -->
-    <div class="q-pa-md">
+    <div class="q-px-md">
 
         <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders" v-if="!this.render">
             <template v-slot:avatar>
@@ -9,112 +9,129 @@
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-        <!-- INFOBOX -->
-        <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox" v-if="this.render">
+        <div v-if="this.render">
 
-            <q-card-section horizontal>
+            <!-- INFOBOX -->
+            <q-list class="q-my-md">
+                <q-expansion-item class="bg-grey-1">
+                    <template v-slot:header>
+                        <q-item-section avatar>
+                            <q-icon name="help" color="orange-7" size="2rem" />
+                        </q-item-section>
 
-                <q-card-section class="q-pa-xs">
-                    <div class="text-body2 text-weight-bold q-mb-sm">Informations sur le calcul</div>
+                        <q-item-section>
+                            <div class="text-body2 text-weight-bold">Informations et aide sur le calcul</div>
+                            <div class="text-caption">Cliquer pour ouvrir/fermer</div>
+                        </q-item-section>
 
-                    <div class="text-body2">
-                        <ul>
-                            <li>Le besoin net en places de stationnement est calculé par l’application au besoin brut des
-                                pourcentages du tableau 2 de l’annexe 1 du RELConstr.</li>
+                        <q-item-section side>
 
-                            <li>Les pourcentages sont à appliquer dans les cases ci-dessous (affectation logement et
-                                affectation activité). Ils sont compris entre un minimum et un maximum.</li>
+                        </q-item-section>
+                    </template>
 
-                            <li>La commune peut définir un pourcentage fixe dans son plan règlement communal, ou le canton
-                                dans un plan d’affectation cantonal.</li>
+                    <q-card flat class="q-pa-none">
 
-                            <li>Le pourcentage à appliquer au besoin brut pour les quartiers durables est obligatoirement le
-                                minimum, sauf pour l’affectation logement dans le type de localisation III où il est de 50%
-                                (au lieu de 70%).</li>
-                        </ul>
-                    </div>
-                </q-card-section>
+                        <q-card-section class="">
 
-            </q-card-section>
+                            <div class="text-body2">
+                                <ul>
+                                    <li>Le besoin net en places de stationnement est calculé par l’application au besoin brut des
+                                        pourcentages du tableau 2 de l’annexe 1 du RELConstr.</li>
 
-        </q-card>
+                                    <li>Les pourcentages sont à appliquer dans les cases ci-dessous (affectation logement et
+                                        affectation activité). Ils sont compris entre un minimum et un maximum.</li>
 
-        <!-- FORM -->
-        <q-form ref="form" greedy no-error-focus no-reset-focus v-if="this.render">
+                                    <li>La commune peut définir un pourcentage fixe dans son plan règlement communal, ou le canton
+                                        dans un plan d’affectation cantonal.</li>
 
-            <!-- Eco neighbourhoud checkbox field -->
-            <div class="row q-pa-sm q-my-sm bg-grey-2 rounded-borders">
-                <q-item tag="label" v-ripple>
-                    <q-item-section avatar>
-                        <q-checkbox v-model="this.project.eco" @update:model-value="eco()" color="blue" />
-                    </q-item-section>
-                    <q-item-section>
-                        <q-item-label>Le projet est un quartier durable au sens de l’article 48 de la loi cantonale sur l’aménagement du territoire.</q-item-label>
-                        <q-item-label caption>Le pourcentage à appliquer au besoin brut pour les quartiers durables est obligatoirement le minimum, sauf pour l’affectation logement dans le type de localisation III où il est de 50% (au lieu de 70%).</q-item-label>
-                    </q-item-section>
-                </q-item>
-            </div>
+                                    <li>Le pourcentage à appliquer au besoin brut pour les quartiers durables est obligatoirement le
+                                        minimum, sauf pour l’affectation logement dans le type de localisation III où il est de 50%
+                                        (au lieu de 70%).</li>
+                                </ul>
+                            </div>
+                        </q-card-section>
 
-            <!-- Housing and activity ratios input fields -->
-            <div class="row q-col-gutter-none q-pa-sm q-my-sm bg-grey-2 rounded-borders">
+                    </q-card>
 
-                <div class="col-xs-12 col-sm-6 q-pa-sm q-my-none" v-for="(item, key) in this.outputs.values">
-                    <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective" :min=item.min :max=item.max @update:model-value="check(item)" reactive-rules :rules="[val => validateRange(val, item.min, item.max)]" :disable="!this.project.getAffectations().map((x) => (x.type)).includes(item.label) || this.project.eco">
-                        <template v-slot:label>
-                            {{ item.label }} {{ this.project.eco === true ? `` : `(${item.min}% à ${item.max}% selon votre projet)` }}
-                        </template>
-                        <template v-slot:append>
-                            <div class="text-body2">%</div>
-                        </template>
-                    </q-input>
+                </q-expansion-item>
+            </q-list>
+
+            <!-- FORM -->
+            <q-form ref="formC" greedy no-error-focus no-reset-focus @validation-success="validationSuccess" @validation-error="validationError">
+
+                <!-- Eco neighbourhoud checkbox field -->
+                <div class="row q-pa-sm q-my-md bg-grey-1 rounded-borders">
+                    <q-item tag="label" v-ripple>
+                        <q-item-section avatar>
+                            <q-checkbox v-model="this.project.eco" @update:model-value="eco()" color="blue" />
+                        </q-item-section>
+                        <q-item-section>
+                            <q-item-label>Le projet est un quartier durable au sens de l’article 48 de la loi cantonale sur l’aménagement du territoire.</q-item-label>
+                            <q-item-label caption>Le pourcentage à appliquer au besoin brut pour les quartiers durables est obligatoirement le minimum, sauf pour l’affectation logement dans le type de localisation III où il est de 50% (au lieu de 70%).</q-item-label>
+                        </q-item-section>
+                    </q-item>
                 </div>
 
-            </div>
+                <!-- Housing and activity ratios input fields -->
+                <div class="row q-col-gutter-none q-pa-sm q-my-sm bg-grey-1 rounded-borders">
 
-        </q-form>
-
-        <!-- COMPUTATION SUMMARY TABLES -->
-        <div class="row" v-if="this.render">
-
-            <!-- CAR PARKINGS SUMMARY TABLE -->
-            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-                <div class="bg-white q-pa-md q-my-sm rounded-borders">
-
-                    <table class="total-row">
-                        <caption class="text-subtitle1">Stationnements voitures</caption>
-                        <thead>
-                            <tr>
-                                <th>Affectation</th>
-                                <th>Facteur</th>
-                                <th>Type de place</th>
-                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_car" /></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template v-for="item in this.project.getAffectations()">
-                                <tr v-for="(subitem, iSub) in item.getNetOutputs(['car'])">
-                                    <td v-if="iSub === 0" :rowspan="item.getOutputs(['car']).length" class="">{{ item.name }}</td>
-                                    <td v-if="iSub === 0" :rowspan="item.getOutputs(['car']).length" class="">&#215; {{ item.ordinaryReduction.toFixed(1) }}% </td>
-                                    <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
-                                </tr>
+                    <div class="col-xs-12 col-sm-6 q-pa-sm q-my-none" v-for="(item, key) in this.outputs.values">
+                        <q-input bg-color="white" outlined label="" type="number" name="" v-model.number="item.effective" :min=item.min :max=item.max @update:model-value="check(item)" reactive-rules :rules="[val => validateRange(val, item.min, item.max)]" :disable="!this.project.getAffectations().map((x) => (x.type)).includes(item.label) || this.project.eco">
+                            <template v-slot:label>
+                                {{ item.label }} {{ this.project.eco === true ? `` : `(${item.min}% à ${item.max}% selon votre projet)` }}
                             </template>
-                            <tr>
-                                <td class="text-weight-bold">Besoin net total</td>
-                                <td class="text-weight-bold"></td>
-                                <td class="text-weight-bold"></td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ this.project.getNetNeeds(['car']).toFixed(3) }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <template v-slot:append>
+                                <div class="text-body2">%</div>
+                            </template>
+                        </q-input>
+                    </div>
+
+                </div>
+
+            </q-form>
+
+            <!-- COMPUTATION SUMMARY TABLES -->
+            <div class="row">
+
+                <!-- CAR PARKINGS SUMMARY TABLE -->
+                <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                    <div class="bg-white q-pa-md q-my-sm rounded-borders">
+
+                        <table class="total-row">
+                            <caption class="text-subtitle1">Stationnements voitures</caption>
+                            <thead>
+                                <tr>
+                                    <th>Affectation</th>
+                                    <th>Facteur</th>
+                                    <th>Type de place</th>
+                                    <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="directions_car" /></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template v-for="item in this.project.getAffectations()">
+                                    <tr v-for="(subitem, iSub) in item.getNetOutputs(['car'])">
+                                        <td v-if="iSub === 0" :rowspan="item.getOutputs(['car']).length" class="">{{ item.name }}</td>
+                                        <td v-if="iSub === 0" :rowspan="item.getOutputs(['car']).length" class="">&#215; {{ item.ordinaryReduction.toFixed(1) }}% </td>
+                                        <td>{{ subitem.name }}</td>
+                                        <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
+                                    </tr>
+                                </template>
+                                <tr>
+                                    <td class="text-weight-bold">Besoin net total</td>
+                                    <td class="text-weight-bold"></td>
+                                    <td class="text-weight-bold"></td>
+                                    <td class="bg-light-blue-1 text-weight-bold text-right">
+                                        {{ this.project.getNetNeeds(['car']).toFixed(2) }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
 
             </div>
-
         </div>
-
     </div>
 </template>
 
@@ -139,7 +156,8 @@ export default {
     },
     computed: {
         render() {
-            return (this.project.commune !== null) & (this.project.locationType !== null) & this.project.hasAffectation
+            return store.validity.A & store.validity.B
+            // return (this.project.commune !== null) & (this.project.locationType !== null) & this.project.hasAffectation
         },
         outputs() {
 
@@ -150,8 +168,6 @@ export default {
             } else {
                 return this.project.commune.factors.find((e) => e.zone === this.project.locationType.name)
             }
-
-
 
         },
 
@@ -220,27 +236,35 @@ export default {
 
         },
         validateForm() {
-
-            if (this.$refs.hasOwnProperty('form')) {
-                if (this.$refs.form !== null) {
-                    this.$nextTick(() => { this.$refs.form.validate() })
+            if (this.$refs.hasOwnProperty('formC')) {
+                if (this.$refs.formC !== null) {
+                    this.$nextTick(() => { this.$refs.formC.validate() })
                 }
             }
-        }
+        },
+        validationSuccess() {
+            // console.log(`${this.$options.name} | validationSuccess()`)
+            this.store.validity.C = true
+            // console.log(this.store.validity)
+            //this.valid = true
+            //this.model.valid = true
+            //store.valid = true
+            //this.$emit('validationEvent', true)
+        },
+        validationError() {
+            // console.log(`${this.$options.name} | validationError()`)
+            this.store.validity.C = false
+            // console.log(this.store.validity)
+            //this.valid = false
+            //this.model.valid = false
+            //store.valid = false
+            //this.$emit('validationEvent', false)
+        },
 
     },
     updated() {
 
-        // console.log('this.$refs')
-        // console.log(this.$refs)
-        // console.log(`form !== null:  ${this.$refs.form !== null}`)
-        // console.log(`form hasOwnProperty:  ${this.$refs.hasOwnProperty('form')}`)
-
-        if (this.$refs.hasOwnProperty('form')) {
-            if (this.$refs.form !== null) {
-                this.$nextTick(() => { this.$refs.form.validate() })
-            }
-        }
+        this.validateForm()
     }
 }
 </script>
