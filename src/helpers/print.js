@@ -124,8 +124,9 @@ export const print = (project) => {
 
             // SECTION STATIONNEMENTS VOITURES
             {
-                text: `Conformément à l'art. 30 du RELConstr., le nombre de places de stationnement pour voitures à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
-                style: 'body',
+                // text: `Conformément à l'art. 30 du RELConstr., le nombre de places de stationnement pour voitures à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                text: `Stationnements voitures (art. 30 RELConstr.)`,
+                style: 'tableTitle',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
                 render: true
             },
@@ -315,10 +316,11 @@ export const print = (project) => {
             // SECTION EQUIPEMENTS DE RECHARGE POUR VEHICULES ELECTRIQUES
             {
                 pageBreak: 'before',
-                text: `Conformément à l'art. 34 du RELCEn., le nombre d'équipements pour véhicules électriques à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
-                style: 'body',
+                // text: `Conformément à l'art. 34 du RELCEn., le nombre d'équipements pour véhicules électriques à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                text: `Équipements pour véhicules électriques (art. 34 RELCEn.)`,
+                style: 'tableTitle',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
-                render: true
+                render: project.type.equipement
             },
             {
                 style: 'table',
@@ -371,15 +373,16 @@ export const print = (project) => {
                     },
                     vLineWidth: (i, node) => ((i === 0 || i === node.table.widths.length) ? 0 : 0),
                 },
-                render: true
+                render: project.type.equipement
             },
 
 
             // SECTION STATIONNEMENTS DEUX-ROUES MOTORISES
             {
                 pageBreak: 'before',
-                text: `Conformément à l'art. 37c RELConstr., le nombre de places de stationnements pour deux-roues motorisés à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
-                style: 'body',
+                // text: `Conformément à l'art. 37c RELConstr., le nombre de places de stationnements pour deux-roues motorisés à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                text: `Stationnements deux-roues motorisés (art. 37c RELConstr.)`,
+                style: 'tableTitle',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
                 render: true
             },
@@ -464,8 +467,9 @@ export const print = (project) => {
             // SECTION STATIONNEMENTS VELOS
             {
                 pageBreak: 'before',
-                text: `Conformément à l'art. 37b du RELConstr., le nombre de places de stationnements pour vélos (y.c. électriques et spéciaux) à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
-                style: 'body',
+                // text: `Conformément à l'art. 37b du RELConstr., le nombre de places de stationnements pour vélos (y.c. électriques et spéciaux) à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
+                text: `Stationnements vélos, y.c. électriques et spéciaux (art. 37b RELConstr.)`,
+                style: 'tableTitle',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
                 render: true
             },
@@ -547,6 +551,12 @@ export const print = (project) => {
                 },
                 render: true
             },
+            {
+                text: `Pour les logements avec encadrement, une place par appartement est calculée au sens de l'article 37 b alinéa 4 du RELConstr. Le chiffre indiqué dans le tableau est un minimum. Une place par pièce est préconisée selon la norme VSS.`,
+                style: 'body',
+                margin: [0, 5, 0, 2], // [left, top, right, bottom]
+                render: true
+            },
 
 
         ],
@@ -573,6 +583,12 @@ export const print = (project) => {
                 font: 'Roboto',
                 fontSize: 10,
                 bold: false,
+                margin: [0, 5, 0, 5] // [left, top, right, bottom]
+            },
+            tableTitle: {
+                font: 'Roboto',
+                fontSize: 11,
+                bold: true,
                 margin: [0, 5, 0, 5] // [left, top, right, bottom]
             },
             table: {
