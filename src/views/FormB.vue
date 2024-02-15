@@ -1,6 +1,6 @@
 <template>
     <!-- 2. RAW PARKING NEEDS -->
-    <div class="q-pa-md">
+    <div class="q-px-md">
 
         <q-banner inline-actions class="text-white bg-red q-my-md q-pa-md rounded-borders" v-if="!this.render">
             <template v-slot:avatar>
@@ -10,76 +10,105 @@
         </q-banner>
 
         <!-- INFOBOX  -->
-        <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox" v-if="this.render">
+        <q-list class="q-my-md" v-if="this.render">
+            <q-expansion-item class="bg-grey-1">
+                <!-- <q-expansion-item icon="help" label="Informations et aide sur le calcul" caption="Cliquer pour ouvrir l'aide" class="bg-grey-1"> -->
+                <template v-slot:header>
+                    <q-item-section avatar>
+                        <q-icon name="help" color="orange-7" text-color="black" size="2rem" /> <!-- #f78a15 -->
 
-            <q-card-section horizontal>
+                    </q-item-section>
 
-                <q-card-section class="q-pa-xs">
-                    <div class="text-body2 text-weight-bold q-mb-sm">Informations sur le calcul</div>
+                    <q-item-section>
+                        <div class="text-body2 text-weight-bold">Informations et aide sur le calcul</div>
+                        <div class="text-caption">Cliquer pour ouvrir/fermer</div>
+                    </q-item-section>
 
-                    <div class="text-body2">
-                        <ul>
-                            <li>Le besoin brut en places de stationnement est calculé selon les ratios du tableau 1 de
-                                l’annexe 1 du RELConstr.</li>
+                    <q-item-section side>
 
-                            <li>Pour que le calcul soit fait au plus juste des besoins, il est important de préciser toutes
-                                les affectations comprises dans le projet, en particulier pour les projets d’activité.
-                                Ainsi, un projet pour une manufacture horlogère comprendra possiblement des surfaces
-                                affectées à « industrie et artisanat », « entrepôts et dépôts » et « autres services ».</li>
-
-                            <li>Pour les affectations moins fréquentes les ratios sont à
-                                rechercher dans le tableau 1 de la norme VSS 40 281 (2019). Le nombre de places obtenu est à
-                                indiquer manuellement.</li>
-
-                            <li>La surface brute de plancher (SBP) correspond à la somme des surfaces utiles principales,
-                                des surfaces de dégagement et des surfaces de construction au sens de l’article 16 RELCAT.
-                            </li>
-
-                        </ul>
-                    </div>
-                </q-card-section>
-
-            </q-card-section>
-
-        </q-card>
-
-        <div class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-if="this.render">
-
-            <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations" option-value="name" option-label="name" @add="addOption()" @remove="removeOption()" @update:model-value="selectOption()" multiple label="Affectation(s)">
-
-                <template v-slot:option="scope">
-                    <q-item v-bind="scope.itemProps">
-                        <q-item-section side>
-                            <q-checkbox :model-value="scope.selected" @update:model-value="scope.toggleOption(scope.opt)" />
-                        </q-item-section>
-                        <q-item-section>
-                            <q-item-label>{{ scope.opt.name }}</q-item-label>
-                            <q-item-label caption>{{ scope.opt.description }}</q-item-label>
-                        </q-item-section>
-                        <q-item-section side>
-
-                            <q-chip square :color="scope.opt.automatic ? 'blue' : 'orange'" text-color="white" :icon="scope.opt.automatic ? 'calculate' : 'article'">
-                                {{ scope.opt.automatic ? 'AUTO' : 'VSS' }}
-                            </q-chip>
-
-                        </q-item-section>
-                        <q-tooltip>
-                            {{ scope.opt.automatic ? 'Le calcul du besoin brute est automatique pour cette affectation' : 'Le calcul du besoin brute doit être fait manuellement selon les formules du tableau 1 de la norme VSS 40 281 (2019) pour cette affectation' }}
-                        </q-tooltip>
-                    </q-item>
+                    </q-item-section>
                 </template>
 
-                <template v-slot:hint>
-                    Choisir une ou plusieurs affectations dans la liste
-                </template>
-            </q-select>
+                <!-- <q-card flat class="bg-grey-1 q-pa-md q-my-md infobox" v-if="this.render"> -->
+                <q-card flat class="q-pa-none">
+                    <!-- <q-card-section horizontal> -->
 
-        </div>
+                    <q-card-section class="">
+                        <!-- <div class="text-body2 text-weight-bold q-mb-sm">Informations et aide sur le calcul</div> -->
+
+                        <div class="text-body2">
+                            <ul>
+                                <li>Le besoin brut en places de stationnement est calculé selon les ratios du tableau 1 de l’annexe 1 du RELConstr.</li>
+
+                                <li>Pour que le calcul soit fait au plus juste des besoins, il est important de préciser toutes
+                                    les affectations comprises dans le projet, en particulier pour les projets d’activité.
+                                    Ainsi, un projet pour une manufacture horlogère comprendra possiblement des surfaces
+                                    affectées à « industrie et artisanat », « entrepôts et dépôts » et « autres services ».</li>
+
+                                <li>S’agissant des places de stationnement voiture, pour les affectations moins fréquentes les ratios sont à rechercher dans le tableau 1 de la norme VSS 40 281 (2019). Le nombre de places obtenu est à indiquer manuellement.</li>
+
+                                <li>S’agissant des places de stationnement vélo, pour les affectations moins fréquentes les ratios sont à rechercher dans les tableaux de la norme VSS 40 065 (2019). Le nombre de places obtenu est à indiquer manuellement.</li>
+
+                                <li>S’agissant des places de stationnement deux-roues motorisés, le calcul se fait automatiquement sur la base du nombre de places de stationnement voiture (15% à réaliser à partir de trois logements ou pour les activités).</li>
+
+                                <li>La surface brute de plancher (SBP) correspond à la somme des surfaces utiles principales,
+                                    des surfaces de dégagement et des surfaces de construction au sens de l’article 16 RELCAT.
+                                </li>
+
+                            </ul>
+                            <div class="row q-col-gutter-sm q-py-xs">
+                                <img src="/img/doc_sbp.svg" alt="Surface brute de plancher">
+                            </div>
+
+                        </div>
+                    </q-card-section>
+
+                    <!-- </q-card-section> -->
+
+                </q-card>
+
+            </q-expansion-item>
+        </q-list>
 
         <!-- FORM -->
-        <q-form ref="form" greedy no-error-focus no-reset-focus>
+        <q-form ref="formB" greedy no-error-focus no-reset-focus @validation-success="validationSuccess" @validation-error="validationError">
 
-            <div v-if="this.render" class="bg-grey-2 q-pa-md q-my-sm rounded-borders" v-for="(item, key) in this.project.getAffectations()">
+            <div class="bg-grey-1 q-pa-md q-my-md rounded-borders" v-if="this.render">
+
+                <q-select outlined bottom-slots bg-color="white" v-model="model" :options="this.project.affectations" option-value="name" option-label="name" @add="addOption()" @remove="removeOption()" @update:model-value="selectOption()" multiple label="Affectation(s)" :rules="[(val) => val.length > 0 || 'Veuillez choisir une ou plusieurs affectations dans la liste']">
+
+                    <template v-slot:option="scope">
+                        <q-item v-bind="scope.itemProps">
+                            <q-item-section side>
+                                <q-checkbox :model-value="scope.selected" @update:model-value="scope.toggleOption(scope.opt)" />
+                            </q-item-section>
+                            <q-item-section>
+                                <q-item-label>{{ scope.opt.name }}</q-item-label>
+                                <q-item-label caption>{{ scope.opt.description }}</q-item-label>
+                            </q-item-section>
+                            <q-item-section side>
+
+                                <q-chip square :color="scope.opt.automatic ? 'blue' : 'orange'" text-color="white" :icon="scope.opt.automatic ? 'calculate' : 'article'">
+                                    {{ scope.opt.automatic ? 'AUTO' : 'VSS' }}
+                                </q-chip>
+
+                            </q-item-section>
+                            <q-tooltip>
+                                {{ scope.opt.automatic ? 'Le calcul du besoin brute est automatique pour cette affectation' : 'Le calcul du besoin brute doit être fait manuellement selon les formules du tableau 1 de la norme VSS 40 281 (2019) pour cette affectation' }}
+                            </q-tooltip>
+                        </q-item>
+                    </template>
+
+                    <template v-slot:hint>
+                        Choisir une ou plusieurs affectations dans la liste
+                    </template>
+                </q-select>
+
+            </div>
+
+
+
+            <div v-if="this.render" class="bg-grey-1 q-pa-md q-my-md rounded-borders" v-for="(item, key) in this.project.getAffectations()">
 
                 <div class="row q-col-gutter-sm q-py-xs">
                     <label class="text-h7">
@@ -153,7 +182,7 @@
                                 <tr v-for="(subitem, iSub) in item.getRawOutputs(['car'])">
                                     <td v-if="iSub === 0" :rowspan="item.getOutputs(['car']).length" class="">{{ item.name }}</td>
                                     <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
+                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(2) }}</td>
                                 </tr>
 
                             </template>
@@ -161,7 +190,7 @@
                                 <td class="text-weight-bold">Besoin brut total</td>
                                 <td class="text-weight-bold"></td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ this.project.getRawNeeds(['car']).toFixed(3) }}
+                                    {{ this.project.getRawNeeds(['car']).toFixed(2) }}
                                 </td>
                             </tr>
                         </tbody>
@@ -190,12 +219,13 @@ export default {
         return {
             store,
             project: store.project,
-            model: null,
+            model: [],
         }
     },
     computed: {
         render() {
-            return (this.project.commune !== null) & (this.project.locationType !== null)
+            // return (this.project.commune !== null) & (this.project.locationType !== null)
+            return store.validity.A // (this.project.commune !== null) & (this.project.locationType !== null) & 
         },
         filled() {
             return this.project.hasAffectation & (this.project.locationType !== null)
@@ -203,6 +233,8 @@ export default {
     },
     watch: {
         filled(val) {
+            // this.store.validity.B = val
+
             this.$emit('filled', val)
         }
     },
@@ -276,15 +308,33 @@ export default {
         },
         updateProject() {
             this.validateForm()
-            this.$emit('updateProject', this.project);
+            // this.$emit('updateProject', this.project);
         },
         validateForm() {
-            if (this.$refs.hasOwnProperty('form')) {
-                if (this.$refs.form !== null) {
-                    this.$nextTick(() => { this.$refs.form.validate() })
+            if (this.$refs.hasOwnProperty('formB')) {
+                if (this.$refs.formB !== null) {
+                    this.$nextTick(() => { this.$refs.formB.validate() })
                 }
             }
-        }
+        },
+        validationSuccess() {
+            // console.log(`${this.$options.name} | validationSuccess()`)
+            this.store.validity.B = true
+            console.log(this.store.validity)
+            //this.valid = true
+            //this.model.valid = true
+            //store.valid = true
+            //this.$emit('validationEvent', true)
+        },
+        validationError() {
+            // console.log(`${this.$options.name} | validationError()`)
+            this.store.validity.B = false
+            console.log(this.store.validity)
+            //this.valid = false
+            //this.model.valid = false
+            //store.valid = false
+            //this.$emit('validationEvent', false)
+        },
     },
     updated() {
         this.validateForm()
