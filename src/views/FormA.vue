@@ -35,12 +35,11 @@
 
                     <q-card flat class="q-pa-none">
 
-                        <q-card-section class="q-pa-sm">
+                        <q-card-section class="">
 
                             <div class="text-body2">
-                                <ul>
-                                    <li>Voir document d'aide à l'application</li>
-                                </ul>
+
+                                Pour de plus amples renseignements nous vous laissons le soin de consulter l’aide à l’application EN-106 disponible sur le site de la Conférence des directeurs cantonaux de l’énergie (<a href="https://www.endk.ch/fr/professionnels/aides-a-lapplication/en101-142-muken-2014" target="_blank">https://www.endk.ch/fr/professionnels/aides-a-lapplication/en101-142-muken-2014</a>).
 
                             </div>
                         </q-card-section>
@@ -209,9 +208,8 @@
 
             <!-- LOCATION TYPE JUSTIFICATION  -->
             <div v-if="store.project.loctypes.filter(e => e.active).length > 1" class="bg-grey-1 q-pa-md q-my-sm rounded-borders">
-                <q-input v-model="project.locationTypeJustification" outlined bg-color="white" type="textarea" maxlength="500" counter label="Justification du type de localisation du projet" :rules="[(val) => val.length > 3 || 'Veuillez justifier le choix du type de localisation']" />
+                <q-input v-model="project.locationTypeJustification" outlined bg-color="white" type="textarea" maxlength="500" counter label="Justification du type de localisation du projet" @update:model-value="validateForm" :rules="[(val) => val.length > 3 || 'Veuillez justifier le choix du type de localisation']" />
             </div>
-
 
         </q-form>
 
@@ -219,7 +217,7 @@
 </template>
 
 <script>
-// import { ref } from 'vue'
+import { ref } from 'vue'
 import { store } from '../store/store.js'
 import communes from '../assets/data/communes.json'
 import { Mob20, project_types } from "../helpers/classes.js"
@@ -239,7 +237,7 @@ export default {
     setup() {
 
         return {
-            // map: ref()
+            map: ref()
         }
     },
     data() {
@@ -300,6 +298,12 @@ export default {
 
         }
     },
+    mounted() {
+        this.validateForm()
+    },
+    updated() {
+        this.validateForm()
+    },
     methods: {
         validateLocalisation(val) {
             if (val === null) {
@@ -341,6 +345,9 @@ export default {
                     store.project.parcels = this.geojson.features.map(x => (`n° ${x.properties.idmai.split("_")[1]}, cadastre de ${x.properties.cadnom}`))
                 })
                 .catch(error => console.log('error', error))
+
+            this.validateForm()
+
         },
         deleteRecord(id) {
             this.geojson.features = this.geojson.features.filter((x) => (x.id !== id))
@@ -348,20 +355,17 @@ export default {
             // update parcels in project
             store.project.parcels = this.geojson.features.map((x) => x.properties.idmai)
             // console.log(`App.vue | Delete item with id=${id}`)
+            this.validateForm()
         },
         focusRecord(id) {
             this.map.zoomTo(id)
         },
-        updateProject(obj) {
-            store.project = obj
-            this.validateForm()
-        },
         validateForm() {
-            // console.log(`${this.$options.name} | validateForm()`)
             if (this.$refs.hasOwnProperty('formA')) {
                 if (this.$refs.formA !== null) {
                     // this.$refs.formA.validate()
                     this.$nextTick(() => { this.$refs.formA.validate() })
+                    // console.log(`${this.$options.name} | validateForm()`)
                     // console.log(this.store.validity)
                 }
             }
@@ -369,38 +373,13 @@ export default {
         validationSuccess() {
             // console.log(`${this.$options.name} | validationSuccess()`)
             this.store.validity.A = true
-            //console.log(this.store.validity)
-            //this.valid = true
-            //this.model.valid = true
-            //store.valid = true
-            //this.$emit('validationEvent', true)
+            // console.log(this.store.validity)
         },
         validationError() {
             // console.log(`${this.$options.name} | validationError()`)
             this.store.validity.A = false
-            //console.log(this.store.validity)
-            //this.valid = false
-            //this.model.valid = false
-            //store.valid = false
-            //this.$emit('validationEvent', false)
+            // console.log(this.store.validity)
         },
-    },
-
-    mounted() {
-        this.validateForm()
-        console.log(this.project)
-        /*
-        console.log(this.$refs)
-        console.log(this.$refs.formA)
-        let didi = this.$refs.formA.validate()
-        console.log(didi)
-        */
-    },
-    updated() {
-        this.validateForm()
-        console.log(`${this.$options.name} | updated()`)
-        console.log(this.project)
-
     }
 }
 </script>

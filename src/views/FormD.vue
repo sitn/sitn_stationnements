@@ -110,7 +110,7 @@
             <div class="text-h6">Besoin net réduit</div>
 
             <!-- COMPUTATION SUMMARY TABLES -->
-            <div class="row" v-if="this.render">
+            <div class="row overflow-scroll" v-if="this.render">
 
                 <!-- CAR PARKINGS SUMMARY TABLE -->
                 <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
@@ -179,6 +179,12 @@ export default {
             // return (this.project.commune !== null) & (this.project.locationType !== null) & this.project.hasAffectation & this.project.hasZoneFactors & this.store.validity.A & this.store.validity.B & this.store.validity.C
         },
     },
+    mounted() {
+        this.validateForm()
+    },
+    updated() {
+        this.validateForm()
+    },
     methods: {
         check(item) {
 
@@ -188,6 +194,9 @@ export default {
             } else {
                 item.value = item.value
             }
+
+            this.validateForm()
+
 
         },
         validateRange(val, min, max) {
@@ -199,6 +208,7 @@ export default {
         },
         validateForm() {
             if (this.$refs.hasOwnProperty('formD')) {
+                // console.log(`${this.$options.name} | validateForm()`)
                 if (this.$refs.formD !== null) {
                     this.$nextTick(() => { this.$refs.formD.validate() })
                 }
@@ -213,12 +223,8 @@ export default {
             // console.log(`${this.$options.name} | validationError()`)
             this.store.validity.D = false
             // console.log(this.store.validity)
-        },
+        }
 
-    },
-    updated() {
-
-        this.validateForm()
     }
 }
 </script>

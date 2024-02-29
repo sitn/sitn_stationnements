@@ -9,7 +9,7 @@
             <span class="text-body1">Veuillez compléter l'étape précédente</span>
         </q-banner>
 
-        <div class="row" v-if="this.render">
+        <div class="row overflow-scroll" v-if="this.render">
 
             <!-- CAR PARKINGS SUMMARY TABLE -->
             <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">

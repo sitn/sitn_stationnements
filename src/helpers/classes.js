@@ -4,10 +4,10 @@ import communes_json from '../assets/data/communes.json'
 export var communes = communes_json.sort((a, b) => a.comnom.toLowerCase().localeCompare(b.comnom.toLowerCase()))
 
 export var project_types = [
-  { "name": "Nouvelle construction", "description": "Description 1", "equipement": true, "icon": "img/ev_station_white_24dp.svg" },
-  { "name": "Extension", "description": "Description 2", "equipement": true, "icon": "img/ev_station_white_24dp.svg" },
-  { "name": "Rénovation d'envergure", "description": "Description 3", "equipement": true, "icon": "img/ev_station_white_24dp.svg" },
-  { "name": "Transformation et changement d'affectation", "description": "Description 4", "equipement": false, "icon": "img/no_ev_station_white_24dp.svg" },
+  { "name": "Nouvelle construction", "description": "Ouvrage construit durablement destiné à être chauffé, ventilé, refroidi ou humidifié", "equipement": true, "icon": "img/ev_station_white_24dp.svg" },
+  { "name": "Extension", "description": "Augmentation du volume du bâtiment", "equipement": true, "icon": "img/ev_station_white_24dp.svg" },
+  { "name": "Rénovation d'envergure", "description": "Évacuation des murs intérieurs et des dalles d’un bâtiment ou passage d’un volume non chauffé dédié à un dépôt, une écurie/grange en des appartements et/ou surfaces commerciales", "equipement": true, "icon": "img/ev_station_white_24dp.svg" },
+  { "name": "Transformation et changement d'affectation", "description": "Élément de construction délimitant le volume chauffé touché au-delà qu’un simple rafraîchissement ou de réparations mineures ou changement d’utilisation des locaux qui entraîne une modification de la température ambiante", "equipement": false, "icon": "img/no_ev_station_white_24dp.svg" },
 ]
 
 

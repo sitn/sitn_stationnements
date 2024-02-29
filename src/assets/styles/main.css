@@ -315,3 +315,7 @@ th {
   border-right: none !important;
 
 }
+
+.overflow-scroll {
+  overflow-x: auto;
+}

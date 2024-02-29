@@ -56,9 +56,17 @@
                                 </li>
 
                             </ul>
+
                             <div class="row q-col-gutter-sm q-py-xs">
-                                <img src="/img/doc_sbp.svg" alt="Surface brute de plancher">
+                                <figure>
+                                    <img src="/img/surfaces.svg" alt="Surface brute de plancher">
+                                    <!--
+                                    <img src="/img/doc_sbp.svg" alt="Surface brute de plancher">
+                                    <figcaption>Illustration issue du décret cantonal (720.5) portant adhésion à l'accord intercantonal harmonisant la terminologie dans le domaine des constructions (AIHC).</figcaption>
+                                    -->
+                                </figure>
                             </div>
+
 
                         </div>
                     </q-card-section>
@@ -105,7 +113,6 @@
                 </q-select>
 
             </div>
-
 
 
             <div v-if="this.render" class="bg-grey-1 q-pa-md q-my-md rounded-borders" v-for="(item, key) in this.project.getAffectations()">
@@ -159,11 +166,10 @@
         </q-form>
 
         <!-- COMPUTATION SUMMARY TABLES -->
-        <div class="row" v-if="this.render">
+        <div class="row overflow-scroll" v-if="this.render">
 
             <!-- CAR PARKINGS SUMMARY TABLE -->
             <div id="summary-container-1" class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-
 
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
@@ -211,7 +217,7 @@ export default {
     name: 'FormB',
     components: {},
     props: {},
-    emits: ['updateProject', 'deleteItem', 'filled'],
+    emits: ['deleteItem', 'filled'],
     setup() {
         return {}
     },
@@ -238,6 +244,12 @@ export default {
             this.$emit('filled', val)
         }
     },
+    mounted() {
+        this.validateForm()
+    },
+    updated() {
+        this.validateForm()
+    },
     methods: {
         validatePositive(val) {
             return val !== null && val !== '' && val > 0.0 || "Veuillez entrer une valeur positive"
@@ -263,6 +275,8 @@ export default {
             } else {
                 item.value = item.value
             }
+
+            this.validateForm()
         },
         addOption() {
             // console.log('Add option')
@@ -289,7 +303,7 @@ export default {
                 e.active = true
             })
 
-            this.updateProject()
+            this.validateForm()
 
         },
         deleteItem(item) {
@@ -303,12 +317,8 @@ export default {
             this.project.affectations[index].area = 0.0
             this.project.affectations[index].numberOfHouses = 0.0
 
-            this.updateProject()
-
-        },
-        updateProject() {
             this.validateForm()
-            // this.$emit('updateProject', this.project);
+
         },
         validateForm() {
             if (this.$refs.hasOwnProperty('formB')) {
@@ -320,24 +330,13 @@ export default {
         validationSuccess() {
             // console.log(`${this.$options.name} | validationSuccess()`)
             this.store.validity.B = true
-            console.log(this.store.validity)
-            //this.valid = true
-            //this.model.valid = true
-            //store.valid = true
-            //this.$emit('validationEvent', true)
+            // console.log(this.store.validity)
         },
         validationError() {
             // console.log(`${this.$options.name} | validationError()`)
             this.store.validity.B = false
-            console.log(this.store.validity)
-            //this.valid = false
-            //this.model.valid = false
-            //store.valid = false
-            //this.$emit('validationEvent', false)
-        },
-    },
-    updated() {
-        this.validateForm()
+            // console.log(this.store.validity)
+        }
     }
 }
 </script>

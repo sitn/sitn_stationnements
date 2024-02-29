@@ -91,7 +91,7 @@
             </q-form>
 
             <!-- COMPUTATION SUMMARY TABLES -->
-            <div class="row">
+            <div class="row overflow-scroll">
 
                 <!-- CAR PARKINGS SUMMARY TABLE -->
                 <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
@@ -162,7 +162,6 @@ export default {
         outputs() {
 
             // console.log(`FormC.vue: outputs`)
-
             if (this.project.commune === null || this.project.locationType === null) {
                 return null // "Commune and/or zone not selected"
             } else {
@@ -171,6 +170,12 @@ export default {
 
         },
 
+    },
+    mounted() {
+        this.validateForm()
+    },
+    updated() {
+        this.validateForm()
     },
     methods: {
         eco() {
@@ -183,6 +188,7 @@ export default {
                     this.outputs.values.find((x) => (x.type === "housing")).effective = 50
                 }
                 this.updateLocationFactors()
+
             }
 
         },
@@ -207,6 +213,8 @@ export default {
 
             })
 
+            this.validateForm()
+
         },
         validateRange(val, min, max) {
 
@@ -225,7 +233,6 @@ export default {
         },
         check(item) {
 
-            // console.log(item)
             let isValid = item.effective >= item.min && item.effective <= item.max
             if (!isValid) {
                 item.effective = null
@@ -233,6 +240,7 @@ export default {
                 item.effective = item.effective
             }
             this.updateLocationFactors()
+            this.validateForm()
 
         },
         validateForm() {
@@ -245,26 +253,13 @@ export default {
         validationSuccess() {
             // console.log(`${this.$options.name} | validationSuccess()`)
             this.store.validity.C = true
-            // console.log(this.store.validity)
-            //this.valid = true
-            //this.model.valid = true
-            //store.valid = true
-            //this.$emit('validationEvent', true)
+
         },
         validationError() {
             // console.log(`${this.$options.name} | validationError()`)
             this.store.validity.C = false
-            // console.log(this.store.validity)
-            //this.valid = false
-            //this.model.valid = false
-            //store.valid = false
-            //this.$emit('validationEvent', false)
         },
 
-    },
-    updated() {
-
-        this.validateForm()
     }
 }
 </script>
