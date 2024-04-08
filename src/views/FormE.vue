@@ -46,6 +46,7 @@
             </div>
 
             <!-- CHARGING STATIONS SUMMARY TABLE -->
+            <!-- 
             <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6" v-if="this.project.type.equipement">
                 <div class="bg-white q-pa-md q-my-sm rounded-borders">
 
@@ -100,44 +101,7 @@
                 </div>
 
             </div>
-
-
-            <!-- CHARGING STATIONS SUMMARY TABLE (DETAILS) -->
-            <!-- 
-            <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                <div class="bg-white q-pa-md q-my-sm rounded-borders">
-
-                    <table id="summary-table">
-                        <caption class="text-subtitle1">Détails - Équipements pour véhicules électriques (art. 34 RELCEn)</caption>
-                        <thead>
-                            <tr>
-                                <th>Affectation</th>
-                                <th>Type d'équipement</th>
-                                <th class="text-right"><q-avatar rounded size="md" font-size="25px" color="blue-10" text-color="white" icon="ev_station" /></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template v-for="item in this.project.getAffectations()">
-                                <tr v-for="(subitem, iSub) in item.reducedOutput2.filter(e => e.group === 'station')">
-                                    <td v-if="iSub === 0" :rowspan="item.outputs.filter(e => e.group === 'station').length" class="">{{ item.name }}</td>
-                                    <td>{{ subitem.name }}</td>
-                                    <td class="bg-light-blue-1 text-right">{{ subitem.value.toFixed(3) }}</td>
-                                </tr>
-                            </template>
-                            <tr>
-                                <td class="text-weight-bold">Total (arrondi inf.)</td>
-                                <td class="text-weight-bold"></td>
-                                <td class="bg-light-blue-1 text-weight-bold text-right">
-                                    {{ Math.floor(this.project.getReducedNeeds('station')) }}
-                                    {{ this.project.getReducedNeeds('station').toFixed(3) }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        -->
+            -->
 
             <!-- MOTORCYCLE PARKINGS SUMMARY TABLE -->
             <div id="summary-container" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
