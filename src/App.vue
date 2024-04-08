@@ -4,7 +4,7 @@
     <q-header>
       <q-toolbar class="bg-white text-black custom-header">
 
-        <q-toolbar-title class="text-center">CALCUL DES STATIONNEMENTS ET ÉQUIPEMENTS</q-toolbar-title>
+        <q-toolbar-title class="text-center">CALCUL DES STATIONNEMENTS</q-toolbar-title>
 
         <a href="https://www.ne.ch/autorites/DDTE/SCAT/Pages/accueil.aspx" target="_blank"><img src="./assets/img/logo_right.svg" alt="Neuchâtel" /></a>
 
@@ -44,7 +44,7 @@
 
 
         <!-- 5. SUMMARY -->
-        <FormSection title="5. Résumé des stationnements et équipements à réaliser">
+        <FormSection title="5. Résumé des stationnements à réaliser">
           <template v-slot:content>
             <FormE :project="project"></FormE>
           </template>
