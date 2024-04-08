@@ -49,7 +49,6 @@
                 </q-expansion-item>
             </q-list>
 
-
             <!-- PROJECT TYPE -->
             <div class="bg-grey-1 q-pa-md q-my-md rounded-borders">
                 <q-select clearable outlined bottom-slots bg-color="white" v-model="project.type" :options="project_types" option-value="name" option-label="name" @update:model-value="validateForm" label="Nature du projet" :rules="[(val) => val !== null || 'Veuillez choisir le type de projet']">
