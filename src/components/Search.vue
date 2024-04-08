@@ -16,7 +16,7 @@
                     </q-item-label>
                     <q-item-label caption>IDMAI: {{ scope.opt.properties.idmai }}</q-item-label>
                     <q-item-label caption>Commune: {{ scope.opt.properties.comnom }} (n° {{
-                        scope.opt.properties.comnum }})
+        scope.opt.properties.comnum }})
                     </q-item-label>
                 </q-item-section>
             </q-item>
