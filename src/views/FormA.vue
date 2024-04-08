@@ -17,6 +17,7 @@
             </div>
 
             <!-- PROJECT TYPE TYPE INFOBOX  -->
+            <!-- 
             <q-list class="q-my-lg rounded-borders">
                 <q-expansion-item rounded-borders class="bg-grey-1">
                     <template v-slot:header>
@@ -48,6 +49,7 @@
 
                 </q-expansion-item>
             </q-list>
+            -->
 
             <!-- PROJECT TYPE -->
             <div class="bg-grey-1 q-pa-md q-my-md rounded-borders">
@@ -61,22 +63,15 @@
                                 <q-item-label caption>{{ scope.opt.description }}</q-item-label>
                             </q-item-section>
 
+                            <!--
                             <q-item-section side>
 
                                 <q-avatar rounded size="md" font-size="22px" color="blue-10" text-color="white">
                                     <img height="50%" width="50%" :src="scope.opt.icon">
                                 </q-avatar>
 
-                                <!-- 
-                                <q-chip color="blue-10" text-color="white" square>
-                                    <q-avatar>
-                                        <img height="50%" width="50%" :src="scope.opt.icon">
-                                    </q-avatar>
-                                    {{ scope.opt.equipement ? 'CALCUL ÉQUIP. ÉLEC. REQUIS' : 'CALCUL ÉQUIP. ÉLEC. NON REQUIS' }}
-                                </q-chip>
-                                -->
-
                             </q-item-section>
+                            -->
 
                             <q-tooltip>
                                 {{ scope.opt.equipement ? 'Nécessite le calcul d’équipement de recharge pour véhicules électriques' : 'Ne nécessite pas de calcul d’équipement de recharge pour véhicules électriques' }}
@@ -140,7 +135,7 @@
                             <q-item-section>
                                 <q-item-label>{{ scope.opt.name }}</q-item-label>
                                 <q-item-label caption>{{ scope.opt.area.toFixed(1) }} m<sup>2</sup> ({{ (100 *
-                                    scope.opt.ratio).toFixed(1) }}%)</q-item-label>
+            scope.opt.ratio).toFixed(1) }}%)</q-item-label>
                             </q-item-section>
                         </q-item>
                     </template>
