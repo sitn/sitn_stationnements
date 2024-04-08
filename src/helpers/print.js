@@ -38,7 +38,7 @@ export const print = (project) => {
     let docDefinition = {
         pageSize: 'A4',
         pageOrientation: 'landscape',
-        watermark: { text: 'PROTOTYPE', color: 'red', opacity: 0.3, bold: true, italics: false, angle: 45, fontSize: 26 },
+        // watermark: { text: 'PROTOTYPE', color: 'red', opacity: 0.3, bold: true, italics: false, angle: 45, fontSize: 26 },
         // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
         pageMargins: mmToPoints([12, 12, 12, 20]),
         header: '',
@@ -93,7 +93,7 @@ export const print = (project) => {
                         width: '*',
                         alignment: 'center',
                         stack: [
-                            { text: 'Calcul des stationnements et équipements', style: 'header' },
+                            { text: 'Calcul des stationnements', style: 'header' },
                             { text: 'Annexe à joindre à la demande de permis', style: 'subheader' },
                         ],
                     },
@@ -315,6 +315,7 @@ export const print = (project) => {
             },
 
             // SECTION EQUIPEMENTS DE RECHARGE POUR VEHICULES ELECTRIQUES
+            /*
             {
                 pageBreak: 'before',
                 // text: `Conformément à l'art. 34 du RELCEn., le nombre d'équipements pour véhicules électriques à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
@@ -376,7 +377,7 @@ export const print = (project) => {
                 },
                 render: project.type.equipement
             },
-
+            */
 
             // SECTION STATIONNEMENTS DEUX-ROUES MOTORISES
             {
