@@ -5,7 +5,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/web/test_stationnement/', // for local use '', for test use: '/web/test_stationnement/', for production (docker) use '/stationnement/'
+  base: '', // for local use '', for test use: '/web/test_stationnement_tmp/', for production (docker) use '/stationnement/'
   publicDir: 'public',
   plugins: [vue()],
   resolve: {
