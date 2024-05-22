@@ -345,7 +345,7 @@ export const print = (project) => {
                         [
                             { text: 'Activités', style: 'tableBody', alignment: 'left' },
                             { text: project.getAffectationNames('Activité').join('; '), style: 'tableBody', alignment: 'left' },
-                            { text: 'Niveau C2', style: 'tableBody', alignment: 'left' },
+                            { text: 'Niveau D (bornes)', style: 'tableBody', alignment: 'left' },
                             { text: project.getStations('Activité'), style: 'tableBody', alignment: 'right' },
                         ],
                         [
