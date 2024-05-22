@@ -68,7 +68,7 @@
                             </tr>
                             <tr>
                                 <td rowspan="1">Activités<br>{{ this.project.getAffectationNames('Activité').length > 0 ? ` (${this.project.getAffectationNames('Activité').join('; ')})` : '' }}</td>
-                                <td>Niveau C2</td>
+                                <td>Niveau D (bornes)</td>
                                 <td class="bg-light-blue-1 text-weight-bold text-right">
                                     {{ this.project.getStations("Activité") }}
                                 </td>
