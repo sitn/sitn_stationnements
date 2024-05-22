@@ -1443,13 +1443,24 @@ export class Project {
     let n_housings = this.getHousingCount()
     let n_stations
 
+    /*
+    Le Conseil d’État a décidé que dans :
+    1.	les bâtiments à construire affectés à l’habitation avec trois logements ou plus, au moins 40% des places de stationnement prescrites selon la législation sur les constructions doivent être équipées selon le niveau d’équipement D, mais au minimum une place de stationnement.
+    2.	les bâtiments à construire qui ont d’autres affectations, au moins 20% des places de stationnement prescrites selon la législation sur les constructions doivent être équipées selon le niveau d’équipement D, mais au minimum une place de stationnement et au maximum trente places de stationnement.
+    3.	Les bâtiments à construire dont les places de stationnement prescrites selon la législation sur les constructions n’ayant pas un niveau d’équipement D, doivent être toutes équipées au moins selon le niveau d’équipement B.
+    */
+
     switch (category) {
 
       case "Logement":
-        n_stations = (n_housings > 2.0) * Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 0.0)
+        // n_stations = (n_housings > 2.0) * Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 0.0)
+        // n_stations = (n_housings > 2.0) * Math.max(Math.min(Math.round(0.4 * n_parkings), 50.0), 1.0)
+        n_stations = (n_housings > 2.0) * Math.max(Math.round(0.4 * n_parkings), 1.0)
         break
       case "Activité":
-        n_stations = Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 0.0)
+        // n_stations = Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 0.0)
+        n_stations = Math.max(Math.min(Math.round(0.2 * n_parkings), 30.0), 1.0)
+
         break
       case "Pas concerné":
         n_stations = Math.round(n_parkings)
