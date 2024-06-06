@@ -354,17 +354,19 @@ export const print = (project) => {
                             { text: 'Niveau B', style: 'tableBody', alignment: 'left' },
                             { text: Math.ceil(project.getReducedNeeds(['car', 'special'])) - project.getStations('Logement') - project.getStations('Activité') - project.getStations('Pas concerné'), style: 'tableBody', alignment: 'right' },
                         ],
+                        /*
                         [
                             { text: 'Pas concerné', style: 'tableBody', alignment: 'left' },
                             { text: project.getAffectationNames('Pas concerné').join('; '), style: 'tableBody', alignment: 'left' },
                             { text: 'Aucun', style: 'tableBody', alignment: 'left' },
                             { text: project.getStations('Pas concerné'), style: 'tableBody', alignment: 'right' },
                         ],
+                        */
                         [
                             { text: 'Total', style: 'tableHeader', alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
                             { text: '', style: 'tableHeader', alignment: 'left' },
-                            { text: Math.ceil(project.getReducedNeeds(['car', 'special'])), style: 'tableHeader', alignment: 'right' },
+                            { text: Math.ceil(project.getReducedNeeds(['car', 'special'])) - project.getStations("Pas concerné"), style: 'tableHeader', alignment: 'right' },
                         ],
                     ]
                 },
@@ -376,7 +378,12 @@ export const print = (project) => {
                 },
                 render: project.type.equipement
             },
-
+            {
+                text: `Affectation(s) non-concernée(s): ${project.getAffectationNames('Pas concerné').join('; ')}`,
+                style: 'body',
+                margin: [0, 5, 0, 2], // [left, top, right, bottom]
+                render: project.type.equipement & (project.getAffectationNames('Pas concerné').length > 0)
+            },
 
             // SECTION STATIONNEMENTS DEUX-ROUES MOTORISES
             {
