@@ -1450,21 +1450,31 @@ export class Project {
     3.	Les bâtiments à construire dont les places de stationnement prescrites selon la législation sur les constructions n’ayant pas un niveau d’équipement D, doivent être toutes équipées au moins selon le niveau d’équipement B.
     */
 
-    switch (category) {
+    // console.log(`category: ${category}, n_parkings: ${n_parkings}`)
 
-      case "Logement":
-        // n_stations = (n_housings > 2.0) * Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 0.0)
-        // n_stations = (n_housings > 2.0) * Math.max(Math.min(Math.round(0.4 * n_parkings), 50.0), 1.0)
-        n_stations = (n_housings > 2.0) * Math.max(Math.round(0.4 * n_parkings), 1.0)
-        break
-      case "Activité":
-        // n_stations = Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 0.0)
-        n_stations = Math.max(Math.min(Math.round(0.2 * n_parkings), 30.0), 1.0)
+    if (n_parkings === 0.0) {
 
-        break
-      case "Pas concerné":
-        n_stations = Math.round(n_parkings)
-        break
+      n_stations = 0.0
+
+    } else {
+
+      switch (category) {
+
+        case "Logement":
+          // n_stations = (n_housings > 2.0) * Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 0.0)
+          // n_stations = (n_housings > 2.0) * Math.max(Math.min(Math.round(0.4 * n_parkings), 50.0), 1.0)
+          n_stations = (n_housings > 2.0) * Math.max(Math.round(0.4 * n_parkings), 1.0)
+          break
+        case "Activité":
+          // n_stations = Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 0.0)
+          n_stations = Math.max(Math.min(Math.round(0.2 * n_parkings), 30.0), 1.0)
+          // n_stations = Math.min(Math.round(0.2 * n_parkings), 30.0) // CORRECTION
+
+          break
+        case "Pas concerné":
+          n_stations = Math.round(n_parkings)
+          break
+      }
     }
 
     return n_stations
