@@ -56,11 +56,6 @@
                     <template v-slot:option="scope">
                         <q-item v-bind="scope.itemProps">
 
-                            <q-item-section>
-                                <q-item-label>{{ scope.opt.name }}</q-item-label>
-                                <q-item-label caption>{{ scope.opt.description }}</q-item-label>
-                            </q-item-section>
-
                             <q-item-section side>
 
                                 <q-avatar rounded size="md" font-size="22px" color="blue-10" text-color="white">
@@ -77,6 +72,13 @@
                                 -->
 
                             </q-item-section>
+
+                            <q-item-section>
+                                <q-item-label>{{ scope.opt.name }}</q-item-label>
+                                <q-item-label caption>{{ scope.opt.description }}</q-item-label>
+                            </q-item-section>
+
+
 
                             <q-tooltip>
                                 {{ scope.opt.equipement ? 'Nécessite le calcul d’équipement de recharge pour véhicules électriques' : 'Ne nécessite pas de calcul d’équipement de recharge pour véhicules électriques' }}
@@ -140,7 +142,7 @@
                             <q-item-section>
                                 <q-item-label>{{ scope.opt.name }}</q-item-label>
                                 <q-item-label caption>{{ scope.opt.area.toFixed(1) }} m<sup>2</sup> ({{ (100 *
-                                    scope.opt.ratio).toFixed(1) }}%)</q-item-label>
+            scope.opt.ratio).toFixed(1) }}%)</q-item-label>
                             </q-item-section>
                         </q-item>
                     </template>
