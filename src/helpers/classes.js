@@ -1445,8 +1445,6 @@ export class Project {
       .flat()
       .reduce((acc, obj) => { return acc + obj.value }, 0)
 
-    console.log(`Category: ${category}, stations: ${n_stations_D}`)
-
     let n_parkings = this.getAffectations()
       .filter(x => (x.category === category))
       .map(x => x.getReducedOutputs(['car', 'special']))
@@ -1463,7 +1461,7 @@ export class Project {
     3.	Les bâtiments à construire dont les places de stationnement prescrites selon la législation sur les constructions n’ayant pas un niveau d’équipement D, doivent être toutes équipées au moins selon le niveau d’équipement B.
     */
 
-    // console.log(`category: ${category}, n_parkings: ${n_parkings}`)
+    // console.log(`Category: ${category}, stations: ${n_stations_D}, parkings: ${n_parkings}`)
 
     if (n_parkings === 0.0) {
 
@@ -1475,12 +1473,14 @@ export class Project {
 
         case "Logement":
           // n_stations = Math.max(Math.round(0.4 * n_parkings), 1.0)
-          n_stations = Math.max(Math.round(0.4 * n_stations_D), 1.0)
+          // n_stations = Math.max(Math.round(0.4 * n_stations_D), 1.0)
+          n_stations = Math.max(Math.round(0.4 * Math.ceil(n_stations_D)), 1.0)
 
           break
         case "Activité":
           // n_stations = Math.max(Math.min(Math.round(0.2 * n_parkings), 30.0), 1.0)
-          n_stations = Math.max(Math.min(Math.round(0.2 * n_stations_D), 30.0), 1.0)
+          // n_stations = Math.max(Math.min(Math.round(0.2 * n_stations_D), 30.0), 1.0)
+          n_stations = Math.max(Math.min(Math.round(0.2 * Math.ceil(n_stations_D)), 30.0), 1.0)
 
           break
         case "Pas concerné":
