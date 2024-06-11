@@ -41,23 +41,31 @@ export class Affectation {
 
   // getters
   get valid() {
+
     return this.variables.map((x) => x.value >= x.min && x.value <= x.max).every(Boolean)
+
   }
 
   getVariables(types) {
+
     return this.variables.filter(o => types.includes(o.type))
+
   }
 
   getOutputs(groups) {
+
     return this.outputs.filter(o => groups.includes(o.group))
+
   }
 
+  // RETURNS RAW OUTPUT ("BESOIN BRUT")
   getRawOutputs(groups) {
 
     return this.getOutputs(groups).map(o => ({ name: o.name, group: o.group, value: o.formula(this.variableMap, 100.0, 0.0) }))
 
   }
 
+  // RETURNS NET OUTPUT ("BESOIN NET")
   getNetOutputs(groups) {
 
     return this.getOutputs(groups).map(o => ({ name: o.name, group: o.group, value: o.formula(this.variableMap, this.ordinaryReduction, 0.0) }))
@@ -71,25 +79,28 @@ export class Affectation {
 
   }
 
+  // RETURNS TOTAL (SUM) OF RAW OUTPUT ("BESOIN BRUT TOTAL")
   getTotalOutput(groups) {
 
     return this.getRawOutputs(groups).reduce((acc, obj) => { return acc + obj.value }, 0)
 
   }
 
+  // RETURNS TOTAL (SUM) OF NET OUTPUT ("BESOIN NET TOTAL")
   getTotalNetOutput(groups) {
 
     return this.getNetOutputs(groups).reduce((acc, obj) => { return acc + obj.value }, 0)
 
   }
 
-
+  // RETURNS TOTAL (SUM) OF REDUCED OUTPUT ("BESOIN REDUIT TOTAL")
   getTotalReducedOutput(groups) {
 
     return this.getReducedOutputs(groups).reduce((acc, obj) => { return acc + obj.value }, 0)
 
   }
 
+  // RETURNS TOTAL (SUM) OF CEILING OF REDUCED OUTPUT ("BESOIN REDUIT TOTAL ARRONDI")
   getTotalReducedOutputCeil(groups) {
 
     return this.getReducedOutputs(groups).reduce((acc, obj) => { return acc + Math.ceil(obj.value) }, 0)
@@ -129,13 +140,9 @@ export const affectations = [
       { group: "special", icon: "directions_car", name: "Places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "Places habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 3) * 0.15 * (Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places habitants/visiteurs", formula: ((x) => Math.floor(x.get('n_rooms'))) },
-
-
-      { group: "station", icon: "ev_station", name: "Équipements niv. B", formula: ((x, f = 100.0, r = 0.0) => (Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) * (x.get('n_housings') > 2.0 ? 2 / 3 : 1.0)), 50), 1)) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => 0.0) },
-      // { group: "station", icon: "ev_station", name: "Nb. équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 2.0) * Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((x.get('n_housings') > 2.0) * 1 / 3 * ((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk'))) },
-      { group: "station", icon: "ev_station", name: "Pas concerné", formula: ((x, f = 100.0, r = 0.0) => 0.0) },
+      // { group: "station", icon: "ev_station", name: "Équipements niv. B", formula: ((x, f = 100.0, r = 0.0) => (Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) * (x.get('n_housings') > 2.0 ? 2 / 3 : 1.0)), 50), 1)) },
+      // { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => 0.0) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((x.get('n_housings') > 2.0) * ((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) + x.get('n_car_shr_prk')))) },
     ]
   }),
   new Affectation({
@@ -159,7 +166,7 @@ export const affectations = [
       { group: "special", icon: "directions_car", name: "Places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "Places habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 3) * 0.15 * (Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places habitants/visiteurs", formula: ((x) => Math.floor(x.get('n_housings'))) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 2) * Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((x.get('n_housings') > 2.0) * ((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) + x.get('n_car_shr_prk')))) },
     ]
   }),
 
@@ -184,7 +191,7 @@ export const affectations = [
       { group: "special", icon: "directions_car", name: "Places pour autopartage", formula: ((x) => x.get('n_car_shr_prk') * 1.0) },
       { group: "motorcycle", icon: "motorcycle", name: "Places habitants/visiteurs", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 3) * 0.15 * (Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places habitants/visiteurs", formula: ((x) => Math.floor(x.get('n_rooms'))) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_housings') > 2) * Math.max(Math.min((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((x.get('n_housings') > 2.0) * ((Math.max(0.01 * x.get('floor_area'), x.get('n_housings')) + 0.001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) + x.get('n_car_shr_prk')))) },
     ]
   }),
   new Affectation({
@@ -211,7 +218,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.01 * x.get('floor_area') + 0.002 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.004 * x.get('floor_area'))) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.05 * x.get('n_staff')) : Math.ceil(0.001 * x.get('floor_area'))) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.01 * x.get('floor_area') + 0.002 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((0.01 * x.get('floor_area') + 0.002 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) + x.get('n_car_cmp_prk') + x.get('n_car_shr_prk')) },
     ]
   }),
 
@@ -239,7 +246,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.001 * x.get('floor_area') + 0.0001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.004 * x.get('floor_area'))) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.05 * x.get('n_staff')) : Math.ceil(0.001 * x.get('floor_area'))) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.001 * x.get('floor_area') + 0.0001 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((0.001 * x.get('floor_area') + 0.0001 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) + x.get('n_car_cmp_prk') + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -266,7 +273,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.02 * x.get('floor_area') + 0.01 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.01 * x.get('floor_area'))) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.3 * x.get('n_staff')) : Math.ceil(0.015 * x.get('floor_area'))) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.02 * x.get('floor_area') + 0.01 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((0.02 * x.get('floor_area') + 0.01 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) + x.get('n_car_cmp_prk') + x.get('n_car_shr_prk')) },
     ]
   }),
 
@@ -294,7 +301,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.02 * x.get('floor_area') + 0.005 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.01 * x.get('floor_area'))) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.05 * x.get('n_staff')) : Math.ceil(0.0025 * x.get('floor_area'))) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.02 * x.get('floor_area') + 0.005 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((0.02 * x.get('floor_area') + 0.005 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) + x.get('n_car_cmp_prk') + x.get('n_car_shr_prk')) },
     ]
   }),
 
@@ -322,7 +329,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.02 * x.get('floor_area') + 0.08 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.01 * x.get('floor_area'))) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.25 * x.get('n_staff')) : Math.ceil(0.015 * x.get('floor_area'))) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.02 * x.get('floor_area') + 0.08 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((0.02 * x.get('floor_area') + 0.008 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) + x.get('n_car_cmp_prk') + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -349,7 +356,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (0.015 * x.get('floor_area') + 0.035 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(0.2 * x.get('n_staff')) : Math.ceil(0.01 * x.get('floor_area'))) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_staff') > 0 ? Math.ceil(1.0 * x.get('n_staff')) : Math.ceil(0.015 * x.get('floor_area'))) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((0.015 * x.get('floor_area') + 0.035 * x.get('floor_area')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((0.015 * x.get('floor_area') + 0.035 * x.get('floor_area')) * (f / 100) * (1 - r / 100)) + x.get('n_car_cmp_prk') + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -374,7 +381,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min(x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -399,7 +406,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min(x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -424,7 +431,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min(x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -451,7 +458,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -478,7 +485,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -503,7 +510,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -528,7 +535,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -553,7 +560,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -578,7 +585,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -603,6 +610,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -627,7 +635,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -678,7 +686,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -705,7 +713,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -732,7 +740,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -759,7 +767,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * (x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => ((x.get('n_car_emp_prk') + x.get('n_car_vis_prk')) * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -784,7 +792,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -809,7 +817,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_mix_vis_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -834,7 +842,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -859,7 +867,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -884,7 +892,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -909,7 +917,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -958,7 +966,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -983,7 +991,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -1128,7 +1136,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -1177,7 +1185,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/clients", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places clients", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. C2", formula: ((x, f = 100.0, r = 0.0) => Math.max(Math.min((x.get('n_car_mix_prk')) * (f / 100) * (1 - r / 100) / 3, 50), 1)) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -1402,15 +1410,12 @@ export class Project {
       .reduce((acc, obj) => { return acc + obj.value }, 0)
   }
 
-
   getReducedNeeds(groups) {
     return this.getAffectations()
       .map((x) => x.getReducedOutputs(groups))
       .flat()
       .reduce((acc, obj) => { return acc + obj.value }, 0)
   }
-
-
 
   getAffectationNames(category) {
 
@@ -1434,13 +1439,21 @@ export class Project {
 
   getStations(category) {
 
+    let n_stations_D = this.getAffectations()
+      .filter(x => (x.category === category))
+      .map(x => x.getReducedOutputs(['station']))
+      .flat()
+      .reduce((acc, obj) => { return acc + obj.value }, 0)
+
+    console.log(`Category: ${category}, stations: ${n_stations_D}`)
+
     let n_parkings = this.getAffectations()
       .filter(x => (x.category === category))
       .map(x => x.getReducedOutputs(['car', 'special']))
       .flat()
       .reduce((acc, obj) => { return acc + obj.value }, 0)
 
-    let n_housings = this.getHousingCount()
+    // let n_housings = this.getHousingCount()
     let n_stations
 
     /*
@@ -1461,14 +1474,13 @@ export class Project {
       switch (category) {
 
         case "Logement":
-          // n_stations = (n_housings > 2.0) * Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 0.0)
-          // n_stations = (n_housings > 2.0) * Math.max(Math.min(Math.round(0.4 * n_parkings), 50.0), 1.0)
-          n_stations = (n_housings > 2.0) * Math.max(Math.round(0.4 * n_parkings), 1.0)
+          // n_stations = Math.max(Math.round(0.4 * n_parkings), 1.0)
+          n_stations = Math.max(Math.round(0.4 * n_stations_D), 1.0)
+
           break
         case "Activité":
-          // n_stations = Math.max(Math.min(Math.round(n_parkings / 3), 50.0), 0.0)
-          n_stations = Math.max(Math.min(Math.round(0.2 * n_parkings), 30.0), 1.0)
-          // n_stations = Math.min(Math.round(0.2 * n_parkings), 30.0) // CORRECTION
+          // n_stations = Math.max(Math.min(Math.round(0.2 * n_parkings), 30.0), 1.0)
+          n_stations = Math.max(Math.min(Math.round(0.2 * n_stations_D), 30.0), 1.0)
 
           break
         case "Pas concerné":
