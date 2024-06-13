@@ -324,7 +324,7 @@ export const print = (project) => {
                 render: project.type.equipement
             },
             {
-                text: `Les exigences en lien avec les équipements électriques mentionnés entrent en vigueur au 1er juillet 2024 (date de dépôt de la demande de permis de construire auprès de l'autorité communale).`,
+                text: `Les exigences en lien avec les équipements électriques mentionnés entrent en vigueur au 1er juillet 2024 (date de dépôt de la demande de permis de construire auprès de l'autorité communale faisant foi).`,
                 style: 'body',
                 margin: [0, 5, 0, 2], // [left, top, right, bottom]
                 render: project.type.equipement
