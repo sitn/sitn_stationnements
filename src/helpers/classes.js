@@ -1,7 +1,7 @@
-import communes_json from '../assets/data/communes.json'
+// import communes_json from '../assets/data/communes.json'
 
 // sort alphabetically
-export var communes = communes_json.sort((a, b) => a.comnom.toLowerCase().localeCompare(b.comnom.toLowerCase()))
+// export var communes = communes_json.sort((a, b) => a.comnom.toLowerCase().localeCompare(b.comnom.toLowerCase()))
 
 export var project_types = [
   { "name": "Nouvelle construction", "description": "Ouvrage construit durablement destiné à être chauffé, ventilé, refroidi ou humidifié", "equipement": true, "icon": "img/ev_station_white_24dp.svg" },
@@ -817,7 +817,7 @@ export const affectations = [
       { group: "motorcycle", icon: "motorcycle", name: "Places personnel/visiteurs", formula: ((x, f = 100.0, r = 0.0) => 0.15 * x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) },
       { group: "bicycle", icon: "directions_bike", name: "Places personnel", formula: ((x) => x.get('n_bcl_emp_prk') * 1.0) },
       { group: "bicycle", icon: "directions_bike", name: "Places visiteurs", formula: ((x) => x.get('n_bcl_clt_prk') * 1.0) },
-      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_mix_vis_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
+      { group: "station", icon: "ev_station", name: "Équipements niv. D (bornes)", formula: ((x, f = 100.0, r = 0.0) => (x.get('n_car_mix_prk') * (f / 100) * (1 - r / 100)) + x.get('n_car_shr_prk')) },
     ]
   }),
   new Affectation({
@@ -1463,7 +1463,8 @@ export class Project {
 
     // console.log(`Category: ${category}, stations: ${n_stations_D}, parkings: ${n_parkings}`)
 
-    if (n_parkings === 0.0) {
+    // if (n_parkings === 0.0) {
+    if (n_stations_D === 0.0) {
 
       n_stations = 0.0
 
