@@ -38,7 +38,7 @@ export const print = (project) => {
     let docDefinition = {
         pageSize: 'A4',
         pageOrientation: 'landscape',
-        watermark: { text: 'PROTOTYPE', color: 'red', opacity: 0.3, bold: true, italics: false, angle: 45, fontSize: 26 },
+        // watermark: { text: 'PROTOTYPE', color: 'red', opacity: 0.3, bold: true, italics: false, angle: 45, fontSize: 26 },
         // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
         pageMargins: mmToPoints([12, 12, 12, 20]),
         header: '',
