@@ -8,7 +8,15 @@
 
         <a href="https://www.ne.ch/autorites/DDTE/SCAT/Pages/accueil.aspx" target="_blank"><img src="./assets/img/logo_right.svg" alt="Neuchâtel" /></a>
 
+
       </q-toolbar>
+
+      <!-- BANNER (TOP OF PAGE) -->
+      <q-banner inline-actions class="bg-yellow text-black text-center">
+        Les exigences en lien avec les équipements électriques mentionnés entrent en vigueur au <b>1er juillet 2024</b> (date de dépôt de la demande de permis de construire auprès de l'autorité communale faisant foi).
+
+      </q-banner>
+
     </q-header>
 
     <q-page-container>
@@ -42,14 +50,12 @@
           </template>
         </FormSection>
 
-
         <!-- 5. SUMMARY -->
         <FormSection title="5. Résumé des stationnements à réaliser">
           <template v-slot:content>
             <FormE :project="project"></FormE>
           </template>
         </FormSection>
-
 
       </q-page>
     </q-page-container>
@@ -84,6 +90,7 @@ export default {
   data() {
     return {
       store,
+      showBanner: true,
       project: store.project,
     }
   },

@@ -1,5 +1,7 @@
-backup
-doc
-dist
+backup/
+doc/
+dist/
+node_modules/
 README.md
 todo.txt
+
