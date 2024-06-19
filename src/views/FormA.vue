@@ -74,6 +74,13 @@
 
 
 
+                            <q-item-section>
+                                <q-item-label>{{ scope.opt.name }}</q-item-label>
+                                <q-item-label caption>{{ scope.opt.description }}</q-item-label>
+                            </q-item-section>
+
+
+
                             <q-tooltip>
                                 {{ scope.opt.equipement ? 'Nécessite le calcul d’équipement de recharge pour véhicules électriques' : 'Ne nécessite pas de calcul d’équipement de recharge pour véhicules électriques' }}
                             </q-tooltip>
