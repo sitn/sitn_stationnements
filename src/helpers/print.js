@@ -93,7 +93,7 @@ export const print = (project) => {
                         width: '*',
                         alignment: 'center',
                         stack: [
-                            { text: 'Calcul des stationnements', style: 'header' },
+                            { text: 'Calcul des stationnements et équipements', style: 'header' },
                             { text: 'Annexe à joindre à la demande de permis', style: 'subheader' },
                         ],
                     },
@@ -315,7 +315,6 @@ export const print = (project) => {
             },
 
             // SECTION EQUIPEMENTS DE RECHARGE POUR VEHICULES ELECTRIQUES
-            /*
             {
                 pageBreak: 'before',
                 // text: `Conformément à l'art. 34 du RELCEn., le nombre d'équipements pour véhicules électriques à réaliser pour le projet est détaillé dans le tableau ci-dessous.`,
