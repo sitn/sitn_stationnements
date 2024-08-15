@@ -12,10 +12,11 @@
       </q-toolbar>
 
       <!-- BANNER (TOP OF PAGE) -->
+      <!--
       <q-banner inline-actions class="bg-yellow text-black text-center">
         Les exigences en lien avec les équipements électriques mentionnés entrent en vigueur au <b>1er juillet 2024</b> (date de dépôt de la demande de permis de construire auprès de l'autorité communale faisant foi).
-
       </q-banner>
+      -->
 
     </q-header>
 
