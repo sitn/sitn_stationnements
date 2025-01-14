@@ -1,8 +1,6 @@
-version: '3'
-
 services:
   front: # name of the container
-    image: sitn-stationnement
+    image: ne2harbor.ne.ch/sgrf/sitn-stationnement
     build:
       context: .
     restart: unless-stopped

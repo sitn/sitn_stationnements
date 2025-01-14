@@ -28,7 +28,7 @@ vite
 
 To just build locally:
 ```
-docker build -t sitn-stationnement . 
+docker compose build
 ```
 
 To build and run locally:
@@ -40,6 +40,9 @@ To build and run on remote server:
 
 Set the **DOCKER_HOST** environment variable and launch the build/run :
 ```
+docker compose build
+docker compose push
 $env:DOCKER_HOST="<PATH_TO_REMOTE_HOST>"
-docker compose up -d --build
+docker compose pull
+docker compose up -d
 ```
