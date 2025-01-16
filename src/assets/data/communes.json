@@ -1,3056 +1,2708 @@
 [
-    {
-        "numcom": 11,
-        "comnom": "Boudry",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            }
+  {
+    "numcom": 11,
+    "comnom": "Boudry",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 59,
-        "comnom": "Brot-Plamboz",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 6,
-        "comnom": "Cornaux",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 12,
-        "comnom": "Cortaillod",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 7,
-        "comnom": "Cressier (NE)",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 8,
-        "comnom": "Enges",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 2,
-        "comnom": "Hauterive (NE)",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "numcom": 59,
+    "comnom": "Brot-Plamboz",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 56,
-        "comnom": "La Brévine",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 60,
-        "comnom": "La Chaux-de-Fonds",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 57,
-        "comnom": "La Chaux-du-Milieu",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 33,
-        "comnom": "La Côte-aux-Fées",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0,
-                        "effective": null
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 76,
-        "comnom": "La Grande Béroche",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0,
-                        "effective": null
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0,
-                        "effective": null
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 62,
-        "comnom": "La Sagne",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "numcom": 6,
+    "comnom": "Cornaux",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 71,
-        "comnom": "La Tène",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 55,
-        "comnom": "Le Cerneux-Péquignot",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 9,
-        "comnom": "Le Landeron",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 78,
-        "comnom": "Le Locle",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 61,
-        "comnom": "Les Planchettes",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 58,
-        "comnom": "Les Ponts-de-Martel",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "numcom": 12,
+    "comnom": "Cortaillod",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 35,
-        "comnom": "Les Verrières",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 10,
-        "comnom": "Lignières",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 73,
-        "comnom": "Milvignes",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 77,
-        "comnom": "Neuchâtel",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 75,
-        "comnom": "Rochefort",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 3,
-        "comnom": "Saint-Blaise",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      }
+    ]
+  },
+  {
+    "numcom": 7,
+    "comnom": "Cressier (NE)",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 74,
-        "comnom": "Val-de-Ruz",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          }
         ]
-    },
-    {
-        "numcom": 72,
-        "comnom": "Val-de-Travers",
-        "factors": [
-            {
-                "zone": "I",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 20.0,
-                        "max": 50.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 0.0,
-                        "max": 40.0
-                    }
-                ]
-            },
-            {
-                "zone": "II",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 50.0,
-                        "max": 70.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 20.0,
-                        "max": 50.0
-                    }
-                ]
-            },
-            {
-                "zone": "III",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 40.0,
-                        "max": 70.0
-                    }
-                ]
-            },
-            {
-                "zone": "IV",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 50.0,
-                        "max": 80.0
-                    }
-                ]
-            },
-            {
-                "zone": "V",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 70.0,
-                        "max": 100.0
-                    }
-                ]
-            },
-            {
-                "zone": "VI",
-                "values": [
-                    {
-                        "type": "housing",
-                        "label": "Logement",
-                        "min": 70.0,
-                        "max": 100.0
-                    },
-                    {
-                        "type": "activity",
-                        "label": "Activité",
-                        "min": 90.0,
-                        "max": 100.0
-                    }
-                ]
-            }
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0,
+            "effective": null
+          }
         ]
-    }
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0,
+            "effective": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 56,
+    "comnom": "La Brévine",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0,
+            "effective": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 60,
+    "comnom": "La Chaux-de-Fonds",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0,
+            "effective": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 57,
+    "comnom": "La Chaux-du-Milieu",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0,
+            "effective": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 33,
+    "comnom": "La Côte-aux-Fées",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0,
+            "effective": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 76,
+    "comnom": "La Grande Béroche",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0,
+            "effective": null
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0,
+            "effective": null
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 62,
+    "comnom": "La Sagne",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 6513,
+    "comnom": "Laténa",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 55,
+    "comnom": "Le Cerneux-Péquignot",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 9,
+    "comnom": "Le Landeron",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 78,
+    "comnom": "Le Locle",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 61,
+    "comnom": "Les Planchettes",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 58,
+    "comnom": "Les Ponts-de-Martel",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 35,
+    "comnom": "Les Verrières",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 10,
+    "comnom": "Lignières",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 73,
+    "comnom": "Milvignes",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 77,
+    "comnom": "Neuchâtel",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 75,
+    "comnom": "Rochefort",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 74,
+    "comnom": "Val-de-Ruz",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "numcom": 72,
+    "comnom": "Val-de-Travers",
+    "factors": [
+      {
+        "zone": "I",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 20.0,
+            "max": 50.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 0.0,
+            "max": 40.0
+          }
+        ]
+      },
+      {
+        "zone": "II",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 50.0,
+            "max": 70.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 20.0,
+            "max": 50.0
+          }
+        ]
+      },
+      {
+        "zone": "III",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 40.0,
+            "max": 70.0
+          }
+        ]
+      },
+      {
+        "zone": "IV",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 50.0,
+            "max": 80.0
+          }
+        ]
+      },
+      {
+        "zone": "V",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 70.0,
+            "max": 100.0
+          }
+        ]
+      },
+      {
+        "zone": "VI",
+        "values": [
+          {
+            "type": "housing",
+            "label": "Logement",
+            "min": 70.0,
+            "max": 100.0
+          },
+          {
+            "type": "activity",
+            "label": "Activité",
+            "min": 90.0,
+            "max": 100.0
+          }
+        ]
+      }
+    ]
+  }
 ]
